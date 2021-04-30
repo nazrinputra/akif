@@ -78,46 +78,26 @@
                 <div class="row justify-content-center">
                     <!-- Service Item 1-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal1">
-                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-center text-white">
-                                    <i class="fas fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img class="img-fluid py-5" src="assets/img/service/wash.png" alt="Wash" />
+                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal1">
+                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/wash.png" alt="Wash" /></a>
                         </div>
                     </div>
                     <!-- Service Item 2-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal2">
-                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-center text-white">
-                                    <i class="fas fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img class="img-fluid py-5" src="assets/img/service/maintenance.png" alt="Maintenance" />
+                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal2">
+                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/maintenance.png" alt="Maintenance" /></a>
                         </div>
                     </div>
                     <!-- Service Item 3-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal3">
-                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-center text-white">
-                                    <i class="fas fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img class="img-fluid py-5" src="assets/img/service/treatment.png" alt="Treatment" />
+                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal3">
+                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/treatment.png" alt="Treatment" /></a>
                         </div>
                     </div>
                     <!-- Service Item 4-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal4">
-                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-center text-white">
-                                    <i class="fas fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img class="img-fluid py-5" src="assets/img/service/others.png" alt="Others" />
+                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal4">
+                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/others.png" alt="Others" /></a>
                         </div>
                     </div>
                 </div>
@@ -139,23 +119,13 @@
                     <!-- Store Item 1-->
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
-                            <div class="store-item mx-auto">
-                                <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/store/tambak_bugis.png" alt="" />
-                            </div>
+                            <img class="img-fluid" src="assets/img/store/tambak_bugis.png" alt="" />
                         </a>
                     </div>
                     <!-- Store Item 2-->
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
-                            <div class="store-item mx-auto">
-                                <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/store/bukit_katil.png" alt="" />
-                            </div>
+                            <img class="img-fluid" src="assets/img/store/bukit_katil.png" alt="" />
                         </a>
                     </div>
                 </div>
@@ -202,7 +172,7 @@
         </div>
         <!-- Service Modals-->
         <!-- Service Modal 1-->
-        <div class="store-modal modal fade" id="storeModal1" tabindex="-1" role="dialog" aria-labelledby="storeModal1Label" aria-hidden="true">
+        <div class="service-modal modal fade" id="serviceModal1" tabindex="-1" role="dialog" aria-labelledby="serviceModal1Label" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -210,7 +180,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Service Modal - Title-->
-                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal1Label">Wash</h2>
+                                    <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal1Label">Wash</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -234,7 +204,7 @@
             </div>
         </div>
         <!-- Service Modal 2-->
-        <div class="store-modal modal fade" id="storeModal2" tabindex="-1" role="dialog" aria-labelledby="storeModal2Label" aria-hidden="true">
+        <div class="service-modal modal fade" id="serviceModal2" tabindex="-1" role="dialog" aria-labelledby="serviceModal2Label" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -242,7 +212,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Service Modal - Title-->
-                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal2Label">Maintenance</h2>
+                                    <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal2Label">Maintenance</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -271,7 +241,7 @@
             </div>
         </div>
         <!-- Service Modal 3-->
-        <div class="store-modal modal fade" id="storeModal3" tabindex="-1" role="dialog" aria-labelledby="storeModal3Label" aria-hidden="true">
+        <div class="service-modal modal fade" id="serviceModal3" tabindex="-1" role="dialog" aria-labelledby="serviceModal3Label" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -279,7 +249,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Service Modal - Title-->
-                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal3Label">Treatment</h2>
+                                    <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal3Label">Treatment</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -307,7 +277,7 @@
             </div>
         </div>
         <!-- Service Modal 4-->
-        <div class="store-modal modal fade" id="storeModal4" tabindex="-1" role="dialog" aria-labelledby="storeModal4Label" aria-hidden="true">
+        <div class="service-modal modal fade" id="serviceModal4" tabindex="-1" role="dialog" aria-labelledby="serviceModal4Label" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -315,7 +285,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Service Modal - Title-->
-                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal4Label">Others</h2>
+                                    <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal4Label">Others</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
