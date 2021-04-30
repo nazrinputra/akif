@@ -6,7 +6,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Akif - Auto Detailing Service</title>
+        <title>Akif - Car Grooming Center</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
@@ -22,16 +22,16 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Akif Car Wash</a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Akif Car Grooming Center</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#services">Services</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#stores">Stores</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
-                        @if (Route::has('login'))
+                        {{-- @if (Route::has('login'))
                             @auth
                                 <li class="nav-item mx-0 mx-lg-1 hidden"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/dashboard') }}">Dashboard</a></li>
                             @else
@@ -40,35 +40,124 @@
                                 <li class="nav-item mx-0 mx-lg-1 hidden"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ route('register') }}">Register</a></li>
                             @endif
                             @endauth
-                        @endif
+                        @endif --}}
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead text-center">
+        <header class="masthead text-center mb-5">
             <div class="container d-flex align-items-center flex-column">
                 <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar" src="assets/img/akif.png" alt="" />
+                <img class="masthead-avatar py-4" src="assets/img/logo.png" alt="" />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Auto Detailing Service</h1>
+                <h1 class="masthead-heading text-uppercase mb-0">Car Grooming Center</h1>
                 <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
+                <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Washing - Cleaning - Grooming</p>
+                <p class="masthead-subheading font-weight-light mb-0">Akif Car Grooming Center are committed to ensuring the external and internal cleaning of your vehicle.</p>
+                <p class="masthead-subheading font-weight-light mb-0">Give us your trust, and we will give you satisfaction!</p>
             </div>
         </header>
+        <!-- Services Section-->
+        <section class="page-section bg-primary store" id="services">
+            <div class="container">
+                <!-- Services Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase mb-4">Services</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Service Items-->
+                <div class="row justify-content-center">
+                    <!-- Service Item 1-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="store-item mx-auto">
+                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="service-item-caption-content text-white">
+                                    <ul>
+                                        <li>VIP wash</li>
+                                        <li>Signature wash</li>
+                                        <li>Maintenance wash</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/service/wash.png" alt="Wash" />
+                        </div>
+                    </div>
+                    <!-- Service Item 2-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="store-item mx-auto">
+                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="service-item-caption-content text-white">
+                                    <ul>
+                                        <li>Conditioner</li>
+                                        <li>Glaze & wax</li>
+                                        <li>Paint coatings</li>
+                                        <li>Protection wax</li>
+                                        <li>Engine bay wash</li>
+                                        <li>Sanitize nano mist</li>
+                                        <li>Paint protective films</li>
+                                        <li>Inner plastic & leather</li>    
+                                    </ul>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/service/maintenance.png" alt="Maintenance" />
+                        </div>
+                    </div>
+                    <!-- Service Item 3-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="store-item mx-auto">
+                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="service-item-caption-content text-white">
+                                    <ul>
+                                        <li>Polish</li>
+                                        <li>Scrubbing</li>
+                                        <li>Windows tattooing</li>
+                                        <li>Windows treatment</li>
+                                        <li>Headlamp restoration</li>
+                                        <li>Seat & interior cleaning</li>
+                                        <li>Inner cabin pest control</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/service/treatment.png" alt="Treatment" />
+                        </div>
+                    </div>
+                    <!-- Service Item 4-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="store-item mx-auto">
+                            <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="service-item-caption-content text-white">
+                                    <ul>
+                                        <li>Roadtax</li>
+                                        <li>Insurance</li>
+                                        <li>Car tinted</li>
+                                        <li>Car service</li>
+                                        <li>Paint & touchup</li>
+                                        <li>Cushion restore</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/service/others.png" alt="Others" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Store Section-->
-        <section class="page-section bg-primary store" id="stores">
+        <section class="page-section store" id="stores">
             <div class="container">
                 <!-- Store Section Heading-->
-                <h2 class="page-section-heading text-center text-white text-uppercase mb-0">Stores</h2>
+                <h2 class="page-section-heading text-center text-uppercase mb-0">Stores</h2>
                 <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
+                <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
@@ -76,46 +165,26 @@
                 <!-- Store Grid Items-->
                 <div class="row justify-content-center">
                     <!-- Store Item 1-->
-                    <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="col-md-6 col-lg-4">
                         <a href="/store-one">
                             <div class="store-item mx-auto">
                                 <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-external-link-alt fa-3x"></i></div>
+                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/store/cabin.png" alt="" />
+                                <img class="img-fluid" src="assets/img/store/tambak_bugis.png" alt="" />
                             </div>
                         </a>
                     </div>
                     <!-- Store Item 2-->
-                    <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="col-md-6 col-lg-4">
                         <a href="/store-two">
                             <div class="store-item mx-auto">
                                 <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-external-link-alt fa-3x"></i></div>
+                                    <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/store/circus.png" alt="" />
+                                <img class="img-fluid" src="assets/img/store/bukit_katil.png" alt="" />
                             </div>
                         </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Section-->
-        <section class="page-section mb-0" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase">About</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div class="col ml-auto text-center">
-                        <p class="lead">Akif Car Wash are committed to ensuring the external and internal cleaning of your vehicle.</p>
-                        <p class="lead">Give us your trust , and we will give you satisfaction!</p>
                     </div>
                 </div>
             </div>
