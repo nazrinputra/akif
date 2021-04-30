@@ -78,74 +78,46 @@
                 <div class="row justify-content-center">
                     <!-- Service Item 1-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto">
+                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal1">
                             <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-white">
-                                    <ul>
-                                        <li>VIP wash</li>
-                                        <li>Signature wash</li>
-                                        <li>Maintenance wash</li>
-                                    </ul>
+                                <div class="service-item-caption-content text-center text-white">
+                                    <i class="fas fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/service/wash.png" alt="Wash" />
+                            <img class="img-fluid py-5" src="assets/img/service/wash.png" alt="Wash" />
                         </div>
                     </div>
                     <!-- Service Item 2-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto">
+                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal2">
                             <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-white">
-                                    <ul>
-                                        <li>Conditioner</li>
-                                        <li>Glaze & wax</li>
-                                        <li>Paint coatings</li>
-                                        <li>Protection wax</li>
-                                        <li>Engine bay wash</li>
-                                        <li>Sanitize nano mist</li>
-                                        <li>Paint protective films</li>
-                                        <li>Inner plastic & leather</li>    
-                                    </ul>
+                                <div class="service-item-caption-content text-center text-white">
+                                    <i class="fas fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/service/maintenance.png" alt="Maintenance" />
+                            <img class="img-fluid py-5" src="assets/img/service/maintenance.png" alt="Maintenance" />
                         </div>
                     </div>
                     <!-- Service Item 3-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto">
+                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal3">
                             <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-white">
-                                    <ul>
-                                        <li>Polish</li>
-                                        <li>Scrubbing</li>
-                                        <li>Windows tattooing</li>
-                                        <li>Windows treatment</li>
-                                        <li>Headlamp restoration</li>
-                                        <li>Seat & interior cleaning</li>
-                                        <li>Inner cabin pest control</li>
-                                    </ul>
+                                <div class="service-item-caption-content text-center text-white">
+                                    <i class="fas fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/service/treatment.png" alt="Treatment" />
+                            <img class="img-fluid py-5" src="assets/img/service/treatment.png" alt="Treatment" />
                         </div>
                     </div>
                     <!-- Service Item 4-->
                     <div class="col-md-6 col-lg-3">
-                        <div class="store-item mx-auto">
+                        <div class="store-item mx-auto" data-toggle="modal" data-target="#storeModal4">
                             <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="service-item-caption-content text-white">
-                                    <ul>
-                                        <li>Roadtax</li>
-                                        <li>Insurance</li>
-                                        <li>Car tinted</li>
-                                        <li>Car service</li>
-                                        <li>Paint & touchup</li>
-                                        <li>Cushion restore</li>
-                                    </ul>
+                                <div class="service-item-caption-content text-center text-white">
+                                    <i class="fas fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/service/others.png" alt="Others" />
+                            <img class="img-fluid py-5" src="assets/img/service/others.png" alt="Others" />
                         </div>
                     </div>
                 </div>
@@ -227,6 +199,147 @@
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed">
             <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+        <!-- Service Modals-->
+        <!-- Service Modal 1-->
+        <div class="store-modal modal fade" id="storeModal1" tabindex="-1" role="dialog" aria-labelledby="storeModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Service Modal - Title-->
+                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal1Label">Wash</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <p class="mb-5 text-uppercase">
+                                        VIP wash<br>
+                                        Signature wash<br>
+                                        Maintenance wash
+                                    </p>
+                                    <button class="btn btn-primary" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Service Modal 2-->
+        <div class="store-modal modal fade" id="storeModal2" tabindex="-1" role="dialog" aria-labelledby="storeModal2Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Service Modal - Title-->
+                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal2Label">Maintenance</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <p class="mb-5 text-uppercase">
+                                        Conditioner<br>
+                                        Glaze & wax<br>
+                                        Paint coatings<br>
+                                        Protection wax<br>
+                                        Engine bay wash<br>
+                                        Sanitize nano mist<br>
+                                        Paint protective films<br>
+                                        Inner plastic & leather
+                                    </p>
+                                    <button class="btn btn-primary" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Service Modal 3-->
+        <div class="store-modal modal fade" id="storeModal3" tabindex="-1" role="dialog" aria-labelledby="storeModal3Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Service Modal - Title-->
+                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal3Label">Treatment</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <p class="mb-5 text-uppercase">
+                                        Polish<br>
+                                        Scrubbing<br>
+                                        Windows tattooing<br>
+                                        Windows treatment<br>
+                                        Headlamp restoration<br>
+                                        Seat & interior cleaning<br>
+                                        Inner cabin pest control
+                                    </p>
+                                    <button class="btn btn-primary" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Service Modal 4-->
+        <div class="store-modal modal fade" id="storeModal4" tabindex="-1" role="dialog" aria-labelledby="storeModal4Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Service Modal - Title-->
+                                    <h2 class="store-modal-title text-secondary text-uppercase mb-0" id="storeModal4Label">Others</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <p class="mb-5 text-uppercase">
+                                        Roadtax<br>
+                                        Insurance<br>
+                                        Car tinted<br>
+                                        Car service<br>
+                                        Paint & touchup<br>
+                                        Cushion restore
+                                    </p>
+                                    <button class="btn btn-primary" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
