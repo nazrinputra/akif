@@ -477,6 +477,11 @@ mark,
 .img-fluid {
   max-width: 100%;
   height: auto;
+  transition: transform .2s; /* Animation */
+}
+
+.img-fluid:hover {
+  transform: scale(1.25);
 }
 
 .img-thumbnail {
@@ -10138,44 +10143,18 @@ h3 {
     font-size: 1.5rem;
   }
 }
-.store .store-item {
-  cursor: pointer;
-  position: relative;
-  display: block;
-  max-width: 25rem;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-.store .store-item .store-item-caption {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: all 0.2s ease-in-out;
-  opacity: 0;
-  background-color: rgba(0,150,234,100);
-}
-.store .store-item .store-item-caption:hover {
-  opacity: 1;
-}
-.store .store-item .store-item-caption .store-item-caption-content {
-  font-size: 1.5rem;
-}
 
-.store .store-item .store-item-caption .service-item-caption-content {
-  font-size: 1rem;
-}
-
-.portfolio-modal .portfolio-modal-title {
+.service-modal .service-modal-title {
   font-size: 2.25rem;
   line-height: 2rem;
 }
 @media (min-width: 992px) {
-  .portfolio-modal .portfolio-modal-title {
+  .service-modal .service-modal-title {
     font-size: 3rem;
     line-height: 2.5rem;
   }
 }
-.portfolio-modal .close {
+.service-modal .close {
   position: absolute;
   z-index: 1;
   right: 1.5rem;
