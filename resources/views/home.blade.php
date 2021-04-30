@@ -138,7 +138,7 @@
                 <div class="row justify-content-center">
                     <!-- Store Item 1-->
                     <div class="col-md-6 col-lg-4">
-                        <a href="/store-one">
+                        <a href="#">
                             <div class="store-item mx-auto">
                                 <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                     <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
@@ -149,7 +149,7 @@
                     </div>
                     <!-- Store Item 2-->
                     <div class="col-md-6 col-lg-4">
-                        <a href="/store-two">
+                        <a href="#">
                             <div class="store-item mx-auto">
                                 <div class="store-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                     <div class="store-item-caption-content text-center text-white"><i class="fas fa-search fa-3x"></i></div>
