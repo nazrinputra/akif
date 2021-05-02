@@ -477,6 +477,8 @@ mark,
 .img-fluid {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: auto;
   transition: transform .2s; /* Animation */
 }
 

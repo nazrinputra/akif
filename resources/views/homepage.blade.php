@@ -22,7 +22,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Akif Car Grooming Center</a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Akif</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -67,15 +67,15 @@
                 <!-- Store Grid Items-->
                 <div class="row justify-content-center">
                     <!-- Store Item 1-->
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-lg-3 col-lg-offset-3">
                         <a href="/tambak-bugis">
-                            <img class="img-fluid" src="img/store/tambak-bugis-web.png" alt="Tambak Bugis" />
+                            <img class="img-fluid pb-3" src="img/store/tambak-bugis.png" alt="Tambak Bugis" />
                         </a>
                     </div>
                     <!-- Store Item 2-->
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-lg-3 col-lg-offset-3">
                         <a href="/bukit-katil">
-                            <img class="img-fluid" src="img/store/bukit-katil-web.png" alt="Bukit Katil" />
+                            <img class="img-fluid pb-3" src="img/store/bukit-katil.png" alt="Bukit Katil" />
                         </a>
                     </div>
                 </div>
@@ -95,16 +95,16 @@
                 <!-- Service Items-->
                 <div class="row justify-content-center text-center text-uppercase">
                     <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal1">
-                        <h3 class="img-fluid">Wash</h3>
+                        <h3 class="img-fluid pb-3">Wash</h3>
                     </div>
                     <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal2">
-                        <h3 class="img-fluid">Maintenance</h3>
+                        <h3 class="img-fluid pb-3">Maintain</h3>
                     </div>
                     <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal3">
-                        <h3 class="img-fluid">Treatment</h3>
+                        <h3 class="img-fluid pb-3">Treatment</h3>
                     </div>
                     <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal4">
-                        <h3 class="img-fluid">Others</h3>
+                        <h3 class="img-fluid pb-3">Others</h3>
                     </div>
                 </div>
             </div>
