@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('tambak-bugis', function () {
+    return view('tambak-bugis');
+});
 
-require __DIR__.'/auth.php';
+Route::get('bukit-katil', function () {
+    return view('bukit-katil');
+});

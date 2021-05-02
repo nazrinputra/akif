@@ -9,14 +9,14 @@
         <title>Akif - Car Grooming Center</title>
 
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -29,28 +29,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#services">Services</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#stores">Stores</a></li>
-                        {{-- @if (Route::has('login'))
-                            @auth
-                                <li class="nav-item mx-0 mx-lg-1 hidden"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/dashboard') }}">Dashboard</a></li>
-                            @else
-                                <li class="nav-item mx-0 mx-lg-1 hidden"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ route('login') }}">Log in</a></li>
-                            @if (Route::has('register'))
-                                <li class="nav-item mx-0 mx-lg-1 hidden"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ route('register') }}">Register</a></li>
-                            @endif
-                            @endauth
-                        @endif --}}
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#services">Services</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
+        <!-- Logo -->
         <header class="masthead text-center mb-5">
             <div class="container d-flex align-items-center flex-column">
-                <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar py-4" src="assets/img/logo.png" alt="" />
-                <!-- Masthead Heading-->
+                <!-- Logo Image-->
+                <img class="masthead-avatar py-4" src="img/logo-web.png" alt="" />
+                <!-- Logo Heading-->
                 <h1 class="masthead-heading text-uppercase mb-0">Car Grooming Center</h1>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
@@ -58,53 +48,13 @@
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Masthead Subheading-->
+                <!-- Logo Subheading-->
                 <p class="masthead-subheading font-weight-light mb-0">Akif Car Grooming Center are committed to ensuring the external and internal cleaning of your vehicle.</p>
                 <p class="masthead-subheading font-weight-light mb-0">Give us your trust, and we will give you satisfaction!</p>
             </div>
         </header>
-        <!-- Services Section-->
-        <section class="page-section bg-primary store" id="services">
-            <div class="container">
-                <!-- Services Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase mb-4">Services</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Service Items-->
-                <div class="row justify-content-center">
-                    <!-- Service Item 1-->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal1">
-                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/wash.png" alt="Wash" /></a>
-                        </div>
-                    </div>
-                    <!-- Service Item 2-->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal2">
-                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/maintenance.png" alt="Maintenance" /></a>
-                        </div>
-                    </div>
-                    <!-- Service Item 3-->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal3">
-                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/treatment.png" alt="Treatment" /></a>
-                        </div>
-                    </div>
-                    <!-- Service Item 4-->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="mx-auto" data-toggle="modal" data-target="#serviceModal4">
-                            <a href="#services"><img class="img-fluid py-5" src="assets/img/service/others.png" alt="Others" /></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Store Section-->
-        <section class="page-section store" id="stores">
+        <section class="page-section bg-primary store" id="stores">
             <div class="container">
                 <!-- Store Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase mb-0">Stores</h2>
@@ -118,15 +68,43 @@
                 <div class="row justify-content-center">
                     <!-- Store Item 1-->
                     <div class="col-md-6 col-lg-4">
-                        <a href="#">
-                            <img class="img-fluid" src="assets/img/store/tambak_bugis.png" alt="" />
+                        <a href="/tambak-bugis">
+                            <img class="img-fluid" src="img/store/tambak-bugis-web.png" alt="Tambak Bugis" />
                         </a>
                     </div>
                     <!-- Store Item 2-->
                     <div class="col-md-6 col-lg-4">
-                        <a href="#">
-                            <img class="img-fluid" src="assets/img/store/bukit_katil.png" alt="" />
+                        <a href="/bukit-katil">
+                            <img class="img-fluid" src="img/store/bukit-katil-web.png" alt="Bukit Katil" />
                         </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <!-- Services Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase mb-4">Services</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Service Items-->
+                <div class="row justify-content-center text-center text-uppercase">
+                    <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal1">
+                        <h3 class="img-fluid">Wash</h3>
+                    </div>
+                    <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal2">
+                        <h3 class="img-fluid">Maintenance</h3>
+                    </div>
+                    <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal3">
+                        <h3 class="img-fluid">Treatment</h3>
+                    </div>
+                    <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal4">
+                        <h3 class="img-fluid">Others</h3>
                     </div>
                 </div>
             </div>
@@ -135,29 +113,11 @@
         <footer class="footer text-center">
             <div class="container">
                 <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=2.2292139767895%2C102.30516583928" class="text-white">
-                            <p class="lead mb-0">
-                                Lot 3589, Jalan Tun Kudu,
-                                <br />
-                                75400 Bukit Katil, Malacca
-                            </p>
-                        </a>
-                    </div>
                     <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="col-lg mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Contact Us</h4>
                         <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/akifcarwash/"><i class="fab fa-fw fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="https://api.whatsapp.com/send?phone=60136541240"><i class="fab fa-fw fa-whatsapp"></i></a>
-                    </div>
-                    <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Us</h4>
-                        <p class="lead mb-0">
-                            Akif Car Wash are committed to ensuring the external and internal cleaning of your vehicle.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -173,7 +133,7 @@
         <!-- Service Modals-->
         <!-- Service Modal 1-->
         <div class="service-modal modal fade" id="serviceModal1" tabindex="-1" role="dialog" aria-labelledby="serviceModal1Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="container">
@@ -205,7 +165,7 @@
         </div>
         <!-- Service Modal 2-->
         <div class="service-modal modal fade" id="serviceModal2" tabindex="-1" role="dialog" aria-labelledby="serviceModal2Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="container">
@@ -242,7 +202,7 @@
         </div>
         <!-- Service Modal 3-->
         <div class="service-modal modal fade" id="serviceModal3" tabindex="-1" role="dialog" aria-labelledby="serviceModal3Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="container">
@@ -278,7 +238,7 @@
         </div>
         <!-- Service Modal 4-->
         <div class="service-modal modal fade" id="serviceModal4" tabindex="-1" role="dialog" aria-labelledby="serviceModal4Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="container">

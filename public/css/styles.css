@@ -481,7 +481,7 @@ mark,
 }
 
 .img-fluid:hover {
-  transform: scale(1.25);
+  transform: scale(1.1);
 }
 
 .img-thumbnail {
@@ -1666,14 +1666,9 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 0.125rem solid #dee2e6;
 }
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 0.25rem solid #dee2e6;
-}
-.table tbody + tbody {
-  border-top: 0.25rem solid #dee2e6;
 }
 
 .table-sm th,
@@ -4691,7 +4686,7 @@ a.badge:hover, a.badge:focus {
 }
 a.badge-primary:hover, a.badge-primary:focus {
   color: #fff;
-  background-color: #148f77;
+  background-color: #51aed3;
 }
 a.badge-primary:focus, a.badge-primary.focus {
   outline: 0;
@@ -6084,7 +6079,7 @@ a.close.disabled {
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #148f77 !important;
+  background-color: #51aed3 !important;
 }
 
 .bg-secondary {
