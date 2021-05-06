@@ -6,7 +6,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Akif - Bukit Katil Branch</title>
+        <title>Akif - Service</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -30,87 +30,36 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/tambak-bugis">Tambak Bugis</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#queue">Bukit Katil</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Menu 1</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Menu 2</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Logo-->
-        <header class="masthead text-center mb-5" id="queue">
+        <header class="masthead text-center bg-primary" id="queue">
             <div class="container d-flex align-items-center flex-column pt-3">
                 <!-- Logo Heading-->
-                <h1 class="text-uppercase mb-0">Bukit Katil Branch</h1>
+                <h1 class="text-uppercase mb-0">Service Name</h1>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Logo Subheading-->
-                <div class="row text-uppercase">
-                    <!-- QUEUE -->
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table">
-                            <thead>	
-                                <tr>
-                                    <th>
-                                        <h2>Queuing</h3>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="table-danger">
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table">
-                            <thead>	
-                                <tr>
-                                    <th>
-                                        <h2>Grooming</h2>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="table-warning">
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table">
-                            <thead>	
-                                <tr>
-                                    <th>
-                                        <h2>Completed</h2>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="table-success">
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                        <h4>MCX4567</h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="row">
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM10</h3>
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM20</h3>
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM30</h3>
                 </div>
+                <!-- Logo Subheading-->
+                <p class="masthead-subheading font-weight-light pt-5 mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                </p>
             </div>
         </header>
 

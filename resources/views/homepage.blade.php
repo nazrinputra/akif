@@ -85,7 +85,8 @@
         <section class="page-section" id="services">
             <div class="container">
                 <!-- Services Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase mb-4">Services</h2>
+                <!-- FIXME remove hyperlink for service when done -->
+                <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service" style="text-decoration: none; color: #2c3e50">Services</a></h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
@@ -124,7 +125,7 @@
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright © Akif Car Wash 2021</small></div>
+            <div class="container"><small>Copyright © Akif Car Grooming Center 2021</small></div>
         </div>
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed">
