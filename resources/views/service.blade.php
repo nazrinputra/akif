@@ -48,15 +48,9 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-sm-12">
-                        <h3 class="text-uppercase mb-0">Price 1</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <h3 class="text-uppercase mb-0">Price 2</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <h3 class="text-uppercase mb-0">Price 3</h3>
-                    </div>
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM10</h3>
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM20</h3>
+                    <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM30</h3>
                 </div>
                 <!-- Logo Subheading-->
                 <p class="masthead-subheading font-weight-light pt-5 mb-0">
