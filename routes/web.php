@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('service', function () {
+    return view('service');
+});
+
 Route::get('tambak-bugis', function () {
     return view('tambak-bugis');
 });
