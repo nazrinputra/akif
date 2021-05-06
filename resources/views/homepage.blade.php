@@ -86,7 +86,7 @@
             <div class="container">
                 <!-- Services Section Heading-->
                 <!-- FIXME remove hyperlink for service when done -->
-                <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service">Services</a></h2>
+                <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service" style="text-decoration: none; color: #2c3e50">Services</a></h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
