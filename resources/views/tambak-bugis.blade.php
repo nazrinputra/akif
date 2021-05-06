@@ -38,7 +38,7 @@
         </nav>
         <!-- Logo-->
         <header class="masthead text-center mb-5" id="queue">
-            <div class="container d-flex align-items-center flex-column">
+            <div class="container d-flex align-items-center flex-column pt-3">
                 <!-- Logo Heading-->
                 <h1 class="text-uppercase mb-0">Tambak Bugis Branch</h1>
                 <!-- Icon Divider-->
@@ -129,7 +129,7 @@
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright © Akif Car Wash 2021</small></div>
+            <div class="container"><small>Copyright © Akif Car Grooming Center 2021</small></div>
         </div>
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed">
