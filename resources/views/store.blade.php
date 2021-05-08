@@ -10,11 +10,11 @@
             <!-- Queue Subheading-->
             <div class="row text-uppercase">
                 <!-- Queue Table 1 -->
-                <x-queue-table status="Queuing" table="table-danger"/>
+                <x-queue-table status="Queuing <i class='fas fa-hourglass-start'></i>" table="table-danger"/>
                 <!-- Queue Table 2 -->
-                <x-queue-table status="Grooming" table="table-warning"/>
+                <x-queue-table status="Grooming <i class='fas fa-hands-wash'></i>" table="table-warning"/>
                 <!-- Queue Table 3 -->
-                <x-queue-table status="Completed" table="table-success"/>
+                <x-queue-table status="Completed <i class='fas fa-clipboard-check'></i>" table="table-success"/>
             </div>
         </div>
     </section>
