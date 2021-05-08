@@ -22,9 +22,15 @@ Route::get('service', function () {
 });
 
 Route::get('tambak-bugis', function () {
-    return view('tambak-bugis');
+    return view('store',[
+        'slug' => 'tambak-bugis',
+        'name' => 'Tambak Bugis'
+    ]);
 });
 
 Route::get('bukit-katil', function () {
-    return view('bukit-katil');
+    return view('store',[
+        'slug' => 'bukit-katil',
+        'name' => 'Bukit Katil'
+    ]);
 });
