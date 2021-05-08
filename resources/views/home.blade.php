@@ -5,7 +5,7 @@
     <section class="page-section bg-primary store" id="stores">
         <div class="container">
             <!-- Store Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase mb-0">Stores</h2>
+            <h2 class="page-section-heading text-secondary text-center text-uppercase mb-0">Stores</h2>
             <!-- Icon Divider-->
             <x-divider/>
             <!-- Store Grid Items-->
@@ -51,8 +51,8 @@
         </div>
     </section>
     <!-- Service Modals-->
-    <x-service.wash/>
-    <x-service.maintenance/>
-    <x-service.treatment/>
-    <x-service.other/>
+    <x-modal.wash/>
+    <x-modal.maintenance/>
+    <x-modal.treatment/>
+    <x-modal.other/>
 </x-layout>
