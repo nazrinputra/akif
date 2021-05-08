@@ -42,11 +42,7 @@
                 <!-- Logo Heading-->
                 <h1 class="text-uppercase mb-0">Service Name</h1>
                 <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
+                <x-divider></x-divider>
                 <div class="row">
                     <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM10</h3>
                     <h3 class="col col-lg-4 col-sm-12 text-uppercase mb-0">RM20</h3>

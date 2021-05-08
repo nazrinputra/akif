@@ -43,11 +43,7 @@
                 <!-- Logo Heading-->
                 <h1 class="masthead-heading text-uppercase mb-0">Car Grooming Center</h1>
                 <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
+                <x-divider></x-divider>
                 <!-- Logo Subheading-->
                 <p class="masthead-subheading font-weight-light mb-0">Akif Car Grooming Center are committed to ensuring the external and internal cleaning of your vehicle.</p>
                 <p class="masthead-subheading font-weight-light mb-0">Give us your trust, and we will give you satisfaction!</p>
@@ -59,11 +55,7 @@
                 <!-- Store Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase mb-0">Stores</h2>
                 <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
+                <x-divider></x-divider>
                 <!-- Store Grid Items-->
                 <div class="row justify-content-center">
                     <!-- Store Item 1-->
@@ -88,11 +80,7 @@
                 <!-- FIXME remove hyperlink for service when done -->
                 <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service" style="text-decoration: none; color: #2c3e50">Services</a></h2>
                 <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
+                <x-divider></x-divider>
                 <!-- Service Items-->
                 <div class="row justify-content-center text-center text-uppercase">
                     <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal1">
@@ -143,11 +131,7 @@
                                     <!-- Service Modal - Title-->
                                     <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal1Label">Wash</h2>
                                     <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
+                                    <x-divider></x-divider>
                                     <p class="mb-5 text-uppercase">
                                         VIP wash<br>
                                         Signature wash<br>
@@ -175,11 +159,7 @@
                                     <!-- Service Modal - Title-->
                                     <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal2Label">Maintenance</h2>
                                     <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
+                                    <x-divider></x-divider>
                                     <p class="mb-5 text-uppercase">
                                         Conditioner<br>
                                         Glaze & wax<br>
@@ -212,11 +192,7 @@
                                     <!-- Service Modal - Title-->
                                     <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal3Label">Treatment</h2>
                                     <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
+                                    <x-divider></x-divider>
                                     <p class="mb-5 text-uppercase">
                                         Polish<br>
                                         Scrubbing<br>
@@ -248,11 +224,7 @@
                                     <!-- Service Modal - Title-->
                                     <h2 class="service-modal-title text-secondary text-uppercase mb-0" id="serviceModal4Label">Others</h2>
                                     <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
+                                    <x-divider></x-divider>
                                     <p class="mb-5 text-uppercase">
                                         Roadtax<br>
                                         Insurance<br>
