@@ -21,16 +21,10 @@ Route::get('service', function () {
     return view('service');
 });
 
-Route::get('tambak-bugis', function () {
-    return view('store',[
-        'slug' => 'tambak-bugis',
-        'name' => 'Tambak Bugis'
-    ]);
-});
-
-Route::get('bukit-katil', function () {
-    return view('store',[
-        'slug' => 'bukit-katil',
-        'name' => 'Bukit Katil'
+//TODO setup fallback if random path is given
+Route::get('{store}', function ($store) {
+    return view('store', [
+        'slug' => $store,
+        'name' => str_replace('-', ' ', $store)
     ]);
 });
