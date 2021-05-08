@@ -1,4 +1,5 @@
 <x-layout>
+    <x-navbar-home></x-navbar-home>
     <!-- Logo -->
     <x-header/>
     <!-- Store Section-->
@@ -51,8 +52,36 @@
         </div>
     </section>
     <!-- Service Modals-->
-    <x-modal.wash/>
-    <x-modal.maintenance/>
-    <x-modal.treatment/>
-    <x-modal.other/>
+    <x-modal index="1" title="wash">
+        VIP wash<br>
+        Signature wash<br>
+        Maintenance wash
+    </x-modal>
+    <x-modal index="2" title="maintenance">
+        Conditioner<br>
+        Glaze & wax<br>
+        Paint coatings<br>
+        Protection wax<br>
+        Engine bay wash<br>
+        Sanitize nano mist<br>
+        Paint protective films<br>
+        Inner plastic & leather
+    </x-modal>
+    <x-modal index="3" title="treatment">
+        Polish<br>
+        Scrubbing<br>
+        Windows tattooing<br>
+        Windows treatment<br>
+        Headlamp restoration<br>
+        Seat & interior cleaning<br>
+        Inner cabin pest control
+    </x-modal>
+    <x-modal index="4" title="other">
+        Roadtax<br>
+        Insurance<br>
+        Car tinted<br>
+        Car service<br>
+        Paint & touchup<br>
+        Cushion restore
+    </x-modal>
 </x-layout>
