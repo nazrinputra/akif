@@ -3,7 +3,7 @@
         <!-- Logo Image-->
         <img class="masthead-avatar py-4" src="img/logo-web.png" alt="" />
         <!-- Logo Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">Car Grooming Center</h1>
+        <h1 class="masthead-heading text-secondary text-uppercase mb-0">Car Grooming Center</h1>
         <!-- Icon Divider-->
         <x-divider/>
         <!-- Logo Subheading-->

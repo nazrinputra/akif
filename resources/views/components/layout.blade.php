@@ -19,12 +19,10 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body id="page-top">
-        <!-- Navigation-->
         <x-navbar></x-navbar>
         
         {{ $slot }}
 
-        <!-- Footer-->
         <x-footer></x-footer>
         
         <!-- Copyright Section-->
