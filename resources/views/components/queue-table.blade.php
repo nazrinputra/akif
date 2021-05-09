@@ -1,3 +1,5 @@
+@props(['status'])
+
 <div class="col-md-4 col-sm-12">
     <table class="table text-center">
         <thead>	
@@ -9,11 +11,8 @@
         </thead>
         <tbody>
             <tr>
-                <td class="{{ $table }}">
-                    <h4>ABC1234</h4>
-                    <h4>ABC1234</h4>
-                    <h4>ABC1234</h4>
-                    <h4>ABC1234</h4>
+                <td {{ $attributes([ 'class' => '']) }}>
+                    {{ $slot }}
                 </td>
             </tr>
         </tbody>
