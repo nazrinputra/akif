@@ -15,9 +15,10 @@ class Modal extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($index, $title)
     {
-        //
+        $this->index = $index;
+        $this->title = $title;
     }
 
     /**
