@@ -1,5 +1,4 @@
-<x-layout>
-    <x-slot name="title">Akif - Car Grooming Center</x-slot>
+<x-layout title="Akif - Car Grooming Center" :stores="$stores">
     <!-- Logo -->
     <x-header/>
     <!-- Store Section-->
@@ -47,16 +46,12 @@
         </div>
     </section>
     <!-- Service Modals-->
-    <x-modal>
-        <x-slot name="index">1</x-slot>
-        <x-slot name="title">Wash</x-slot>
+    <x-modal index="1" title="Wash">
         VIP wash<br>
         Signature wash<br>
         Maintenance wash
     </x-modal>
-    <x-modal>
-        <x-slot name="index">2</x-slot>
-        <x-slot name="title">Maintenance</x-slot>
+    <x-modal index="2" title="Maintenance">
         Conditioner<br>
         Glaze & wax<br>
         Paint coatings<br>
@@ -66,9 +61,7 @@
         Paint protective films<br>
         Inner plastic & leather
     </x-modal>
-    <x-modal>
-        <x-slot name="index">3</x-slot>
-        <x-slot name="title">Treatment</x-slot>
+    <x-modal index="3" title="Treatment">
         Polish<br>
         Scrubbing<br>
         Windows tattooing<br>
@@ -77,9 +70,7 @@
         Seat & interior cleaning<br>
         Inner cabin pest control
     </x-modal>
-    <x-modal>
-        <x-slot name="index">4</x-slot>
-        <x-slot name="title">Other</x-slot>
+    <x-modal index="4" title="Other">
         Roadtax<br>
         Insurance<br>
         Car tinted<br>

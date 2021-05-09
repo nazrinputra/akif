@@ -1,5 +1,4 @@
-<x-layout>
-    <x-slot name="title">Akif - {{ $store->name }}</x-slot>
+<x-layout title="Akif - {{ $store->name }}" :stores="$stores">
     <!-- Queue Section-->
     <section class="page-section" id="{{ $store->slug }}">
         <div class="container">
