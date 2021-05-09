@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
+
+    public function queue() {
+        return $this->hasMany(Queue::class);
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class);
+    }
 }
