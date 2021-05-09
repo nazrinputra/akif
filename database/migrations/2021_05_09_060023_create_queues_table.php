@@ -16,6 +16,7 @@ class CreateQueuesTable extends Migration
         Schema::create('queues', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id');
+            $table->foreignId('car_id');
             $table->string('status');
             $table->timestamps();
         });
