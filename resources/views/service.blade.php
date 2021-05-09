@@ -1,5 +1,5 @@
 <x-layout>
-    <x-navbar/>
+    <x-slot name="title">Akif - Service Name</x-slot>
     <!-- Service Section-->
     <section class="page-section bg-primary" id="service">
         <div class="container text-center text-uppercase">

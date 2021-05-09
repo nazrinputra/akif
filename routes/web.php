@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        'stores' => Store::all()
+    ]);
+});
+
+Route::get('store/{store:slug}', function (Store $store) {
+    return view('store', [
+        'stores' => Store::all(),
+        'store' => $store
+    ]);
 });
 
 Route::get('service', function () {
     return view('service');
-});
-
-//TODO setup fallback if random path is given
-Route::get('{store}', function ($store) {
-    return view('store', [
-        'slug' => $store,
-        'name' => str_replace('-', ' ', $store)
-    ]);
 });

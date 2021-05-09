@@ -1,5 +1,4 @@
-<x-layout>
-    <x-navbar/>
+<x-layout title="Akif - Car Grooming Center" :stores="$stores">
     <!-- Logo -->
     <x-header/>
     <!-- Store Section-->
@@ -11,18 +10,13 @@
             <x-divider/>
             <!-- Store Grid Items-->
             <div class="row justify-content-center">
-                <!-- Store Item 1-->
+                @foreach ($stores as $store)
                 <div class="col-lg-3 col-lg-offset-3">
-                    <a href="/tambak-bugis">
-                        <img class="img-fluid pb-3" src="img/store/tambak-bugis.png" alt="Tambak Bugis" />
+                    <a href="/store/{{ $store->slug }}">
+                        <img class="img-fluid pb-3" src="img/store/{{ $store->slug }}.png" alt="{{ $store->name }}" />
                     </a>
                 </div>
-                <!-- Store Item 2-->
-                <div class="col-lg-3 col-lg-offset-3">
-                    <a href="/bukit-katil">
-                        <img class="img-fluid pb-3" src="img/store/bukit-katil.png" alt="Bukit Katil" />
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -52,12 +46,12 @@
         </div>
     </section>
     <!-- Service Modals-->
-    <x-modal index="1" title="wash">
+    <x-modal index="1" title="Wash">
         VIP wash<br>
         Signature wash<br>
         Maintenance wash
     </x-modal>
-    <x-modal index="2" title="maintenance">
+    <x-modal index="2" title="Maintenance">
         Conditioner<br>
         Glaze & wax<br>
         Paint coatings<br>
@@ -67,7 +61,7 @@
         Paint protective films<br>
         Inner plastic & leather
     </x-modal>
-    <x-modal index="3" title="treatment">
+    <x-modal index="3" title="Treatment">
         Polish<br>
         Scrubbing<br>
         Windows tattooing<br>
@@ -76,7 +70,7 @@
         Seat & interior cleaning<br>
         Inner cabin pest control
     </x-modal>
-    <x-modal index="4" title="other">
+    <x-modal index="4" title="Other">
         Roadtax<br>
         Insurance<br>
         Car tinted<br>

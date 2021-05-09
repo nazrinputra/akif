@@ -5,16 +5,30 @@
         <thead>	
             <tr>
                 <th>
-                    <h2>{!! $status !!}</h3>
+                    <h2>
+                        {{ $status }}
+                        @if ($status == 'Queuing')
+                            <i class="fas fa-hourglass-start"></i>
+                        @elseif ($status == 'Grooming')
+                            <i class="fas fa-hands-wash"></i>
+                        @elseif ($status == 'Completed')
+                            <i class="fas fa-clipboard-check"></i>
+                        @endif
+                    </h2>
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td {{ $attributes([ 'class' => '']) }}>
-                    {{ $slot }}
-                </td>
-            </tr>
-        </tbody>
+        @if ($queues->count() > 0)
+            <tbody>
+                <tr>
+                    <td {{ $attributes([ 'class' => '']) }}>
+                        @foreach ($queues as $queue)
+                            <h4>{{ $queue->car->plate_no }}</h4>
+                        @endforeach
+                        {{ $slot }}
+                    </td>
+                </tr>
+            </tbody>
+        @endif
     </table>
 </div>

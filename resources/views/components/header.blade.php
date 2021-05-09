@@ -1,7 +1,7 @@
 <header class="masthead text-center mb-5">
     <div class="container d-flex align-items-center flex-column">
         <!-- Logo Image-->
-        <img class="masthead-avatar py-4" src="img/logo-web.png" alt="Akif" />
+        <img class="masthead-avatar py-4" src="/img/logo-web.png" alt="Akif" />
         <!-- Logo Heading-->
         <h1 class="masthead-heading text-secondary text-uppercase mb-0">Car Grooming Center</h1>
         <!-- Icon Divider-->

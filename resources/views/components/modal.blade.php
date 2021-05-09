@@ -1,5 +1,3 @@
-@props(['index', 'title'])
-
 <div class="service-modal modal fade" id="serviceModal{{ $index }}" tabindex="-1" role="dialog" aria-labelledby="serviceModal{{ $index }}Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
