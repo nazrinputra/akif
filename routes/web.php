@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('store/{store:slug}', function (Store $store) {
     return view('store', [
+        'stores' => Store::all(),
         'store' => $store
     ]);
 });
