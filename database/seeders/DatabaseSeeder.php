@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
             'phone_no' => '0123456789',
         ]);
 
+        Customer::create([
+            'name' => 'Ahmad',
+            'phone_no' => '0123456789',
+        ]);
+
         Car::create([
             'customer_id' => 1,
             'plate_no' => 'ABC1234',
@@ -59,6 +64,15 @@ class DatabaseSeeder extends Seeder
             'size' => 'S'
         ]);
 
+        Car::create([
+            'customer_id' => 3,
+            'plate_no' => 'GHI9012',
+            'brand' => 'Proton',
+            'model' => 'Exora',
+            'colour' => 'Black',
+            'size' => 'L'
+        ]);
+
         Queue::create([
             'store_id' => 1,
             'car_id' => 1,
@@ -69,6 +83,30 @@ class DatabaseSeeder extends Seeder
             'store_id' => 1,
             'car_id' => 2,
             'status' => 'Grooming'
+        ]);
+
+        Queue::create([
+            'store_id' => 1,
+            'car_id' => 3,
+            'status' => 'Completed'
+        ]);
+
+        Queue::create([
+            'store_id' => 2,
+            'car_id' => 2,
+            'status' => 'Queuing'
+        ]);
+
+        Queue::create([
+            'store_id' => 2,
+            'car_id' => 3,
+            'status' => 'Grooming'
+        ]);
+
+        Queue::create([
+            'store_id' => 2,
+            'car_id' => 1,
+            'status' => 'Completed'
         ]);
     }
 }
