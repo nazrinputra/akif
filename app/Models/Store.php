@@ -9,7 +9,7 @@ class Store extends Model
 {
     use HasFactory;
 
-    public function Queues() {
+    public function queues() {
         return $this->hasMany(Queue::class);
     }
 }

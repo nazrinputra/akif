@@ -9,7 +9,7 @@ class Queue extends Model
 {
     use HasFactory;
 
-    public function Store() {
+    public function store() {
         return $this->belongsTo(Store::class);
     }
 }
