@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Store;
+use App\Models\Car;
+use App\Models\Customer;
+use App\Models\Queue;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +29,46 @@ class DatabaseSeeder extends Seeder
             'name' => 'Bukit Katil',
             'slug' => 'bukit-katil',
             'address' => "Unknown"
+        ]);
+
+        Customer::create([
+            'name' => 'Ali',
+            'phone_no' => '0123456789',
+        ]);
+
+        Customer::create([
+            'name' => 'Abu',
+            'phone_no' => '0123456789',
+        ]);
+
+        Car::create([
+            'customer_id' => 1,
+            'plate_no' => 'ABC1234',
+            'brand' => 'Proton',
+            'model' => 'Saga',
+            'colour' => 'Grey',
+            'size' => 'M'
+        ]);
+
+        Car::create([
+            'customer_id' => 2,
+            'plate_no' => 'DEF5678',
+            'brand' => 'Perodua',
+            'model' => 'Kancil',
+            'colour' => 'White',
+            'size' => 'S'
+        ]);
+
+        Queue::create([
+            'store_id' => 1,
+            'car_id' => 1,
+            'status' => 'Queuing'
+        ]);
+
+        Queue::create([
+            'store_id' => 1,
+            'car_id' => 2,
+            'status' => 'Grooming'
         ]);
     }
 }
