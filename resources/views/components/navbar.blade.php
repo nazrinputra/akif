@@ -24,8 +24,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ (request()->is('store/tambak-bugis')) ? '#tambak-bugis' : '/store/tambak-bugis' }}">Tambak Bugis</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ (request()->is('store/bukit-katil')) ? '#bukit-katil' : '/store/bukit-katil' }}">Bukit Katil</a></li>
+                    @foreach ($stores as $store)
+                        @if (request()->is('store/'.$store->slug))
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#{{ $store->slug }}">{{ $store->name }}</a></li>
+                        @else
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/store/{{ $store->slug }}">{{ $store->name }}</a></li>
+                        @endif
+                    @endforeach
                 </ul>
             </div>
         </div>
