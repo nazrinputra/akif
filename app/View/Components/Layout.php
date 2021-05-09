@@ -6,6 +6,8 @@ use Illuminate\View\Component;
 
 class Layout extends Component
 {
+    public $title;
+    
     /**
      * Create a new component instance.
      *
