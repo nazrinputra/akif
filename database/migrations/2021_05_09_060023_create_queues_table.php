@@ -17,6 +17,7 @@ class CreateQueuesTable extends Migration
             $table->id();
             $table->foreignId('store_id');
             $table->foreignId('car_id');
+            $table->foreignId('service_id');
             $table->string('status');
             $table->timestamps();
         });

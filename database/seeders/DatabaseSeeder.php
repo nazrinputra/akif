@@ -6,6 +6,7 @@ use App\Models\Store;
 use App\Models\Car;
 use App\Models\Customer;
 use App\Models\Queue;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -73,39 +74,54 @@ class DatabaseSeeder extends Seeder
             'size' => 'L'
         ]);
 
+        Service::create([
+            'title' => 'Service 1',
+            'price' => 'RM1',
+            'duration' => '1 hour',
+            'frequency' => 'Every day',
+            'package' => 'Wash and Vacuum',
+            'details' => 'Good service choice'
+        ]);
+
         Queue::create([
             'store_id' => 1,
             'car_id' => 1,
+            'service_id' => 1,
             'status' => 'Queuing'
         ]);
 
         Queue::create([
             'store_id' => 1,
             'car_id' => 2,
+            'service_id' => 1,
             'status' => 'Grooming'
         ]);
 
         Queue::create([
             'store_id' => 1,
             'car_id' => 3,
+            'service_id' => 1,
             'status' => 'Completed'
         ]);
 
         Queue::create([
             'store_id' => 2,
             'car_id' => 2,
+            'service_id' => 1,
             'status' => 'Queuing'
         ]);
 
         Queue::create([
             'store_id' => 2,
             'car_id' => 3,
+            'service_id' => 1,
             'status' => 'Grooming'
         ]);
 
         Queue::create([
             'store_id' => 2,
             'car_id' => 1,
+            'service_id' => 1,
             'status' => 'Completed'
         ]);
     }
