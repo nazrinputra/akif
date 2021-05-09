@@ -1,4 +1,5 @@
 <x-layout>
+    <x-slot name="title">Akif - {{ ucwords($name) }}</x-slot>
     <!-- Queue Section-->
     <section class="page-section" id="{{ $slug }}">
         <div class="container">

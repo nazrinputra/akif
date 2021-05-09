@@ -6,7 +6,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Akif - Car Grooming Center</title>
+        <title>{{ $title }}</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="img/favicon.ico" />

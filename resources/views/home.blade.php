@@ -1,4 +1,5 @@
 <x-layout>
+    <x-slot name="title">Akif - Car Grooming Center</x-slot>
     <!-- Logo -->
     <x-header/>
     <!-- Store Section-->
