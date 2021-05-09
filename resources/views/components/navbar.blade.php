@@ -14,9 +14,7 @@
             </div>
         </div>
     </nav>
-@endif
-
-@unless (request()->is('/'))
+@else
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="/"><img class="img-thumbnail" src="img/logo-navbar.png" alt="Akif" /></a>
@@ -32,4 +30,4 @@
             </div>
         </div>
     </nav>
-@endunless
+@endif

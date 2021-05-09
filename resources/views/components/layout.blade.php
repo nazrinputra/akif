@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/styles.css" />
     </head>
     <body id="page-top">
-        
+        <x-navbar/>
         {{ $slot }}
 
         <x-footer/>

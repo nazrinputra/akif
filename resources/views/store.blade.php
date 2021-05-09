@@ -1,5 +1,4 @@
 <x-layout>
-    <x-navbar/>
     <!-- Queue Section-->
     <section class="page-section" id="{{ $slug }}">
         <div class="container">
