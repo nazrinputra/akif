@@ -36,7 +36,7 @@
         <!-- Third party plugin JS-->
         <script src="js/jquery.easing.min.js"></script>
         <!-- Font Awesome icons (free version)-->
-        <script src="js/fontawesome.all.js"></script>
+        <script src="js/font.awesome.all.js"></script>
         <!-- Core theme JS-->
         <script type="text/javascript" src="js/scripts.js"></script>
     </body>
