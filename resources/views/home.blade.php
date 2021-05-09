@@ -11,18 +11,13 @@
             <x-divider/>
             <!-- Store Grid Items-->
             <div class="row justify-content-center">
-                <!-- Store Item 1-->
+                @foreach ($stores as $store)
                 <div class="col-lg-3 col-lg-offset-3">
-                    <a href="/tambak-bugis">
-                        <img class="img-fluid pb-3" src="img/store/tambak-bugis.png" alt="Tambak Bugis" />
+                    <a href="/store/{{ $store->slug }}">
+                        <img class="img-fluid pb-3" src="img/store/{{ $store->slug }}.png" alt="{{ $store->name }}" />
                     </a>
                 </div>
-                <!-- Store Item 2-->
-                <div class="col-lg-3 col-lg-offset-3">
-                    <a href="/bukit-katil">
-                        <img class="img-fluid pb-3" src="img/store/bukit-katil.png" alt="Bukit Katil" />
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
