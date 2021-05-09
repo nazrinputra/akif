@@ -18,12 +18,17 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td {{ $attributes([ 'class' => '']) }}>
-                    {{ $slot }}
-                </td>
-            </tr>
-        </tbody>
+        @if ($queues->count() > 0)
+            <tbody>
+                <tr>
+                    <td {{ $attributes([ 'class' => '']) }}>
+                        @foreach ($queues as $queue)
+                            <h4>{{ $queue->car->plate_no }}</h4>
+                        @endforeach
+                        {{ $slot }}
+                    </td>
+                </tr>
+            </tbody>
+        @endif
     </table>
 </div>
