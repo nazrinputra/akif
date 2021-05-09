@@ -51,12 +51,16 @@
         </div>
     </section>
     <!-- Service Modals-->
-    <x-modal index="1" title="wash">
+    <x-modal>
+        <x-slot name="index">1</x-slot>
+        <x-slot name="title">Wash</x-slot>
         VIP wash<br>
         Signature wash<br>
         Maintenance wash
     </x-modal>
-    <x-modal index="2" title="maintenance">
+    <x-modal>
+        <x-slot name="index">2</x-slot>
+        <x-slot name="title">Maintenance</x-slot>
         Conditioner<br>
         Glaze & wax<br>
         Paint coatings<br>
@@ -66,7 +70,9 @@
         Paint protective films<br>
         Inner plastic & leather
     </x-modal>
-    <x-modal index="3" title="treatment">
+    <x-modal>
+        <x-slot name="index">3</x-slot>
+        <x-slot name="title">Treatment</x-slot>
         Polish<br>
         Scrubbing<br>
         Windows tattooing<br>
@@ -75,7 +81,9 @@
         Seat & interior cleaning<br>
         Inner cabin pest control
     </x-modal>
-    <x-modal index="4" title="other">
+    <x-modal>
+        <x-slot name="index">4</x-slot>
+        <x-slot name="title">Other</x-slot>
         Roadtax<br>
         Insurance<br>
         Car tinted<br>
