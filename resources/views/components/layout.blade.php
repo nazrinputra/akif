@@ -9,11 +9,11 @@
         <title>{{ $title }}</title>
 
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
         <!-- Google fonts-->
-        <link rel="stylesheet" href="css/google.fonts.css" />
+        <link rel="stylesheet" href="/css/google.fonts.css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="/css/styles.css" />
     </head>
     <body id="page-top">
         <x-navbar/>
@@ -31,13 +31,13 @@
         </div>
         
         <!-- Bootstrap core JS-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
-        <script src="js/jquery.easing.min.js"></script>
+        <script src="/js/jquery.easing.min.js"></script>
         <!-- Font Awesome icons (free version)-->
-        <script src="js/font.awesome.all.js"></script>
+        <script src="/js/font.awesome.all.js"></script>
         <!-- Core theme JS-->
-        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript" src="/js/scripts.js"></script>
     </body>
 </html>
