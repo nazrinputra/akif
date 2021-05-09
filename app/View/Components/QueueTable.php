@@ -6,14 +6,19 @@ use Illuminate\View\Component;
 
 class QueueTable extends Component
 {
+    public $status;
+
+    public $queues;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($status, $queues)
     {
-        //
+        $this->status = $status;
+        $this->queues = $queues;
     }
 
     /**
