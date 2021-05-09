@@ -1,5 +1,5 @@
 <x-layout>
-    <x-navbar-store></x-navbar-store>
+    <x-navbar/>
     <!-- Service Section-->
     <section class="page-section bg-primary" id="service">
         <div class="container text-center text-uppercase">

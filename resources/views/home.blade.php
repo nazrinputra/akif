@@ -1,5 +1,5 @@
 <x-layout>
-    <x-navbar-home></x-navbar-home>
+    <x-navbar/>
     <!-- Logo -->
     <x-header/>
     <!-- Store Section-->
