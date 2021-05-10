@@ -34,6 +34,12 @@ Route::get('service', function () {
     ]);
 });
 
+Route::get('service-detail', function () {
+    return view('service-detail-static', [
+        'stores' => Store::all()
+    ]);
+});
+
 Route::get('service/{service:slug}', function (Service $service) {
     return view('service', [
         'stores' => Store::all(),
