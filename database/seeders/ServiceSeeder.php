@@ -19,6 +19,7 @@ class ServiceSeeder extends Seeder
         Service::create([
             'id' => 1,
             'title' => 'Service 1',
+            'slug' => 'service-1',
             'price' => 'RM1',
             'duration' => '1 hour',
             'frequency' => 'Every day',
