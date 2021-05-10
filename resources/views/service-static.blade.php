@@ -1,9 +1,9 @@
-<x-layout title="Akif - {{ $service->title }}" :stores="$stores">
+<x-layout title="Akif - Service Name" :stores="$stores">
     <!-- Service Section-->
     <section class="page-section bg-primary" id="service">
         <div class="container text-center text-uppercase">
             <!-- Service Section Heading-->
-            <h2 class="page-section-heading text-secondary pt-5">{{ $service->title }}</h2>
+            <h2 class="page-section-heading text-secondary pt-5">Service Name</h2>
             <!-- Icon Divider-->
             <x-divider/>
             <!-- Service Price-->

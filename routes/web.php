@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Service;
 use App\Models\Store;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,14 @@ Route::get('store/{store:slug}', function (Store $store) {
 });
 
 Route::get('service', function () {
-    return view('service');
+    return view('service-static', [
+        'stores' => Store::all()
+    ]);
+});
+
+Route::get('service/{service:slug}', function (Service $service) {
+    return view('service', [
+        'stores' => Store::all(),
+        'service' => $service
+    ]);
 });
