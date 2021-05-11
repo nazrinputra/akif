@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StoreController@show');
+Route::get('/', 'StoreController@index');
 
-Route::get('store/{store:slug}', 'StoreController@showOne');
+Route::get('store/{store:slug}', 'StoreController@show');
 
 Route::get('service', function () {
     return view('service-static', [
