@@ -44,7 +44,7 @@
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/bukit-katil">Bukit
                                 Katil</a>
                         </li>
-                        <li class="nav-item  mx-0 mx-lg-1">
+                        {{-- <li class="nav-item  mx-0 mx-lg-1">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/counter">Counter</a>
                         </li>
                         @guest
@@ -62,7 +62,7 @@
                                 @csrf
                             </form>
                         </li>
-                        @endguest
+                        @endguest --}}
                     </ul>
                 </div>
             </div>
@@ -108,7 +108,8 @@
 
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
-    <div class="container"><small>Copyright © Akif Car Grooming Center 2021</small></div>
+    <div class="container"><small>Copyright © <a href="/login" class="text-primary">Akif Car Grooming Center</a>
+            2021</small></div>
 </div>
 <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
 <div class="scroll-to-top d-lg-none position-fixed">
