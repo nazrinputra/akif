@@ -21,7 +21,7 @@
         <p class="masthead-subheading font-weight-light mb-0">Give us your trust, and we will give you satisfaction!</p>
     </div>
 </header>
-<!-- Store Section-->
+{{-- <!-- Store Section-->
 <section class="page-section bg-primary store" id="stores">
     <div class="container">
         <!-- Store Section Heading-->
@@ -48,9 +48,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Services Section-->
-<section class="page-section" id="services">
+<section class="page-section bg-primary" id="services">
     <div class="container">
         <!-- Services Section Heading-->
         <!-- FIXME remove hyperlink for service when done -->
