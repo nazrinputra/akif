@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Service;
-use App\Models\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,25 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StoreController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('store/{store:slug}', 'StoreController@show');
+Route::get('counter', function () {
+    return view('counter');
+});
+
+Route::get('tambak-bugis', function () {
+    return view('tambak-bugis');
+});
+
+Route::get('bukit-katil', function () {
+    return view('bukit-katil');
+});
 
 Route::get('service', function () {
-    return view('service-static', [
-        'stores' => Store::all()
-    ]);
+    return view('service-static');
 });
 
-Route::get('service-detail', function () {
-    return view('service-detail-static', [
-        'stores' => Store::all()
-    ]);
-});
+Auth::routes();
 
-Route::get('service/{service:slug}', function (Service $service) {
-    return view('service', [
-        'stores' => Store::all(),
-        'service' => $service
-    ]);
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

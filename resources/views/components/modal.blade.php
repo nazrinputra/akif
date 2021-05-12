@@ -10,7 +10,13 @@
                             <h2 class="service-modal-title text-secondary text-uppercase mb-0"
                                 id="serviceModal{{ $index }}Label">{{ $title }}</h2>
                             <!-- Icon Divider-->
-                            <x-divider />
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="divider-custom-line"></div>
+                            </div>
                             <p class="mb-5 text-uppercase">
                                 {{ $slot }}
                             </p>
