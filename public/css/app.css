@@ -3153,7 +3153,7 @@ fieldset:disabled a.btn {
     text-decoration: none;
 }
 .btn-link:hover {
-    color: #117964;
+    color: #14458f;
     text-decoration: underline;
 }
 .btn-link:focus,
@@ -4912,7 +4912,7 @@ input[type="button"].btn-block {
 }
 .page-link:hover {
     z-index: 2;
-    color: #117964;
+    color: #14458f;
     text-decoration: none;
     background-color: #e9ecef;
     border-color: #dee2e6;
@@ -10193,7 +10193,7 @@ button.bg-dark:focus {
 
 a.text-primary:hover,
 a.text-primary:focus {
-    color: #117964 !important;
+    color: #14458f !important;
 }
 
 .text-secondary {
