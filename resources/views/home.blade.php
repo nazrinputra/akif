@@ -1,13 +1,13 @@
 <x-layout title="Akif - Car Grooming Center" :stores="$stores">
     <!-- Logo -->
-    <x-header/>
+    <x-header />
     <!-- Store Section-->
     <section class="page-section bg-primary store" id="stores">
         <div class="container">
             <!-- Store Section Heading-->
             <h2 class="page-section-heading text-secondary text-center text-uppercase mb-0">Stores</h2>
             <!-- Icon Divider-->
-            <x-divider/>
+            <x-divider />
             <!-- Store Grid Items-->
             <div class="row justify-content-center">
                 @foreach ($stores as $store)
@@ -25,9 +25,10 @@
         <div class="container">
             <!-- Services Section Heading-->
             <!-- FIXME remove hyperlink for service when done -->
-            <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service" style="text-decoration: none; color: #2c3e50">Services</a></h2>
+            <h2 class="page-section-heading text-center text-uppercase mb-4"><a href="/service"
+                    style="text-decoration: none; color: #2c3e50">Services</a></h2>
             <!-- Icon Divider-->
-            <x-divider/>
+            <x-divider />
             <!-- Service Items-->
             <div class="row justify-content-center text-center text-uppercase">
                 <div class="col-md-3 col-sm-12" data-toggle="modal" data-target="#serviceModal1">
