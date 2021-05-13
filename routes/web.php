@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('stores', 'StoreController@index');
+
+Route::get('store/{store}', 'StoreController@show');
+
 Route::get('counter', function () {
     return view('counter');
 });
