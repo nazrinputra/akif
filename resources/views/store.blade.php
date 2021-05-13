@@ -17,11 +17,11 @@
         <!-- Queue Subheading-->
         <div class="row text-uppercase">
             <!-- Queue Table 1 -->
-            <x-queues class="table-danger" status="Queuing" :store="$store" />
+            <x-queues class="table-danger" status="Waiting <i class='fas fa-hourglass-start'></i>" :store="$store" />
             <!-- Queue Table 2 -->
-            <x-queues class="table-warning" status="Grooming" :store="$store" />
+            <x-queues class="table-warning" status="Grooming <i class='fas fa-hands-wash'></i>" :store="$store" />
             <!-- Queue Table 3 -->
-            <x-queues class="table-success" status="Completed" :store="$store" />
+            <x-queues class="table-success" status="Completed <i class='fas fa-clipboard-check'></i>" :store="$store" />
         </div>
     </div>
 </section>

@@ -4,14 +4,7 @@
             <tr>
                 <th>
                     <h2>
-                        {{ $status }}
-                        @if ($status == 'Queuing')
-                        <i class="fas fa-hourglass-start"></i>
-                        @elseif ($status == 'Grooming')
-                        <i class="fas fa-hands-wash"></i>
-                        @elseif ($status == 'Completed')
-                        <i class="fas fa-clipboard-check"></i>
-                        @endif
+                        {!! $status !!}
                     </h2>
                 </th>
             </tr>
