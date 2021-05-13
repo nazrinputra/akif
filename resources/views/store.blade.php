@@ -17,11 +17,11 @@
         <!-- Queue Subheading-->
         <div class="row text-uppercase">
             <!-- Queue Table 1 -->
-            <x-queues class="table-danger" status="Queuing" />
+            <x-queues class="table-danger" status="Queuing" :store="$store" />
             <!-- Queue Table 2 -->
-            <x-queues class="table-warning" status="Grooming" />
+            <x-queues class="table-warning" status="Grooming" :store="$store" />
             <!-- Queue Table 3 -->
-            <x-queues class="table-success" status="Completed" />
+            <x-queues class="table-success" status="Completed" :store="$store" />
         </div>
     </div>
 </section>

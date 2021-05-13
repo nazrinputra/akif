@@ -16,13 +16,6 @@
                 </th>
             </tr>
         </thead>
-        {{-- <tbody>
-            <tr>
-                <td {{ $attributes([ 'class' => '']) }}>
-        <h4>ABC1234</h4>
-        </td>
-        </tr>
-        </tbody> --}}
         @if ($queues->count() > 0)
         <tbody>
             <tr>
