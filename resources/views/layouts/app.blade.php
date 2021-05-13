@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/google.fonts.css') }}" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 </head>
 
 <body>
