@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Queue;
 use Illuminate\Database\Seeder;
 
 class QueueSeeder extends Seeder
@@ -13,6 +14,6 @@ class QueueSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Queue::factory(20)->create();
     }
 }

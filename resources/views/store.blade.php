@@ -11,7 +11,7 @@ $completed = $store->queues->where('status', 'Completed');
 <section class="page-section" id="store-name">
     <div class="container">
         <!-- Queue Section Heading-->
-        <h2 class="page-section-heading text-secondary text-center text-uppercase pt-5">{{ $store->name }}</h2>
+        <h2 class="page-section-heading text-secondary text-center text-uppercase">{{ $store->name }}</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>

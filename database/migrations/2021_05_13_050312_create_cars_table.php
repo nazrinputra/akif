@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('plate_no');
             $table->string('brand');
             $table->string('model');
+            $table->string('color');
             $table->string('size');
             $table->timestamps();
         });

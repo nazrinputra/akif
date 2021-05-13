@@ -22,8 +22,9 @@ class StoreFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->cityPrefix(),
-            'name' => $this->faker->company(),
+            'slug' => $this->faker->slug(),
+            'name' => $this->faker->city(),
+            'phone_no' => $this->faker->e164PhoneNumber,
             'location' => $this->faker->address(),
         ];
     }
