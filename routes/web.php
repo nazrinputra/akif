@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('store/{store}', 'StoreController@show');
+Route::get('store/{store:slug}', 'StoreController@show')->name('store');
 
 Route::get('counter', function () {
     return view('counter');
