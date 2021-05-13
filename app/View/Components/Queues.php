@@ -9,8 +9,6 @@ class Queues extends Component
 {
     public $status;
 
-    public $store;
-
     public $queues;
 
     /**
@@ -18,11 +16,11 @@ class Queues extends Component
      *
      * @return void
      */
-    public function __construct($status, $store)
+    public function __construct($status, $queues)
     {
         $this->status = $status;
 
-        $this->queues = Queue::all()->where('store_id', $store->id);
+        $this->queues = $queues;
     }
 
     /**
