@@ -15,8 +15,8 @@ class CreateQueuesTable extends Migration
     {
         Schema::create('queues', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->nullable();
-            $table->foreignId('car_id')->nullable();
+            $table->foreignId('store_id')->nullable()->constrained();
+            $table->foreignId('car_id')->nullable()->constrained();
             $table->foreignId('customer_id')->nullable();
             $table->foreignId('package_id')->nullable();
             $table->string('status');
