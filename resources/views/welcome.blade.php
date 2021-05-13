@@ -21,34 +21,6 @@
         <p class="masthead-subheading font-weight-light mb-0">Give us your trust, and we will give you satisfaction!</p>
     </div>
 </header>
-{{-- <!-- Store Section-->
-<section class="page-section bg-primary store" id="stores">
-    <div class="container">
-        <!-- Store Section Heading-->
-        <h2 class="page-section-heading text-secondary text-center text-uppercase mb-0">Stores</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon">
-                <i class="fas fa-car"></i>
-            </div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- Store Grid Items-->
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-lg-offset-3">
-                <a href="/tambak-bugis">
-                    <img class="img-fluid pb-3" src="img/store/tambak-bugis.png" alt="Tambak Bugis" />
-                </a>
-            </div>
-            <div class="col-lg-3 col-lg-offset-3">
-                <a href="/bukit-katil">
-                    <img class="img-fluid pb-3" src="img/store/bukit-katil.png" alt="Bukit Katil" />
-                </a>
-            </div>
-        </div>
-    </div>
-</section> --}}
 <!-- Services Section-->
 <section class="page-section bg-primary" id="services">
     <div class="container">
