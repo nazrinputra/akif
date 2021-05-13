@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('store/{store:slug}', 'StoreController@show')->name('store');
 
 Route::get('counter', function () {
-    return view('counter');
+    return view('counter-static');
 });
 
 Route::get('services', function () {
