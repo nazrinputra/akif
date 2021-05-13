@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +24,8 @@ Route::get('counter', function () {
     return view('counter');
 });
 
-Route::get('tambak-bugis', function () {
-    return view('tambak-bugis');
-});
-
-Route::get('bukit-katil', function () {
-    return view('bukit-katil');
+Route::get('services', function () {
+    return view('service-static');
 });
 
 Route::get('service', function () {
