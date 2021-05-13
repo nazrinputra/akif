@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@php
+$waiting = $store->queues->where('status', 'Waiting');
+$grooming = $store->queues->where('status', 'Grooming');
+$completed = $store->queues->where('status', 'Completed');
+@endphp
+
 @section('content')
 <!-- Queue Section-->
 <section class="page-section" id="store-name">
@@ -17,11 +23,12 @@
         <!-- Queue Subheading-->
         <div class="row text-uppercase">
             <!-- Queue Table 1 -->
-            <x-queues class="table-danger" status="Waiting <i class='fas fa-hourglass-start'></i>" :store="$store" />
+            <x-queues class="table-danger" status="Waiting <i class='fas fa-hourglass-start'></i>" :queues="$waiting" />
             <!-- Queue Table 2 -->
-            <x-queues class="table-warning" status="Grooming <i class='fas fa-hands-wash'></i>" :store="$store" />
+            <x-queues class="table-warning" status="Grooming <i class='fas fa-hands-wash'></i>" :queues="$grooming" />
             <!-- Queue Table 3 -->
-            <x-queues class="table-success" status="Completed <i class='fas fa-clipboard-check'></i>" :store="$store" />
+            <x-queues class="table-success" status="Completed <i class='fas fa-clipboard-check'></i>"
+                :queues="$completed" />
         </div>
     </div>
 </section>
