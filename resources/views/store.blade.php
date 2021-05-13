@@ -17,11 +17,11 @@
         <!-- Queue Subheading-->
         <div class="row text-uppercase">
             <!-- Queue Table 1 -->
-            <x-queue class="table-danger" status="Queuing" />
+            <x-queues class="table-danger" status="Queuing" />
             <!-- Queue Table 2 -->
-            <x-queue class="table-warning" status="Grooming" />
+            <x-queues class="table-warning" status="Grooming" />
             <!-- Queue Table 3 -->
-            <x-queue class="table-success" status="Completed" />
+            <x-queues class="table-success" status="Completed" />
         </div>
     </div>
 </section>

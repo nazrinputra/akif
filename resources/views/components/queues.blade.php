@@ -1,5 +1,3 @@
-@props(['status'])
-
 <div class="col-md-4 col-sm-12">
     <table class="table text-center">
         <thead>
@@ -18,24 +16,24 @@
                 </th>
             </tr>
         </thead>
+        {{-- <tbody>
+            <tr>
+                <td {{ $attributes([ 'class' => '']) }}>
+        <h4>ABC1234</h4>
+        </td>
+        </tr>
+        </tbody> --}}
+        @if ($queues->count() > 0)
         <tbody>
             <tr>
                 <td {{ $attributes([ 'class' => '']) }}>
-                    <h4>ABC1234</h4>
+                    @foreach ($queues as $queue)
+                    <h4>{{ $queue->car->plate_no }}</h4>
+                    @endforeach
+                    {{ $slot }}
                 </td>
             </tr>
         </tbody>
-        {{-- @if ($queues->count() > 0)
-        <tbody>
-            <tr>
-                <td {{ $attributes([ 'class' => '']) }}>
-        @foreach ($queues as $queue)
-        <h4>{{ $queue->car->plate_no }}</h4>
-        @endforeach
-        {{ $slot }}
-        </td>
-        </tr>
-        </tbody>
-        @endif --}}
+        @endif
     </table>
 </div>
