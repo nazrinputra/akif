@@ -12,13 +12,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
     <!-- Google fonts-->
-    <link rel="stylesheet" href="{{ asset('css/google.fonts.css') }}" />
+    <link rel="stylesheet" href="/css/google.fonts.css" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -36,17 +36,17 @@
     </div>
 
     <!-- Bootstrap core JS-->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 
     <!-- Third party plugin JS-->
-    <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
+    <script src="/js/jquery.easing.min.js"></script>
 
     <!-- Font Awesome icons (free version)-->
-    <script src="{{ asset('js/font.awesome.all.js') }}"></script>
+    <script src="/js/font.awesome.all.js"></script>
 
     <!-- Core theme JS-->
-    <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
 
 </body>
 
