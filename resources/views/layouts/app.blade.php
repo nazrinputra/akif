@@ -14,11 +14,8 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
-    <!-- Google fonts-->
-    <link rel="stylesheet" href="/css/google.fonts.css" />
-
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/css/style.css" rel="stylesheet" />
+    <!-- Mix CSS-->
+    <link rel="stylesheet" href="{{mix ('css/app.css')}}">
 </head>
 
 <body>
@@ -26,27 +23,12 @@
         <x-navbar />
 
         <main class="pt-5">
-            {{-- FIXME remove after finish development --}}
-            <x-alert class="alert-info">
-                <strong>Hey there!</strong> This site is still under development. Any data you see here is not real.
-            </x-alert>
-
             @yield('content')
         </main>
     </div>
 
-    <!-- Bootstrap core JS-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Third party plugin JS-->
-    <script src="/js/jquery.easing.min.js"></script>
-
-    <!-- Font Awesome icons (free version)-->
-    <script src="/js/font.awesome.all.js"></script>
-
-    <!-- Core theme JS-->
-    <script type="text/javascript" src="/js/scripts.js"></script>
+    <!-- Mix JS-->
+    <script src="{{mix ('js/app.js')}}"></script>
 
 </body>
 
@@ -73,10 +55,10 @@
     <div class="container"><small>Copyright © <a href="/login" class="text-primary">Akif Car Grooming Center</a>
             2021</small></div>
 </div>
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
-            class="fa fa-chevron-up"></i></a>
-</div>
+
+{{-- FIXME remove after finish development --}}
+<x-alert class="alert-info">
+    <strong>Hey there!</strong> This site is still under development. Any data you see here is not real.
+</x-alert>
 
 </html>
