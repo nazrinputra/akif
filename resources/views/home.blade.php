@@ -14,48 +14,63 @@
                     </div>
                     @endif
 
-                    <div class="row">
+                    <div class="row bg-success py-3">
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                <i class="fa fa-key"></i>
+                                <i class="fa fa-cash-register"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 1</p>
+                            <p class="ml-3 mt-1 pt-2">Counter Menu</p>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
                                 <i class="fa fa-calculator"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 2</p>
+                            <p class="ml-3 mt-1 pt-2">Modify Whatsapp Text</p>
                         </div>
                     </div>
 
-                    <div class="row mt-3">
+                    <div class="row bg-success py-3">
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
                                 <i class="fa fa-cash-register"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 3</p>
+                            <p class="ml-3 mt-1 pt-2">Manage Cars</p>
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <a class="btn btn-outline-dark btn-social mx-1" href="#">
+                                <i class="fa fa-calculator"></i>
+                            </a>
+                            <p class="ml-3 mt-1 pt-2">Manage Customers</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 bg-warning py-3">
+                        <div class="col d-flex justify-content-center">
+                            <a class="btn btn-outline-dark btn-social mx-1" href="#">
+                                <i class="fa fa-key"></i>
+                            </a>
+                            <p class="ml-3 mt-1 pt-2">Manage Services</p>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
                                 <i class="fa fa-desktop"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 4</p>
+                            <p class="ml-3 mt-1 pt-2">Manage Packages</p>
                         </div>
                     </div>
 
-                    <div class="row mt-3">
+                    <div class="row mt-3 bg-danger py-3">
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
                                 <i class="fa fa-folder-open"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 5</p>
+                            <p class="ml-3 mt-1 pt-2">Dashboard Reports</p>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <a class="btn btn-outline-dark btn-social mx-1" href="#">
                                 <i class="fa fa-hourglass"></i>
                             </a>
-                            <p class="ml-3 mt-1 pt-2">Click for menu 6</p>
+                            <p class="ml-3 mt-1 pt-2">Manage Staffs</p>
                         </div>
                     </div>
                 </div>
