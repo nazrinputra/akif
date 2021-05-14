@@ -1,82 +1,46 @@
 <x-layout>
     <div class="container mt-5 py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <span class="my-auto">Dashboard</span>
-                        <button type="button" class="btn btn-primary"><a href="{{ url('/logout') }}" class="text-white"
-                                style="text-decoration: none">Logout</a></button>
-                    </div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                        @endif
-
-                        <div class="row bg-success py-3">
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-cash-register"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Counter Menu</p>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-calculator"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Modify Whatsapp Text</p>
-                            </div>
-                        </div>
-
-                        <div class="row bg-success py-3">
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-cash-register"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Manage Cars</p>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-calculator"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Manage Customers</p>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3 bg-warning py-3">
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-key"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Manage Services</p>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-desktop"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Manage Packages</p>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3 bg-danger py-3">
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-folder-open"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Dashboard Reports</p>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <a class="btn btn-outline-dark btn-social mx-1" href="#">
-                                    <i class="fa fa-hourglass"></i>
-                                </a>
-                                <p class="ml-3 mt-1 pt-2">Manage Staffs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Counter</h2>
+                <p>Register car and customer into queue.</p>
+                <p><a class="btn btn-secondary" href="#">Counter</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>WhatsApp</h2>
+                <p>Modify WhatsApp message sent by the system.
+                </p>
+                <p><a class="btn btn-secondary" href="#">WhatsApp</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Cars</h2>
+                <p>View, add or edit cars registered in the system.</p>
+                <p><a class="btn btn-secondary" href="#">Cars</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Customers</h2>
+                <p>Add new customer, view or update existing customers.</p>
+                <p><a class="btn btn-secondary" href="#">Customers</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Services</h2>
+                <p>View services in the system. Add service or modify existing ones.</p>
+                <p><a class="btn btn-secondary" href="#">Services</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Packages</h2>
+                <p>Define packages or create new promotional package.</p>
+                <p><a class="btn btn-secondary" href="#">Packages</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Dashboard</h2>
+                <p>Generate monthly reports and statistics.</p>
+                <p><a class="btn btn-secondary" href="#">Dashboard</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                <h2>Crews</h2>
+                <p>Enable or disable staff access to the system.</p>
+                <p><a class="btn btn-secondary" href="#">Crews</a></p>
             </div>
         </div>
     </div>
