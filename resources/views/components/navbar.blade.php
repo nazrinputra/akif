@@ -21,6 +21,12 @@
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                         href="{{ url('/services') }}">Services</a>
                 </li>
+                @auth
+                <li class="nav-item  mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                        href="{{ url('/logout') }}">Logout</a>
+                </li>
+                @endauth
             </ul>
         </div>
     </div>

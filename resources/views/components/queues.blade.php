@@ -16,7 +16,6 @@
                     @foreach ($queues as $queue)
                     <h4>{{ $queue->car->plate_no }}</h4>
                     @endforeach
-                    {{ $slot }}
                 </td>
             </tr>
         </tbody>
