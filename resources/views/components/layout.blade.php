@@ -62,8 +62,8 @@
 </div>
 
 {{-- FIXME remove after finish development --}}
-<x-alert class="alert-info fixed-bottom mb-0">
-    <strong>Hey there!</strong> This site is still under development. Any data you see here is not real.
+<x-alert class="alert-warning fixed-bottom mb-0">
+    <strong>Hey there!</strong> This site is still under development. Some data are simulated.
 </x-alert>
 
 </html>
