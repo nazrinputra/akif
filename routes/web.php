@@ -23,6 +23,12 @@ Route::get('/', function () {
 
 Route::get('store/{store:slug}', 'StoreController@show')->name('store');
 
+Auth::routes();
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/index', 'HomeController@index')->name('index');
+
 Route::get('counter', function () {
     return view('menu.counter');
 })->name('counter');
@@ -74,9 +80,3 @@ Route::get('crews/crew', function () {
 Route::get('promotions', function () {
     return view('service-static');
 })->name('promotions');
-
-Auth::routes();
-
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
-
-Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
