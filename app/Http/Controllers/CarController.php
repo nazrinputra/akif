@@ -14,7 +14,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('cars', [
+        return view('dashboard.cars', [
             'cars' => Car::all()
         ]);
     }
@@ -48,7 +48,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('car', [
+        return view('dashboard.car', [
             'car' => $car
         ]);
     }
