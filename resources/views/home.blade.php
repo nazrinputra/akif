@@ -10,7 +10,7 @@
                 <h2>WhatsApp</h2>
                 <p>Modify WhatsApp message sent by the system.
                 </p>
-                <p><a class="btn btn-secondary" href="#">WhatsApp</a></p>
+                <p><a class="btn btn-secondary" href="/whatsapp">WhatsApp</a></p>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>Cars</h2>

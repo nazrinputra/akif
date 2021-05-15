@@ -23,6 +23,10 @@ Route::get('/', function () {
 
 Route::get('store/{store:slug}', 'StoreController@show')->name('store');
 
+Route::get('whatsapp', function () {
+    return view('whatsapp');
+});
+
 Route::get('cars', 'CarController@index')->name('cars');
 
 Route::get('car/{car:plate_no}', 'CarController@show')->name('car');
