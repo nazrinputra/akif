@@ -19,68 +19,64 @@ URL::forceScheme('https');
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('store/{store:slug}', 'StoreController@show')->name('store');
 
+Route::get('counter', function () {
+    return view('menu.counter');
+})->name('counter');
+
 Route::get('whatsapp', function () {
-    return view('dashboard.whatsapp');
-});
+    return view('menu.whatsapp');
+})->name('whatsapp');
 
 Route::get('cars', 'CarController@index')->name('cars');
 
-Route::get('car/{car:plate_no}', 'CarController@show')->name('car');
-
-Route::get('counter', function () {
-    return view('dashboard.counter');
-});
+Route::get('cars/{car:plate_no}', 'CarController@show')->name('car');
 
 Route::get('customers', function () {
-    return view('dashboard.customers');
-});
+    return view('menu.customers');
+})->name('customers');
 
-Route::get('customer', function () {
-    return view('dashboard.customer');
-});
+Route::get('customers/customer', function () {
+    return view('menu.customer');
+})->name('customer');
 
 Route::get('services', function () {
-    return view('dashboard.services');
-});
+    return view('menu.services');
+})->name('services');
 
-Route::get('service', function () {
-    return view('dashboard.service');
-});
+Route::get('services/service', function () {
+    return view('menu.service');
+})->name('service');
 
 Route::get('packages', function () {
-    return view('dashboard.packages');
-});
+    return view('menu.packages');
+})->name('packages');
 
-Route::get('package', function () {
-    return view('dashboard.package');
-});
+Route::get('packages/package', function () {
+    return view('menu.package');
+})->name('package');
 
 Route::get('dashboard', function () {
-    return view('dashboard.dashboard');
-});
+    return view('menu.dashboard');
+})->name('dashboard');
 
 Route::get('crews', function () {
-    return view('dashboard.crews');
-});
+    return view('menu.crews');
+})->name('crews');
 
-Route::get('crew', function () {
-    return view('dashboard.crew');
-});
+Route::get('crews/crew', function () {
+    return view('menu.crew');
+})->name('crew');
 
-// Route::get('services', function () {
-//     return view('service-static');
-// });
-
-// Route::get('service', function () {
-//     return view('service-static');
-// });
+Route::get('promotions', function () {
+    return view('service-static');
+})->name('promotions');
 
 Auth::routes();
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

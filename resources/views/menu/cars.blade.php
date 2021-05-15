@@ -6,7 +6,7 @@
             <li>Present in table for managing</li>
             <li>
                 @foreach ($cars as $car)
-                <a href="/car/{{ $car->plate_no }}">
+                <a href="{{ route('car', $car->plate_no) }}">
                     {{ $car->plate_no }}
                 </a>
                 &emsp;

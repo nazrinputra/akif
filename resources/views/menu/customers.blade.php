@@ -4,7 +4,7 @@
         <ul>
             <li>Show form for customer</li>
             <li>List all customers in tables</li>
-            <li>Example: <a href="/customer">Link</a></li>
+            <li>Example: <a href="{{ route('customer') }}">Link</a></li>
         </ul>
     </x-dashboard>
 </x-layout>
