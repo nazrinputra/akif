@@ -2,7 +2,9 @@
     <x-dashboard>
         <h2>Customer</h2>
         <ul>
-            <li>Show form for one customer</li>
+            <li>{{ $customer->name }}</li>
+            <li>Display customer info</li>
+            <li>Display car(s) owned</li>
         </ul>
     </x-dashboard>
 </x-layout>

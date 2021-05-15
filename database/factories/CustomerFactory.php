@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Store;
+use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StoreFactory extends Factory
+class CustomerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Store::class;
+    protected $model = Customer::class;
 
     /**
      * Define the model's default state.
@@ -21,11 +22,14 @@ class StoreFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->name();
+        $slug = Str::slug($name);
+
         return [
-            'slug' => $this->faker->slug(),
-            'name' => $this->faker->city(),
+            'name' => $name,
+            'slug' => $slug,
             'phone_no' => $this->faker->randomNumber(9, true),
-            'location' => $this->faker->address(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
         ];
     }
 }

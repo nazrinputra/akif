@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class CarController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('private.cars', [
-            'cars' => Car::all()
+        return view('private.customers', [
+            'customers' => Customer::all()
         ]);
     }
 
@@ -43,23 +43,23 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Car  $car
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function show(Customer $customer)
     {
-        return view('private.car', [
-            'car' => $car
+        return view('private.customer', [
+            'customer' => $customer
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Car  $car
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -68,10 +68,10 @@ class CarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -79,10 +79,10 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Car  $car
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy(Customer $customer)
     {
         //
     }
