@@ -8,7 +8,7 @@ $cancelled= $store->queues->where('status', 'Cancelled');
 
 <x-layout title="Akif - {{ $store->name }}">
     <!-- Queue Section-->
-    <section class="page-section" id="store-name">
+    <section class="page-section" id="{{ $store->slug }}">
         <div class="container">
             <!-- Queue Section Heading-->
             <h2 class="page-section-heading text-secondary text-center text-uppercase">{{ $store->name }}</h2>
