@@ -24,7 +24,7 @@ class StoreFactory extends Factory
         return [
             'slug' => $this->faker->slug(),
             'name' => $this->faker->city(),
-            'phone_no' => $this->faker->e164PhoneNumber,
+            'phone_no' => $this->faker->randomNumber(9, true),
             'location' => $this->faker->address(),
         ];
     }
