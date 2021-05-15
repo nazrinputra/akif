@@ -1,6 +1,6 @@
 <div class="service-modal modal fade" id="serviceModal{{ $index }}" tabindex="-1" role="dialog"
     aria-labelledby="serviceModal{{ $index }}Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body text-center">
                 <div class="container">
@@ -21,8 +21,7 @@
                                 {{ $slot }}
                             </p>
                             <button class="btn btn-primary" data-dismiss="modal">
-                                <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Close
                             </button>
                         </div>
                     </div>
