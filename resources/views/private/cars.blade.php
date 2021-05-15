@@ -1,5 +1,9 @@
 <x-layout title="Akif - Cars">
     <x-dashboard>
+        <x-slot name="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
+            <li class="breadcrumb-item">Cars</li>
+        </x-slot>
         <h2>Cars</h2>
         <ul>
             <li>List all cars</li>

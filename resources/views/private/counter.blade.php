@@ -1,5 +1,9 @@
 <x-layout title="Akif - Counter">
     <x-dashboard>
+        <x-slot name="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
+            <li class="breadcrumb-item">Counter</li>
+        </x-slot>
         <h2>Counter</h2>
         <ul>
             <li>Show form for queue</li>

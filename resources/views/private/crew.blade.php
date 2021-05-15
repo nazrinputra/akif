@@ -1,5 +1,10 @@
 <x-layout title="Akif - Crew">
     <x-dashboard>
+        <x-slot name="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
+            <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('packages') }}">Crews</a></li>
+            <li class="breadcrumb-item">Crew</li>
+        </x-slot>
         <h2>Crew</h2>
         <ul>
             <li>Show form for one staff</li>
