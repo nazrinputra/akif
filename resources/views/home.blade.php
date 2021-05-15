@@ -4,7 +4,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>Counter</h2>
                 <p>Register car and customer into queue.</p>
-                <p><a class="btn btn-secondary" href="#">Counter</a></p>
+                <p><a class="btn btn-secondary" href="/counter">Counter</a></p>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>WhatsApp</h2>
@@ -15,7 +15,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>Cars</h2>
                 <p>View, add or edit cars registered in the system.</p>
-                <p><a class="btn btn-secondary" href="#">Cars</a></p>
+                <p><a class="btn btn-secondary" href="/cars">Cars</a></p>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>Customers</h2>
