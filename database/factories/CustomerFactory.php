@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomerFactory extends Factory
@@ -21,8 +22,12 @@ class CustomerFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->name();
+        $slug = Str::slug($name);
+
         return [
-            'name' => $this->faker->name(),
+            'name' => $name,
+            'slug' => $slug,
             'phone_no' => $this->faker->randomNumber(9, true),
             'gender' => $this->faker->randomElement(['male', 'female']),
         ];

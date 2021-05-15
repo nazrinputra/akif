@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->foreignId('trait_id')->nullable();
             $table->string('name');
+            $table->string('slug');
             $table->integer('phone_no');
             $table->string('gender');
             $table->timestamps();

@@ -14,7 +14,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('private.customers', [
+            'customers' => Customer::all()
+        ]);
     }
 
     /**
@@ -46,7 +48,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('private.customer', [
+            'customer' => $customer
+        ]);
     }
 
     /**
