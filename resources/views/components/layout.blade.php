@@ -56,9 +56,16 @@
             @guest
             <a href="{{ route('login') }}" class="text-primary">Akif Car Grooming Center</a>
             @else
-            <a href="{{ route('logout') }}" class="text-primary">Akif Car Grooming Center</a>
+            <a class="text-primary" href="{{ route('logout') }}"
+                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                Akif Car Grooming Center
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             @endguest
-            2021</small></div>
+            2021
+        </small></div>
 </div>
 
 @if(config('app.env') != 'production')
