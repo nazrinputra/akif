@@ -2,11 +2,13 @@
 $waiting = $store->queues->where('status', 'Waiting');
 $grooming = $store->queues->where('status', 'Grooming');
 $completed = $store->queues->where('status', 'Completed');
+$collected= $store->queues->where('status', 'Collected');
+$cancelled= $store->queues->where('status', 'Cancelled');
 @endphp
 
-<x-layout>
+<x-layout title="Akif - {{ $store->name }}">
     <!-- Queue Section-->
-    <section class="page-section" id="store-name">
+    <section class="page-section" id="{{ $store->slug }}">
         <div class="container">
             <!-- Queue Section Heading-->
             <h2 class="page-section-heading text-secondary text-center text-uppercase">{{ $store->name }}</h2>

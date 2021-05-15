@@ -59,7 +59,7 @@
         Signature wash<br>
         Maintenance wash
     </x-modal>
-    <x-modal index="2" title="Maintenance">
+    <x-modal index="2" title="Maintain">
         Conditioner<br>
         Glaze & wax<br>
         Paint coatings<br>
@@ -78,7 +78,7 @@
         Seat & interior cleaning<br>
         Inner cabin pest control
     </x-modal>
-    <x-modal index="4" title="Other">
+    <x-modal index="4" title="Others">
         Roadtax<br>
         Insurance<br>
         Car tinted<br>
