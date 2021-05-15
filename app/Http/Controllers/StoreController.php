@@ -14,9 +14,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        return view('stores', [
-            'stores' => Store::all()
-        ]);
+        //
     }
 
     /**
@@ -48,7 +46,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return view('store', [
+        return view('public.store', [
             'store' => $store
         ]);
     }
