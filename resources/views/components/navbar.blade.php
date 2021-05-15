@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         @guest
-        <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}"><img class="img-thumbnail"
+        <a class="navbar-brand js-scroll-trigger" href="{{ route('welcome') }}"><img class="img-thumbnail"
                 src="/img/logo-navbar.png" alt="Akif" /></a>
         @else
-        <a class="navbar-brand js-scroll-trigger" href="{{ url('/home') }}"><img class="img-thumbnail"
+        <a class="navbar-brand js-scroll-trigger" href="{{ route('index') }}"><img class="img-thumbnail"
                 src="/img/logo-navbar.png" alt="Akif" /></a>
         @endguest
         <button
@@ -31,12 +31,12 @@
                 @endforeach
                 <li class="nav-item  mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                        href="{{ url('/services') }}">Services</a>
+                        href="{{ route('promotions') }}">Promotions</a>
                 </li>
                 @auth
                 <li class="nav-item  mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                        href="{{ url('/logout') }}">Logout</a>
+                        href="{{ route('logout') }}">Logout</a>
                 </li>
                 @endauth
             </ul>

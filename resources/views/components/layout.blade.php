@@ -54,16 +54,17 @@
 <div class="copyright py-4 text-center text-white">
     <div class="container"><small>Copyright ©
             @guest
-            <a href="{{ url('/login') }}" class="text-primary">Akif Car Grooming Center</a>
+            <a href="{{ route('login') }}" class="text-primary">Akif Car Grooming Center</a>
             @else
-            <a href="{{ url('/logout') }}" class="text-primary">Akif Car Grooming Center</a>
+            <a href="{{ route('logout') }}" class="text-primary">Akif Car Grooming Center</a>
             @endguest
             2021</small></div>
 </div>
 
-{{-- FIXME remove after finish development --}}
+@if(config('app.env') != 'production')
 <x-alert class="alert-warning fixed-bottom mb-0">
     <strong>Hey there!</strong> This site is still under development. Some data are simulated.
 </x-alert>
+@endif
 
 </html>
