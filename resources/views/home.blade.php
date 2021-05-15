@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Akif - Dashboard">
     <div class="container mt-5 py-5">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
