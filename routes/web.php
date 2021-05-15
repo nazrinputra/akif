@@ -29,11 +29,8 @@ Route::get('promotions', function () {
 
 Auth::routes();
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
-Route::get('/index', 'HomeController@index')->name('index');
-
 Route::group(['middleware' => ['auth', 'clear.cache']], function () {
+    Route::get('/index', 'HomeController@index')->name('index');
 
     Route::get('counter', function () {
         return view('private.counter');
