@@ -14,7 +14,7 @@
             <tr>
                 <td {{ $attributes([ 'class' => '']) }}>
                     @foreach ($queues as $queue)
-                    <h4>{{ $queue->car->plate_no }}</h4>
+                    <h4>{{ $queue->car->model . " " . $queue->car->plate_no }}</h4>
                     @endforeach
                 </td>
             </tr>
