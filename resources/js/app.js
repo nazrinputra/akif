@@ -1,4 +1,6 @@
 require('./bootstrap');
+var Turbolinks = require("turbolinks")
+Turbolinks.start()
 
     /*!
     * Start Bootstrap - Freelancer v6.0.5 (https://startbootstrap.com/theme/freelancer)

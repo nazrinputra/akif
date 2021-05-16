@@ -15,7 +15,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
     <!-- Mix CSS-->
-    <link rel="stylesheet" href="{{mix ('css/app.css')}}">
+    <link rel="stylesheet" href="{{mix ('css/app.css')}}" data-turbolinks-track="true">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Mix JS-->
-    <script src="{{mix ('js/app.js')}}"></script>
+    <script src="{{mix ('js/app.js')}}" data-turbolinks-track="true"></script>
 
 </body>
 
