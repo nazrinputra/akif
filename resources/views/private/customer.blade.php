@@ -4,6 +4,7 @@
             <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
             <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('customers') }}">Customers</a></li>
             <li class="breadcrumb-item">Customer</li>
+            <li class="ml-auto"><a class="text-secondary" href="{{ route('profile') }}">My Profile</a></li>
         </x-slot>
         <h2>Customer</h2>
         <ul>

@@ -2,6 +2,7 @@
     <x-dashboard>
         <x-slot name="breadcrumb">
             <li class="breadcrumb-item">Index</li>
+            <li class="ml-auto"><a class="text-secondary" href="{{ route('profile') }}">My Profile</a></li>
         </x-slot>
         <div class="row p-3">
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
