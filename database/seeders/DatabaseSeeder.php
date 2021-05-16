@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CarSeeder::class,
             CustomerSeeder::class,
+            OwnerSeeder::class,
             StoreSeeder::class,
             QueueSeeder::class,
         ]);
