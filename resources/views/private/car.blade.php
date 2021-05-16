@@ -11,10 +11,14 @@
             <li>Display car info</li>
             <li>{{ $car->plate_no }}</li>
             <li>Display owner(s) from customer</li>
-            <li>Owner(s)</li>
-            @foreach ($car->owners as $owner)
-            <li>{{ $owner->name }}</li>
-            @endforeach
+            <li>
+                @foreach ($car->owners as $owner)
+                <a href="{{ route('customer', $owner->slug) }}">
+                    {{ $owner->name }}
+                </a>
+                &emsp;
+                @endforeach
+            </li>
         </ul>
     </x-dashboard>
 </x-layout>
