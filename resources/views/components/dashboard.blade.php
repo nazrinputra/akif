@@ -2,12 +2,21 @@
 
 <div class="container mt-4 pt-5 pb-3">
     <div class="card">
-        <div class="card-header text-center">Hello, {{ auth()->user()->name }}</div>
-
         <div class="card-body">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+            <nav class="text-center" aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center:">
+                    @if (request()->is('index'))
+                    <li class="breadcrumb-item">Index</li>
+                    @else
+                    <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
+                    @endif
                     {{ $breadcrumb }}
+                    @if (request()->is('profile'))
+                    <li class="ml-auto">Hello, {{ auth()->user()->name }}</li>
+                    @else
+                    <li class="ml-auto">Hello, <a class="text-secondary"
+                            href="{{ route('profile') }}">{{ auth()->user()->name }}</a></li>
+                    @endif
                 </ol>
             </nav>
             {{ $slot }}

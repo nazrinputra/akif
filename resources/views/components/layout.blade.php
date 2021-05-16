@@ -16,6 +16,9 @@
 
     <!-- Mix CSS-->
     <link rel="stylesheet" href="{{mix ('css/app.css')}}" data-turbolinks-track="true">
+
+    <!-- Mix JS-->
+    <script src="{{mix ('js/app.js')}}" defer data-turbolinks-track="true"></script>
 </head>
 
 <body>
@@ -25,11 +28,7 @@
         <main class="pt-5">
             {{ $slot }}
         </main>
-    </div>
-
-    <!-- Mix JS-->
-    <script src="{{mix ('js/app.js')}}" data-turbolinks-track="true"></script>
-
+    </div>*
 </body>
 
 <!-- Footer section-->
