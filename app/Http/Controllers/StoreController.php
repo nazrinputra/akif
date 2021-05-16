@@ -46,9 +46,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return view('public.store', [
-            'store' => $store
-        ]);
+        return view('public.store', compact('store'));
     }
 
     /**
