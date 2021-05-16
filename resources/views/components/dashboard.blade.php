@@ -12,10 +12,12 @@
                     @endif
                     {{ $breadcrumb }}
                     @if (request()->is('profile'))
-                    <li class="ml-auto">Hello, {{ auth()->user()->name }}</li>
+                    <li class="ml-auto">Hello, {{ auth()->user()->name }}</li>&emsp;
+                    <x-logout class="text-secondary" />
                     @else
                     <li class="ml-auto">Hello, <a class="text-secondary"
-                            href="{{ route('profile') }}">{{ auth()->user()->name }}</a></li>
+                            href="{{ route('profile') }}">{{ auth()->user()->name }}</a>&emsp;</li>
+                    <x-logout class="text-secondary" />
                     @endif
                 </ol>
             </nav>
