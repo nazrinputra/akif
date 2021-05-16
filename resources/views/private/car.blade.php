@@ -8,9 +8,13 @@
         </x-slot>
         <h2>Car</h2>
         <ul>
-            <li>{{ $car->plate_no }}</li>
             <li>Display car info</li>
+            <li>{{ $car->plate_no }}</li>
             <li>Display owner(s) from customer</li>
+            <li>Owner(s)</li>
+            @foreach ($car->owners as $owner)
+            <li>{{ $owner->name }}</li>
+            @endforeach
         </ul>
     </x-dashboard>
 </x-layout>
