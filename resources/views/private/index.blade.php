@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                 <h2>WhatsApp</h2>
-                <p>Modify WhatsApp message sent by the system.
+                <p>Modify WhatsApp messages for the store.
                 </p>
                 <p><a class="btn btn-secondary" href="{{ route('whatsapp') }}">WhatsApp</a></p>
             </div>
