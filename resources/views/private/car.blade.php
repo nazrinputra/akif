@@ -4,12 +4,21 @@
             <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
             <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('cars') }}">Cars</a></li>
             <li class="breadcrumb-item">Car</li>
+            <li class="ml-auto"><a class="text-secondary" href="{{ route('profile') }}">My Profile</a></li>
         </x-slot>
         <h2>Car</h2>
         <ul>
-            <li>{{ $car->plate_no }}</li>
             <li>Display car info</li>
+            <li>{{ $car->plate_no }}</li>
             <li>Display owner(s) from customer</li>
+            <li>
+                @foreach ($car->owners as $owner)
+                <a href="{{ route('customer', $owner->slug) }}">
+                    {{ $owner->name }}
+                </a>
+                &emsp;
+                @endforeach
+            </li>
         </ul>
     </x-dashboard>
 </x-layout>

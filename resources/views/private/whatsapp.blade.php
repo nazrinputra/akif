@@ -8,6 +8,7 @@ $string = "Tak perlu menaip lagi - " . $name;
         <x-slot name="breadcrumb">
             <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('index') }}">Index</a></li>
             <li class="breadcrumb-item">WhatsApp</li>
+            <li class="ml-auto"><a class="text-secondary" href="{{ route('profile') }}">My Profile</a></li>
         </x-slot>
         <h2>WhatsApp</h2>
         <ul>

@@ -29,8 +29,12 @@ Route::get('promotions', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'clear.cache']], function () {
+Route::group(['middleware' => ['auth', 'verified', 'clear.cache']], function () {
     Route::get('/index', 'HomeController@index')->name('index');
+
+    Route::get('profile', function () {
+        return view('private.profile');
+    })->name('profile');
 
     Route::get('counter', function () {
         return view('private.counter');
