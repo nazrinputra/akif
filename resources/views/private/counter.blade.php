@@ -10,10 +10,10 @@
         <form method="POST" action="#">
             @csrf
 
-            <div class="row py-2 d-flex justify-content-between">
+            <div class="row d-flex justify-content-between">
                 <label for="plate_no" class="col-md-4 col-form-label text-md-right">Plate Number</label>
 
-                <div class="col-md-4">
+                <div class="col-md-4 pb-1">
                     <input id="plate_no" type="text" class="form-control @error('plate_no') is-invalid @enderror"
                         name="plate_no" value="{{ old('plate_no') }}" required autofocus>
 
