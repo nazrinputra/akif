@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "pelmered/fake-car": "^1.6",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
