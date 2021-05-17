@@ -10539,7 +10539,6 @@ a.text-dark:focus {
 }
 .masthead {
     padding-top: 4rem;
-    padding-bottom: 3rem;
 }
 .masthead .masthead-heading {
     font-size: 2.75rem;
@@ -10554,8 +10553,7 @@ a.text-dark:focus {
 
 @media (min-width: 992px) {
     .masthead {
-        padding-top: 7rem;
-        padding-bottom: 6rem;
+        padding-top: 6.5rem;
     }
     .masthead .masthead-heading {
         font-size: 4rem;
