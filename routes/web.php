@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +28,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/counter', function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
+
+    Route::get('/whatsapp', function () {
+        return Inertia::render('Private/Whatsapp');
+    })->name('whatsapp');
+
+    Route::get('/cars', [CarController::class, 'index'])->name('cars');
 });
 
 require __DIR__ . '/auth.php';
