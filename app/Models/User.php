@@ -11,6 +11,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function phone()
+    {
+        /**
+         * Get phone number with 0 at the front with $this->phone().
+         */
+        return '0' . $this->phone_no;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,7 +26,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'slug',
         'email',
+        'phone_no',
         'password',
     ];
 
