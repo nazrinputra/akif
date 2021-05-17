@@ -35,7 +35,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/cars', [CarController::class, 'index'])->name('cars');
 
-    Route::get('/cars/{car:plate_no}', [CarController::class, 'show'])->name('car');
+    Route::get('/car', function () {
+        return Inertia::render('Private.Car');
+    })->name('car');
 });
 
 require __DIR__ . '/auth.php';
