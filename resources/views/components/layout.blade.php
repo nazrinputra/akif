@@ -22,13 +22,13 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="slot">
         <x-navbar />
 
         <main class="pt-5">
             {{ $slot }}
         </main>
-    </div>*
+    </div>
 </body>
 
 <!-- Footer section-->
