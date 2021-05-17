@@ -1,24 +1,24 @@
 import './bootstrap';
 import './acw';
-import Vue from 'vue';
+// import Vue from 'vue';
 import Turbolinks from 'turbolinks';
-import TurbolinksAdapter from 'vue-turbolinks';
+// import TurbolinksAdapter from 'vue-turbolinks';
 
 Turbolinks.start();
-Vue.use(TurbolinksAdapter);
-Vue.component('test', {
-    template: 'components.Test.vue'
-});
+// Vue.use(TurbolinksAdapter);
+// Vue.component('test', {
+//     template: 'components.Test.vue'
+// });
 
-document.addEventListener('turbo:load', () => {
-    const element = document.getElementById("app");
+// document.addEventListener('turbo:load', () => {
+//     const element = document.getElementById("app");
 
-    if (element != null) {
+//     if (element != null) {
     
-        const app = new Vue({
-            el: element,
-            // template: '<App/>',
-            // components: { App }
-        });
-    }
-});
+//         const app = new Vue({
+//             el: element,
+//             // template: '<App/>',
+//             // components: { App }
+//         });
+//     }
+// });
