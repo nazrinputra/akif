@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item  mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">Tambak Bugis</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Tambak Bugis</a>
                     </li>
                     <li class="nav-item  mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Bukit Katil</a>
@@ -70,10 +70,7 @@
 
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
-    <div class="container"><small>Copyright ©
-            <a href="{{ route('login') }}" class="text-primary">Akif Car Grooming Center</a>
-            2021
-        </small></div>
+    <div class="container"><small>Copyright © Akif Car Grooming Center 2021</small></div>
 </div>
 
 </html>

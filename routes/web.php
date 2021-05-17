@@ -24,10 +24,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('static', function () {
-    return view('static');
-});
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
