@@ -1,24 +1,22 @@
-import './bootstrap';
-import './acw';
-// import Vue from 'vue';
-import Turbolinks from 'turbolinks';
-// import TurbolinksAdapter from 'vue-turbolinks';
+require('./bootstrap');
+require('./acw');
 
-Turbolinks.start();
-// Vue.use(TurbolinksAdapter);
-// Vue.component('test', {
-//     template: 'components.Test.vue'
-// });
+// Import modules...
+import { createApp, h } from 'vue';
+import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
 
-// document.addEventListener('turbo:load', () => {
-//     const element = document.getElementById("app");
+const el = document.getElementById('app');
 
-//     if (element != null) {
-    
-//         const app = new Vue({
-//             el: element,
-//             // template: '<App/>',
-//             // components: { App }
-//         });
-//     }
-// });
+createApp({
+    render: () =>
+        h(InertiaApp, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: (name) => require(`./Pages/${name}`).default,
+        }),
+})
+    .mixin({ methods: { route } })
+    .use(InertiaPlugin)
+    .mount(el);
+
+InertiaProgress.init({ color: '#4B5563' });
