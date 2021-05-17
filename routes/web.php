@@ -16,16 +16,16 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('Public/Welcome');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Private/Dashboard');
     })->name('dashboard');
 
     Route::get('/counter', function () {
-        return Inertia::render('Counter');
+        return Inertia::render('Private/Counter');
     })->name('counter');
 });
 
