@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/counter', function () {
+        return Inertia::render('Counter');
+    })->name('counter');
 });
 
 require __DIR__ . '/auth.php';

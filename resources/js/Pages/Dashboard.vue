@@ -11,8 +11,10 @@
                                 <h2>Counter</h2>
                                 <p>Register car and customer into queue.</p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
-                                        >Counter</a
+                                    <inertia-link
+                                        class="btn btn-secondary"
+                                        :href="route('counter')"
+                                        >Counter</inertia-link
                                     >
                                 </p>
                             </div>
