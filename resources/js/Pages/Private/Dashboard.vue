@@ -22,8 +22,10 @@
                                 <h2>WhatsApp</h2>
                                 <p>Modify WhatsApp messages for the store.</p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
-                                        >WhatsApp</a
+                                    <inertia-link
+                                        class="btn btn-secondary"
+                                        :href="route('whatsapp')"
+                                        >WhatsApp</inertia-link
                                     >
                                 </p>
                             </div>
@@ -34,8 +36,10 @@
                                     system.
                                 </p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
-                                        >Cars</a
+                                    <inertia-link
+                                        class="btn btn-secondary"
+                                        :href="route('cars')"
+                                        >Cars</inertia-link
                                     >
                                 </p>
                             </div>
