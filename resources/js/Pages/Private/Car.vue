@@ -1,12 +1,18 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <!-- <template #header>Car</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapp')"
-                :active="route().current('whatsapp')"
+                :href="route('cars')"
+                :active="route().current('cars')"
             >
-                WhatsApp
+                Cars
+            </breeze-nav-link>
+            <breeze-nav-link
+                :href="route('car')"
+                :active="route().current('car')"
+            >
+                Car
             </breeze-nav-link>
         </template>
 
@@ -16,8 +22,11 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row p-3">
                             <div class="col pb-5">
-                                <h2>WhatsApp</h2>
-                                <p>Modify WhatsApp messages for the store.</p>
+                                <h2>Car</h2>
+                                <p>
+                                    View, add or edit car registered in the
+                                    system.
+                                </p>
                             </div>
                         </div>
                     </div>

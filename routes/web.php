@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('whatsapp');
 
     Route::get('/cars', [CarController::class, 'index'])->name('cars');
+
+    Route::get('/cars/{car:plate_no}', [CarController::class, 'show'])->name('car');
 });
 
 require __DIR__ . '/auth.php';

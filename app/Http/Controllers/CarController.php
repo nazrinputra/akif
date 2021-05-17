@@ -49,7 +49,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('private.car', compact('car'));
+        return Inertia::render('Private/Car', [
+            'car' => $car
+        ]);
     }
 
     /**

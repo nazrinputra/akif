@@ -1,6 +1,14 @@
 <template>
     <breeze-authenticated-layout>
         <!-- <template #header>Counter</template> -->
+        <template #nav>
+            <breeze-nav-link
+                :href="route('counter')"
+                :active="route().current('counter')"
+            >
+                Counter
+            </breeze-nav-link>
+        </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -21,10 +29,12 @@
 
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
+import BreezeNavLink from "@/Components/NavLink";
 
 export default {
     components: {
-        BreezeAuthenticatedLayout
+        BreezeAuthenticatedLayout,
+        BreezeNavLink
     },
 
     props: {

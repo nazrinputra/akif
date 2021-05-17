@@ -16,6 +16,7 @@
                                 >
                                     Dashboard
                                 </breeze-nav-link>
+                                <slot name="nav" />
                                 <!-- <breeze-nav-link
                                     :href="route('login')"
                                     :active="route().current('login')"

@@ -1,6 +1,14 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <!-- <template #header>Cars</template> -->
+        <template #nav>
+            <breeze-nav-link
+                :href="route('cars')"
+                :active="route().current('cars')"
+            >
+                Cars
+            </breeze-nav-link>
+        </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -13,14 +21,14 @@
                                     View, add or edit cars registered in the
                                     system.
                                 </p>
-                                <inertia-link
-                                    href="#"
-                                    v-for="car in cars"
-                                    v-bind:key="car.id"
-                                    class="px-2"
-                                >
-                                    {{ car.plate_no }}
-                                </inertia-link>
+                                <span v-for="car in cars" v-bind:key="car.id">
+                                    <inertia-link
+                                        :href="route('car', car.plate_no)"
+                                        class="px-2"
+                                    >
+                                        {{ car.plate_no }}
+                                    </inertia-link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -32,10 +40,12 @@
 
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
+import BreezeNavLink from "@/Components/NavLink";
 
 export default {
     components: {
-        BreezeAuthenticatedLayout
+        BreezeAuthenticatedLayout,
+        BreezeNavLink
     },
 
     props: {
