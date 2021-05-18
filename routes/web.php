@@ -1,11 +1,12 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Dashboard');
     })->name('dashboard');
 
-    Route::get('profile', [UserController::class, 'show'])->name('profile');
+    Route::get('profile', function () {
+        return Inertia::render('Private/Profile', [
+            'user' => Auth::user()->load('store')
+        ]);
+    })->name('profile');
 
     Route::get('counter', function () {
         return Inertia::render('Private/Counter');
@@ -48,6 +53,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('services', [ServiceController::class, 'index'])->name('services');
 
     Route::get('services/{service:slug}', [ServiceController::class, 'show'])->name('service');
+
+    Route::get('reports', function () {
+        return Inertia::render('Private/Report');
+    })->name('reports');
+
+    Route::get('crews', [UserController::class, 'index'])->name('crews');
+
+    Route::get('crews/{user:slug}', [UserController::class, 'show'])->name('crew');
 });
 
 require __DIR__ . '/auth.php';

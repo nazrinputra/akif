@@ -87,7 +87,9 @@
                                 <h2>Reports</h2>
                                 <p>Generate monthly reports and statistics.</p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
+                                    <a
+                                        class="btn btn-secondary"
+                                        :href="route('reports')"
                                         >Reports</a
                                     >
                                 </p>
@@ -99,7 +101,9 @@
                                     system.
                                 </p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
+                                    <a
+                                        class="btn btn-secondary"
+                                        :href="route('crews')"
                                         >Crews</a
                                     >
                                 </p>
