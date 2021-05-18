@@ -21,4 +21,9 @@ class Store extends Model
     {
         return $this->hasMany(Queue::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -14,7 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('private.cars', [
+        return Inertia::render('Private/Cars', [
             'cars' => Car::all()
         ]);
     }
@@ -48,7 +49,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('private.car', compact('car'));
+        return Inertia::render('Private/Car', [
+            'car' => $car->load('owners')
+        ]);
     }
 
     /**

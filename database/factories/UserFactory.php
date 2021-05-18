@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Store;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
@@ -15,6 +16,8 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+    protected $stores;
+
     /**
      * Define the model's default state.
      *
@@ -22,11 +25,14 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $this->stores = Store::all();
+
         $name = $this->faker->name();
         $slug = Str::slug($name);
 
         return [
             'name' => $name,
+            'store_id' => $this->faker->randomElement($this->stores),
             'email' => $this->faker->unique()->safeEmail(),
             'slug' => $slug,
             'phone_no' => $this->faker->randomNumber(9, true),

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Car;
 use App\Models\Queue;
 use App\Models\Store;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QueueFactory extends Factory
@@ -20,7 +21,7 @@ class QueueFactory extends Factory
 
     protected $cars;
 
-    protected $status = ['Waiting', 'Grooming', 'Completed'];
+    protected $status = ['Waiting', 'Grooming', 'Completed', 'Collected', 'Cancelled'];
 
     /**
      * Define the model's default state.

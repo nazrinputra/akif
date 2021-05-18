@@ -1,8 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\URL;
+use Inertia\Inertia;
+use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,68 +22,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-URL::forceScheme('https');
-
 Route::get('/', function () {
-    return view('public.welcome');
-})->name('welcome');
+    return Inertia::render('Public/Welcome');
+});
 
-Route::get('store/{store:slug}', 'StoreController@show')->name('store');
+Route::get('{store:slug}', [StoreController::class, 'show'])->name('store');
 
-Route::get('promotions', function () {
-    return view('public.promotions');
-})->name('promotions');
-
-Auth::routes();
-
-Route::group(['middleware' => ['auth', 'verified', 'clear.cache']], function () {
-    Route::get('/index', 'HomeController@index')->name('index');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('dashboard', function () {
+        return Inertia::render('Private/Dashboard');
+    })->name('dashboard');
 
     Route::get('profile', function () {
-        return view('private.profile');
+        return Inertia::render('Private/Profile', [
+            'user' => Auth::user()->load('store')
+        ]);
     })->name('profile');
 
     Route::get('counter', function () {
-        return view('private.counter');
+        return Inertia::render('Private/Counter');
     })->name('counter');
 
     Route::get('whatsapp', function () {
-        return view('private.whatsapp');
+        return Inertia::render('Private/Whatsapp');
     })->name('whatsapp');
 
-    Route::get('cars', 'CarController@index')->name('cars');
+    Route::get('cars', [CarController::class, 'index'])->name('cars');
 
-    Route::get('cars/{car:plate_no}', 'CarController@show')->name('car');
+    Route::get('cars/{car:plate_no}', [CarController::class, 'show'])->name('car');
 
-    Route::get('customers', 'CustomerController@index')->name('customers');
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers');
 
-    Route::get('customers/{customer:slug}', 'CustomerController@show')->name('customer');
+    Route::get('customer/{customer:slug}', [CustomerController::class, 'show'])->name('customer');
 
-    Route::get('services', function () {
-        return view('private.services');
-    })->name('services');
+    Route::get('services', [ServiceController::class, 'index'])->name('services');
 
-    Route::get('services/service', function () {
-        return view('private.service');
-    })->name('service');
+    Route::get('services/{service:slug}', [ServiceController::class, 'show'])->name('service');
 
-    Route::get('packages', function () {
-        return view('private.packages');
-    })->name('packages');
+    Route::get('packages', [PackageController::class, 'index'])->name('packages');
 
-    Route::get('packages/package', function () {
-        return view('private.package');
-    })->name('package');
+    Route::get('packages/{package:slug}', [PackageController::class, 'show'])->name('package');
 
-    Route::get('dashboard', function () {
-        return view('private.dashboard');
-    })->name('dashboard');
+    Route::get('reports', function () {
+        return Inertia::render('Private/Report');
+    })->name('reports');
 
-    Route::get('crews', function () {
-        return view('private.crews');
-    })->name('crews');
+    Route::get('crews', [UserController::class, 'index'])->name('crews');
 
-    Route::get('crews/crew', function () {
-        return view('private.crew');
-    })->name('crew');
+    Route::get('crews/{user:slug}', [UserController::class, 'show'])->name('crew');
 });
+
+require __DIR__ . '/auth.php';

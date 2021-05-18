@@ -18,4 +18,9 @@ class Queue extends Model
     {
         return $this->belongsTo(Car::class);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }
