@@ -15,7 +15,7 @@
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="bg-light">
                                         <h2>
                                             Waiting
                                             <i
@@ -47,7 +47,7 @@
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="bg-light">
                                         <h2>
                                             Grooming
                                             <i class="fas fa-hands-wash"></i>
@@ -77,7 +77,7 @@
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="bg-light">
                                         <h2>
                                             Completed
                                             <i
