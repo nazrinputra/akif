@@ -8,12 +8,6 @@
             >
                 WhatsApps
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
-            >
-                WhatsApp
-            </breeze-nav-link>
         </template>
 
         <template #responsive-nav>
@@ -22,12 +16,6 @@
                 :active="route().current('whatsapps')"
             >
                 WhatsApps
-            </breeze-responsive-nav-link>
-            <breeze-responsive-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
-            >
-                WhatsApp
             </breeze-responsive-nav-link>
         </template>
 
@@ -39,7 +27,17 @@
                             <div class="col pb-5">
                                 <h2>WhatsApp</h2>
                                 <p>Modify WhatsApp messages for the store.</p>
-                                <p>{{ whatsapp.title }}</p>
+                                <span
+                                    v-for="whatsapp in whatsapps"
+                                    v-bind:key="whatsapp.id"
+                                >
+                                    <inertia-link
+                                        :href="route('whatsapp', whatsapp)"
+                                        class="px-2"
+                                    >
+                                        {{ whatsapp.title }}
+                                    </inertia-link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -64,7 +62,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        whatsapp: Object
+        whatsapps: Object
     }
 };
 </script>

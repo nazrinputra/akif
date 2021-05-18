@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Whatsapp;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class WhatsappController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Private/Whatsapps', [
+            'whatsapps' => Whatsapp::all()
+        ]);
     }
 
     /**
@@ -46,7 +49,7 @@ class WhatsappController extends Controller
      */
     public function show(Whatsapp $whatsapp)
     {
-        //
+        return Inertia::render('Private/Whatsapp', compact('whatsapp'));
     }
 
     /**
