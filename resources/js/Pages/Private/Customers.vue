@@ -54,7 +54,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        cars: Object
+        customers: Object
     }
 };
 </script>
