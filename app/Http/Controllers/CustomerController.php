@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('private.customers', [
+        return Inertia::render('Private/Customers', [
             'customers' => Customer::all()
         ]);
     }

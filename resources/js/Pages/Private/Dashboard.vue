@@ -50,7 +50,9 @@
                                     customers.
                                 </p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
+                                    <a
+                                        class="btn btn-secondary"
+                                        :href="route('customers')"
                                         >Customers</a
                                     >
                                 </p>

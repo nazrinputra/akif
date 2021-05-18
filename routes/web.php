@@ -38,6 +38,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/car', function () {
         return Inertia::render('Private/Car');
     })->name('car');
+
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+
+    Route::get('/customer', function () {
+        return Inertia::render('Private/Customer');
+    })->name('customer');
 });
 
 require __DIR__ . '/auth.php';
