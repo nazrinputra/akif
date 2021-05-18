@@ -21,29 +21,25 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return Inertia::render('Private/Dashboard');
     })->name('dashboard');
 
-    Route::get('/counter', function () {
+    Route::get('counter', function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
 
-    Route::get('/whatsapp', function () {
+    Route::get('whatsapp', function () {
         return Inertia::render('Private/Whatsapp');
     })->name('whatsapp');
 
-    Route::get('/cars', [CarController::class, 'index'])->name('cars');
+    Route::get('cars', [CarController::class, 'index'])->name('cars');
 
-    Route::get('/car', function () {
-        return Inertia::render('Private/Car');
-    })->name('car');
+    Route::get('cars/{car:plate_no}', [CarController::class, 'show'])->name('car');
 
-    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers');
 
-    Route::get('/customer', function () {
-        return Inertia::render('Private/Customer');
-    })->name('customer');
+    Route::get('customer/{customer:slug}', [CustomerController::class, 'show'])->name('customer');
 });
 
 require __DIR__ . '/auth.php';

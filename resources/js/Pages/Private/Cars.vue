@@ -23,7 +23,7 @@
                                 </p>
                                 <span v-for="car in cars" v-bind:key="car.id">
                                     <inertia-link
-                                        :href="route('car')"
+                                        :href="route('car', car)"
                                         class="px-2"
                                     >
                                         {{ car.plate_no }}

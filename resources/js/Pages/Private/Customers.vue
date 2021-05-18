@@ -26,7 +26,7 @@
                                     v-bind:key="customer.id"
                                 >
                                     <inertia-link
-                                        :href="route('customer')"
+                                        :href="route('customer', customer)"
                                         class="px-2"
                                     >
                                         {{ customer.name }}

@@ -9,8 +9,8 @@
                 Cars
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('car')"
-                :active="route().current('car')"
+                :href="route('car', car)"
+                :active="route().current('car', car)"
             >
                 Car
             </breeze-nav-link>
@@ -27,6 +27,7 @@
                                     View, add or edit car registered in the
                                     system.
                                 </p>
+                                <p>{{ car.plate_no }}</p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        car: Object
     }
 };
 </script>

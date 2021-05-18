@@ -9,8 +9,8 @@
                 Customers
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('customer')"
-                :active="route().current('customer')"
+                :href="route('customer', customer)"
+                :active="route().current('customer', customer)"
             >
                 Customer
             </breeze-nav-link>
@@ -27,6 +27,7 @@
                                     View, add or edit customer registered in the
                                     system.
                                 </p>
+                                <p>{{ customer.name }}</p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        customer: Object
     }
 };
 </script>
