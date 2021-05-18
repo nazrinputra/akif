@@ -18641,6 +18641,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      queues: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get(route("queues", route().params)).then(function (data) {
+      _this.queues = data;
+      console.log("queues :");
+      console.dir(_this.queues);
+    });
+  },
   props: {
     auth: Object,
     errors: Object,

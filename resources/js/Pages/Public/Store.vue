@@ -101,6 +101,20 @@
 
 <script>
 export default {
+    data() {
+        return {
+            queues: []
+        };
+    },
+
+    created() {
+        axios.get(route("queues", route().params)).then(data => {
+            this.queues = data;
+            console.log("queues :");
+            console.dir(this.queues);
+        });
+    },
+
     props: {
         auth: Object,
         errors: Object,
