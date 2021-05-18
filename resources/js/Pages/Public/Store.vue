@@ -8,11 +8,8 @@
             >
                 {{ store.name }}
             </h2>
-            <p v-for="queue in queues" v-bind:key="queue.id">
-                {{ queue.car.plate_no }}
-            </p>
             <!-- Queue Subheading-->
-            <!-- <div class="row text-uppercase">
+            <div class="row text-uppercase">
                 <div class="col-md-4 col-sm-12">
                     <table class="table-queue text-center">
                         <thead>
@@ -97,7 +94,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div> -->
+            </div>
         </div>
     </section>
 </template>
@@ -106,26 +103,48 @@
 export default {
     data() {
         return {
-            queues: []
+            waiting: [],
+            grooming: [],
+            completed: []
         };
     },
 
     mounted() {
-        let self = this;
-        setInterval(function() {
+        this.getQueue();
+        this.refreshQueue();
+    },
+
+    methods: {
+        getQueue() {
+            // Get data for first page load
+            let self = this;
             axios.get(route("queues", route().params)).then(response => {
-                self.queues = response.data;
+                self.waiting = response.data.filter(queues =>
+                    queues.status.includes("Waiting")
+                );
+                self.grooming = response.data.filter(queues =>
+                    queues.status.includes("Grooming")
+                );
+                self.completed = response.data.filter(queues =>
+                    queues.status.includes("Completed")
+                );
             });
-        }, 10000);
+        },
+        refreshQueue() {
+            setInterval(function() {
+                // Get new data after every 10 seconds
+                let self = this;
+                axios.get(route("queues", route().params)).then(response => {
+                    self.queues = response.data;
+                });
+            }, 10000);
+        }
     },
 
     props: {
         auth: Object,
         errors: Object,
-        store: Object,
-        waiting: Object,
-        grooming: Object,
-        completed: Object
+        store: Object
     }
 };
 </script>

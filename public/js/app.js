@@ -18643,24 +18643,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      queues: []
+      waiting: [],
+      grooming: [],
+      completed: []
     };
   },
   mounted: function mounted() {
-    var self = this;
-    setInterval(function () {
+    this.getQueue();
+    this.refreshQueue();
+  },
+  methods: {
+    getQueue: function getQueue() {
+      // Get data for first page load
+      var self = this;
       axios.get(route("queues", route().params)).then(function (response) {
-        self.queues = response.data;
+        self.waiting = response.data.filter(function (queues) {
+          return queues.status.includes("Waiting");
+        });
+        self.grooming = response.data.filter(function (queues) {
+          return queues.status.includes("Grooming");
+        });
+        self.completed = response.data.filter(function (queues) {
+          return queues.status.includes("Completed");
+        });
       });
-    }, 10000);
+    },
+    refreshQueue: function refreshQueue() {
+      setInterval(function () {
+        // Get new data after every 10 seconds
+        var self = this;
+        axios.get(route("queues", route().params)).then(function (response) {
+          self.queues = response.data;
+        });
+      }, 10000);
+    }
   },
   props: {
     auth: Object,
     errors: Object,
-    store: Object,
-    waiting: Object,
-    grooming: Object,
-    completed: Object
+    store: Object
   }
 });
 
@@ -21956,18 +21977,85 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "page-section-heading text-secondary text-center text-uppercase py-4"
 };
+var _hoisted_4 = {
+  "class": "row text-uppercase"
+};
+var _hoisted_5 = {
+  "class": "col-md-4 col-sm-12"
+};
+var _hoisted_6 = {
+  "class": "table-queue text-center"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Waiting "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fas fa-hourglass-start"
+})])])])], -1
+/* HOISTED */
+);
+
+var _hoisted_8 = {
+  "class": "table-danger"
+};
+var _hoisted_9 = {
+  "class": "col-md-4 col-sm-12"
+};
+var _hoisted_10 = {
+  "class": "table-queue text-center"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Grooming "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fas fa-hands-wash"
+})])])])], -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "table-warning"
+};
+var _hoisted_13 = {
+  "class": "col-md-4 col-sm-12"
+};
+var _hoisted_14 = {
+  "class": "table-queue text-center"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Completed "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fas fa-clipboard-check"
+})])])])], -1
+/* HOISTED */
+);
+
+var _hoisted_16 = {
+  "class": "table-success"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section Heading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.store.name), 1
   /* TEXT */
-  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.queues, function (queue) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Subheading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.waiting, function (queue) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
       key: queue.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(queue.car.plate_no), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(queue.car.model + " " + queue.car.plate_no), 1
     /* TEXT */
-    );
+    )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Subheading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row text-uppercase\">\r\n                <div class=\"col-md-4 col-sm-12\">\r\n                    <table class=\"table-queue text-center\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>\r\n                                    <h2>\r\n                                        Waiting\r\n                                        <i class=\"fas fa-hourglass-start\"></i>\r\n                                    </h2>\r\n                                </th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr v-for=\"queue in waiting\" v-bind:key=\"queue.id\">\r\n                                <td class=\"table-danger\">\r\n                                    <h4>\r\n                                        {{\r\n                                            queue.car.model +\r\n                                                \" \" +\r\n                                                queue.car.plate_no\r\n                                        }}\r\n                                    </h4>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"col-md-4 col-sm-12\">\r\n                    <table class=\"table-queue text-center\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>\r\n                                    <h2>\r\n                                        Grooming\r\n                                        <i class=\"fas fa-hands-wash\"></i>\r\n                                    </h2>\r\n                                </th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr v-for=\"queue in grooming\" v-bind:key=\"queue.id\">\r\n                                <td class=\"table-warning\">\r\n                                    <h4>\r\n                                        {{\r\n                                            queue.car.model +\r\n                                                \" \" +\r\n                                                queue.car.plate_no\r\n                                        }}\r\n                                    </h4>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"col-md-4 col-sm-12\">\r\n                    <table class=\"table-queue text-center\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>\r\n                                    <h2>\r\n                                        Completed\r\n                                        <i class=\"fas fa-clipboard-check\"></i>\r\n                                    </h2>\r\n                                </th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr\r\n                                v-for=\"queue in completed\"\r\n                                v-bind:key=\"queue.id\"\r\n                            >\r\n                                <td class=\"table-success\">\r\n                                    <h4>\r\n                                        {{\r\n                                            queue.car.model +\r\n                                                \" \" +\r\n                                                queue.car.plate_no\r\n                                        }}\r\n                                    </h4>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n            </div> ")])])], 2112
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.grooming, function (queue) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
+      key: queue.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(queue.car.model + " " + queue.car.plate_no), 1
+    /* TEXT */
+    )])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.completed, function (queue) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
+      key: queue.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(queue.car.model + " " + queue.car.plate_no), 1
+    /* TEXT */
+    )])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])])])])])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }
