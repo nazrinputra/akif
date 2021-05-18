@@ -56,6 +56,13 @@
 
                                     <template #content>
                                         <breeze-dropdown-link
+                                            :href="route('profile')"
+                                            method="get"
+                                            as="button"
+                                        >
+                                            My Profile
+                                        </breeze-dropdown-link>
+                                        <breeze-dropdown-link
                                             :href="route('logout')"
                                             method="post"
                                             as="button"

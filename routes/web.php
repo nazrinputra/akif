@@ -25,6 +25,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Dashboard');
     })->name('dashboard');
 
+    Route::get('profile', function () {
+        return Inertia::render('Private/Profile');
+    })->name('profile');
+
     Route::get('counter', function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
