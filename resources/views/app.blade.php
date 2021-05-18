@@ -29,7 +29,7 @@
                 type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
                 Menu
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-store-alt"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -73,5 +73,16 @@
     <div class="container"><small>Copyright © <a href="{{ route('login') }}" class="text-primary">Akif Car Grooming
                 Center</a> 2021</small></div>
 </div>
+
+@if(config('app.env') != 'production')
+<div class="container">
+    <div class="alert-warning fixed-bottom mb-0 alert alert-dismissible fade show text-center" role="alert">
+        <strong>Hey there!</strong> This site is still under development. Some data are simulated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+@endif
 
 </html>
