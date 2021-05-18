@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Customer;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Customers', [
-            'customers' => Customer::all()
+        return Inertia::render('Private/Services', [
+            'services' => Service::all()
         ]);
     }
 
@@ -44,21 +44,21 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Service $service)
     {
-        return Inertia::render('Private/Customer', compact('customer'));
+        return Inertia::render('Private/Service', compact('service'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Service $service)
     {
         //
     }
@@ -67,10 +67,10 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Service $service)
     {
         //
     }
@@ -78,10 +78,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Service $service)
     {
         //
     }
