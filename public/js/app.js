@@ -18650,11 +18650,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getQueue();
-    this.refreshQueue();
+    var self = this;
+    setInterval(function () {
+      self.getQueue();
+    }, 5000);
   },
   methods: {
     getQueue: function getQueue() {
-      // Get data for first page load
       var self = this;
       axios.get(route("queues", route().params)).then(function (response) {
         self.waiting = response.data.filter(function (queues) {
@@ -18667,15 +18669,6 @@ __webpack_require__.r(__webpack_exports__);
           return queues.status.includes("Completed");
         });
       });
-    },
-    refreshQueue: function refreshQueue() {
-      setInterval(function () {
-        // Get new data after every 10 seconds
-        var self = this;
-        axios.get(route("queues", route().params)).then(function (response) {
-          self.queues = response.data;
-        });
-      }, 10000);
     }
   },
   props: {

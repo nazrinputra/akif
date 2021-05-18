@@ -111,12 +111,14 @@ export default {
 
     mounted() {
         this.getQueue();
-        this.refreshQueue();
+        let self = this;
+        setInterval(function() {
+            self.getQueue();
+        }, 5000);
     },
 
     methods: {
         getQueue() {
-            // Get data for first page load
             let self = this;
             axios.get(route("queues", route().params)).then(response => {
                 self.waiting = response.data.filter(queues =>
@@ -129,15 +131,6 @@ export default {
                     queues.status.includes("Completed")
                 );
             });
-        },
-        refreshQueue() {
-            setInterval(function() {
-                // Get new data after every 10 seconds
-                let self = this;
-                axios.get(route("queues", route().params)).then(response => {
-                    self.queues = response.data;
-                });
-            }, 10000);
         }
     },
 
