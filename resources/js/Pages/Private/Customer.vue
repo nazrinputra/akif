@@ -34,6 +34,12 @@
                                 >
                                     {{ car.plate_no }}
                                 </p>
+                                <p
+                                    v-for="personality in customer.personalities"
+                                    v-bind:key="personality.id"
+                                >
+                                    {{ personality.name }}
+                                </p>
                             </div>
                         </div>
                     </div>

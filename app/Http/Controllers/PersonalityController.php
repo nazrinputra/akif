@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Customer;
+use App\Models\Personality;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class PersonalityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Customers', [
-            'customers' => Customer::all()
-        ]);
+        //
     }
 
     /**
@@ -44,23 +41,21 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Personality  $personality
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Personality $personality)
     {
-        return Inertia::render('Private/Customer', [
-            'customer' => $customer->load('cars', 'personalities')
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Personality  $personality
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Personality $personality)
     {
         //
     }
@@ -69,10 +64,10 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Personality  $personality
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Personality $personality)
     {
         //
     }
@@ -80,10 +75,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Personality  $personality
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Personality $personality)
     {
         //
     }

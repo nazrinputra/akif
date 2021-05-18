@@ -21,4 +21,9 @@ class Customer extends Model
     {
         return $this->belongsToMany(Car::class);
     }
+
+    public function personalities()
+    {
+        return $this->belongsToMany(Personality::class);
+    }
 }
