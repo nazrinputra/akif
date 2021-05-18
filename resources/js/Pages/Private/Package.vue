@@ -16,6 +16,21 @@
             </breeze-nav-link>
         </template>
 
+        <template #responsive-nav>
+            <breeze-responsive-nav-link
+                :href="route('packages')"
+                :active="route().current('packages')"
+            >
+                Packages
+            </breeze-responsive-nav-link>
+            <breeze-responsive-nav-link
+                :href="route('package', pkg)"
+                :active="route().current('package', pkg)"
+            >
+                Package
+            </breeze-responsive-nav-link>
+        </template>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -46,11 +61,13 @@
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
+import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
-        BreezeNavLink
+        BreezeNavLink,
+        BreezeResponsiveNavLink
     },
 
     props: {

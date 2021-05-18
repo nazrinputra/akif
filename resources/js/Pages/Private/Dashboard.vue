@@ -120,10 +120,14 @@
 
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
+import BreezeNavLink from "@/Components/NavLink";
+import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 
 export default {
     components: {
-        BreezeAuthenticatedLayout
+        BreezeAuthenticatedLayout,
+        BreezeNavLink,
+        BreezeResponsiveNavLink
     },
 
     props: {

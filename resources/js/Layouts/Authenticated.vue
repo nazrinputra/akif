@@ -17,12 +17,6 @@
                                     Dashboard
                                 </breeze-nav-link>
                                 <slot name="nav" />
-                                <!-- <breeze-nav-link
-                                    :href="route('login')"
-                                    :active="route().current('login')"
-                                >
-                                    Login
-                                </breeze-nav-link> -->
                             </div>
                         </div>
 
@@ -57,7 +51,6 @@
                                     <template #content>
                                         <breeze-dropdown-link
                                             :href="route('profile')"
-                                            method="get"
                                             as="button"
                                         >
                                             My Profile
@@ -129,12 +122,7 @@
                         >
                             Dashboard
                         </breeze-responsive-nav-link>
-                        <!-- <breeze-responsive-nav-link
-                            :href="route('login')"
-                            :active="route().current('login')"
-                        >
-                            Login
-                        </breeze-responsive-nav-link> -->
+                        <slot name="responsive-nav" />
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -143,12 +131,18 @@
                             <div class="font-medium text-base text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">
+                            <div class="font-medium text-sm text-gray-500 ml-2">
                                 {{ $page.props.auth.user.email }}
                             </div>
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <breeze-responsive-nav-link
+                                :href="route('profile')"
+                                as="button"
+                            >
+                                My Profile
+                            </breeze-responsive-nav-link>
                             <breeze-responsive-nav-link
                                 :href="route('logout')"
                                 method="post"
