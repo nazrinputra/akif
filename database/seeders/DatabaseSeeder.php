@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
             OwnerSeeder::class,
             StoreSeeder::class,
             QueueSeeder::class,
+            PackageSeeder::class,
             ServiceSeeder::class,
+            PromotionSeeder::class,
             UserSeeder::class,
         ]);
     }

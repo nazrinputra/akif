@@ -13,4 +13,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Queue::class);
     }
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class);
+    }
 }

@@ -50,10 +50,10 @@
                                     customers.
                                 </p>
                                 <p>
-                                    <a
+                                    <inertia-link
                                         class="btn btn-secondary"
                                         :href="route('customers')"
-                                        >Customers</a
+                                        >Customers</inertia-link
                                     >
                                 </p>
                             </div>
@@ -64,10 +64,10 @@
                                     modifications.
                                 </p>
                                 <p>
-                                    <a
+                                    <inertia-link
                                         class="btn btn-secondary"
                                         :href="route('services')"
-                                        >Services</a
+                                        >Services</inertia-link
                                     >
                                 </p>
                             </div>
@@ -78,8 +78,10 @@
                                     package.
                                 </p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
-                                        >Packages</a
+                                    <inertia-link
+                                        class="btn btn-secondary"
+                                        :href="route('packages')"
+                                        >Packages</inertia-link
                                     >
                                 </p>
                             </div>
@@ -87,10 +89,10 @@
                                 <h2>Reports</h2>
                                 <p>Generate monthly reports and statistics.</p>
                                 <p>
-                                    <a
+                                    <inertia-link
                                         class="btn btn-secondary"
                                         :href="route('reports')"
-                                        >Reports</a
+                                        >Reports</inertia-link
                                     >
                                 </p>
                             </div>
@@ -101,10 +103,10 @@
                                     system.
                                 </p>
                                 <p>
-                                    <a
+                                    <inertia-link
                                         class="btn btn-secondary"
                                         :href="route('crews')"
-                                        >Crews</a
+                                        >Crews</inertia-link
                                     >
                                 </p>
                             </div>

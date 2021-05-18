@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
 
@@ -53,6 +54,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('services', [ServiceController::class, 'index'])->name('services');
 
     Route::get('services/{service:slug}', [ServiceController::class, 'show'])->name('service');
+
+    Route::get('packages', [PackageController::class, 'index'])->name('packages');
+
+    Route::get('packages/{package:slug}', [PackageController::class, 'show'])->name('package');
 
     Route::get('reports', function () {
         return Inertia::render('Private/Report');

@@ -3,18 +3,17 @@
 namespace Database\Factories;
 
 use App\Models\Package;
-use App\Models\Service;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ServiceFactory extends Factory
+class PackageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Service::class;
+    protected $model = Package::class;
 
     /**
      * Define the model's default state.
@@ -30,6 +29,8 @@ class ServiceFactory extends Factory
             'slug' => $slug,
             'name' => $name,
             'price' => $this->faker->randomNumber(2, true),
+            'frequency' => $this->faker->words(3, true),
+            'duration' => $this->faker->words(3, true),
             'description' => $this->faker->sentences(5, true),
         ];
     }
