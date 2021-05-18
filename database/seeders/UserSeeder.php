@@ -28,5 +28,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
         ]);
+
+        User::factory(20)->create();
     }
 }
