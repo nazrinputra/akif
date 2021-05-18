@@ -43,9 +43,10 @@
                             href="{{ route('store', 'bukit-katil') }}">Bukit
                             Katil</a>
                     </li>
+                    {{-- TODO add promotion page and link here
                     <li class="nav-item  mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Promotions</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
