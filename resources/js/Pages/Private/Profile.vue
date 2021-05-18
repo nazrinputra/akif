@@ -20,7 +20,8 @@
                                 <p>
                                     View, add or edit my profile.
                                 </p>
-                                <p>{{ auth.user.name }}</p>
+                                <p>{{ user.name }}</p>
+                                <p>{{ user.store.name }}</p>
                             </div>
                         </div>
                     </div>
@@ -42,7 +43,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        user: Object
     }
 };
 </script>
