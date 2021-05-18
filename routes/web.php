@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\CarController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
