@@ -8,104 +8,122 @@
             >
                 {{ store.name }}
             </h2>
-            <!-- Queue Subheading-->
-            <div class="row text-uppercase">
-                <div class="col-md-4 col-sm-12">
-                    <table class="table-queue text-center">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <h2>
-                                        Waiting
-                                        <i class="fas fa-hourglass-start"></i>
-                                    </h2>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="queue in waiting" v-bind:key="queue.id">
-                                <td class="table-danger">
-                                    <h4>
-                                        {{
-                                            queue.car.model +
-                                                " " +
-                                                queue.car.plate_no
-                                        }}
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <fullscreen ref="fullscreen" :fullscreen.sync="fullscreen">
+                <!-- Queue Subheading-->
+                <div class="row text-uppercase">
+                    <div class="col-md-4 col-sm-12">
+                        <table class="table-queue text-center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h2>
+                                            Waiting
+                                            <i
+                                                class="fas fa-hourglass-start"
+                                            ></i>
+                                        </h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="queue in waiting"
+                                    v-bind:key="queue.id"
+                                >
+                                    <td class="table-danger">
+                                        <h4>
+                                            {{
+                                                queue.car.model +
+                                                    " " +
+                                                    queue.car.plate_no
+                                            }}
+                                        </h4>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <table class="table-queue text-center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h2>
+                                            Grooming
+                                            <i class="fas fa-hands-wash"></i>
+                                        </h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="queue in grooming"
+                                    v-bind:key="queue.id"
+                                >
+                                    <td class="table-warning">
+                                        <h4>
+                                            {{
+                                                queue.car.model +
+                                                    " " +
+                                                    queue.car.plate_no
+                                            }}
+                                        </h4>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <table class="table-queue text-center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h2>
+                                            Completed
+                                            <i
+                                                class="fas fa-clipboard-check"
+                                            ></i>
+                                        </h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="queue in completed"
+                                    v-bind:key="queue.id"
+                                >
+                                    <td class="table-success">
+                                        <h4>
+                                            {{
+                                                queue.car.model +
+                                                    " " +
+                                                    queue.car.plate_no
+                                            }}
+                                        </h4>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <table class="table-queue text-center">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <h2>
-                                        Grooming
-                                        <i class="fas fa-hands-wash"></i>
-                                    </h2>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="queue in grooming" v-bind:key="queue.id">
-                                <td class="table-warning">
-                                    <h4>
-                                        {{
-                                            queue.car.model +
-                                                " " +
-                                                queue.car.plate_no
-                                        }}
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <table class="table-queue text-center">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <h2>
-                                        Completed
-                                        <i class="fas fa-clipboard-check"></i>
-                                    </h2>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="queue in completed"
-                                v-bind:key="queue.id"
-                            >
-                                <td class="table-success">
-                                    <h4>
-                                        {{
-                                            queue.car.model +
-                                                " " +
-                                                queue.car.plate_no
-                                        }}
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </fullscreen>
+            <button type="button" @click="toggle">Fullscreen</button>
         </div>
     </section>
 </template>
 
 <script>
+import Fullscreen from "vue-fullscreen/src/component.vue";
+
 export default {
+    components: { Fullscreen },
+
     data() {
         return {
             waiting: [],
             grooming: [],
-            completed: []
+            completed: [],
+            fullscreen: false
         };
     },
 
@@ -131,6 +149,10 @@ export default {
                     queues.status.includes("Completed")
                 );
             });
+        },
+        toggle() {
+            this.$refs["fullscreen"].toggle();
+            // this.fullscreen = !this.fullscreen
         }
     },
 
