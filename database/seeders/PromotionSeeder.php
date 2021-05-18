@@ -28,10 +28,14 @@ class PromotionSeeder extends Seeder
          * Assign random service to every package
          */
         foreach ($packages as $package) {
-            DB::table('package_service')->insert([
-                'package_id' => $package,
-                'service_id' => $faker->randomElement($services)
-            ]);
+            $i = 0;
+            while ($i < 5) {
+                DB::table('package_service')->insert([
+                    'package_id' => $package,
+                    'service_id' => $faker->randomElement($services)
+                ]);
+                $i++;
+            }
         }
     }
 }

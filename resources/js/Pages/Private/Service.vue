@@ -28,6 +28,12 @@
                                     system.
                                 </p>
                                 <p>{{ service.name }}</p>
+                                <p
+                                    v-for="pkg in service.packages"
+                                    v-bind:key="pkg.id"
+                                >
+                                    {{ pkg.name }}
+                                </p>
                             </div>
                         </div>
                     </div>
