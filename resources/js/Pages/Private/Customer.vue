@@ -28,6 +28,12 @@
                                     system.
                                 </p>
                                 <p>{{ customer.name }}</p>
+                                <p
+                                    v-for="car in customer.cars"
+                                    v-bind:key="car.id"
+                                >
+                                    {{ car.plate_no }}
+                                </p>
                             </div>
                         </div>
                     </div>
