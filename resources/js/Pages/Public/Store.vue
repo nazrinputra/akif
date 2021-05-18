@@ -8,8 +8,11 @@
             >
                 {{ store.name }}
             </h2>
+            <p v-for="queue in queues" v-bind:key="queue.id">
+                {{ queue.car.plate_no }}
+            </p>
             <!-- Queue Subheading-->
-            <div class="row text-uppercase">
+            <!-- <div class="row text-uppercase">
                 <div class="col-md-4 col-sm-12">
                     <table class="table-queue text-center">
                         <thead>
@@ -94,7 +97,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </template>
@@ -107,12 +110,13 @@ export default {
         };
     },
 
-    created() {
-        axios.get(route("queues", route().params)).then(data => {
-            this.queues = data;
-            console.log("queues :");
-            console.dir(this.queues);
-        });
+    mounted() {
+        let self = this;
+        setInterval(function() {
+            axios.get(route("queues", route().params)).then(response => {
+                self.queues = response.data;
+            });
+        }, 10000);
     },
 
     props: {

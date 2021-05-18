@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('store/{store:slug}/queues', function (Store $store) {
-    return Queue::where('store_id', $store->id)->get();
+    return Queue::where('store_id', $store->id)->with('car')->get();
 })->name('queues');
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
