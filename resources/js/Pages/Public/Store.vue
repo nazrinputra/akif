@@ -4,18 +4,23 @@
         <div class="container">
             <!-- Queue Section Heading-->
             <h2
+                @click="toggle"
                 class="page-section-heading text-secondary text-center text-uppercase py-4"
             >
                 {{ store.name }}
             </h2>
-            <fullscreen ref="fullscreen" :fullscreen.sync="fullscreen">
+            <fullscreen
+                ref="fullscreen"
+                :fullscreen.sync="fullscreen"
+                class="bg-light"
+            >
                 <!-- Queue Subheading-->
                 <div class="row text-uppercase">
                     <div class="col-md-4 col-sm-12">
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th class="bg-light">
+                                    <th>
                                         <h2>
                                             Waiting
                                             <i
@@ -47,7 +52,7 @@
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th class="bg-light">
+                                    <th>
                                         <h2>
                                             Grooming
                                             <i class="fas fa-hands-wash"></i>
@@ -77,7 +82,7 @@
                         <table class="table-queue text-center">
                             <thead>
                                 <tr>
-                                    <th class="bg-light">
+                                    <th>
                                         <h2>
                                             Completed
                                             <i
@@ -107,7 +112,6 @@
                     </div>
                 </div>
             </fullscreen>
-            <button type="button" @click="toggle">Fullscreen</button>
         </div>
     </section>
 </template>
