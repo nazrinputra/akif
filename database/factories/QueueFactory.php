@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Car;
+use App\Models\Customer;
 use App\Models\Queue;
 use App\Models\Store;
 use App\Models\Service;
@@ -21,6 +22,8 @@ class QueueFactory extends Factory
 
     protected $cars;
 
+    protected $customers;
+
     protected $status = ['Waiting', 'Grooming', 'Completed', 'Collected', 'Cancelled'];
 
     /**
@@ -32,10 +35,12 @@ class QueueFactory extends Factory
     {
         $this->stores = Store::all();
         $this->cars  = Car::all();
+        $this->customers  = Customer::all();
 
         return [
             'store_id' => $this->faker->randomElement($this->stores),
             'car_id' => $this->faker->randomElement($this->cars),
+            'customer_id' => $this->faker->randomElement($this->customers),
             'status' => $this->faker->randomElement($this->status),
         ];
     }
