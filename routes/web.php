@@ -1,7 +1,7 @@
 <?php
 
 use Inertia\Inertia;
-use App\Models\Store;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
@@ -21,6 +21,8 @@ use App\Http\Controllers\CustomerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+URL::forceScheme('https');
 
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
