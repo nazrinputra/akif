@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Store;
 use Illuminate\Support\Str;
@@ -18,6 +19,8 @@ class UserFactory extends Factory
 
     protected $stores;
 
+    protected $roles;
+
     /**
      * Define the model's default state.
      *
@@ -26,12 +29,14 @@ class UserFactory extends Factory
     public function definition()
     {
         $this->stores = Store::all();
+        $this->roles = Role::all();
 
         $name = $this->faker->name();
         $slug = Str::slug($name);
 
         return [
             'name' => $name,
+            'role_id' => $this->faker->randomElement($this->roles),
             'store_id' => $this->faker->randomElement($this->stores),
             'email' => $this->faker->unique()->safeEmail(),
             'slug' => $slug,
