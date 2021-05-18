@@ -21,7 +21,7 @@ class QueueFactory extends Factory
 
     protected $cars;
 
-    protected $status = ['Waiting', 'Grooming', 'Completed'];
+    protected $status = ['Waiting', 'Grooming', 'Completed', 'Collected', 'Cancelled'];
 
     /**
      * Define the model's default state.

@@ -14,6 +14,6 @@ class QueueSeeder extends Seeder
      */
     public function run()
     {
-        Queue::factory(20)->create();
+        Queue::factory(40)->create();
     }
 }

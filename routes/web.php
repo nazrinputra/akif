@@ -1,10 +1,12 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
@@ -23,6 +25,8 @@ use App\Http\Controllers\CustomerController;
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 });
+
+Route::get('{store:slug}', [StoreController::class, 'show'])->name('store');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
