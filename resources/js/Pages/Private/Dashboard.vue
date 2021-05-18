@@ -24,7 +24,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('whatsapp')"
+                                        :href="route('whatsapps')"
                                         >WhatsApp</inertia-link
                                     >
                                 </p>

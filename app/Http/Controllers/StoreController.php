@@ -48,17 +48,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        $queues = Queue::where('store_id', $store->id)->with('car')->get();
-        $waiting = $queues->where('status', 'Waiting');
-        $grooming = $queues->where('status', 'Grooming');
-        $completed = $queues->where('status', 'Completed');
-
-        return Inertia::render('Public/Store', [
-            'store' => $store,
-            'waiting' => $waiting,
-            'grooming' => $grooming,
-            'completed' => $completed,
-        ]);
+        return Inertia::render('Public/Store', compact('store'));
     }
 
     /**

@@ -3,8 +3,14 @@
         <!-- <template #header>Whatsapp</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapp')"
-                :active="route().current('whatsapp')"
+                :href="route('whatsapps')"
+                :active="route().current('whatsapps')"
+            >
+                WhatsApps
+            </breeze-nav-link>
+            <breeze-nav-link
+                :href="route('whatsapp', whatsapp)"
+                :active="route().current('whatsapp', whatsapp)"
             >
                 WhatsApp
             </breeze-nav-link>
@@ -12,8 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapp')"
-                :active="route().current('whatsapp')"
+                :href="route('whatsapps')"
+                :active="route().current('whatsapps')"
+            >
+                WhatsApps
+            </breeze-responsive-nav-link>
+            <breeze-responsive-nav-link
+                :href="route('whatsapp', whatsapp)"
+                :active="route().current('whatsapp', whatsapp)"
             >
                 WhatsApp
             </breeze-responsive-nav-link>
@@ -27,6 +39,7 @@
                             <div class="col pb-5">
                                 <h2>WhatsApp</h2>
                                 <p>Modify WhatsApp messages for the store.</p>
+                                <p>{{ whatsapp.title }}</p>
                             </div>
                         </div>
                     </div>
@@ -50,7 +63,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        whatsapp: Object
     }
 };
 </script>

@@ -1,7 +1,7 @@
 <?php
 
 use Inertia\Inertia;
-use App\Models\Store;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
@@ -10,6 +10,9 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\WhatsappController;
+use App\Models\Queue;
+use App\Models\Store;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +25,15 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
+URL::forceScheme('https');
+
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 });
+
+Route::get('store/{store:slug}/queues', function (Store $store) {
+    return Queue::where('store_id', $store->id)->with('car')->get();
+})->name('queues');
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
@@ -43,9 +52,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
 
-    Route::get('whatsapp', function () {
-        return Inertia::render('Private/Whatsapp');
-    })->name('whatsapp');
+    Route::get('whatsapps', [WhatsappController::class, 'index'])->name('whatsapps');
+
+    Route::get('whatsapp/{whatsapp:slug}', [WhatsappController::class, 'show'])->name('whatsapp');
 
     Route::get('cars', [CarController::class, 'index'])->name('cars');
 

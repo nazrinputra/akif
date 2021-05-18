@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             ServiceSeeder::class,
             PromotionSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
+            WhatsappSeeder::class,
         ]);
     }
 }
