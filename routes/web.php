@@ -26,7 +26,7 @@ Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 });
 
-Route::get('{store:slug}', [StoreController::class, 'show'])->name('store');
+Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
