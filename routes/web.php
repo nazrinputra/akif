@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
 
 /*
@@ -44,6 +45,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('customers', [CustomerController::class, 'index'])->name('customers');
 
     Route::get('customer/{customer:slug}', [CustomerController::class, 'show'])->name('customer');
+
+    Route::get('services', [ServiceController::class, 'index'])->name('services');
+
+    Route::get('services/{service:slug}', [ServiceController::class, 'show'])->name('service');
 });
 
 require __DIR__ . '/auth.php';

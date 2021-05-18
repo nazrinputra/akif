@@ -64,7 +64,9 @@
                                     modifications.
                                 </p>
                                 <p>
-                                    <a class="btn btn-secondary" href="#"
+                                    <a
+                                        class="btn btn-secondary"
+                                        :href="route('services')"
                                         >Services</a
                                     >
                                 </p>
