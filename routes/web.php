@@ -27,7 +27,7 @@ URL::forceScheme('https');
 
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
-});
+})->name('welcome');
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 

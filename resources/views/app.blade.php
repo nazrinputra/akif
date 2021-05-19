@@ -22,15 +22,11 @@
 <body class="font-sans antialiased">
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <span id="navButtons" class="js-scroll-trigger">
+            <span id="homeButton" class="js-scroll-trigger">
             </span>
-            <button
-                class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
-                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-store-alt"></i>
-            </button>
+            <span id="menuButton" class="navbar-toggler navbar-toggler-right" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto js-scroll-trigger" id="navLinks">
                     {{-- TODO add promotion page and link here

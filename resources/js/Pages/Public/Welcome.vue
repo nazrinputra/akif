@@ -1,8 +1,17 @@
 <template>
-    <teleport to="#navButtons">
+    <teleport to="#homeButton">
         <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
         /></inertia-link>
+    </teleport>
+    <teleport to="#menuButton">
+        <button
+            type="button"
+            class="text-uppercase font-weight-bold text-white text-xl"
+        >
+            Menu
+            <i class="fas fa-store-alt"></i>
+        </button>
     </teleport>
     <teleport to="#navLinks">
         <li class="nav-item  mx-0 mx-lg-1">
