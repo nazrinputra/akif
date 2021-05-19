@@ -1,12 +1,12 @@
 <template>
     <div
-        class="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0"
+        class="relative items-top justify-center min-h-screen sm:items-center sm:pt-0"
     >
         <header class="text-center">
             <div class="container d-flex align-items-center flex-column">
                 <!-- Logo Image-->
                 <img
-                    class="masthead-avatar py-4"
+                    class="masthead-avatar py-5"
                     src="/img/logo-web.png"
                     alt="Akif"
                 />
@@ -32,6 +32,45 @@
                 </p>
             </div>
         </header>
+        <section class="page-section py-5 mt-5" id="bukit katil">
+            <div class="container">
+                <!-- Store Section Heading-->
+                <h2
+                    class="page-section-heading text-secondary text-center text-uppercase mb-0"
+                >
+                    Our Stores
+                </h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Store Grid Items-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <inertia-link :href="route('store', 'tambak-bugis')">
+                            <img
+                                class="img-fluid pb-3"
+                                src="img/store/tambak-bugis.png"
+                                alt="Tambak Bugis"
+                            />
+                        </inertia-link>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <inertia-link :href="route('store', 'bukit-katil')">
+                            <img
+                                class="img-fluid pb-3"
+                                src="img/store/bukit-katil.png"
+                                alt="Bukit Katil"
+                            />
+                        </inertia-link>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
