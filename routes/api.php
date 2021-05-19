@@ -21,5 +21,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('{store:slug}/queues', [QueueController::class, 'index'])->name('queues');
-
-Route::get('promotions', [PromotionController::class, 'index'])->name('promos');
