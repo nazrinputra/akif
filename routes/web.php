@@ -10,6 +10,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WhatsappController;
 
 /*
@@ -29,9 +30,9 @@ Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 })->name('welcome');
 
-Route::get('promotions', function () {
-    return Inertia::render('Public/Promotions');
-})->name('promotions');
+Route::get('promotions', [PromotionController::class, 'index'])->name('promotions');
+
+Route::get('promotion/{package:slug}', [PromotionController::class, 'show'])->name('promotion');
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
