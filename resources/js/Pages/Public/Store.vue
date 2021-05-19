@@ -1,119 +1,167 @@
 <template>
-    <!-- Queue Section-->
-    <section class="page-section">
-        <div class="container">
-            <!-- Queue Section Heading-->
-            <h2
-                @click="toggle"
-                class="page-section-heading text-secondary text-center text-uppercase py-4"
+    <teleport to="#navButtons">
+        <inertia-link class="navbar-brand js-scroll-trigger" href="/"
+            ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
+        /></inertia-link>
+        <button
+            class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            Menu
+            <i class="fas fa-store-alt"></i>
+        </button>
+    </teleport>
+    <teleport to="#navLinks">
+        <li class="nav-item  mx-0 mx-lg-1">
+            <inertia-link
+                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                :href="route('store', 'tambak-bugis')"
+                >Tambak Bugis</inertia-link
             >
-                {{ store.name }}
-            </h2>
-            <fullscreen
-                ref="fullscreen"
-                :fullscreen.sync="fullscreen"
-                class="bg-light"
+        </li>
+        <li class="nav-item  mx-0 mx-lg-1">
+            <inertia-link
+                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                :href="route('store', 'bukit-katil')"
+                >Bukit Katil</inertia-link
             >
-                <!-- Queue Subheading-->
-                <div class="row text-uppercase">
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table-queue text-center">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h2>
-                                            Waiting
-                                            <i
-                                                class="fas fa-hourglass-start"
-                                            ></i>
-                                        </h2>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="queue in waiting"
-                                    v-bind:key="queue.id"
-                                >
-                                    <td class="table-danger">
-                                        <h4>
-                                            {{
-                                                queue.car.model +
-                                                    " " +
-                                                    queue.car.plate_no
-                                            }}
-                                        </h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+        </li>
+    </teleport>
+    <section class="masthead">
+        <!-- Queue Section-->
+        <section class="page-section">
+            <div class="container">
+                <!-- Queue Section Heading-->
+                <h2
+                    @click="toggle"
+                    class="page-section-heading text-secondary text-center text-uppercase py-4"
+                >
+                    {{ store.name }}
+                </h2>
+                <fullscreen
+                    ref="fullscreen"
+                    v-model:fullscreen.sync="fullscreen"
+                    class="bg-white"
+                >
+                    <!-- Queue Subheading-->
+                    <div class="row text-uppercase">
+                        <div class="col-md-4 col-sm-12">
+                            <table class="table-queue text-center">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h2>
+                                                Waiting
+                                                <i
+                                                    class="fas fa-hourglass-start"
+                                                ></i>
+                                            </h2>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="queue in waiting"
+                                        v-bind:key="queue.id"
+                                    >
+                                        <td class="table-danger">
+                                            <h4>
+                                                {{
+                                                    queue.car.model +
+                                                        " " +
+                                                        queue.car.plate_no
+                                                }}
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <table class="table-queue text-center">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h2>
+                                                Grooming
+                                                <i
+                                                    class="fas fa-hands-wash"
+                                                ></i>
+                                            </h2>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="queue in grooming"
+                                        v-bind:key="queue.id"
+                                    >
+                                        <td class="table-warning">
+                                            <h4>
+                                                {{
+                                                    queue.car.model +
+                                                        " " +
+                                                        queue.car.plate_no
+                                                }}
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <table class="table-queue text-center">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h2>
+                                                Completed
+                                                <i
+                                                    class="fas fa-clipboard-check"
+                                                ></i>
+                                            </h2>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="queue in completed"
+                                        v-bind:key="queue.id"
+                                    >
+                                        <td class="table-success">
+                                            <h4>
+                                                {{
+                                                    queue.car.model +
+                                                        " " +
+                                                        queue.car.plate_no
+                                                }}
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table-queue text-center">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h2>
-                                            Grooming
-                                            <i class="fas fa-hands-wash"></i>
-                                        </h2>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="queue in grooming"
-                                    v-bind:key="queue.id"
-                                >
-                                    <td class="table-warning">
-                                        <h4>
-                                            {{
-                                                queue.car.model +
-                                                    " " +
-                                                    queue.car.plate_no
-                                            }}
-                                        </h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <table class="table-queue text-center">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h2>
-                                            Completed
-                                            <i
-                                                class="fas fa-clipboard-check"
-                                            ></i>
-                                        </h2>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="queue in completed"
-                                    v-bind:key="queue.id"
-                                >
-                                    <td class="table-success">
-                                        <h4>
-                                            {{
-                                                queue.car.model +
-                                                    " " +
-                                                    queue.car.plate_no
-                                            }}
-                                        </h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </fullscreen>
-        </div>
+                </fullscreen>
+            </div>
+        </section>
     </section>
+    <teleport to="#copyright">
+        <div class="container">
+            <small
+                >Copyright ©
+                <inertia-link :href="route('login')" class="text-primary"
+                    >Akif Car Grooming Center</inertia-link
+                >
+                2021</small
+            >
+        </div>
+    </teleport>
 </template>
 
 <script>
@@ -124,6 +172,7 @@ export default {
 
     data() {
         return {
+            polling: null,
             waiting: [],
             grooming: [],
             completed: [],
@@ -133,10 +182,11 @@ export default {
 
     mounted() {
         this.getQueue();
-        let self = this;
-        setInterval(function() {
-            self.getQueue();
-        }, 5000);
+        this.pollData();
+    },
+
+    unmounted() {
+        clearInterval(this.polling);
     },
 
     methods: {
@@ -154,9 +204,13 @@ export default {
                 );
             });
         },
+        pollData() {
+            this.polling = setInterval(() => {
+                this.getQueue();
+            }, 10000);
+        },
         toggle() {
             this.$refs["fullscreen"].toggle();
-            // this.fullscreen = !this.fullscreen
         }
     },
 

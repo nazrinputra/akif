@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Queue;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
 class QueueController extends Controller
@@ -12,9 +13,9 @@ class QueueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Store $store)
     {
-        //
+        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->with('car:id,plate_no,model')->get();
     }
 
     /**
