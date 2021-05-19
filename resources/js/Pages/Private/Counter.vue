@@ -29,12 +29,12 @@
                                 <p>Register car and customer into queue.</p>
                                 <form method="POST" @submit.prevent="submit">
                                     <div>
-                                        <breeze-label for="text" value="Test" />
+                                        <breeze-label for="test" value="Test" />
                                         <breeze-input
-                                            id="text"
+                                            id="test"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.text"
+                                            v-model="form.test"
                                             required
                                             autofocus
                                         />
@@ -89,7 +89,7 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                text: this.text
+                test: this.test
             })
         };
     },

@@ -49,6 +49,62 @@
                                 >
                                     {{ owner.name }}
                                 </p>
+                                <form method="POST" @submit.prevent="submit">
+                                    <div>
+                                        <breeze-label
+                                            for="plate_no"
+                                            value="Plate No"
+                                        />
+                                        <breeze-input
+                                            id="plate_no"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.plate_no"
+                                            required
+                                            autofocus
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="model"
+                                            value="Model"
+                                        />
+                                        <breeze-input
+                                            id="model"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.model"
+                                            required
+                                            autofocus
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="color"
+                                            value="Color"
+                                        />
+                                        <breeze-input
+                                            id="color"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.color"
+                                            required
+                                            autofocus
+                                        />
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-end mt-4"
+                                    >
+                                        <breeze-button
+                                            :class="{
+                                                'opacity-25': form.processing
+                                            }"
+                                            :disabled="form.processing"
+                                        >
+                                            Submit
+                                        </breeze-button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -62,18 +118,40 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import BreezeButton from "@/Components/Button";
+import BreezeInput from "@/Components/Input";
+import BreezeLabel from "@/Components/Label";
+import BreezeValidationErrors from "@/Components/ValidationErrors";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink
+        BreezeResponsiveNavLink,
+        BreezeButton,
+        BreezeInput,
+        BreezeLabel,
+        BreezeValidationErrors
     },
 
     props: {
         auth: Object,
         errors: Object,
         car: Object
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                plate_no: this.plate_no
+            })
+        };
+    },
+
+    methods: {
+        submit() {
+            alert(plate_no.value);
+        }
     }
 };
 </script>
