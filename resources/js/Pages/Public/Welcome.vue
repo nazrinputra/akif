@@ -1,16 +1,13 @@
 <template>
-    <teleport to="#navButtons">
-        <inertia-link class="navbar-brand js-scroll-trigger" href="/"
+    <teleport to="#homeButton">
+        <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
         /></inertia-link>
+    </teleport>
+    <teleport to="#menuButton">
         <button
-            class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+            class="text-uppercase font-weight-bold text-white text-xl"
         >
             Menu
             <i class="fas fa-store-alt"></i>
@@ -19,14 +16,14 @@
     <teleport to="#navLinks">
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'tambak-bugis')"
                 >Tambak Bugis</inertia-link
             >
         </li>
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'bukit-katil')"
                 >Bukit Katil</inertia-link
             >
