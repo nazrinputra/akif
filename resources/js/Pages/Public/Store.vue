@@ -11,8 +11,8 @@
             </h2>
             <fullscreen
                 ref="fullscreen"
-                :fullscreen.sync="fullscreen"
-                class="bg-light"
+                v-model:fullscreen.sync="fullscreen"
+                class="bg-white"
             >
                 <!-- Queue Subheading-->
                 <div class="row text-uppercase">
