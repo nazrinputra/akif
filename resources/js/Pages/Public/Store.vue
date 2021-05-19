@@ -28,6 +28,13 @@
                 >Bukit Katil</inertia-link
             >
         </li>
+        <li class="nav-item  mx-0 mx-lg-1">
+            <inertia-link
+                class="nav-link py-3 px-0 px-lg-3 rounded"
+                :href="route('promotions')"
+                >Promotions</inertia-link
+            >
+        </li>
     </teleport>
     <section class="masthead">
         <!-- Queue Section-->
