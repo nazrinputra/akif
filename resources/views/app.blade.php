@@ -22,7 +22,7 @@
 <body class="font-sans antialiased">
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <span id="navButtons">
+            <span id="navButtons" class="js-scroll-trigger">
             </span>
             <button
                 class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
@@ -32,7 +32,7 @@
                 <i class="fas fa-store-alt"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto" id="navLinks">
+                <ul class="navbar-nav ml-auto js-scroll-trigger" id="navLinks">
                     {{-- TODO add promotion page and link here
                     <li class="nav-item  mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Promotions</a>
@@ -44,7 +44,7 @@
     @inertia
 </body>
 <!-- Footer section-->
-<footer class="footer text-center">
+<footer class=" footer text-center">
     <div class="container">
         <div class="row">
             <!-- Footer Social Icons-->
@@ -68,7 +68,8 @@
 @if(config('app.env') != 'production')
 <div class="container">
     <div class="alert-warning fixed-bottom mb-0 alert alert-dismissible fade show text-center" role="alert">
-        <strong>Hey there!</strong> This site is still under development. Some data are simulated.
+        <strong>Hey there!</strong> This site is still under development. Some data are
+        simulated.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

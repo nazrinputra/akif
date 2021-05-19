@@ -1,32 +1,20 @@
 <template>
     <teleport to="#navButtons">
-        <inertia-link class="navbar-brand js-scroll-trigger" href="/"
+        <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
         /></inertia-link>
-        <button
-            class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            Menu
-            <i class="fas fa-store-alt"></i>
-        </button>
     </teleport>
     <teleport to="#navLinks">
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'tambak-bugis')"
                 >Tambak Bugis</inertia-link
             >
         </li>
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'bukit-katil')"
                 >Bukit Katil</inertia-link
             >
@@ -34,7 +22,7 @@
     </teleport>
     <section class="masthead">
         <!-- Queue Section-->
-        <section class="page-section">
+        <section class="page-section py-3">
             <div class="container">
                 <!-- Queue Section Heading-->
                 <h2

@@ -1,20 +1,20 @@
 <template>
     <teleport to="#navButtons">
-        <inertia-link class="navbar-brand js-scroll-trigger" href="/"
+        <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
         /></inertia-link>
     </teleport>
     <teleport to="#navLinks">
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'tambak-bugis')"
                 >Tambak Bugis</inertia-link
             >
         </li>
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'bukit-katil')"
                 >Bukit Katil</inertia-link
             >
