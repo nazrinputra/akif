@@ -55,9 +55,7 @@
 </footer>
 
 <!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
-    <div class="container"><small>Copyright © <a href="{{ route('login') }}" class="text-primary">Akif Car Grooming
-                Center</a> 2021</small></div>
+<div class="copyright py-4 text-center text-white" id="copyright">
 </div>
 
 @if(config('app.env') != 'production')

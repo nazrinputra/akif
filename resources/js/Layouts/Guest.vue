@@ -16,6 +16,17 @@
             <slot />
         </div>
     </div>
+    <teleport to="#copyright">
+        <div class="container">
+            <small
+                >Copyright ©
+                <inertia-link :href="route('login')" class="text-primary"
+                    >Akif Car Grooming Center</inertia-link
+                >
+                2021</small
+            >
+        </div>
+    </teleport>
 </template>
 
 <script>
