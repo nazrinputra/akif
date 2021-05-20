@@ -29,7 +29,7 @@ class CustomerFactory extends Factory
             'name' => $name,
             'slug' => $slug,
             'phone_no' => $this->faker->randomNumber(9, true),
-            'gender' => $this->faker->randomElement(['male', 'female']),
+            'gender' => $this->faker->randomElement(['Male', 'Female']),
         ];
     }
 }
