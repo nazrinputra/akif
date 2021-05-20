@@ -102,6 +102,7 @@
                                         >
                                         <breeze-button
                                             type="button"
+                                            class="ml-4"
                                             @click="edit"
                                         >
                                             Edit

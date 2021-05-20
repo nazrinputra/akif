@@ -39,7 +39,7 @@
                             <div class="col-md-3 col-sm-12">
                                 <h2>Customer</h2>
                                 <span
-                                    class="badge badge-pill badge-dark"
+                                    class="badge badge-pill badge-info"
                                     v-for="personality in customer.personalities"
                                     v-bind:key="personality.id"
                                     >{{ personality.name }}</span
@@ -51,7 +51,7 @@
                                         v-bind:key="car.id"
                                     >
                                         <inertia-link
-                                            :href="route('car', car.plate_no)"
+                                            :href="route('car', car)"
                                             >{{ car.plate_no }}</inertia-link
                                         >
                                         <br />
@@ -114,6 +114,7 @@
                                         >
                                         <breeze-button
                                             type="button"
+                                            class="ml-4"
                                             @click="edit"
                                         >
                                             Edit

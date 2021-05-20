@@ -138,6 +138,7 @@
                                             </breeze-button></inertia-link
                                         >
                                         <breeze-button
+                                            class="ml-4"
                                             type="button"
                                             @click="edit"
                                         >
