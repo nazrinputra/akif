@@ -37,13 +37,16 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
-                                <h2>Customer</h2>
-                                <span
-                                    class="badge badge-pill badge-info"
-                                    v-for="personality in customer.personalities"
-                                    v-bind:key="personality.id"
-                                    >{{ personality.name }}</span
-                                >
+                                <h2 v-on:click="isVisible = !isVisible">
+                                    Customer
+                                </h2>
+                                <h1 v-if="isVisible" id="personalities">
+                                    <span
+                                        v-for="personality in customer.personalities"
+                                        v-bind:key="personality.id"
+                                        >{{ personality.name }}</span
+                                    >
+                                </h1>
                                 <p class="mt-2">
                                     <strong>Car(s):</strong><br />
                                     <span
@@ -158,6 +161,7 @@ export default {
 
     data() {
         return {
+            isVisible: false,
             isView: true,
             form: this.$inertia.form({
                 plate_no: this.plate_no

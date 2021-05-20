@@ -15,8 +15,6 @@ class PersonalityFactory extends Factory
      */
     protected $model = Personality::class;
 
-    protected $colors = ['Blue', 'Gray', 'Green', 'Red', 'Yellow', 'Light Blue', 'White', 'Black'];
-
     /**
      * Define the model's default state.
      *
@@ -30,7 +28,6 @@ class PersonalityFactory extends Factory
         return [
             'name' => $name,
             'slug' => $slug,
-            'color' => $this->faker->randomElement($this->colors),
             'description' => $this->faker->sentence()
         ];
     }
