@@ -39,7 +39,7 @@
     <section class="masthead">
         <div class="container p-4">
             <div
-                class="row featurette pt-5 shadow px-2 p-3 mb-5 bg-white rounded"
+                class="row featurette pt-5 mt-4 shadow px-2 p-3 mb-5 bg-white rounded"
             >
                 <div class="col-md-6">
                     <h1 class="featurette-heading ">
