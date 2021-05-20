@@ -36,6 +36,7 @@ Route::get('promotion/{package:slug}', [PromotionController::class, 'show'])->na
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Private/Dashboard');
