@@ -18696,6 +18696,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isTambakBugis: false,
+      isBukitKatil: false,
       polling: null,
       waiting: [],
       grooming: [],
@@ -18704,6 +18706,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    if (route().current("store", "tambak-bugis")) {
+      this.isTambakBugis = true;
+    }
+
+    if (route().current("store", "bukit-katil")) {
+      this.isBukitKatil = true;
+    }
+
     this.getQueue();
     this.pollData();
   },
@@ -22348,7 +22358,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [_hoisted_2])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Teleport, {
     to: "#navLinks"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    "class": "nav-link py-3 px-0 px-lg-3 rounded",
+    "class": [[$data.isTambakBugis ? 'active' : ''], "nav-link py-3 px-0 px-lg-3 rounded"],
     href: _ctx.route('store', 'tambak-bugis')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -22359,8 +22369,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    "class": "nav-link py-3 px-0 px-lg-3 rounded",
+  , ["class", "href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    "class": [[$data.isBukitKatil ? 'active' : ''], "nav-link py-3 px-0 px-lg-3 rounded"],
     href: _ctx.route('store', 'bukit-katil')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -22371,7 +22381,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])])])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section Heading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  , ["class", "href"])])])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Section Heading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.toggle && $options.toggle.apply($options, arguments);
     }),
