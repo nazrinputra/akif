@@ -25,9 +25,10 @@ class CarFactory extends Factory
     public function definition()
     {
         $this->faker->addProvider(new Fakecar($this->faker));
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\Miscellaneous($this->faker));
 
         return [
-            'plate_no' => $this->faker->vehicleRegistration,
+            'plate_no' => $this->faker->jpjNumberPlate,
             'brand' => $this->faker->vehicleBrand,
             'model' => $this->faker->vehicleModel,
             'color' => $this->faker->colorName,

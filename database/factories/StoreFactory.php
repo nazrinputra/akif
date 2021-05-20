@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Store;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StoreFactory extends Factory
@@ -21,10 +22,14 @@ class StoreFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\Miscellaneous($this->faker));
+        $name = $this->faker->city();
+        $slug = Str::slug($name);
+
         return [
-            'slug' => $this->faker->slug(),
-            'name' => $this->faker->city(),
-            'phone_no' => $this->faker->randomNumber(9, true),
+            'slug' => $slug,
+            'name' => $name,
+            'phone_no' => $this->faker->fixedLineNumber(false, false),
             'location' => $this->faker->address(),
         ];
     }

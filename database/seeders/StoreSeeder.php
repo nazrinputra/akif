@@ -14,18 +14,20 @@ class StoreSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create('ms_MY');
+
         Store::create([
             'name' => 'Tambak Bugis',
             'slug' => 'tambak-bugis',
-            'phone_no' => '0123456789',
-            'location' => "Melaka"
+            'phone_no' => $faker->fixedLineNumber(false, false),
+            'location' => $faker->address()
         ]);
 
         Store::create([
             'name' => 'Bukit Katil',
             'slug' => 'bukit-katil',
-            'phone_no' => '0123456789',
-            'location' => "Melaka"
+            'phone_no' => $faker->fixedLineNumber(false, false),
+            'location' => $faker->address()
         ]);
     }
 }

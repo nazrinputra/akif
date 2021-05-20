@@ -16,6 +16,8 @@ class CreatePersonalitiesTable extends Migration
         Schema::create('personalities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
+            $table->string('color');
             $table->string('description');
             $table->timestamps();
         });

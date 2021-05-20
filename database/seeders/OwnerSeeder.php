@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\Customer;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +19,7 @@ class OwnerSeeder extends Seeder
         /**
          * Get cars and customers from database
          */
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create('ms_MY');
         $cars = Car::all()->pluck('id');
         $customers = Customer::all()->pluck('id');
 
