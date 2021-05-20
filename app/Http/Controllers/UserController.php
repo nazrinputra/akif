@@ -51,7 +51,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return Inertia::render('Private/Crew', [
-            'crew' => $user->load('store')
+            'crew' => $user->load('role', 'store')
         ]);
     }
 
