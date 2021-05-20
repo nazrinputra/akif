@@ -10,6 +10,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PersonalityController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WhatsappController;
 
@@ -42,6 +43,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Dashboard');
     })->name('dashboard');
 
+    Route::get('reports', function () {
+        return Inertia::render('Private/Report');
+    })->name('reports');
+
     Route::get('profile', function () {
         return Inertia::render('Private/Profile', [
             'user' => Auth::user()->load('store')
@@ -72,9 +77,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('packages/{package:slug}', [PackageController::class, 'show'])->name('package');
 
-    Route::get('reports', function () {
-        return Inertia::render('Private/Report');
-    })->name('reports');
+    Route::get('personalities', [PersonalityController::class, 'index'])->name('personalities');
+
+    Route::get('personality/{personality:slug}', [PersonalityController::class, 'show'])->name('personality');
 
     Route::get('crews', [UserController::class, 'index'])->name('crews');
 
