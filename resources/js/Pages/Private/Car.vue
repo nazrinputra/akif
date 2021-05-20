@@ -35,21 +35,27 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="row p-3">
-                            <div class="col pb-5">
+                        <div class="row pt-3 px-3">
+                            <div class="col-md-3 col-sm-12">
                                 <h2>Car</h2>
                                 <p>
-                                    View, add or edit car registered in the
-                                    system.
+                                    <strong>Owner(s):</strong><br />
+                                    <span
+                                        v-for="owner in car.owners"
+                                        v-bind:key="owner.id"
+                                    >
+                                        <inertia-link
+                                            :href="
+                                                route('customer', owner.slug)
+                                            "
+                                            >{{ owner.name }}</inertia-link
+                                        >
+                                        <br />
+                                    </span>
                                 </p>
-                                <p>{{ car.plate_no }}</p>
-                                <p
-                                    v-for="owner in car.owners"
-                                    v-bind:key="owner.id"
-                                >
-                                    {{ owner.name }}
-                                </p>
-                                <form method="POST" @submit.prevent="submit">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <form @submit.prevent="submit">
                                     <div>
                                         <breeze-label
                                             for="plate_no"
@@ -60,8 +66,25 @@
                                             type="text"
                                             class="mt-1 block w-full"
                                             v-model="form.plate_no"
+                                            :value="car.plate_no"
                                             required
                                             autofocus
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="brand"
+                                            value="Brand"
+                                        />
+                                        <breeze-input
+                                            id="brand"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.brand"
+                                            :value="car.brand"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
                                     <div class="mt-4">
@@ -74,8 +97,21 @@
                                             type="text"
                                             class="mt-1 block w-full"
                                             v-model="form.model"
+                                            :value="car.model"
                                             required
-                                            autofocus
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label for="size" value="Size" />
+                                        <breeze-input
+                                            id="size"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.size"
+                                            :value="car.size"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
                                     <div class="mt-4">
@@ -88,20 +124,24 @@
                                             type="text"
                                             class="mt-1 block w-full"
                                             v-model="form.color"
+                                            :value="car.color"
                                             required
-                                            autofocus
+                                            :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <breeze-button
-                                            :class="{
-                                                'opacity-25': form.processing
-                                            }"
-                                            :disabled="form.processing"
+                                        <inertia-link :href="route('cars')"
+                                            ><breeze-button type="button">
+                                                Back
+                                            </breeze-button></inertia-link
                                         >
-                                            Submit
+                                        <breeze-button
+                                            type="button"
+                                            @click="edit"
+                                        >
+                                            Edit
                                         </breeze-button>
                                     </div>
                                 </form>
@@ -142,6 +182,7 @@ export default {
 
     data() {
         return {
+            isView: true,
             form: this.$inertia.form({
                 plate_no: this.plate_no
             })
@@ -150,7 +191,10 @@ export default {
 
     methods: {
         submit() {
-            alert(plate_no.value);
+            alert("Not configured yet");
+        },
+        edit() {
+            alert("Not configured yet");
         }
     }
 };
