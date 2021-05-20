@@ -522,10 +522,6 @@ mark,
     transition: transform 0.2s; /* Animation */
 }
 
-.img-fluid:hover {
-    transform: scale(1.1);
-}
-
 .img-thumbnail {
     padding: 0.25rem;
     background-color: #fff;
