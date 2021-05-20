@@ -56,6 +56,12 @@
                                             My Profile
                                         </breeze-dropdown-link>
                                         <breeze-dropdown-link
+                                            :href="route('reports')"
+                                            as="button"
+                                        >
+                                            Reports
+                                        </breeze-dropdown-link>
+                                        <breeze-dropdown-link
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
@@ -142,6 +148,12 @@
                                 as="button"
                             >
                                 My Profile
+                            </breeze-responsive-nav-link>
+                            <breeze-responsive-nav-link
+                                :href="route('reports')"
+                                as="button"
+                            >
+                                Reports
                             </breeze-responsive-nav-link>
                             <breeze-responsive-nav-link
                                 :href="route('logout')"
