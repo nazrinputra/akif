@@ -29,6 +29,10 @@ Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 })->name('welcome');
 
+Route::get('promotions', function () {
+    return Inertia::render('Public/Promotions');
+})->name('promotions');
+
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\QueueController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QueueController;
+use App\Http\Controllers\PromotionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('store/{store:slug}/queues', [QueueController::class, 'index'])->name('queues');
+
+Route::get('promotions', [PromotionController::class, 'index'])->name('promos');
