@@ -1,33 +1,33 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Car</template> -->
+        <!-- <template #header>Personality</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('personalities')"
+                :active="route().current('personalities')"
             >
-                Cars
+                Personalities
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('car', car)"
-                :active="route().current('car', car)"
+                :href="route('personality', personality)"
+                :active="route().current('Personality', personality)"
             >
-                Car
+                Personality
             </breeze-nav-link>
         </template>
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('personalities')"
+                :active="route().current('personalities')"
             >
-                Cars
+                Personalities
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('car', car)"
-                :active="route().current('car', car)"
+                :href="route('personality', personality)"
+                :active="route().current('personality', personality)"
             >
-                Car
+                Personality
             </breeze-responsive-nav-link>
         </template>
 
@@ -37,80 +37,34 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
-                                <h2>Car</h2>
-                                <p>
-                                    <strong>Owner(s):</strong><br />
+                                <h2>Personality</h2>
+                                <p class="mt-2">
+                                    <strong>Customer(s):</strong><br />
                                     <span
-                                        v-for="owner in car.owners"
-                                        v-bind:key="owner.id"
+                                        v-for="customer in personality.customers"
+                                        v-bind:key="customer.id"
                                     >
                                         <inertia-link
-                                            :href="
-                                                route('customer', owner.slug)
-                                            "
-                                            >{{ owner.name }}</inertia-link
+                                            :href="route('customer', customer)"
+                                            >{{ customer.name }}</inertia-link
                                         >
                                         <br />
                                     </span>
                                 </p>
                             </div>
+
                             <div class="col-md-6 col-sm-12">
                                 <form @submit.prevent="submit">
                                     <div>
-                                        <breeze-label
-                                            for="plate_no"
-                                            value="Plate No"
-                                        />
+                                        <breeze-label for="name" value="Name" />
                                         <breeze-input
-                                            id="plate_no"
+                                            id="name"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.plate_no"
-                                            :value="car.plate_no"
+                                            v-model="form.name"
+                                            :value="personality.name"
                                             required
                                             autofocus
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
-                                            for="brand"
-                                            value="Brand"
-                                        />
-                                        <breeze-input
-                                            id="brand"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.brand"
-                                            :value="car.brand"
-                                            required
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
-                                            for="model"
-                                            value="Model"
-                                        />
-                                        <breeze-input
-                                            id="model"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.model"
-                                            :value="car.model"
-                                            required
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label for="size" value="Size" />
-                                        <breeze-input
-                                            id="size"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.size"
-                                            :value="car.size"
-                                            required
                                             :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
@@ -124,21 +78,38 @@
                                             type="text"
                                             class="mt-1 block w-full"
                                             v-model="form.color"
-                                            :value="car.color"
+                                            :value="personality.color"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="description"
+                                            value="Description"
+                                        />
+                                        <textarea
+                                            rows="7"
+                                            id="description"
+                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                            :value="personality.description"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        >
+                                        </textarea>
+                                    </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('cars')"
+                                        <inertia-link
+                                            :href="route('personalities')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link
                                         >
                                         <breeze-button
                                             type="button"
+                                            class="ml-4"
                                             @click="edit"
                                         >
                                             Edit
@@ -177,7 +148,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        car: Object
+        personality: Object
     },
 
     data() {

@@ -1,33 +1,33 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Crew</template> -->
+        <!-- <template #header>Package</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('crews')"
-                :active="route().current('crews')"
+                :href="route('packages')"
+                :active="route().current('packages')"
             >
-                Crews
+                Packages
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('crew', auth.user)"
-                :active="route().current('crew', auth.user)"
+                :href="route('package', pkg)"
+                :active="route().current('package', pkg)"
             >
-                Crew
+                Package
             </breeze-nav-link>
         </template>
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('crews')"
-                :active="route().current('crews')"
+                :href="route('packages')"
+                :active="route().current('packages')"
             >
-                Crews
+                Packages
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('crew', crew)"
-                :active="route().current('crew', crew)"
+                :href="route('package', pkg)"
+                :active="route().current('package', pkg)"
             >
-                Crew
+                Package
             </breeze-responsive-nav-link>
         </template>
 
@@ -37,13 +37,21 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
-                                <h2>Crew</h2>
+                                <h2>Package</h2>
                                 <p>
-                                    <strong>Role: </strong>{{ crew.role.name }}
-                                </p>
-                                <p>
-                                    <strong>Store: </strong
-                                    >{{ crew.store.name }}
+                                    <strong>Services:</strong><br />
+                                    <span
+                                        v-for="service in pkg.services"
+                                        v-bind:key="service.id"
+                                    >
+                                        <inertia-link
+                                            :href="
+                                                route('service', service.slug)
+                                            "
+                                            >{{ service.name }}</inertia-link
+                                        >
+                                        <br />
+                                    </span>
                                 </p>
                             </div>
 
@@ -56,7 +64,7 @@
                                             type="text"
                                             class="mt-1 block w-full"
                                             v-model="form.name"
-                                            :value="crew.name"
+                                            :value="pkg.name"
                                             required
                                             autofocus
                                             :readonly="isView ? 'readonly' : ''"
@@ -64,44 +72,75 @@
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="phone_no"
-                                            value="Phone Number"
+                                            for="price"
+                                            value="Price"
                                         />
                                         <breeze-input
-                                            id="phone_no"
-                                            type="number"
+                                            id="price"
+                                            type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.phone_no"
-                                            :value="crew.phone_no"
+                                            v-model="form.price"
+                                            :value="pkg.price"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="email"
-                                            value="Email"
+                                            for="frequency"
+                                            value="Frequency"
                                         />
                                         <breeze-input
-                                            id="email"
-                                            type="email"
+                                            id="frequency"
+                                            type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.email"
-                                            :value="crew.email"
+                                            v-model="form.frequency"
+                                            :value="pkg.frequency"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="duration"
+                                            value="Duration"
+                                        />
+                                        <breeze-input
+                                            id="duration"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.duration"
+                                            :value="pkg.duration"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="description"
+                                            value="Description"
+                                        />
+                                        <textarea
+                                            rows="7"
+                                            id="description"
+                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                            :value="pkg.description"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        >
+                                        </textarea>
+                                    </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('crews')"
+                                        <inertia-link :href="route('packages')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link
                                         >
                                         <breeze-button
                                             type="button"
+                                            class="ml-4"
                                             @click="edit"
                                         >
                                             Edit
@@ -140,7 +179,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        crew: Object
+        pkg: Object
     },
 
     data() {

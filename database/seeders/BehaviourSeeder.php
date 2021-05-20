@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Customer;
 use App\Models\Personality;
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
 
 class BehaviourSeeder extends Seeder
@@ -20,7 +19,7 @@ class BehaviourSeeder extends Seeder
         /**
          * Get customers and personalities from database
          */
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create('ms_MY');
         $customers = Customer::all()->pluck('id');
         $personalities = Personality::all()->pluck('id');
 

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Package;
 use App\Models\Service;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +19,7 @@ class PromotionSeeder extends Seeder
         /**
          * Get services and packages from database
          */
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create('ms_MY');
         $services = Service::all()->pluck('id');
         $packages = Package::all()->pluck('id');
 

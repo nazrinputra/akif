@@ -28,6 +28,9 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\Person($this->faker));
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\PhoneNumber($this->faker));
+
         $this->stores = Store::all();
         $this->roles = Role::all();
 
@@ -40,7 +43,7 @@ class UserFactory extends Factory
             'store_id' => $this->faker->randomElement($this->stores),
             'email' => $this->faker->unique()->safeEmail(),
             'slug' => $slug,
-            'phone_no' => $this->faker->randomNumber(9, true),
+            'phone_no' => $this->faker->mobileNumber(false, false),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

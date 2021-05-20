@@ -93,7 +93,7 @@
                         <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link
                                 :href="route('store', 'tambak-bugis')"
-                                class=" text-decoration-none"
+                                class="text-decoration-none"
                             >
                                 <img
                                     class="img-fluid"
@@ -106,7 +106,10 @@
                             </inertia-link>
                         </div>
                         <div class="col-lg-4 mx-5 my-3 shadow">
-                            <inertia-link :href="route('store', 'bukit-katil')">
+                            <inertia-link
+                                :href="route('store', 'bukit-katil')"
+                                class="text-decoration-none"
+                            >
                                 <img
                                     class="img-fluid"
                                     src="img/logo-store.png"

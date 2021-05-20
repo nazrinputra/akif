@@ -22,13 +22,15 @@ class CustomerFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->name();
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\Person($this->faker));
+        $this->faker->addProvider(new \Faker\Provider\ms_MY\PhoneNumber($this->faker));
+        $name = $this->faker->name;
         $slug = Str::slug($name);
 
         return [
             'name' => $name,
             'slug' => $slug,
-            'phone_no' => $this->faker->randomNumber(9, true),
+            'phone_no' => $this->faker->mobileNumber(false, false),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
         ];
     }

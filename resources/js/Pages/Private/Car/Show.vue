@@ -1,33 +1,33 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Service</template> -->
+        <!-- <template #header>Car</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('cars')"
+                :active="route().current('cars')"
             >
-                Services
+                Cars
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('service', service)"
-                :active="route().current('service', service)"
+                :href="route('car', car)"
+                :active="route().current('car', car)"
             >
-                Service
+                Car
             </breeze-nav-link>
         </template>
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('cars')"
+                :active="route().current('cars')"
             >
-                Services
+                Cars
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('service', service)"
-                :active="route().current('service', service)"
+                :href="route('car', car)"
+                :active="route().current('car', car)"
             >
-                Service
+                Car
             </breeze-responsive-nav-link>
         </template>
 
@@ -37,32 +37,36 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
-                                <h2>Service</h2>
+                                <h2>Car</h2>
                                 <p>
-                                    <strong>Package(s):</strong><br />
+                                    <strong>Owner(s):</strong><br />
                                     <span
-                                        v-for="pkg in service.packages"
-                                        v-bind:key="pkg.id"
+                                        v-for="owner in car.owners"
+                                        v-bind:key="owner.id"
                                     >
                                         <inertia-link
-                                            :href="route('package', pkg.slug)"
-                                            >{{ pkg.name }}</inertia-link
+                                            :href="
+                                                route('customer', owner.slug)
+                                            "
+                                            >{{ owner.name }}</inertia-link
                                         >
                                         <br />
                                     </span>
                                 </p>
                             </div>
-
                             <div class="col-md-6 col-sm-12">
                                 <form @submit.prevent="submit">
                                     <div>
-                                        <breeze-label for="name" value="Name" />
+                                        <breeze-label
+                                            for="plate_no"
+                                            value="Plate No"
+                                        />
                                         <breeze-input
-                                            id="name"
+                                            id="plate_no"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.name"
-                                            :value="service.name"
+                                            v-model="form.plate_no"
+                                            :value="car.plate_no"
                                             required
                                             autofocus
                                             :readonly="isView ? 'readonly' : ''"
@@ -70,43 +74,71 @@
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="price"
-                                            value="Price"
+                                            for="brand"
+                                            value="Brand"
                                         />
                                         <breeze-input
-                                            id="price"
+                                            id="brand"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.price"
-                                            :value="service.price"
+                                            v-model="form.brand"
+                                            :value="car.brand"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
                                         />
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="description"
-                                            value="Description"
+                                            for="model"
+                                            value="Model"
                                         />
-                                        <textarea
-                                            rows="7"
-                                            id="description"
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                            :value="service.description"
+                                        <breeze-input
+                                            id="model"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.model"
+                                            :value="car.model"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
-                                        >
-                                        </textarea>
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label for="size" value="Size" />
+                                        <breeze-input
+                                            id="size"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.size"
+                                            :value="car.size"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="color"
+                                            value="Color"
+                                        />
+                                        <breeze-input
+                                            id="color"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.color"
+                                            :value="car.color"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
                                     </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('services')"
+                                        <inertia-link :href="route('cars')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link
                                         >
                                         <breeze-button
+                                            class="ml-4"
                                             type="button"
                                             @click="edit"
                                         >
@@ -146,7 +178,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        service: Object
+        car: Object
     },
 
     data() {

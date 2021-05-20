@@ -43,14 +43,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function phone()
-    {
-        /**
-         * Get phone number with 0 at the front with $this->phone().
-         */
-        return '0' . $this->phone_no;
-    }
-
     public function store()
     {
         return $this->belongsTo(Store::class);

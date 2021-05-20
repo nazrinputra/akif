@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Store;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -17,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create('ms_MY');
         $stores = Store::all()->pluck('id');
         $admin = Role::first();
 

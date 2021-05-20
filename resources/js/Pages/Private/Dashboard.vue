@@ -86,13 +86,16 @@
                                 </p>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
-                                <h2>Reports</h2>
-                                <p>Generate monthly reports and statistics.</p>
+                                <h2>Personalities</h2>
+                                <p>
+                                    Manage customer personalities to help
+                                    counter crew.
+                                </p>
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('reports')"
-                                        >Reports</inertia-link
+                                        :href="route('personalities')"
+                                        >Personalities</inertia-link
                                     >
                                 </p>
                             </div>

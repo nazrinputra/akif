@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Personality;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class PersonalityController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Private/Personality/Index', [
+            'personalities' => Personality::all()
+        ]);
     }
 
     /**
@@ -46,7 +49,9 @@ class PersonalityController extends Controller
      */
     public function show(Personality $personality)
     {
-        //
+        return Inertia::render('Private/Personality/Show', [
+            'personality' => $personality->load('customers')
+        ]);
     }
 
     /**

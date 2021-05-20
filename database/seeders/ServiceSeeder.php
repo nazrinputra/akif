@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Queue;
 use App\Models\Service;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +19,7 @@ class ServiceSeeder extends Seeder
         /**
          * Get queues from database and generate services
          */
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create('ms_MY');
         $queues = Queue::all()->pluck('id');
         $services = Service::factory(10)->create()->pluck('id');
 

@@ -1,33 +1,33 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <!-- <template #header>Crew</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('crews')"
+                :active="route().current('crews')"
             >
-                WhatsApps
+                Crews
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('crew', auth.user)"
+                :active="route().current('crew', auth.user)"
             >
-                WhatsApp
+                Crew
             </breeze-nav-link>
         </template>
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('crews')"
+                :active="route().current('crews')"
             >
-                WhatsApps
+                Crews
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('crew', crew)"
+                :active="route().current('crew', crew)"
             >
-                WhatsApp
+                Crew
             </breeze-responsive-nav-link>
         </template>
 
@@ -37,22 +37,26 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
-                                <h2>WhatsApp</h2>
+                                <h2>Crew</h2>
+                                <p>
+                                    <strong>Role: </strong>{{ crew.role.name }}
+                                </p>
+                                <p>
+                                    <strong>Store: </strong
+                                    >{{ crew.store.name }}
+                                </p>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <form @submit.prevent="submit">
                                     <div>
-                                        <breeze-label
-                                            for="title"
-                                            value="Title"
-                                        />
+                                        <breeze-label for="name" value="Name" />
                                         <breeze-input
-                                            id="title"
+                                            id="name"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.title"
-                                            :value="whatsapp.title"
+                                            v-model="form.name"
+                                            :value="crew.name"
                                             required
                                             autofocus
                                             :readonly="isView ? 'readonly' : ''"
@@ -60,29 +64,45 @@
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="message"
-                                            value="Message"
+                                            for="phone_no"
+                                            value="Phone Number"
                                         />
-                                        <textarea
-                                            rows="7"
-                                            id="message"
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                            :value="whatsapp.message"
+                                        <breeze-input
+                                            id="phone_no"
+                                            type="number"
+                                            class="mt-1 block w-full"
+                                            v-model="form.phone_no"
+                                            :value="crew.phone_no"
                                             required
                                             :readonly="isView ? 'readonly' : ''"
-                                        >
-                                        </textarea>
+                                        />
+                                    </div>
+                                    <div class="mt-4">
+                                        <breeze-label
+                                            for="email"
+                                            value="Email"
+                                        />
+                                        <breeze-input
+                                            id="email"
+                                            type="email"
+                                            class="mt-1 block w-full"
+                                            v-model="form.email"
+                                            :value="crew.email"
+                                            required
+                                            :readonly="isView ? 'readonly' : ''"
+                                        />
                                     </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('whatsapps')"
+                                        <inertia-link :href="route('crews')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link
                                         >
                                         <breeze-button
                                             type="button"
+                                            class="ml-4"
                                             @click="edit"
                                         >
                                             Edit
@@ -121,7 +141,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        whatsapp: Object
+        crew: Object
     },
 
     data() {
