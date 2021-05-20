@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Store::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

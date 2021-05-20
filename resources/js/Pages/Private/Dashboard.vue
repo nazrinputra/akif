@@ -58,20 +58,6 @@
                                 </p>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
-                                <h2>Services</h2>
-                                <p>
-                                    View services in the system and make
-                                    modifications.
-                                </p>
-                                <p>
-                                    <inertia-link
-                                        class="btn btn-secondary"
-                                        :href="route('services')"
-                                        >Services</inertia-link
-                                    >
-                                </p>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                                 <h2>Packages</h2>
                                 <p>
                                     Define packages or create new promotional
@@ -82,6 +68,20 @@
                                         class="btn btn-secondary"
                                         :href="route('packages')"
                                         >Packages</inertia-link
+                                    >
+                                </p>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
+                                <h2>Services</h2>
+                                <p>
+                                    View services in the system and make
+                                    modifications.
+                                </p>
+                                <p>
+                                    <inertia-link
+                                        class="btn btn-secondary"
+                                        :href="route('services')"
+                                        >Services</inertia-link
                                     >
                                 </p>
                             </div>

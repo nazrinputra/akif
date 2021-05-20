@@ -12,8 +12,8 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('counter', counter)"
-                :active="route().current('counter', counter)"
+                :href="route('counter')"
+                :active="route().current('counter')"
             >
                 Counter
             </breeze-responsive-nav-link>
@@ -27,6 +27,31 @@
                             <div class="col pb-5">
                                 <h2>Counter</h2>
                                 <p>Register car and customer into queue.</p>
+                                <form method="POST" @submit.prevent="submit">
+                                    <div>
+                                        <breeze-label for="test" value="Test" />
+                                        <breeze-input
+                                            id="test"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            v-model="form.test"
+                                            required
+                                            autofocus
+                                        />
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-end mt-4"
+                                    >
+                                        <breeze-button
+                                            :class="{
+                                                'opacity-25': form.processing
+                                            }"
+                                            :disabled="form.processing"
+                                        >
+                                            Submit
+                                        </breeze-button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -40,17 +65,39 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import BreezeButton from "@/Components/Button";
+import BreezeInput from "@/Components/Input";
+import BreezeLabel from "@/Components/Label";
+import BreezeValidationErrors from "@/Components/ValidationErrors";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink
+        BreezeResponsiveNavLink,
+        BreezeButton,
+        BreezeInput,
+        BreezeLabel,
+        BreezeValidationErrors
     },
 
     props: {
         auth: Object,
         errors: Object
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                test: this.test
+            })
+        };
+    },
+
+    methods: {
+        submit() {
+            alert(text.value);
+        }
     }
 };
 </script>

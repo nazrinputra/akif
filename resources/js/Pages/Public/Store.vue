@@ -16,6 +16,7 @@
     <teleport to="#navLinks">
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
+                v-bind:class="[isTambakBugis ? 'active' : '']"
                 class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'tambak-bugis')"
                 >Tambak Bugis</inertia-link
@@ -23,6 +24,7 @@
         </li>
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
+                v-bind:class="[isBukitKatil ? 'active' : '']"
                 class="nav-link py-3 px-0 px-lg-3 rounded"
                 :href="route('store', 'bukit-katil')"
                 >Bukit Katil</inertia-link
@@ -176,6 +178,8 @@ export default {
 
     data() {
         return {
+            isTambakBugis: false,
+            isBukitKatil: false,
             polling: null,
             waiting: [],
             grooming: [],
@@ -185,6 +189,12 @@ export default {
     },
 
     mounted() {
+        if (route().current("store", "tambak-bugis")) {
+            this.isTambakBugis = true;
+        }
+        if (route().current("store", "bukit-katil")) {
+            this.isBukitKatil = true;
+        }
         this.getQueue();
         this.pollData();
     },
