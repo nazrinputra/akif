@@ -15,7 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Cars', [
+        return Inertia::render('Private/Car/Index', [
             'cars' => Car::all()
         ]);
     }
@@ -49,7 +49,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return Inertia::render('Private/Car', [
+        return Inertia::render('Private/Car/Show', [
             'car' => $car->load('owners')
         ]);
     }

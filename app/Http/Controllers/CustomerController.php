@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Customers', [
+        return Inertia::render('Private/Customer/Index', [
             'customers' => Customer::all()
         ]);
     }
@@ -49,7 +49,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return Inertia::render('Private/Customer', [
+        return Inertia::render('Private/Customer/Show', [
             'customer' => $customer->load('cars', 'personalities')
         ]);
     }

@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Crews', [
+        return Inertia::render('Private/Crew/Index', [
             'crews' => User::all()->except(Auth::id())
         ]);
     }
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return Inertia::render('Private/Crew', [
+        return Inertia::render('Private/Crew/Show', [
             'crew' => $user->load('role', 'store')
         ]);
     }

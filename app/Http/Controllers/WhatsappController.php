@@ -15,7 +15,7 @@ class WhatsappController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Whatsapps', [
+        return Inertia::render('Private/Whatsapp/Index', [
             'whatsapps' => Whatsapp::all()
         ]);
     }
@@ -49,7 +49,7 @@ class WhatsappController extends Controller
      */
     public function show(Whatsapp $whatsapp)
     {
-        return Inertia::render('Private/Whatsapp', compact('whatsapp'));
+        return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
     }
 
     /**

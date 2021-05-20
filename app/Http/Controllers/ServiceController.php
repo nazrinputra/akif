@@ -15,7 +15,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Private/Services', [
+        return Inertia::render('Private/Service/Index', [
             'services' => Service::all()
         ]);
     }
@@ -49,7 +49,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return Inertia::render('Private/Service', [
+        return Inertia::render('Private/Service/Show', [
             'service' => $service->load('packages')
         ]);
     }
