@@ -90,24 +90,31 @@
                     </div>
                     <!-- Store Grid Items-->
                     <div class="row justify-content-center">
-                        <div class="col-lg-3 col-lg-offset-3">
+                        <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link
                                 :href="route('store', 'tambak-bugis')"
+                                class=" text-decoration-none"
                             >
                                 <img
-                                    class="img-fluid pb-3"
-                                    src="img/store/tambak-bugis.png"
+                                    class="img-fluid"
+                                    src="img/logo-store.png"
                                     alt="Tambak Bugis"
                                 />
+                                <h1 class="text-center text-secondary">
+                                    TAMBAK<br />BUGIS
+                                </h1>
                             </inertia-link>
                         </div>
-                        <div class="col-lg-3 col-lg-offset-3">
+                        <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link :href="route('store', 'bukit-katil')">
                                 <img
-                                    class="img-fluid pb-3"
-                                    src="img/store/bukit-katil.png"
+                                    class="img-fluid"
+                                    src="img/logo-store.png"
                                     alt="Bukit Katil"
                                 />
+                                <h1 class="text-center text-secondary">
+                                    BUKIT<br />KATIL
+                                </h1>
                             </inertia-link>
                         </div>
                     </div>
@@ -119,7 +126,9 @@
         <div class="container">
             <small
                 >Copyright ©
-                <inertia-link :href="route('login')" class="text-primary"
+                <inertia-link
+                    :href="route('login')"
+                    class="text-primary text-decoration-none"
                     >Akif Car Grooming Center</inertia-link
                 >
                 2021</small
