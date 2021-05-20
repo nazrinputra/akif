@@ -16,7 +16,8 @@ class PromotionController extends Controller
     public function index()
     {
         return Inertia::render('Public/Promotions', [
-            'promotions' => Package::all()->load('services')
+            'firstPromotion' => Package::first(),
+            'promotions' => Package::all()->skip(1)->load('services')
         ]);
     }
 
