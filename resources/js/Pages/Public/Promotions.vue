@@ -41,7 +41,7 @@
             <div class="row mt-5">
                 <div
                     class="col-xs-12 col-sm-6 col-md-4"
-                    v-for="promo in promos"
+                    v-for="promo in promotions"
                     v-bind:key="promo.id"
                 >
                     <div
@@ -74,7 +74,7 @@
                                                 {{ service.name }}</li>
                                             </ul>
                                         </p>
-                                        <a href="#" class="btn btn-outline-secondary">View More</a>
+                                        <inertia-link :href="route('promotion', promo.slug)" class="btn btn-outline-secondary">View More</inertia-link>
                                     </div>
                                 </div>
                             </div>
@@ -101,26 +101,8 @@
 export default {
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        promotions: Object
     },
-
-    data() {
-        return {
-            promos: []
-        };
-    },
-
-    mounted() {
-        this.getPromos();
-    },
-
-    methods: {
-        getPromos() {
-            let self = this;
-            axios.get(route("promos")).then(response => {
-                self.promos = response.data;
-            });
-        }
-    }
 };
 </script>

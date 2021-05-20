@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        return Package::all()->load('services');
+        return Inertia::render('Public/Promotions', [
+            'promotions' => Package::all()->load('services')
+        ]);
     }
 
     /**
@@ -36,7 +39,9 @@ class PromotionController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        return Inertia::render('Public/Promotion', [
+            'promotion' => $package->load('services')
+        ]);
     }
 
     /**
