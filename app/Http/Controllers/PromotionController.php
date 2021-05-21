@@ -20,7 +20,7 @@ class PromotionController extends Controller
         $firstPromotion = $promotions->first();
         $otherPromotions = $promotions->skip(1);
 
-        return Inertia::render('Public/Promotions', [
+        return Inertia::render('Public/Promotion/Index', [
             'promotionsCount' => $promotionsCount,
             'firstPromotion' => $firstPromotion,
             'otherPromotions' => $otherPromotions
@@ -46,7 +46,7 @@ class PromotionController extends Controller
      */
     public function show(Package $package)
     {
-        return Inertia::render('Public/Promotion', [
+        return Inertia::render('Public/Promotion/Show', [
             'promotion' => $package->load('services')
         ]);
     }
