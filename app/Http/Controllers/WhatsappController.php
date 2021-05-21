@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Whatsapp;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -43,9 +44,17 @@ class WhatsappController extends Controller
      */
     public function store(Request $request)
     {
-        echo "<h1 style='text-align:center;padding-top:15rem;'>Not configured!</h1>";
-        // dump($request->all());
-        // return Redirect::route('whatsapps.index');
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'message' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->title);
+        $request->merge(['slug' => $slug]);
+
+        Whatsapp::create($request->only('title', 'slug', 'message'));
+
+        return Redirect::route('whatsapps.index');
     }
 
     /**
@@ -90,6 +99,7 @@ class WhatsappController extends Controller
      */
     public function destroy(Whatsapp $whatsapp)
     {
-        //
+        Whatsapp::find($whatsapp->id)->delete();
+        return Redirect::route('whatsapps.index');
     }
 }

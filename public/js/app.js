@@ -19004,8 +19004,11 @@ __webpack_require__.r(__webpack_exports__);
     whatsappsCount: Number
   },
   methods: {
-    remove: function remove() {
-      alert("Not configured yet");
+    remove: function remove(whatsapp) {
+      // alert("Deleting " + whatsapp.title);
+      if (!confirm("Are you sure want to remove this item?")) return; // whatsapp._method = "DELETE";
+
+      this.$inertia["delete"](route("whatsapps.destroy", whatsapp.slug));
     }
   }
 });
@@ -24399,16 +24402,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_breeze_button, {
           type: "button",
           "class": "ml-3",
-          onClick: $options.remove
+          onClick: function onClick($event) {
+            return $options.remove(whatsapp);
+          }
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [_hoisted_17];
           }),
-          _: 1
-          /* STABLE */
+          _: 2
+          /* DYNAMIC */
 
-        }, 8
-        /* PROPS */
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
         , ["onClick"])])])]);
       }), 128
       /* KEYED_FRAGMENT */

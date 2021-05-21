@@ -19,6 +19,7 @@ class CreateWhatsappsTable extends Migration
             $table->string('slug');
             $table->string('message');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

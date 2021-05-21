@@ -68,7 +68,9 @@
                                                     <breeze-button
                                                         type="button"
                                                         class="ml-3"
-                                                        @click="remove"
+                                                        @click="
+                                                            remove(whatsapp)
+                                                        "
                                                     >
                                                         <i
                                                             class="far fa-trash-alt"
@@ -129,8 +131,11 @@ export default {
     },
 
     methods: {
-        remove() {
-            alert("Not configured yet");
+        remove(whatsapp) {
+            // alert("Deleting " + whatsapp.title);
+            if (!confirm("Are you sure want to remove this item?")) return;
+            // whatsapp._method = "DELETE";
+            this.$inertia.delete(route("whatsapps.destroy", whatsapp.slug));
         }
     }
 };
