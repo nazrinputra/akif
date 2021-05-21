@@ -15,8 +15,12 @@ class PackageController extends Controller
      */
     public function index()
     {
+        $packages = Package::all();
+        $packagesCount = $packages->count();
+
         return Inertia::render('Private/Package/Index', [
-            'packages' => Package::all()
+            'packages' => $packages,
+            'packagesCount' => $packagesCount
         ]);
     }
 

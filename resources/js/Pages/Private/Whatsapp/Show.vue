@@ -3,14 +3,14 @@
         <!-- <template #header>Whatsapp</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('whatsapps.show', whatsapp)"
+                :active="route().current('whatsapps.show', whatsapp)"
             >
                 WhatsApp
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('whatsapps.show', whatsapp)"
+                :active="route().current('whatsapps.show', whatsapp)"
             >
                 WhatsApp
             </breeze-responsive-nav-link>
@@ -38,10 +38,11 @@
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
                                 <h2>WhatsApp</h2>
+                                <p>View WhatsApp message.</p>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
-                                <form @submit.prevent="submit">
+                                <form>
                                     <div>
                                         <breeze-label
                                             for="title"
@@ -51,11 +52,10 @@
                                             id="title"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.title"
                                             :value="whatsapp.title"
                                             required
                                             autofocus
-                                            :readonly="isView ? 'readonly' : ''"
+                                            readonly
                                         />
                                     </div>
                                     <div class="mt-4">
@@ -69,14 +69,15 @@
                                             class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                                             :value="whatsapp.message"
                                             required
-                                            :readonly="isView ? 'readonly' : ''"
+                                            readonly
                                         >
                                         </textarea>
                                     </div>
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('whatsapps')"
+                                        <inertia-link
+                                            :href="route('whatsapps.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link
@@ -125,19 +126,7 @@ export default {
         whatsapp: Object
     },
 
-    data() {
-        return {
-            isView: true,
-            form: this.$inertia.form({
-                plate_no: this.plate_no
-            })
-        };
-    },
-
     methods: {
-        submit() {
-            alert("Not configured yet");
-        },
         edit() {
             alert("Not configured yet");
         }

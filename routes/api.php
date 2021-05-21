@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\WhatsappController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('store/{store:slug}/queues', [QueueController::class, 'index'])->name('queues');
+Route::get('store/{store:slug}/queues', [QueueController::class, 'index'])->name('queues.index');
+
+Route::post('whatsapps', [WhatsappController::class, 'store'])->name('whatsapps.store');

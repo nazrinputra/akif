@@ -3,8 +3,8 @@
         <!-- <template #header>Services</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('services.index')"
+                :active="route().current('services.index')"
             >
                 Services
             </breeze-nav-link>
@@ -12,8 +12,8 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('services.index')"
+                :active="route().current('services.index')"
             >
                 Services
             </breeze-responsive-nav-link>
@@ -32,33 +32,72 @@
                                 </p>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <table class="table table-hover">
+                                <div id="empty" v-if="servicesCount <= 0">
+                                    <h2 class="text-secondary text-center py-4">
+                                        Oops, we're sorry. <br />
+                                        No item in this list.
+                                    </h2>
+                                </div>
+                                <table
+                                    v-if="servicesCount > 0"
+                                    class="table table-hover"
+                                >
                                     <tbody>
                                         <tr
                                             v-for="service in services"
                                             v-bind:key="service.id"
                                         >
-                                            <td class="col-10">
+                                            <td class="col-9">
                                                 {{ service.name }}
                                             </td>
-                                            <td class="col-2">
-                                                <inertia-link
-                                                    :href="
-                                                        route(
-                                                            'service',
-                                                            service
-                                                        )
-                                                    "
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        View
-                                                    </breeze-button></inertia-link
+                                            <td class="col-3">
+                                                <div
+                                                    class="flex items-center justify-center"
                                                 >
+                                                    <inertia-link
+                                                        :href="
+                                                            route(
+                                                                'services.show',
+                                                                service
+                                                            )
+                                                        "
+                                                        ><breeze-button
+                                                            type="button"
+                                                        >
+                                                            <i
+                                                                class="fas fa-angle-double-right"
+                                                            ></i></breeze-button
+                                                    ></inertia-link>
+                                                    <breeze-button
+                                                        type="button"
+                                                        class="ml-3"
+                                                        @click="remove"
+                                                    >
+                                                        <i
+                                                            class="far fa-trash-alt"
+                                                        ></i>
+                                                    </breeze-button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div
+                                    class="flex items-center justify-center mt-4"
+                                >
+                                    <inertia-link :href="route('dashboard')"
+                                        ><breeze-button type="button">
+                                            Back
+                                        </breeze-button></inertia-link
+                                    >
+                                    <breeze-button
+                                        type="button"
+                                        class="ml-20"
+                                        @click="add"
+                                    >
+                                        Add
+                                    </breeze-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,7 +124,17 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        services: Object
+        services: Object,
+        servicesCount: Number
+    },
+
+    methods: {
+        add() {
+            alert("Not configured yet");
+        },
+        remove() {
+            alert("Not configured yet");
+        }
     }
 };
 </script>

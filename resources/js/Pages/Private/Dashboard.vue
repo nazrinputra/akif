@@ -20,11 +20,11 @@
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
                                 <h2>WhatsApps</h2>
-                                <p>Modify WhatsApp messages for the store.</p>
+                                <p>List of WhatsApp messages for the store.</p>
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('whatsapps')"
+                                        :href="route('whatsapps.index')"
                                         >WhatsApps</inertia-link
                                     >
                                 </p>
@@ -38,7 +38,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('cars')"
+                                        :href="route('cars.index')"
                                         >Cars</inertia-link
                                     >
                                 </p>
@@ -52,7 +52,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('customers')"
+                                        :href="route('customers.index')"
                                         >Customers</inertia-link
                                     >
                                 </p>
@@ -66,7 +66,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('packages')"
+                                        :href="route('packages.index')"
                                         >Packages</inertia-link
                                     >
                                 </p>
@@ -80,7 +80,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('services')"
+                                        :href="route('services.index')"
                                         >Services</inertia-link
                                     >
                                 </p>
@@ -94,7 +94,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('personalities')"
+                                        :href="route('personalities.index')"
                                         >Personalities</inertia-link
                                     >
                                 </p>
@@ -108,7 +108,7 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
-                                        :href="route('crews')"
+                                        :href="route('crews.index')"
                                         >Crews</inertia-link
                                     >
                                 </p>

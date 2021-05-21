@@ -33,7 +33,7 @@
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
                 class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('promotions')"
+                :href="route('promotions.index')"
                 >Promotions</inertia-link
             >
         </li>
@@ -234,7 +234,7 @@ export default {
     methods: {
         getQueue() {
             let self = this;
-            axios.get(route("queues", route().params)).then(response => {
+            axios.get(route("queues.index", route().params)).then(response => {
                 self.waiting = response.data.filter(queues =>
                     queues.status.includes("Waiting")
                 );

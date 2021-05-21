@@ -3,14 +3,14 @@
         <!-- <template #header>Customer</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('customers')"
-                :active="route().current('customers')"
+                :href="route('customers.index')"
+                :active="route().current('customers\.index')"
             >
                 Customers
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('customer', customer)"
-                :active="route().current('customer', customer)"
+                :href="route('customers.show', customer)"
+                :active="route().current('customers.show', customer)"
             >
                 Customer
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('customers')"
-                :active="route().current('customers')"
+                :href="route('customers\.index')"
+                :active="route().current('customers.index')"
             >
                 Customers
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('customer', customer)"
-                :active="route().current('customer', customer)"
+                :href="route('customers.show', customer)"
+                :active="route().current('customers.show', customer)"
             >
                 Customer
             </breeze-responsive-nav-link>
@@ -43,7 +43,10 @@
                                 <div v-if="isVisible" id="personalities">
                                     <inertia-link
                                         :href="
-                                            route('personality', personality)
+                                            route(
+                                                'personalities.show',
+                                                personality
+                                            )
                                         "
                                         class="badge badge-info mr-2"
                                         v-for="personality in customer.personalities"
@@ -58,7 +61,7 @@
                                         v-bind:key="car.id"
                                     >
                                         <inertia-link
-                                            :href="route('car', car)"
+                                            :href="route('cars.show', car)"
                                             >{{ car.plate_no }}</inertia-link
                                         >
                                         <br />
@@ -114,7 +117,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('customers')"
+                                        <inertia-link
+                                            :href="route('customers.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

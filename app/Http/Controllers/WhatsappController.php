@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Whatsapp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class WhatsappController extends Controller
 {
@@ -31,7 +32,7 @@ class WhatsappController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Whatsapp/Create');
     }
 
     /**
@@ -42,7 +43,9 @@ class WhatsappController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "<h1 style='text-align:center;padding-top:15rem;'>Not configured!</h1>";
+        // dump($request->all());
+        // return Redirect::route('whatsapps.index');
     }
 
     /**

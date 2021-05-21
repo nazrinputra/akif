@@ -3,14 +3,14 @@
         <!-- <template #header>Personality</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('personalities')"
-                :active="route().current('personalities')"
+                :href="route('personalities.index')"
+                :active="route().current('personalities.index')"
             >
                 Personalities
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('personality', personality)"
-                :active="route().current('Personality', personality)"
+                :href="route('personalities.show', personality)"
+                :active="route().current('personalities.show', personality)"
             >
                 Personality
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('personalities')"
-                :active="route().current('personalities')"
+                :href="route('personalities.index')"
+                :active="route().current('personalities.index')"
             >
                 Personalities
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('personality', personality)"
-                :active="route().current('personality', personality)"
+                :href="route('personalities.show', personality)"
+                :active="route().current('personalities.show', personality)"
             >
                 Personality
             </breeze-responsive-nav-link>
@@ -45,7 +45,12 @@
                                         v-bind:key="customer.id"
                                     >
                                         <inertia-link
-                                            :href="route('customer', customer)"
+                                            :href="
+                                                route(
+                                                    'customers.show',
+                                                    customer
+                                                )
+                                            "
                                             >{{ customer.name }}</inertia-link
                                         >
                                         <br />
@@ -87,7 +92,7 @@
                                         class="flex items-center justify-end mt-4"
                                     >
                                         <inertia-link
-                                            :href="route('personalities')"
+                                            :href="route('personalities.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

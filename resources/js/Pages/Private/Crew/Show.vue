@@ -3,14 +3,14 @@
         <!-- <template #header>Crew</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('crews')"
-                :active="route().current('crews')"
+                :href="route('crews.index')"
+                :active="route().current('crews.index')"
             >
                 Crews
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('crew', auth.user)"
-                :active="route().current('crew', auth.user)"
+                :href="route('crews.show', crew)"
+                :active="route().current('crews.show', crew)"
             >
                 Crew
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('crews')"
-                :active="route().current('crews')"
+                :href="route('crews.index')"
+                :active="route().current('crews.index')"
             >
                 Crews
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('crew', crew)"
-                :active="route().current('crew', crew)"
+                :href="route('crews.show', crew)"
+                :active="route().current('crews.show', crew)"
             >
                 Crew
             </breeze-responsive-nav-link>
@@ -95,7 +95,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('crews')"
+                                        <inertia-link
+                                            :href="route('crews.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

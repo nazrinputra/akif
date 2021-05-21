@@ -3,8 +3,8 @@
         <!-- <template #header>Whatsapp</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-nav-link>
@@ -12,8 +12,8 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-responsive-nav-link>
@@ -26,7 +26,7 @@
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
                                 <h2>WhatsApps</h2>
-                                <p>Modify WhatsApp messages for the store.</p>
+                                <p>List of WhatsApp messages for the store.</p>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div id="empty" v-if="whatsappsCount <= 0">
@@ -54,7 +54,7 @@
                                                     <inertia-link
                                                         :href="
                                                             route(
-                                                                'whatsapp',
+                                                                'whatsapps.show',
                                                                 whatsapp
                                                             )
                                                         "
@@ -82,18 +82,21 @@
                                 <div
                                     class="flex items-center justify-center mt-4"
                                 >
-                                    <inertia-link :href="route('dashboard')"
-                                        ><breeze-button type="button">
+                                    <inertia-link :href="route('dashboard')">
+                                        <breeze-button type="button">
                                             Back
-                                        </breeze-button></inertia-link
+                                        </breeze-button>
+                                    </inertia-link>
+                                    <inertia-link
+                                        :href="route('whatsapps.create')"
                                     >
-                                    <breeze-button
-                                        type="button"
-                                        class="ml-20"
-                                        @click="add"
-                                    >
-                                        Add
-                                    </breeze-button>
+                                        <breeze-button
+                                            type="button"
+                                            class="ml-20"
+                                        >
+                                            Add
+                                        </breeze-button>
+                                    </inertia-link>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +129,6 @@ export default {
     },
 
     methods: {
-        add() {
-            alert("Not configured yet");
-        },
         remove() {
             alert("Not configured yet");
         }
