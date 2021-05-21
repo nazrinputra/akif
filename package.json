@@ -1,8 +1,5 @@
 {
     "private": true,
-    "engines": {
-        "node": "14.16.0"
-    },
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -10,8 +7,7 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production",
-        "postinstall": "npm run prod"
+        "production": "mix --production"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.3",
