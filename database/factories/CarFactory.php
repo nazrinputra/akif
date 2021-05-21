@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Car;
 use Faker\Provider\Fakecar;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CarFactory extends Factory
@@ -26,9 +27,12 @@ class CarFactory extends Factory
     {
         $this->faker->addProvider(new Fakecar($this->faker));
         $this->faker->addProvider(new \Faker\Provider\ms_MY\Miscellaneous($this->faker));
+        $plate_no = $this->faker->jpjNumberPlate;
+        $slug = Str::slug($plate_no);
 
         return [
-            'plate_no' => $this->faker->jpjNumberPlate,
+            'plate_no' => $plate_no,
+            'slug' => $slug,
             'brand' => $this->faker->vehicleBrand,
             'model' => $this->faker->vehicleModel,
             'color' => $this->faker->colorName,

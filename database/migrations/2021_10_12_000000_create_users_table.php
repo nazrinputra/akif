@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->foreignId('role_id')->constrained();
             $table->foreignId('store_id')->constrained();
             $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('phone_no');
+            $table->string('slug');
+            $table->string('phone_no')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

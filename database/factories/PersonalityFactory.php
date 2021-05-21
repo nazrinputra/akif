@@ -22,7 +22,7 @@ class PersonalityFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->emoji;
+        $name = $this->faker->unique()->word();
         $slug = Str::slug($name);
 
         return [

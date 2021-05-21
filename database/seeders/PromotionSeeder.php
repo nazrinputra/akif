@@ -19,21 +19,19 @@ class PromotionSeeder extends Seeder
         /**
          * Get services and packages from database
          */
-        $faker = \Faker\Factory::create('ms_MY');
-        $services = Service::all()->pluck('id');
         $packages = Package::all()->pluck('id');
 
         /**
-         * Assign random service to every package
+         * Assign five random services to every package
          */
         foreach ($packages as $package) {
-            $i = 0;
-            while ($i < 5) {
+            $services = Service::all()->random(5)->pluck('id');
+
+            foreach ($services as $service) {
                 DB::table('package_service')->insert([
                     'package_id' => $package,
-                    'service_id' => $faker->randomElement($services)
+                    'service_id' => $service
                 ]);
-                $i++;
             }
         }
     }

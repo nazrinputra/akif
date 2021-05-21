@@ -16,6 +16,7 @@ class CreatePackageServiceTable extends Migration
         Schema::create('package_service', function (Blueprint $table) {
             $table->foreignId('package_id')->constrained();
             $table->foreignId('service_id')->constrained();
+            $table->unique(['package_id', 'service_id']);
         });
     }
 

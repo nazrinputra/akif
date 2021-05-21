@@ -40,13 +40,17 @@
                                 <h2 v-on:click="isVisible = !isVisible">
                                     Customer
                                 </h2>
-                                <h1 v-if="isVisible" id="personalities">
-                                    <span
+                                <div v-if="isVisible" id="personalities">
+                                    <inertia-link
+                                        :href="
+                                            route('personality', personality)
+                                        "
+                                        class="badge badge-info mr-2"
                                         v-for="personality in customer.personalities"
                                         v-bind:key="personality.id"
-                                        >{{ personality.name }}</span
+                                        >{{ personality.name }}</inertia-link
                                     >
-                                </h1>
+                                </div>
                                 <p class="mt-2">
                                     <strong>Car(s):</strong><br />
                                     <span
