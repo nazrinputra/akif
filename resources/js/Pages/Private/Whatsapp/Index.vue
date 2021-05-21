@@ -29,7 +29,16 @@
                                 <p>Modify WhatsApp messages for the store.</p>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <table class="table table-hover">
+                                <div id="empty" v-if="whatsappsCount <= 0">
+                                    <h2 class="text-secondary text-center py-4">
+                                        Oops, we're sorry. <br />
+                                        No item in this list.
+                                    </h2>
+                                </div>
+                                <table
+                                    v-if="whatsappsCount > 0"
+                                    class="table table-hover"
+                                >
                                     <tbody>
                                         <tr
                                             v-for="whatsapp in whatsapps"
@@ -56,6 +65,21 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div
+                                    class="flex items-center justify-center mt-4"
+                                >
+                                    <inertia-link :href="route('dashboard')"
+                                        ><breeze-button type="button">
+                                            Back
+                                        </breeze-button></inertia-link
+                                    ><breeze-button
+                                        type="button"
+                                        class="ml-20"
+                                        @click="add"
+                                    >
+                                        Add
+                                    </breeze-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +106,14 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        whatsapps: Object
+        whatsapps: Object,
+        whatsappsCount: Number
+    },
+
+    methods: {
+        add() {
+            alert("Not configured yet");
+        }
     }
 };
 </script>
