@@ -9,8 +9,8 @@
                 WhatsApps
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('whatsapps.show', whatsapp)"
-                :active="route().current('whatsapps.show', whatsapp)"
+                :href="route('whatsapps.create')"
+                :active="route().current('whatsapps.create')"
             >
                 WhatsApp
             </breeze-nav-link>
@@ -24,8 +24,8 @@
                 WhatsApps
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('whatsapps.show', whatsapp)"
-                :active="route().current('whatsapps.show', whatsapp)"
+                :href="route('whatsapps.create')"
+                :active="route().current('whatsapps.create')"
             >
                 WhatsApp
             </breeze-responsive-nav-link>
@@ -38,11 +38,11 @@
                         <div class="row pt-3 px-3">
                             <div class="col-md-3 col-sm-12">
                                 <h2>WhatsApp</h2>
-                                <p>View WhatsApp message.</p>
+                                <p>Add new WhatsApp message.</p>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
-                                <form>
+                                <form @submit.prevent="submit">
                                     <div>
                                         <breeze-label
                                             for="title"
@@ -52,10 +52,9 @@
                                             id="title"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            :value="whatsapp.title"
+                                            v-model="form.title"
                                             required
                                             autofocus
-                                            readonly
                                         />
                                     </div>
                                     <div class="mt-4">
@@ -67,9 +66,8 @@
                                             rows="7"
                                             id="message"
                                             class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                            :value="whatsapp.message"
+                                            v-model="form.message"
                                             required
-                                            readonly
                                         >
                                         </textarea>
                                     </div>
@@ -85,9 +83,9 @@
                                         <breeze-button
                                             type="button"
                                             class="ml-4"
-                                            @click="edit"
+                                            @click="submit"
                                         >
-                                            Edit
+                                            Submit
                                         </breeze-button>
                                     </div>
                                 </form>
@@ -108,6 +106,8 @@ import BreezeButton from "@/Components/Button";
 import BreezeInput from "@/Components/Input";
 import BreezeLabel from "@/Components/Label";
 import BreezeValidationErrors from "@/Components/ValidationErrors";
+import { reactive } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
     components: {
@@ -124,6 +124,29 @@ export default {
         auth: Object,
         errors: Object,
         whatsapp: Object
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                title: this.title,
+                message: this.message
+            })
+        };
+    },
+
+    setup() {
+        const form = reactive({
+            first_name: null,
+            last_name: null,
+            email: null
+        });
+
+        function submit() {
+            Inertia.post(route("whatsapps.store"), form);
+        }
+
+        return { form, submit };
     },
 
     methods: {
