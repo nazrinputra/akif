@@ -44,23 +44,37 @@
                                             v-for="whatsapp in whatsapps"
                                             v-bind:key="whatsapp.id"
                                         >
-                                            <td class="col-10">
+                                            <td class="col-9">
                                                 {{ whatsapp.title }}
                                             </td>
-                                            <td class="col-2">
-                                                <inertia-link
-                                                    :href="
-                                                        route(
-                                                            'whatsapp',
-                                                            whatsapp
-                                                        )
-                                                    "
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        View
-                                                    </breeze-button></inertia-link
+                                            <td class="col-3">
+                                                <div
+                                                    class="flex items-center justify-center"
                                                 >
+                                                    <inertia-link
+                                                        :href="
+                                                            route(
+                                                                'whatsapp',
+                                                                whatsapp
+                                                            )
+                                                        "
+                                                        ><breeze-button
+                                                            type="button"
+                                                        >
+                                                            <i
+                                                                class="fas fa-angle-double-right"
+                                                            ></i></breeze-button
+                                                    ></inertia-link>
+                                                    <breeze-button
+                                                        type="button"
+                                                        class="ml-3"
+                                                        @click="remove"
+                                                    >
+                                                        <i
+                                                            class="far fa-trash-alt"
+                                                        ></i>
+                                                    </breeze-button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -72,7 +86,8 @@
                                         ><breeze-button type="button">
                                             Back
                                         </breeze-button></inertia-link
-                                    ><breeze-button
+                                    >
+                                    <breeze-button
                                         type="button"
                                         class="ml-20"
                                         @click="add"
@@ -112,6 +127,9 @@ export default {
 
     methods: {
         add() {
+            alert("Not configured yet");
+        },
+        remove() {
             alert("Not configured yet");
         }
     }
