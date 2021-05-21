@@ -49,8 +49,29 @@
                 >
                     {{ store.name }}
                 </h2>
+                <div id="empty" v-if="queuesCount <= 0">
+                    <h2
+                        class="page-section-heading text-secondary text-center text-uppercase py-4"
+                    >
+                        Yeay, you're in luck
+                    </h2>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <h2
+                        class="page-section-heading text-secondary text-center text-uppercase py-4"
+                    >
+                        No queue at the moment
+                    </h2>
+                </div>
                 <fullscreen
                     ref="fullscreen"
+                    v-if="queuesCount > 0"
                     v-model:fullscreen.sync="fullscreen"
                     class="bg-white"
                 >
@@ -176,6 +197,13 @@ import Fullscreen from "vue-fullscreen/src/component.vue";
 export default {
     components: { Fullscreen },
 
+    props: {
+        auth: Object,
+        errors: Object,
+        store: Object,
+        queuesCount: Number
+    },
+
     data() {
         return {
             isTambakBugis: false,
@@ -226,12 +254,6 @@ export default {
         toggle() {
             this.$refs["fullscreen"].toggle();
         }
-    },
-
-    props: {
-        auth: Object,
-        errors: Object,
-        store: Object
     }
 };
 </script>
