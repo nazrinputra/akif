@@ -70,21 +70,6 @@
                                     </div>
                                     <div class="mt-4">
                                         <breeze-label
-                                            for="color"
-                                            value="Color"
-                                        />
-                                        <breeze-input
-                                            id="color"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.color"
-                                            :value="personality.color"
-                                            required
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
                                             for="description"
                                             value="Description"
                                         />
