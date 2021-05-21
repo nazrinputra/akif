@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('cars', [CarController::class, 'index'])->name('cars');
 
-    Route::get('cars/{car:plate_no}', [CarController::class, 'show'])->name('car');
+    Route::get('cars/{car:slug}', [CarController::class, 'show'])->name('car');
 
     Route::get('customers', [CustomerController::class, 'index'])->name('customers');
 
