@@ -15,8 +15,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        $services = Service::all();
+        $servicesCount = $services->count();
+
         return Inertia::render('Private/Service/Index', [
-            'services' => Service::all()
+            'services' => $services,
+            'servicesCount' => $servicesCount
         ]);
     }
 

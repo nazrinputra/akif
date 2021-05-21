@@ -16,8 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        $crews = User::all()->except(Auth::id());
+        $crewsCount = $crews->count();
+
         return Inertia::render('Private/Crew/Index', [
-            'crews' => User::all()->except(Auth::id())
+            'crews' => $crews,
+            'crewsCount' => $crewsCount
         ]);
     }
 
@@ -45,13 +49,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $crew
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $crew)
     {
         return Inertia::render('Private/Crew/Show', [
-            'crew' => $user->load('role', 'store')
+            'crew' => $crew->load('role', 'store')
         ]);
     }
 

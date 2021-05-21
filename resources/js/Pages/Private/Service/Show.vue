@@ -3,14 +3,14 @@
         <!-- <template #header>Service</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('services.index')"
+                :active="route().current('services.index')"
             >
                 Services
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('service', service)"
-                :active="route().current('service', service)"
+                :href="route('services.show', service)"
+                :active="route().current('services.show', service)"
             >
                 Service
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('services')"
-                :active="route().current('services')"
+                :href="route('services.index')"
+                :active="route().current('services.index')"
             >
                 Services
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('service', service)"
-                :active="route().current('service', service)"
+                :href="route('services.show', service)"
+                :active="route().current('services.show', service)"
             >
                 Service
             </breeze-responsive-nav-link>
@@ -45,7 +45,9 @@
                                         v-bind:key="pkg.id"
                                     >
                                         <inertia-link
-                                            :href="route('package', pkg.slug)"
+                                            :href="
+                                                route('packages.show', pkg.slug)
+                                            "
                                             >{{ pkg.name }}</inertia-link
                                         >
                                         <br />
@@ -101,7 +103,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('services')"
+                                        <inertia-link
+                                            :href="route('services.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

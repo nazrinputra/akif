@@ -3,14 +3,14 @@
         <!-- <template #header>Car</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('cars.index')"
+                :active="route().current('cars.index')"
             >
                 Cars
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('car', car)"
-                :active="route().current('car', car)"
+                :href="route('cars.show', car)"
+                :active="route().current('cars.show', car)"
             >
                 Car
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('cars.index')"
+                :active="route().current('cars.index')"
             >
                 Cars
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('car', car)"
-                :active="route().current('car', car)"
+                :href="route('cars.show', car)"
+                :active="route().current('cars.show', car)"
             >
                 Car
             </breeze-responsive-nav-link>
@@ -46,7 +46,10 @@
                                     >
                                         <inertia-link
                                             :href="
-                                                route('customer', owner.slug)
+                                                route(
+                                                    'customers.show',
+                                                    owner.slug
+                                                )
                                             "
                                             >{{ owner.name }}</inertia-link
                                         >
@@ -132,7 +135,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('cars')"
+                                        <inertia-link
+                                            :href="route('cars.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

@@ -3,8 +3,8 @@
         <!-- <template #header>Whatsapp</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-nav-link>
@@ -12,8 +12,8 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-responsive-nav-link>
@@ -54,7 +54,7 @@
                                                     <inertia-link
                                                         :href="
                                                             route(
-                                                                'whatsapp',
+                                                                'whatsapps.show',
                                                                 whatsapp
                                                             )
                                                         "

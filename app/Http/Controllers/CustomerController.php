@@ -15,8 +15,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $customers = Customer::all();
+        $customersCount = $customers->count();
+
         return Inertia::render('Private/Customer/Index', [
-            'customers' => Customer::all()
+            'customers' => $customers,
+            'customersCount' => $customersCount
         ]);
     }
 

@@ -15,8 +15,12 @@ class PersonalityController extends Controller
      */
     public function index()
     {
+        $personalities = Personality::all();
+        $personalitiesCount = $personalities->count();
+
         return Inertia::render('Private/Personality/Index', [
-            'personalities' => Personality::all()
+            'personalities' => $personalities,
+            'personalitiesCount' => $personalitiesCount
         ]);
     }
 

@@ -3,8 +3,8 @@
         <!-- <template #header>Cars</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('cars.index')"
+                :active="route().current('cars.index')"
             >
                 Cars
             </breeze-nav-link>
@@ -12,8 +12,8 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('cars')"
-                :active="route().current('cars')"
+                :href="route('cars.index')"
+                :active="route().current('cars.index')"
             >
                 Cars
             </breeze-responsive-nav-link>
@@ -32,28 +32,72 @@
                                 </p>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <table class="table table-hover">
+                                <div id="empty" v-if="carsCount <= 0">
+                                    <h2 class="text-secondary text-center py-4">
+                                        Oops, we're sorry. <br />
+                                        No item in this list.
+                                    </h2>
+                                </div>
+                                <table
+                                    v-if="carsCount > 0"
+                                    class="table table-hover"
+                                >
                                     <tbody>
                                         <tr
                                             v-for="car in cars"
                                             v-bind:key="car.id"
                                         >
-                                            <td class="col-10">
+                                            <td class="col-9">
                                                 {{ car.plate_no }}
                                             </td>
-                                            <td class="col-2">
-                                                <inertia-link
-                                                    :href="route('car', car)"
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        View
-                                                    </breeze-button></inertia-link
+                                            <td class="col-3">
+                                                <div
+                                                    class="flex items-center justify-center"
                                                 >
+                                                    <inertia-link
+                                                        :href="
+                                                            route(
+                                                                'cars.show',
+                                                                car
+                                                            )
+                                                        "
+                                                        ><breeze-button
+                                                            type="button"
+                                                        >
+                                                            <i
+                                                                class="fas fa-angle-double-right"
+                                                            ></i></breeze-button
+                                                    ></inertia-link>
+                                                    <breeze-button
+                                                        type="button"
+                                                        class="ml-3"
+                                                        @click="remove"
+                                                    >
+                                                        <i
+                                                            class="far fa-trash-alt"
+                                                        ></i>
+                                                    </breeze-button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div
+                                    class="flex items-center justify-center mt-4"
+                                >
+                                    <inertia-link :href="route('dashboard')"
+                                        ><breeze-button type="button">
+                                            Back
+                                        </breeze-button></inertia-link
+                                    >
+                                    <breeze-button
+                                        type="button"
+                                        class="ml-20"
+                                        @click="add"
+                                    >
+                                        Add
+                                    </breeze-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +124,17 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        cars: Object
+        cars: Object,
+        carsCount: Number
+    },
+
+    methods: {
+        add() {
+            alert("Not configured yet");
+        },
+        remove() {
+            alert("Not configured yet");
+        }
     }
 };
 </script>

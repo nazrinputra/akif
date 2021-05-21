@@ -33,7 +33,7 @@
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
                 class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('promotions')"
+                :href="route('promotions.index')"
                 >Promotions</inertia-link
             >
         </li>

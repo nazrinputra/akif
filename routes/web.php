@@ -31,9 +31,9 @@ Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 })->name('welcome');
 
-Route::get('promotions', [PromotionController::class, 'index'])->name('promotions');
-
-Route::get('promotion/{package:slug}', [PromotionController::class, 'show'])->name('promotion');
+Route::resource('promotions', PromotionController::class)->parameters([
+    'promotions' => 'package:slug'
+])->only(['index', 'show']);
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
@@ -57,33 +57,33 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
 
-    Route::get('whatsapps', [WhatsappController::class, 'index'])->name('whatsapps');
+    Route::resource('whatsapps', WhatsappController::class)->parameters([
+        'whatsapps' => 'whatsapp:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('whatsapp/{whatsapp:slug}', [WhatsappController::class, 'show'])->name('whatsapp');
+    Route::resource('cars', CarController::class)->parameters([
+        'cars' => 'car:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('cars', [CarController::class, 'index'])->name('cars');
+    Route::resource('customers', CustomerController::class)->parameters([
+        'customers' => 'customer:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('cars/{car:slug}', [CarController::class, 'show'])->name('car');
+    Route::resource('services', ServiceController::class)->parameters([
+        'services' => 'service:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('customers', [CustomerController::class, 'index'])->name('customers');
+    Route::resource('packages', PackageController::class)->parameters([
+        'packages' => 'package:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('customer/{customer:slug}', [CustomerController::class, 'show'])->name('customer');
+    Route::resource('personalities', PersonalityController::class)->parameters([
+        'personalities' => 'personality:slug'
+    ])->only(['index', 'show']);
 
-    Route::get('services', [ServiceController::class, 'index'])->name('services');
-
-    Route::get('services/{service:slug}', [ServiceController::class, 'show'])->name('service');
-
-    Route::get('packages', [PackageController::class, 'index'])->name('packages');
-
-    Route::get('packages/{package:slug}', [PackageController::class, 'show'])->name('package');
-
-    Route::get('personalities', [PersonalityController::class, 'index'])->name('personalities');
-
-    Route::get('personality/{personality:slug}', [PersonalityController::class, 'show'])->name('personality');
-
-    Route::get('crews', [UserController::class, 'index'])->name('crews');
-
-    Route::get('crews/{user:slug}', [UserController::class, 'show'])->name('crew');
+    Route::resource('crews', UserController::class)->parameters([
+        'crews' => 'crew:slug'
+    ])->only(['index', 'show']);
 });
 
 require __DIR__ . '/auth.php';

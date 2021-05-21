@@ -31,7 +31,7 @@
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
                 class="nav-link py-3 px-0 px-lg-3 rounded active"
-                :href="route('promotions')"
+                :href="route('promotions.index')"
                 >Promotions</inertia-link
             >
         </li>
@@ -104,7 +104,10 @@
                                     <inertia-link
                                         class="btn btn-lg btn-primary"
                                         :href="
-                                            route('promotion', firstPromotion)
+                                            route(
+                                                'promotions.show',
+                                                firstPromotion
+                                            )
                                         "
                                         >View more</inertia-link
                                     >
@@ -141,7 +144,9 @@
                                 <p>
                                     <inertia-link
                                         class="btn btn-lg btn-primary"
-                                        :href="route('promotion', promotion)"
+                                        :href="
+                                            route('promotions.show', promotion)
+                                        "
                                         >View promotion</inertia-link
                                     >
                                 </p>

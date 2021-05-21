@@ -3,14 +3,14 @@
         <!-- <template #header>Package</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('packages')"
-                :active="route().current('packages')"
+                :href="route('packages.index')"
+                :active="route().current('packages.index')"
             >
                 Packages
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('package', pkg)"
-                :active="route().current('package', pkg)"
+                :href="route('packages.show', pkg)"
+                :active="route().current('packages.show', pkg)"
             >
                 Package
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('packages')"
-                :active="route().current('packages')"
+                :href="route('packages.index')"
+                :active="route().current('packages.index')"
             >
                 Packages
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('package', pkg)"
-                :active="route().current('package', pkg)"
+                :href="route('packages.show', pkg)"
+                :active="route().current('packages.show', pkg)"
             >
                 Package
             </breeze-responsive-nav-link>
@@ -46,7 +46,7 @@
                                     >
                                         <inertia-link
                                             :href="
-                                                route('service', service.slug)
+                                                route('services.show', service)
                                             "
                                             >{{ service.name }}</inertia-link
                                         >
@@ -133,7 +133,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('packages')"
+                                        <inertia-link
+                                            :href="route('packages.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

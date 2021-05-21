@@ -3,14 +3,14 @@
         <!-- <template #header>Whatsapp</template> -->
         <template #nav>
             <breeze-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-nav-link>
             <breeze-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('whatsapps.show', whatsapp)"
+                :active="route().current('whatsapps.show', whatsapp)"
             >
                 WhatsApp
             </breeze-nav-link>
@@ -18,14 +18,14 @@
 
         <template #responsive-nav>
             <breeze-responsive-nav-link
-                :href="route('whatsapps')"
-                :active="route().current('whatsapps')"
+                :href="route('whatsapps.index')"
+                :active="route().current('whatsapps.index')"
             >
                 WhatsApps
             </breeze-responsive-nav-link>
             <breeze-responsive-nav-link
-                :href="route('whatsapp', whatsapp)"
-                :active="route().current('whatsapp', whatsapp)"
+                :href="route('whatsapps.show', whatsapp)"
+                :active="route().current('whatsapps.show', whatsapp)"
             >
                 WhatsApp
             </breeze-responsive-nav-link>
@@ -76,7 +76,8 @@
                                     <div
                                         class="flex items-center justify-end mt-4"
                                     >
-                                        <inertia-link :href="route('whatsapps')"
+                                        <inertia-link
+                                            :href="route('whatsapps.index')"
                                             ><breeze-button type="button">
                                                 Back
                                             </breeze-button></inertia-link

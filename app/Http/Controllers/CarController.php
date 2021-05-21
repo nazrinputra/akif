@@ -15,8 +15,12 @@ class CarController extends Controller
      */
     public function index()
     {
+        $cars = Car::all();
+        $carsCount = $cars->count();
+
         return Inertia::render('Private/Car/Index', [
-            'cars' => Car::all()
+            'cars' => $cars,
+            'carsCount' => $carsCount
         ]);
     }
 
