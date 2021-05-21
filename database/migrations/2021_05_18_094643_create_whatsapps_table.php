@@ -15,7 +15,7 @@ class CreateWhatsappsTable extends Migration
     {
         Schema::create('whatsapps', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->unique();
             $table->string('slug');
             $table->string('message');
             $table->timestamps();
