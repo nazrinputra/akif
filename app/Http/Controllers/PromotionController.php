@@ -15,9 +15,15 @@ class PromotionController extends Controller
      */
     public function index()
     {
+        $promotions = Package::all();
+        $promotionsCount = $promotions->count();
+        $firstPromotion = $promotions->first();
+        $otherPromotions = $promotions->skip(1);
+
         return Inertia::render('Public/Promotions', [
-            'firstPromotion' => Package::first(),
-            'promotions' => Package::all()->skip(1)->load('services')
+            'promotionsCount' => $promotionsCount,
+            'firstPromotion' => $firstPromotion,
+            'otherPromotions' => $otherPromotions
         ]);
     }
 
