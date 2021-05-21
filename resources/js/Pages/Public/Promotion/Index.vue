@@ -38,7 +38,32 @@
     </teleport>
     <section class="masthead">
         <div class="container pt-5 pb-3">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="empty" v-if="promotionsCount <= 0">
+                <h2
+                    class="page-section-heading text-secondary text-center text-uppercase py-4"
+                >
+                    Oops, we're sorry
+                </h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <h2
+                    class="page-section-heading text-secondary text-center text-uppercase py-4"
+                >
+                    No promotion are available
+                </h2>
+            </div>
+            <div
+                v-if="promotionsCount > 0"
+                id="myCarousel"
+                class="carousel slide"
+                data-ride="carousel"
+            >
                 <ol class="carousel-indicators">
                     <li
                         data-target="#myCarousel"
@@ -46,7 +71,7 @@
                         class="active"
                     ></li>
                     <li
-                        v-for="(promotion, index) in promotions"
+                        v-for="(promotion, index) in otherPromotions"
                         v-bind:key="promotion.id"
                         data-target="#myCarousel"
                         :data-slide-to="index"
@@ -89,7 +114,7 @@
                     </div>
                     <div
                         class="carousel-item"
-                        v-for="promotion in promotions"
+                        v-for="promotion in otherPromotions"
                         v-bind:key="promotion.id"
                     >
                         <svg
@@ -186,8 +211,9 @@ export default {
     props: {
         auth: Object,
         errors: Object,
+        promotionsCount: Number,
         firstPromotion: Object,
-        promotions: Object
+        otherPromotions: Object
     }
 };
 </script>

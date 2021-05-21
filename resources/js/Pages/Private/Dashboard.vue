@@ -19,13 +19,13 @@
                                 </p>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 pb-5">
-                                <h2>WhatsApp</h2>
+                                <h2>WhatsApps</h2>
                                 <p>Modify WhatsApp messages for the store.</p>
                                 <p>
                                     <inertia-link
                                         class="btn btn-secondary"
                                         :href="route('whatsapps')"
-                                        >WhatsApp</inertia-link
+                                        >WhatsApps</inertia-link
                                     >
                                 </p>
                             </div>

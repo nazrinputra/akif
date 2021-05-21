@@ -48,7 +48,10 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return Inertia::render('Public/Store', compact('store'));
+        return Inertia::render('Public/Store', [
+            'store' => $store,
+            'queuesCount' => Queue::where('store_id', $store->id)->count()
+        ]);
     }
 
     /**

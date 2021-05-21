@@ -29,33 +29,72 @@
                                 <p>Modify WhatsApp messages for the store.</p>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <table class="table table-hover">
+                                <div id="empty" v-if="whatsappsCount <= 0">
+                                    <h2 class="text-secondary text-center py-4">
+                                        Oops, we're sorry. <br />
+                                        No item in this list.
+                                    </h2>
+                                </div>
+                                <table
+                                    v-if="whatsappsCount > 0"
+                                    class="table table-hover"
+                                >
                                     <tbody>
                                         <tr
                                             v-for="whatsapp in whatsapps"
                                             v-bind:key="whatsapp.id"
                                         >
-                                            <td class="col-10">
+                                            <td class="col-9">
                                                 {{ whatsapp.title }}
                                             </td>
-                                            <td class="col-2">
-                                                <inertia-link
-                                                    :href="
-                                                        route(
-                                                            'whatsapp',
-                                                            whatsapp
-                                                        )
-                                                    "
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        View
-                                                    </breeze-button></inertia-link
+                                            <td class="col-3">
+                                                <div
+                                                    class="flex items-center justify-center"
                                                 >
+                                                    <inertia-link
+                                                        :href="
+                                                            route(
+                                                                'whatsapp',
+                                                                whatsapp
+                                                            )
+                                                        "
+                                                        ><breeze-button
+                                                            type="button"
+                                                        >
+                                                            <i
+                                                                class="fas fa-angle-double-right"
+                                                            ></i></breeze-button
+                                                    ></inertia-link>
+                                                    <breeze-button
+                                                        type="button"
+                                                        class="ml-3"
+                                                        @click="remove"
+                                                    >
+                                                        <i
+                                                            class="far fa-trash-alt"
+                                                        ></i>
+                                                    </breeze-button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div
+                                    class="flex items-center justify-center mt-4"
+                                >
+                                    <inertia-link :href="route('dashboard')"
+                                        ><breeze-button type="button">
+                                            Back
+                                        </breeze-button></inertia-link
+                                    >
+                                    <breeze-button
+                                        type="button"
+                                        class="ml-20"
+                                        @click="add"
+                                    >
+                                        Add
+                                    </breeze-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +121,17 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        whatsapps: Object
+        whatsapps: Object,
+        whatsappsCount: Number
+    },
+
+    methods: {
+        add() {
+            alert("Not configured yet");
+        },
+        remove() {
+            alert("Not configured yet");
+        }
     }
 };
 </script>
