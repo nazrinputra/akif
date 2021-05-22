@@ -44,6 +44,10 @@
             </span>
         </template>
 
+        <breeze-alert class="alert-success">
+            This is a success alert test
+        </breeze-alert>
+
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -86,6 +90,10 @@
                                         type="button"
                                         class="ml-4"
                                         @click="submit"
+                                        :class="{
+                                            'opacity-25': form.processing
+                                        }"
+                                        :disabled="form.processing"
                                     >
                                         Submit
                                     </breeze-button>
@@ -107,8 +115,7 @@ import BreezeButton from "@/Components/Button";
 import BreezeInput from "@/Components/Input";
 import BreezeLabel from "@/Components/Label";
 import BreezeValidationErrors from "@/Components/ValidationErrors";
-import { reactive } from "vue";
-import { Inertia } from "@inertiajs/inertia";
+import BreezeAlert from "@/Components/Alert";
 
 export default {
     components: {
@@ -118,7 +125,8 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeLabel,
-        BreezeValidationErrors
+        BreezeValidationErrors,
+        BreezeAlert
     },
 
     props: {
@@ -130,29 +138,15 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                title: this.title,
-                message: this.message
+                title: "",
+                message: ""
             })
         };
     },
 
-    setup() {
-        const form = reactive({
-            first_name: null,
-            last_name: null,
-            email: null
-        });
-
-        function submit() {
-            Inertia.post(route("whatsapps.store"), form);
-        }
-
-        return { form, submit };
-    },
-
     methods: {
-        edit() {
-            alert("Not configured yet");
+        submit() {
+            this.form.post(this.route("whatsapps.store"));
         }
     }
 };
