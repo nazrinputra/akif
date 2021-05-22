@@ -36,22 +36,7 @@
     @inertia
 </body>
 <!-- Footer section-->
-<footer class=" footer text-center">
-    <div class="container">
-        <div class="row">
-            <!-- Footer Social Icons-->
-            <div class="col-lg mb-lg-0">
-                <h4 class="text-uppercase">Contact Us</h4>
-                <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/akifcarwash/">
-                    <i class="fab fa-fw fa-facebook-f"></i>
-                </a>
-                <a class="btn btn-outline-light btn-social mx-1" href="https://api.whatsapp.com/send?phone=60136541240">
-                    <i class="fab fa-fw fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</footer>
+<footer id="footer"></footer>
 
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white" id="copyright">
