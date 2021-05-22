@@ -3,9 +3,18 @@
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 md:pt-3 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
+                            <!-- Logo -->
+                            <div class="flex-shrink-0 flex items-center">
+                                <inertia-link :href="route('welcome')">
+                                    <breeze-application-logo
+                                        class="w-20 h-20"
+                                    />
+                                </inertia-link>
+                            </div>
+
                             <!-- Navigation Links -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
@@ -13,7 +22,7 @@
                                 <breeze-nav-link
                                     v-if="!route().current('dashboard')"
                                     :href="route('dashboard')"
-                                    :active="true"
+                                    :active="false"
                                 >
                                     Dashboard
                                 </breeze-nav-link>
