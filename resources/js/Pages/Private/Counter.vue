@@ -1,6 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Counter</template> -->
+        <teleport to="title">
+            - Counter
+        </teleport>
         <template #nav>
             <breeze-nav-link
                 :href="route('counter')"

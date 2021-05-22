@@ -1,4 +1,5 @@
 <template>
+    <teleport to="title"> - {{ store.name }} </teleport>
     <teleport to="#homeButton">
         <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"

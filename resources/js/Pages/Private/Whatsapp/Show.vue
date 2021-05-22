@@ -1,6 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <teleport to="title"> - Whatsapp {{ whatsapp.title }} </teleport>
         <template #nav>
             <breeze-nav-link
                 :href="route('whatsapps.index')"
@@ -8,12 +8,11 @@
             >
                 WhatsApps
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('whatsapps.show', whatsapp)"
-                :active="route().current('whatsapps.show', whatsapp)"
+            <span
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApp
-            </breeze-nav-link>
+            </span>
         </template>
 
         <template #responsive-nav>
@@ -23,12 +22,11 @@
             >
                 WhatsApps
             </breeze-responsive-nav-link>
-            <breeze-responsive-nav-link
-                :href="route('whatsapps.show', whatsapp)"
-                :active="route().current('whatsapps.show', whatsapp)"
+            <span
+                class="block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApp
-            </breeze-responsive-nav-link>
+            </span>
         </template>
 
         <div class="py-12">

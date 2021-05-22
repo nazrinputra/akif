@@ -1,22 +1,22 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <teleport to="title">
+            - Whatsapps
+        </teleport>
         <template #nav>
-            <breeze-nav-link
-                :href="route('whatsapps.index')"
-                :active="route().current('whatsapps.index')"
+            <span
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApps
-            </breeze-nav-link>
+            </span>
         </template>
 
         <template #responsive-nav>
-            <breeze-responsive-nav-link
-                :href="route('whatsapps.index')"
-                :active="route().current('whatsapps.index')"
+            <span
+                class="block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApps
-            </breeze-responsive-nav-link>
+            </span>
         </template>
 
         <div class="py-12">
@@ -28,7 +28,7 @@
                                 <h2>WhatsApps</h2>
                                 <p>List of WhatsApp messages for the store.</p>
                             </div>
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-9 col-sm-12">
                                 <div id="empty" v-if="whatsappsCount <= 0">
                                     <h2 class="text-secondary text-center py-4">
                                         Oops, we're sorry. <br />
@@ -61,15 +61,19 @@
                                                         ><breeze-button
                                                             type="button"
                                                         >
-                                                            <i
-                                                                class="fas fa-angle-double-right"
-                                                            ></i></breeze-button
-                                                    ></inertia-link>
+                                                            View</breeze-button
+                                                        ></inertia-link
+                                                    >
                                                     <breeze-button
                                                         type="button"
                                                         class="ml-3"
                                                         @click="
-                                                            remove(whatsapp)
+                                                            this.$inertia.delete(
+                                                                route(
+                                                                    'whatsapps.destroy',
+                                                                    whatsapp
+                                                                )
+                                                            )
                                                         "
                                                     >
                                                         <i
@@ -84,20 +88,17 @@
                                 <div
                                     class="flex items-center justify-center mt-4"
                                 >
-                                    <inertia-link :href="route('dashboard')">
-                                        <breeze-button type="button">
-                                            Back
-                                        </breeze-button>
+                                    <inertia-link
+                                        :href="route('dashboard')"
+                                        class="btn btn-secondary"
+                                    >
+                                        Back
                                     </inertia-link>
                                     <inertia-link
                                         :href="route('whatsapps.create')"
+                                        class="btn btn-secondary ml-20"
                                     >
-                                        <breeze-button
-                                            type="button"
-                                            class="ml-20"
-                                        >
-                                            Add
-                                        </breeze-button>
+                                        Add
                                     </inertia-link>
                                 </div>
                             </div>

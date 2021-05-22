@@ -1,6 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Profile</template> -->
+        <teleport to="title">
+            - Profile
+        </teleport>
         <template #nav>
             <breeze-nav-link
                 :href="route('profile')"

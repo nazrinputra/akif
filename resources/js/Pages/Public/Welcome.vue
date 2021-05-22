@@ -1,4 +1,7 @@
 <template>
+    <teleport to="title">
+        Car Grooming Center
+    </teleport>
     <teleport to="#homeButton">
         <inertia-link class="navbar-brand" href="/"
             ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
