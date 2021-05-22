@@ -19463,26 +19463,26 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Dashboard ");
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" My Dashboard ");
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "far fa-laugh-beam"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cars ");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Personalities ");
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fab fa-whatsapp"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Counter ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" WhatsApps ");
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-users"
 }, null, -1
 /* HOISTED */
 );
@@ -19490,7 +19490,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Customers ");
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-cubes"
 }, null, -1
 /* HOISTED */
 );
@@ -19498,7 +19498,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Packages ");
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-cube"
 }, null, -1
 /* HOISTED */
 );
@@ -19506,15 +19506,15 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Services ");
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-cash-register"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" WhatsApps ");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Counter ");
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-user-shield"
 }, null, -1
 /* HOISTED */
 );
@@ -19522,12 +19522,12 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Crews ");
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-tachometer-alt"
+  "class": "fas fa-car"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Personalities ");
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cars ");
 
 function render(_ctx, _cache) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
@@ -19550,11 +19550,11 @@ function render(_ctx, _cache) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     "class": "flex items-center group py-3",
-    href: _ctx.route('cars.index')
+    href: _ctx.route('personalities.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": _ctx.route().current('cars.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
+        "class": _ctx.route().current('personalities.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
       }, [_hoisted_4, _hoisted_5], 2
       /* CLASS */
       )];
@@ -19566,11 +19566,11 @@ function render(_ctx, _cache) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     "class": "flex items-center group py-3",
-    href: _ctx.route('counter')
+    href: _ctx.route('whatsapps.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": _ctx.route().current('counter') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
+        "class": _ctx.route().current('whatsapps.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
       }, [_hoisted_6, _hoisted_7], 2
       /* CLASS */
       )];
@@ -19630,11 +19630,11 @@ function render(_ctx, _cache) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     "class": "flex items-center group py-3",
-    href: _ctx.route('whatsapps.index')
+    href: _ctx.route('counter')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": _ctx.route().current('whatsapps.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
+        "class": _ctx.route().current('counter') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
       }, [_hoisted_14, _hoisted_15], 2
       /* CLASS */
       )];
@@ -19662,11 +19662,11 @@ function render(_ctx, _cache) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     "class": "flex items-center group py-3",
-    href: _ctx.route('personalities.index')
+    href: _ctx.route('cars.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": _ctx.route().current('personalities.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
+        "class": _ctx.route().current('cars.index') ? 'text-white' : 'text-indigo-300 group-hover:text-white'
       }, [_hoisted_18, _hoisted_19], 2
       /* CLASS */
       )];
