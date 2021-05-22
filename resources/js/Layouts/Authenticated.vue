@@ -7,7 +7,7 @@
             <!-- Page Content -->
             <div class="md:flex md:flex-shrink-0">
                 <div
-                    class="bg-secondary md:flex-shrink-0 md:w-56 px-6 pt-4 flex items-center justify-between md:justify-center"
+                    class="bg-secondary md:flex-shrink-0 md:w-56 px-6 md:visible sm:invisible flex items-center justify-center"
                 >
                     <inertia-link class="mt-1" href="/">
                         <breeze-application-logo class="w-28 h-28" />
@@ -151,23 +151,6 @@
                             }"
                             class="sm:hidden"
                         >
-                            <div class="pt-2 pb-3 space-y-1">
-                                <breeze-responsive-nav-link
-                                    v-if="!route().current('dashboard')"
-                                    :href="route('dashboard')"
-                                    :active="true"
-                                >
-                                    Dashboard
-                                </breeze-responsive-nav-link>
-                                <slot name="responsive-nav" />
-                                <span
-                                    v-if="route().current('dashboard')"
-                                    class="block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out"
-                                >
-                                    Dashboard
-                                </span>
-                            </div>
-
                             <!-- Responsive Settings Options -->
                             <div class="pt-4 pb-1 border-t border-gray-200">
                                 <div class="flex items-center px-4">
@@ -207,6 +190,12 @@
                             </div>
                         </div>
                     </nav>
+                    <!-- Page Heading -->
+                    <header class="bg-white shadow-sm" v-if="$slots.header">
+                        <div class="max-w-7xl mx-auto py-2">
+                            <slot name="header" />
+                        </div>
+                    </header>
                 </div>
             </div>
             <div class="md:flex md:flex-grow md:overflow-hidden">
