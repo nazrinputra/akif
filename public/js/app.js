@@ -24698,7 +24698,7 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticV
 var _hoisted_16 = {
   key: 1,
   id: "myCarousel",
-  "class": "carousel slide",
+  "class": "carousel slide shadow",
   "data-ride": "carousel"
 };
 var _hoisted_17 = {
@@ -25240,7 +25240,7 @@ var _hoisted_16 = {
   "class": "row text-uppercase"
 };
 var _hoisted_17 = {
-  "class": "col-md-4 col-sm-12"
+  "class": "col-lg-4 col-sm-12"
 };
 var _hoisted_18 = {
   "class": "table-queue text-center"
@@ -25256,7 +25256,7 @@ var _hoisted_20 = {
   "class": "table-danger"
 };
 var _hoisted_21 = {
-  "class": "col-md-4 col-sm-12"
+  "class": "col-lg-4 col-sm-12"
 };
 var _hoisted_22 = {
   "class": "table-queue text-center"
@@ -25272,7 +25272,7 @@ var _hoisted_24 = {
   "class": "table-warning"
 };
 var _hoisted_25 = {
-  "class": "col-md-4 col-sm-12"
+  "class": "col-lg-4 col-sm-12"
 };
 var _hoisted_26 = {
   "class": "table-queue text-center"
@@ -25362,7 +25362,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.toggle && $options.toggle.apply($options, arguments);
     }),
-    "class": "page-section-heading text-secondary text-center text-uppercase py-4"
+    "class": "page-section-heading text-secondary text-center text-uppercase pt-4"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.store.name), 1
   /* TEXT */
   ), $props.queuesCount <= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon Divider"), _hoisted_14])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.queuesCount > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_fullscreen, {
@@ -25375,7 +25375,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     fullscreenModifiers: {
       sync: true
     },
-    "class": "bg-white"
+    "class": "bg-white shadow px-6 py-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Queue Subheading"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.waiting, function (queue) {

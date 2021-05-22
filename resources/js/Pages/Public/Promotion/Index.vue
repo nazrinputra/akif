@@ -64,7 +64,7 @@
             <div
                 v-if="promotionsCount > 0"
                 id="myCarousel"
-                class="carousel slide"
+                class="carousel slide shadow"
                 data-ride="carousel"
             >
                 <ol class="carousel-indicators">

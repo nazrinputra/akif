@@ -46,7 +46,7 @@
                 <!-- Queue Section Heading-->
                 <h2
                     @click="toggle"
-                    class="page-section-heading text-secondary text-center text-uppercase py-4"
+                    class="page-section-heading text-secondary text-center text-uppercase pt-4"
                 >
                     {{ store.name }}
                 </h2>
@@ -74,11 +74,11 @@
                     ref="fullscreen"
                     v-if="queuesCount > 0"
                     v-model:fullscreen.sync="fullscreen"
-                    class="bg-white"
+                    class="bg-white shadow px-6 py-3"
                 >
                     <!-- Queue Subheading-->
                     <div class="row text-uppercase">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
@@ -110,7 +110,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
@@ -142,7 +142,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
