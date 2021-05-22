@@ -1,116 +1,97 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Crew</template> -->
+        <teleport to="title"> - Crew {{ crew.name }} </teleport>
+        <template #header>
+            <div class="row px-5">
+                <inertia-link
+                    :href="route('crews.index')"
+                    class="btn btn-secondary"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </inertia-link>
+                <h6 class="pt-2.5 ml-3">
+                    View specific crew in the system.
+                </h6>
+            </div>
+        </template>
         <template #nav>
-            <breeze-nav-link
-                :href="route('crews.index')"
-                :active="route().current('crews.index')"
-            >
+            <breeze-nav-link :href="route('crews.index')" :active="false">
                 Crews
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('crews.show', crew)"
-                :active="route().current('crews.show', crew)"
+            <span
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 Crew
-            </breeze-nav-link>
+            </span>
         </template>
 
-        <template #responsive-nav>
-            <breeze-responsive-nav-link
-                :href="route('crews.index')"
-                :active="route().current('crews.index')"
-            >
-                Crews
-            </breeze-responsive-nav-link>
-            <breeze-responsive-nav-link
-                :href="route('crews.show', crew)"
-                :active="route().current('crews.show', crew)"
-            >
-                Crew
-            </breeze-responsive-nav-link>
-        </template>
+        <div class="max-w-7xl mx-auto px-3">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="row pt-3 px-3">
+                        <div class="col-md-3 col-sm-12">
+                            <h2>Crew</h2>
+                            <p><strong>Role: </strong>{{ crew.role.name }}</p>
+                            <p><strong>Store: </strong>{{ crew.store.name }}</p>
+                        </div>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="row pt-3 px-3">
-                            <div class="col-md-3 col-sm-12">
-                                <h2>Crew</h2>
-                                <p>
-                                    <strong>Role: </strong>{{ crew.role.name }}
-                                </p>
-                                <p>
-                                    <strong>Store: </strong
-                                    >{{ crew.store.name }}
-                                </p>
-                            </div>
-
-                            <div class="col-md-6 col-sm-12">
-                                <form @submit.prevent="submit">
-                                    <div>
-                                        <breeze-label for="name" value="Name" />
-                                        <breeze-input
-                                            id="name"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.name"
-                                            :value="crew.name"
-                                            required
-                                            autofocus
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
-                                            for="phone_no"
-                                            value="Phone Number"
-                                        />
-                                        <breeze-input
-                                            id="phone_no"
-                                            type="number"
-                                            class="mt-1 block w-full"
-                                            v-model="form.phone_no"
-                                            :value="crew.phone_no"
-                                            required
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
-                                            for="email"
-                                            value="Email"
-                                        />
-                                        <breeze-input
-                                            id="email"
-                                            type="email"
-                                            class="mt-1 block w-full"
-                                            v-model="form.email"
-                                            :value="crew.email"
-                                            required
-                                            :readonly="isView ? 'readonly' : ''"
-                                        />
-                                    </div>
-                                    <div
-                                        class="flex items-center justify-end mt-4"
+                        <div class="col-md-6 col-sm-12">
+                            <form @submit.prevent="submit">
+                                <div>
+                                    <breeze-label for="name" value="Name" />
+                                    <breeze-input
+                                        id="name"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        v-model="form.name"
+                                        :value="crew.name"
+                                        required
+                                        autofocus
+                                        :readonly="isView ? 'readonly' : ''"
+                                    />
+                                </div>
+                                <div class="mt-4">
+                                    <breeze-label
+                                        for="phone_no"
+                                        value="Phone Number"
+                                    />
+                                    <breeze-input
+                                        id="phone_no"
+                                        type="number"
+                                        class="mt-1 block w-full"
+                                        v-model="form.phone_no"
+                                        :value="crew.phone_no"
+                                        required
+                                        :readonly="isView ? 'readonly' : ''"
+                                    />
+                                </div>
+                                <div class="mt-4">
+                                    <breeze-label for="email" value="Email" />
+                                    <breeze-input
+                                        id="email"
+                                        type="email"
+                                        class="mt-1 block w-full"
+                                        v-model="form.email"
+                                        :value="crew.email"
+                                        required
+                                        :readonly="isView ? 'readonly' : ''"
+                                    />
+                                </div>
+                                <div class="flex items-center justify-end mt-4">
+                                    <inertia-link :href="route('crews.index')"
+                                        ><breeze-button type="button">
+                                            Back
+                                        </breeze-button></inertia-link
                                     >
-                                        <inertia-link
-                                            :href="route('crews.index')"
-                                            ><breeze-button type="button">
-                                                Back
-                                            </breeze-button></inertia-link
-                                        >
-                                        <breeze-button
-                                            type="button"
-                                            class="ml-4"
-                                            @click="edit"
-                                        >
-                                            Edit
-                                        </breeze-button>
-                                    </div>
-                                </form>
-                            </div>
+                                    <breeze-button
+                                        type="button"
+                                        class="ml-4"
+                                        @click="edit"
+                                    >
+                                        Edit
+                                    </breeze-button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,36 +3,30 @@
         <teleport to="title">
             - Whatsapps
         </teleport>
+
         <template #header>
-            <div class="row justify-between px-5">
+            <div class="row px-5">
                 <inertia-link
                     :href="route('dashboard')"
                     class="btn btn-secondary"
                 >
                     <i class="fas fa-chevron-left"></i>
                 </inertia-link>
-                <span class="pt-2">
+                <h6 class="pt-2.5 ml-3">
                     List of WhatsApp messages for the store.
-                </span>
+                </h6>
                 <inertia-link
                     :href="route('whatsapps.create')"
-                    class="btn btn-secondary ml-20"
+                    class="btn btn-secondary ml-auto"
                 >
                     <i class="fas fa-plus"></i>
                 </inertia-link>
             </div>
         </template>
+
         <template #nav>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
-            >
-                WhatsApps
-            </span>
-        </template>
-
-        <template #responsive-nav>
-            <span
-                class="block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApps
             </span>

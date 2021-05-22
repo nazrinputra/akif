@@ -3,6 +3,13 @@
         <teleport to="title">
             - Dashboard
         </teleport>
+        <template #header>
+            <div class="row px-5">
+                <h6 class="pt-2.5 ml-3">
+                    Dashboard view for crew.
+                </h6>
+            </div>
+        </template>
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">

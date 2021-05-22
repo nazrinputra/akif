@@ -1,103 +1,104 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Personalities</template> -->
+        <teleport to="title">
+            - Personalities
+        </teleport>
+        <template #header>
+            <div class="row px-5">
+                <inertia-link
+                    :href="route('dashboard')"
+                    class="btn btn-secondary"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </inertia-link>
+                <h6 class="pt-2.5 ml-3">
+                    View list of personalities in the system.
+                </h6>
+                <inertia-link
+                    href="#"
+                    class="btn btn-secondary ml-auto"
+                    @click="add"
+                >
+                    <i class="fas fa-plus"></i>
+                </inertia-link>
+            </div>
+        </template>
         <template #nav>
-            <breeze-nav-link
-                :href="route('personalities.index')"
-                :active="route().current('personalities.index')"
+            <span
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 Personalities
-            </breeze-nav-link>
+            </span>
         </template>
 
-        <template #responsive-nav>
-            <breeze-responsive-nav-link
-                :href="route('personalities.index')"
-                :active="route().current('personalities.index')"
-            >
-                Personalities
-            </breeze-responsive-nav-link>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="row pt-3 px-3">
-                            <div class="col-md-3 col-sm-12">
-                                <h2>Personalities</h2>
-                                <p>
-                                    Manage customer personalities to help
-                                    counter crew.
-                                </p>
+        <div class="max-w-7xl mx-auto px-3">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="row pt-3 px-3">
+                        <div class="col">
+                            <div id="empty" v-if="personalitiesCount <= 0">
+                                <h2 class="text-secondary text-center py-4">
+                                    Oops, we're sorry. <br />
+                                    No item in this list.
+                                </h2>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div id="empty" v-if="personalitiesCount <= 0">
-                                    <h2 class="text-secondary text-center py-4">
-                                        Oops, we're sorry. <br />
-                                        No item in this list.
-                                    </h2>
-                                </div>
-                                <table
-                                    v-if="personalitiesCount > 0"
-                                    class="table table-hover"
-                                >
-                                    <tbody>
-                                        <tr
-                                            v-for="personality in personalities"
-                                            v-bind:key="personality.id"
-                                        >
-                                            <td class="col-9">
-                                                {{ personality.name }}
-                                            </td>
-                                            <td class="col-3">
-                                                <div
-                                                    class="flex items-center justify-center"
-                                                >
-                                                    <inertia-link
-                                                        :href="
-                                                            route(
-                                                                'personalities.show',
-                                                                personality
-                                                            )
-                                                        "
-                                                        ><breeze-button
-                                                            type="button"
-                                                        >
-                                                            <i
-                                                                class="fas fa-angle-double-right"
-                                                            ></i></breeze-button
-                                                    ></inertia-link>
-                                                    <breeze-button
+                            <table
+                                v-if="personalitiesCount > 0"
+                                class="table table-hover"
+                            >
+                                <tbody>
+                                    <tr
+                                        v-for="personality in personalities"
+                                        v-bind:key="personality.id"
+                                    >
+                                        <td class="col-9">
+                                            {{ personality.name }}
+                                        </td>
+                                        <td class="col-3">
+                                            <div
+                                                class="flex items-center justify-center"
+                                            >
+                                                <inertia-link
+                                                    :href="
+                                                        route(
+                                                            'personalities.show',
+                                                            personality
+                                                        )
+                                                    "
+                                                    ><breeze-button
                                                         type="button"
-                                                        class="ml-3"
-                                                        @click="remove"
                                                     >
                                                         <i
-                                                            class="far fa-trash-alt"
-                                                        ></i>
-                                                    </breeze-button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div
-                                    class="flex items-center justify-center mt-4"
+                                                            class="fas fa-angle-double-right"
+                                                        ></i></breeze-button
+                                                ></inertia-link>
+                                                <breeze-button
+                                                    type="button"
+                                                    class="ml-3"
+                                                    @click="remove"
+                                                >
+                                                    <i
+                                                        class="far fa-trash-alt"
+                                                    ></i>
+                                                </breeze-button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="flex items-center justify-center mt-4">
+                                <inertia-link :href="route('dashboard')"
+                                    ><breeze-button type="button">
+                                        Back
+                                    </breeze-button></inertia-link
                                 >
-                                    <inertia-link :href="route('dashboard')"
-                                        ><breeze-button type="button">
-                                            Back
-                                        </breeze-button></inertia-link
-                                    >
-                                    <breeze-button
-                                        type="button"
-                                        class="ml-20"
-                                        @click="add"
-                                    >
-                                        Add
-                                    </breeze-button>
-                                </div>
+                                <breeze-button
+                                    type="button"
+                                    class="ml-20"
+                                    @click="add"
+                                >
+                                    Add
+                                </breeze-button>
                             </div>
                         </div>
                     </div>

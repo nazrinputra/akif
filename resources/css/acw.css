@@ -184,7 +184,7 @@ a {
     background-color: transparent;
 }
 a:hover {
-    color: #791111;
+    color: #112979;
     text-decoration: underline;
 }
 
@@ -2906,7 +2906,7 @@ fieldset:disabled a.btn {
 }
 .btn-outline-primary:focus,
 .btn-outline-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(188, 26, 26, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(26, 42, 188, 0.5);
 }
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {

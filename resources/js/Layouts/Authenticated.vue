@@ -192,7 +192,7 @@
                     </nav>
                     <!-- Page Heading -->
                     <header class="bg-white shadow-sm" v-if="$slots.header">
-                        <div class="max-w-7xl mx-auto py-2">
+                        <div class="max-w-7xl mx-auto py-2 h-14">
                             <slot name="header" />
                         </div>
                     </header>

@@ -3,6 +3,19 @@
         <teleport to="title">
             - Report
         </teleport>
+        <template #header>
+            <div class="row px-5">
+                <inertia-link
+                    :href="route('dashboard')"
+                    class="btn btn-secondary"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </inertia-link>
+                <h6 class="pt-2.5 ml-3">
+                    Generate and view reports.
+                </h6>
+            </div>
+        </template>
         <template #nav>
             <breeze-nav-link
                 :href="route('reports')"

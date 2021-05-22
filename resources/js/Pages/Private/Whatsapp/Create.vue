@@ -4,17 +4,16 @@
             - Whatsapp Create
         </teleport>
         <template #header>
-            <div class="row justify-between px-5">
+            <div class="row px-5">
                 <inertia-link
                     :href="route('whatsapps.index')"
                     class="btn btn-secondary"
                 >
                     <i class="fas fa-chevron-left"></i>
                 </inertia-link>
-                <span class="pt-2">
+                <h6 class="pt-2.5 ml-3">
                     Add new WhatsApp message.
-                </span>
-                <span>&nbsp;</span>
+                </h6>
             </div>
         </template>
         <template #nav>
