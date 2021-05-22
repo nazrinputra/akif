@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed-top mb-0 alert alert-dismissible fade show text-center"
+        class="mb-0 alert alert-dismissible fade show text-center"
         role="alert"
     >
         <slot />

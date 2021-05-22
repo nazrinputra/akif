@@ -100,6 +100,6 @@ class WhatsappController extends Controller
     public function destroy(Whatsapp $whatsapp)
     {
         Whatsapp::find($whatsapp->id)->delete();
-        return Redirect::route('whatsapps.index');
+        return Redirect::route('whatsapps.index')->with('message', 'Deleted!');
     }
 }

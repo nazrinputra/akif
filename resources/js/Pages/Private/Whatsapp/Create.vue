@@ -44,9 +44,15 @@
             </span>
         </template>
 
-        <breeze-alert class="alert-success">
-            This is a success alert test
-        </breeze-alert>
+        <div class="px-3 pb-6" v-if="hasErrors">
+            <breeze-alert
+                v-for="(error, key) in errors"
+                :key="key"
+                class="alert-danger max-w-7xl mx-auto px-3"
+            >
+                {{ error }}
+            </breeze-alert>
+        </div>
 
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -147,6 +153,12 @@ export default {
     methods: {
         submit() {
             this.form.post(this.route("whatsapps.store"));
+        }
+    },
+
+    computed: {
+        hasErrors() {
+            return Object.keys(this.errors).length > 0;
         }
     }
 };

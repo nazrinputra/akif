@@ -32,6 +32,12 @@
             </span>
         </template>
 
+        <div class="px-3 pb-6" v-if="flash.message">
+            <breeze-alert class="alert-success max-w-7xl mx-auto px-3">
+                {{ flash.message }}
+            </breeze-alert>
+        </div>
+
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -75,14 +81,7 @@
                                                 <breeze-button
                                                     type="button"
                                                     class="ml-3"
-                                                    @click="
-                                                        this.$inertia.delete(
-                                                            route(
-                                                                'whatsapps.destroy',
-                                                                whatsapp
-                                                            )
-                                                        )
-                                                    "
+                                                    @click="trash(whatsapp)"
                                                 >
                                                     <i
                                                         class="far fa-trash-alt"
@@ -120,28 +119,28 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeAlert from "@/Components/Alert";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeAlert
     },
 
     props: {
         auth: Object,
         errors: Object,
+        flash: Object,
         whatsapps: Object,
         whatsappsCount: Number
     },
 
     methods: {
-        remove(whatsapp) {
-            // alert("Deleting " + whatsapp.title);
-            if (!confirm("Are you sure want to remove this item?")) return;
-            // whatsapp._method = "DELETE";
-            this.$inertia.delete(route("whatsapps.destroy", whatsapp.slug));
+        trash(whatsapp) {
+            this.$inertia.delete(route("whatsapps.destroy", whatsapp));
         }
     }
 };
