@@ -153,6 +153,8 @@ export default {
     },
 
     props: {
+        auth: Object,
+        errors: Object,
         store: Object,
         queuesCount: Number
     },

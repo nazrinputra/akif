@@ -84,6 +84,8 @@ export default {
     },
 
     props: {
+        auth: Object,
+        errors: Object,
         promotion: Object
     }
 };

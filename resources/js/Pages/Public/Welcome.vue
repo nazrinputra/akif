@@ -99,6 +99,11 @@ import BreezeCustomerLayout from "@/Layouts/Customer";
 export default {
     components: {
         BreezeCustomerLayout
+    },
+
+    props: {
+        auth: Object,
+        errors: Object
     }
 };
 </script>

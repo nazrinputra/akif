@@ -157,6 +157,8 @@ export default {
         BreezeCustomerLayout
     },
     props: {
+        auth: Object,
+        errors: Object,
         promotionsCount: Number,
         firstPromotion: Object,
         otherPromotions: Object
