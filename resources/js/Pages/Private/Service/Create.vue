@@ -15,10 +15,7 @@
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link
-                :href="route('services.index')"
-                :active="route().current('services.index')"
-            >
+            <breeze-nav-link :href="route('services.index')" :active="false">
                 Services
             </breeze-nav-link>
             <span
