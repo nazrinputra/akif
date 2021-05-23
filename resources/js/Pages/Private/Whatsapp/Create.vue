@@ -41,50 +41,32 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row pt-3 px-3">
                         <div class="col">
-                            <form @submit.prevent="submit">
-                                <div>
-                                    <breeze-label for="title" value="Title" />
-                                    <breeze-input
-                                        id="title"
-                                        type="text"
-                                        class="mt-1 block w-full"
+                            <form @submit.prevent="store">
+                                <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+                                    <breeze-text-input
                                         v-model="form.title"
-                                        required
-                                        autofocus
+                                        :error="form.errors.title"
+                                        class="pr-6 pb-8 w-full lg:w-1/2"
+                                        label="Title"
+                                        id="title"
                                     />
-                                </div>
-                                <div class="mt-4">
-                                    <breeze-label
-                                        for="message"
-                                        value="Message"
-                                    />
-                                    <textarea
-                                        rows="7"
-                                        id="message"
-                                        class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                    <breeze-textarea-input
                                         v-model="form.message"
-                                        required
-                                    >
-                                    </textarea>
+                                        :error="form.errors.message"
+                                        class="pr-6 pb-8 w-full lg:w-1/2"
+                                        label="Message"
+                                        id="message"
+                                    />
                                 </div>
-                                <div class="flex items-center justify-end mt-4">
-                                    <inertia-link
-                                        :href="route('whatsapps.index')"
-                                        class="btn btn-secondary"
+                                <div
+                                    class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center"
+                                >
+                                    <breeze-loading-button
+                                        :loading="form.processing"
+                                        class="btn btn-indigo"
+                                        type="submit"
+                                        >Create Message</breeze-loading-button
                                     >
-                                        Back
-                                    </inertia-link>
-                                    <breeze-button
-                                        type="button"
-                                        class="ml-4"
-                                        @click="submit"
-                                        :class="{
-                                            'opacity-25': form.processing
-                                        }"
-                                        :disabled="form.processing"
-                                    >
-                                        Submit
-                                    </breeze-button>
                                 </div>
                             </form>
                         </div>
@@ -100,9 +82,12 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeInput from "@/Components/Input";
+import BreezeTextInput from "@/Components/TextInput";
+import BreezeSelectInput from "@/Components/SelectInput";
+import BreezeTextareaInput from "@/Components/TextareaInput";
 import BreezeLabel from "@/Components/Label";
 import BreezeValidationErrors from "@/Components/ValidationErrors";
+import BreezeLoadingButton from "@/Components/LoadingButton";
 
 export default {
     components: {
@@ -110,9 +95,12 @@ export default {
         BreezeNavLink,
         BreezeResponsiveNavLink,
         BreezeButton,
-        BreezeInput,
+        BreezeTextInput,
+        BreezeSelectInput,
         BreezeLabel,
-        BreezeValidationErrors
+        BreezeValidationErrors,
+        BreezeLoadingButton,
+        BreezeTextareaInput
     },
 
     props: {
@@ -124,14 +112,13 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                title: "",
-                message: ""
+                title: null,
+                message: null
             })
         };
     },
-
     methods: {
-        submit() {
+        store() {
             this.form.post(this.route("whatsapps.store"));
         }
     }
