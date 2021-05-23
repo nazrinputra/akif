@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('services', ServiceController::class)->parameters([
         'services' => 'service:slug'
-    ])->only(['index', 'show']);
+    ]);
 
     Route::resource('packages', PackageController::class)->parameters([
         'packages' => 'package:slug'
