@@ -5,23 +5,15 @@
         </teleport>
 
         <template #header>
-            <div class="d-flex px-2">
-                <inertia-link
-                    :href="route('dashboard')"
-                    class="btn btn-secondary align-self-start"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </inertia-link>
-                <h6 class="pt-2.5 mx-auto">
-                    List of WhatsApp messages for the store.
-                </h6>
-                <inertia-link
-                    :href="route('whatsapps.create')"
-                    class="btn btn-secondary align-self-end"
-                >
-                    <i class="fas fa-plus"></i>
-                </inertia-link>
-            </div>
+            <h6 class="pt-2.5 mx-auto">
+                List of WhatsApp messages for the store.
+            </h6>
+            <inertia-link
+                :href="route('whatsapps.create')"
+                class="btn btn-secondary align-self-end"
+            >
+                <i class="fas fa-plus"></i>
+            </inertia-link>
         </template>
 
         <template #nav>
@@ -98,8 +90,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        whatsapps: Object,
-        whatsappsCount: Number
+        whatsapps: Object
     },
 
     methods: {

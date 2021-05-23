@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -8,15 +8,10 @@
 
     <title>Akif</title>
 
-    <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
-
-    <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-    <!-- Scripts -->
-    @routes
     <script src="{{ mix('js/app.js') }}" defer></script>
+    @routes
 </head>
 
 <body class="font-sans antialiased" style="overflow-x:hidden;">
@@ -35,10 +30,9 @@
     </nav>
     @inertia
 </body>
-<!-- Footer section-->
+
 <footer id="footer"></footer>
 
-<!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white" id="copyright">
 </div>
 

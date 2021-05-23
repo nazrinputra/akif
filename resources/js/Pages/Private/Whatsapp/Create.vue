@@ -4,17 +4,9 @@
             - Whatsapp Create
         </teleport>
         <template #header>
-            <div class="row px-5">
-                <inertia-link
-                    :href="route('whatsapps.index')"
-                    class="btn btn-secondary"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </inertia-link>
-                <h6 class="pt-2.5 ml-3">
-                    Add new WhatsApp message.
-                </h6>
-            </div>
+            <h6 class="pt-2.5 mx-auto">
+                Add new WhatsApp message.
+            </h6>
         </template>
         <template #nav>
             <breeze-nav-link
@@ -126,7 +118,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        whatsapp: Object
+        flash: Object
     },
 
     data() {
@@ -143,11 +135,5 @@ export default {
             this.form.post(this.route("whatsapps.store"));
         }
     }
-
-    // computed: {
-    //     hasErrors() {
-    //         return Object.keys(this.errors).length > 0;
-    //     }
-    // }
 };
 </script>

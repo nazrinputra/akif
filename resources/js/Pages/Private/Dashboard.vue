@@ -4,11 +4,9 @@
             - Dashboard
         </teleport>
         <template #header>
-            <div class="d-flex px-2">
-                <h6 class="pt-2.5 mx-auto">
-                    Dashboard view for crew.
-                </h6>
-            </div>
+            <h6 class="pt-2.5 mx-auto">
+                Dashboard view for crew.
+            </h6>
         </template>
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -138,7 +136,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        flash: Object
     }
 };
 </script>

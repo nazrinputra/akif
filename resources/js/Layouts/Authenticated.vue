@@ -193,7 +193,16 @@
                     <!-- Page Heading -->
                     <header class="bg-white shadow-sm" v-if="$slots.header">
                         <div class="max-w-7xl mx-auto py-2 h-14">
-                            <slot name="header" />
+                            <div class="d-flex px-2">
+                                <inertia-link
+                                    v-if="!route().current('dashboard')"
+                                    :href="route('dashboard')"
+                                    class="btn btn-secondary"
+                                >
+                                    <i class="fas fa-chevron-left"></i>
+                                </inertia-link>
+                                <slot name="header" />
+                            </div>
                         </div>
                     </header>
                 </div>

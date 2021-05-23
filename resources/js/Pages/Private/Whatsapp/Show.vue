@@ -2,17 +2,9 @@
     <breeze-authenticated-layout>
         <teleport to="title"> - Whatsapp {{ whatsapp.title }} </teleport>
         <template #header>
-            <div class="row px-5">
-                <inertia-link
-                    :href="route('whatsapps.index')"
-                    class="btn btn-secondary"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </inertia-link>
-                <h6 class="pt-2.5 ml-3">
-                    View existing WhatsApp message.
-                </h6>
-            </div>
+            <h6 class="pt-2.5 mx-auto">
+                View existing WhatsApp message.
+            </h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('whatsapps.index')" :active="false">
