@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Whatsapp Create
+            - Create WhatsApp
         </teleport>
         <template #header>
             <inertia-link
@@ -11,7 +11,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Add new WhatsApp message.
+                Add new WhatsApp message
             </h6>
         </template>
         <template #nav>
