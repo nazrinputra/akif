@@ -65,7 +65,6 @@ class WhatsappController extends Controller
     public function show(Whatsapp $whatsapp)
     {
         // return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
-        // TODO restore deleted here?
     }
 
     /**
@@ -109,7 +108,13 @@ class WhatsappController extends Controller
      */
     public function destroy(Whatsapp $whatsapp)
     {
-        Whatsapp::find($whatsapp->id)->delete();
+        $whatsapp->delete();
         return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message deleted successfully.');
+    }
+
+    public function restore(Whatsapp $whatsapp)
+    {
+        $whatsapp->restore();
+        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message restored successfully.');
     }
 }

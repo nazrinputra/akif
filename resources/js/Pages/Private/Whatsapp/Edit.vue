@@ -152,7 +152,7 @@ export default {
             this.$inertia.delete(route("whatsapps.destroy", whatsapp));
         },
         restore(whatsapp) {
-            this.$inertia.put(route("whatsapps.show", whatsapp));
+            this.$inertia.put(route("whatsapps.restore", whatsapp));
         }
     }
 };
