@@ -29,7 +29,7 @@
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('personalities.store'))">
+                <form @submit.prevent="form.post(route('packages.store'))">
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
@@ -99,7 +99,7 @@
                             @keydown="form.clearErrors('duration')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
+                            form.errors.duration
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
