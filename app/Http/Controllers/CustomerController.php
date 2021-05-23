@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
@@ -31,7 +33,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Customer/Create');
     }
 
     /**
@@ -42,7 +44,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'phone_no' => ['required', 'max:12'],
+            'gender' => ['required', 'max:50']
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        Customer::create($request->only('name', 'slug', 'phone_no', 'gender'));
+
+        return Redirect::route('customers.index')->with('success', 'Customer added successfully.');
     }
 
     /**

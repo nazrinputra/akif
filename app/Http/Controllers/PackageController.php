@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Package;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PackageController extends Controller
 {
@@ -31,7 +33,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Package/Create');
     }
 
     /**
@@ -42,7 +44,20 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'price' => ['required', 'max:5'],
+            'frequency' => ['required', 'max:50'],
+            'duration' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
+
+        return Redirect::route('packages.index')->with('success', 'Package added successfully.');
     }
 
     /**
