@@ -13,6 +13,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PersonalityController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WhatsappController;
+use App\Models\Whatsapp;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('whatsapps', WhatsappController::class)->parameters([
         'whatsapps' => 'whatsapp:slug'
-    ])->only(['index', 'show', 'create']);
+    ]);
+
+    Route::put('whatsapps/{whatsapp:slug}/restore', [WhatsappController::class, 'restore'])
+        ->name('whatsapps.restore');
 
     Route::resource('cars', CarController::class)->parameters([
         'cars' => 'car:slug'

@@ -22,7 +22,7 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->words(3, true);
+        $name = ucfirst($this->faker->words(3, true));
         $slug = Str::slug($name);
 
         return [

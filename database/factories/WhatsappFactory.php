@@ -22,7 +22,7 @@ class WhatsappFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->words(3, true);
+        $title = ucwords($this->faker->words(3, true));
         $slug = Str::slug($title);
 
         return [

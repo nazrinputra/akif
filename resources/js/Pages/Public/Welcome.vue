@@ -1,42 +1,8 @@
 <template>
-    <teleport to="#homeButton">
-        <inertia-link class="navbar-brand" href="/"
-            ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
-        /></inertia-link>
-    </teleport>
-    <teleport to="#menuButton">
-        <button
-            type="button"
-            class="text-uppercase font-weight-bold text-white text-xl"
-        >
-            Menu
-            <i class="fas fa-store-alt"></i>
-        </button>
-    </teleport>
-    <teleport to="#navLinks">
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'tambak-bugis')"
-                >Tambak Bugis</inertia-link
-            >
-        </li>
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'bukit-katil')"
-                >Bukit Katil</inertia-link
-            >
-        </li>
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('promotions.index')"
-                >Promotions</inertia-link
-            >
-        </li>
-    </teleport>
-    <section class="masthead">
+    <breeze-customer-layout>
+        <template #title>
+            Car Grooming Center
+        </template>
         <div
             class="relative items-top justify-center min-h-screen sm:items-center sm:pt-0"
         >
@@ -124,24 +90,17 @@
                 </div>
             </section>
         </div>
-    </section>
-    <teleport to="#copyright">
-        <div class="container">
-            <small
-                >Copyright ©
-                <inertia-link
-                    :href="route('login')"
-                    class="text-primary text-decoration-none"
-                    >Akif Car Grooming Center</inertia-link
-                >
-                2021</small
-            >
-        </div>
-    </teleport>
+    </breeze-customer-layout>
 </template>
 
 <script>
+import BreezeCustomerLayout from "@/Layouts/Customer";
+
 export default {
+    components: {
+        BreezeCustomerLayout
+    },
+
     props: {
         auth: Object,
         errors: Object

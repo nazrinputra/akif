@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Whatsapp extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    public function phone()
+    public function resolveRouteBinding($value, $field = null)
     {
-        /**
-         * Get phone number with 0 at the front with $this->phone().
-         */
-        return '0' . $this->phone_no;
+        return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'slug',
+        'message',
+    ];
 }

@@ -1,51 +1,13 @@
 <template>
-    <teleport to="#homeButton">
-        <inertia-link class="navbar-brand" href="/"
-            ><img class="img-thumbnail" src="/img/logo-navbar.png" alt="Akif"
-        /></inertia-link>
-    </teleport>
-    <teleport to="#menuButton">
-        <button
-            type="button"
-            class="text-uppercase font-weight-bold text-white text-xl"
-        >
-            Menu
-            <i class="fas fa-store-alt"></i>
-        </button>
-    </teleport>
-    <teleport to="#navLinks">
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                v-bind:class="[isTambakBugis ? 'active' : '']"
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'tambak-bugis')"
-                >Tambak Bugis</inertia-link
-            >
-        </li>
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                v-bind:class="[isBukitKatil ? 'active' : '']"
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'bukit-katil')"
-                >Bukit Katil</inertia-link
-            >
-        </li>
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('promotions.index')"
-                >Promotions</inertia-link
-            >
-        </li>
-    </teleport>
-    <section class="masthead">
+    <breeze-customer-layout>
+        <template #title> - {{ store.name }} </template>
         <!-- Queue Section-->
         <section class="page-section py-3">
             <div class="container">
                 <!-- Queue Section Heading-->
                 <h2
                     @click="toggle"
-                    class="page-section-heading text-secondary text-center text-uppercase py-4"
+                    class="page-section-heading text-secondary text-center text-uppercase pt-4"
                 >
                     {{ store.name }}
                 </h2>
@@ -73,11 +35,11 @@
                     ref="fullscreen"
                     v-if="queuesCount > 0"
                     v-model:fullscreen.sync="fullscreen"
-                    class="bg-white"
+                    class="bg-white shadow px-6 py-3"
                 >
                     <!-- Queue Subheading-->
                     <div class="row text-uppercase">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
@@ -109,7 +71,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
@@ -141,7 +103,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="table-queue text-center">
                                 <thead>
                                     <tr>
@@ -177,25 +139,18 @@
                 </fullscreen>
             </div>
         </section>
-    </section>
-    <teleport to="#copyright">
-        <div class="container">
-            <small
-                >Copyright ©
-                <inertia-link :href="route('login')" class="text-primary"
-                    >Akif Car Grooming Center</inertia-link
-                >
-                2021</small
-            >
-        </div>
-    </teleport>
+    </breeze-customer-layout>
 </template>
 
 <script>
+import BreezeCustomerLayout from "@/Layouts/Customer";
 import Fullscreen from "vue-fullscreen/src/component.vue";
 
 export default {
-    components: { Fullscreen },
+    components: {
+        BreezeCustomerLayout,
+        Fullscreen
+    },
 
     props: {
         auth: Object,
@@ -206,8 +161,6 @@ export default {
 
     data() {
         return {
-            isTambakBugis: false,
-            isBukitKatil: false,
             polling: null,
             waiting: [],
             grooming: [],
@@ -217,12 +170,6 @@ export default {
     },
 
     mounted() {
-        if (route().current("store", "tambak-bugis")) {
-            this.isTambakBugis = true;
-        }
-        if (route().current("store", "bukit-katil")) {
-            this.isBukitKatil = true;
-        }
         this.getQueue();
         this.pollData();
     },

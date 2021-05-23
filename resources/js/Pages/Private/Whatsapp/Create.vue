@@ -1,6 +1,19 @@
 <template>
     <breeze-authenticated-layout>
-        <!-- <template #header>Whatsapp</template> -->
+        <teleport to="title">
+            - Whatsapp Create
+        </teleport>
+        <template #header>
+            <inertia-link
+                :href="route('whatsapps.index')"
+                class="btn btn-secondary"
+            >
+                <i class="fas fa-chevron-left"></i>
+            </inertia-link>
+            <h6 class="pt-2.5 mx-auto">
+                Add new WhatsApp message.
+            </h6>
+        </template>
         <template #nav>
             <breeze-nav-link
                 :href="route('whatsapps.index')"
@@ -8,91 +21,73 @@
             >
                 WhatsApps
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('whatsapps.create')"
-                :active="route().current('whatsapps.create')"
+            <span
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 WhatsApp
-            </breeze-nav-link>
+            </span>
         </template>
 
-        <template #responsive-nav>
-            <breeze-responsive-nav-link
-                :href="route('whatsapps.index')"
-                :active="route().current('whatsapps.index')"
-            >
-                WhatsApps
-            </breeze-responsive-nav-link>
-            <breeze-responsive-nav-link
-                :href="route('whatsapps.create')"
-                :active="route().current('whatsapps.create')"
-            >
-                WhatsApp
-            </breeze-responsive-nav-link>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="row pt-3 px-3">
-                            <div class="col-md-3 col-sm-12">
-                                <h2>WhatsApp</h2>
-                                <p>Add new WhatsApp message.</p>
-                            </div>
-
-                            <div class="col-md-6 col-sm-12">
-                                <form @submit.prevent="submit">
-                                    <div>
-                                        <breeze-label
-                                            for="title"
-                                            value="Title"
-                                        />
-                                        <breeze-input
-                                            id="title"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            v-model="form.title"
-                                            required
-                                            autofocus
-                                        />
-                                    </div>
-                                    <div class="mt-4">
-                                        <breeze-label
-                                            for="message"
-                                            value="Message"
-                                        />
-                                        <textarea
-                                            rows="7"
-                                            id="message"
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                            v-model="form.message"
-                                            required
-                                        >
-                                        </textarea>
-                                    </div>
-                                    <div
-                                        class="flex items-center justify-end mt-4"
-                                    >
-                                        <inertia-link
-                                            :href="route('whatsapps.index')"
-                                            ><breeze-button type="button">
-                                                Back
-                                            </breeze-button></inertia-link
-                                        >
-                                        <breeze-button
-                                            type="button"
-                                            class="ml-4"
-                                            @click="submit"
-                                        >
-                                            Submit
-                                        </breeze-button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        <div
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
+                <form @submit.prevent="form.post(route('whatsapps.store'))">
+                    <div class="mt-3 p-3">
+                        <label for="title">Title</label>
+                        <input
+                            type="text"
+                            id="title"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.title
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.title"
+                            @keydown="form.clearErrors('title')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.title
+                        }}</span>
                     </div>
-                </div>
+                    <div class="mt-3 p-3">
+                        <label for="message">Message</label>
+                        <textarea
+                            rows="7"
+                            id="message"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.message
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.message"
+                            @keydown="form.clearErrors('message')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.message
+                        }}</span>
+                    </div>
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <inertia-link
+                            :href="route('whatsapps.index')"
+                            class="btn btn-secondary"
+                        >
+                            Back
+                        </inertia-link>
+                        <breeze-button
+                            :class="{
+                                'opacity-25': form.processing
+                            }"
+                            :disabled="form.processing"
+                        >
+                            Submit
+                        </breeze-button>
+                    </div>
+                </form>
             </div>
         </div>
     </breeze-authenticated-layout>
@@ -103,56 +98,29 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeInput from "@/Components/Input";
-import BreezeLabel from "@/Components/Label";
-import BreezeValidationErrors from "@/Components/ValidationErrors";
-import { reactive } from "vue";
-import { Inertia } from "@inertiajs/inertia";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeInput,
-        BreezeLabel,
-        BreezeValidationErrors
+        BreezeButton
     },
 
     props: {
         auth: Object,
         errors: Object,
-        whatsapp: Object
-    },
-
-    data() {
-        return {
-            form: this.$inertia.form({
-                title: this.title,
-                message: this.message
-            })
-        };
+        flash: Object
     },
 
     setup() {
-        const form = reactive({
-            first_name: null,
-            last_name: null,
-            email: null
+        const form = useForm({
+            title: null,
+            message: null
         });
 
-        function submit() {
-            Inertia.post(route("whatsapps.store"), form);
-        }
-
-        return { form, submit };
-    },
-
-    methods: {
-        edit() {
-            alert("Not configured yet");
-        }
+        return { form };
     }
 };
 </script>

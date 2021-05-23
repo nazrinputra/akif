@@ -22,7 +22,7 @@ class PackageFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->words(3, true);
+        $name = ucwords($this->faker->words(3, true));
         $slug = Str::slug($name);
 
         return [
