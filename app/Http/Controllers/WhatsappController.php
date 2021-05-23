@@ -97,7 +97,7 @@ class WhatsappController extends Controller
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
-        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message updated successfully.');
+        return Redirect::back()->with('success', 'Message updated successfully.');
     }
 
     /**
@@ -109,12 +109,12 @@ class WhatsappController extends Controller
     public function destroy(Whatsapp $whatsapp)
     {
         $whatsapp->delete();
-        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message deleted successfully.');
+        return Redirect::route('whatsapps.index')->with('success', 'Message deleted successfully.');
     }
 
     public function restore(Whatsapp $whatsapp)
     {
         $whatsapp->restore();
-        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message restored successfully.');
+        return Redirect::back()->with('success', 'Message restored successfully.');
     }
 }
