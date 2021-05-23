@@ -4,9 +4,8 @@
             - Dashboard
         </teleport>
         <template #header>
-            <div class="row px-5">
-                <span>&nbsp;</span>
-                <h6 class="pt-2.5 ml-12">
+            <div class="d-flex px-2">
+                <h6 class="pt-2.5 mx-auto">
                     Dashboard view for crew.
                 </h6>
             </div>

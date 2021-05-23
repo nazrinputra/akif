@@ -14,7 +14,7 @@
                     </inertia-link>
                 </div>
                 <div
-                    class="bg-white border-b w-full md:px-12 text-sm md:text-md"
+                    class="bg-white border-b w-full md:px-10 text-sm md:text-md"
                 >
                     <nav class="bg-white border-b border-gray-100 sm:mt-4">
                         <!-- Primary Navigation Menu -->

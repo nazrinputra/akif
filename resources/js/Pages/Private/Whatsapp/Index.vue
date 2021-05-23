@@ -5,19 +5,19 @@
         </teleport>
 
         <template #header>
-            <div class="row px-5">
+            <div class="d-flex px-2">
                 <inertia-link
                     :href="route('dashboard')"
-                    class="btn btn-secondary"
+                    class="btn btn-secondary align-self-start"
                 >
                     <i class="fas fa-chevron-left"></i>
                 </inertia-link>
-                <h6 class="pt-2.5 ml-3">
+                <h6 class="pt-2.5 mx-auto">
                     List of WhatsApp messages for the store.
                 </h6>
                 <inertia-link
                     :href="route('whatsapps.create')"
-                    class="btn btn-secondary ml-auto"
+                    class="btn btn-secondary align-self-end"
                 >
                     <i class="fas fa-plus"></i>
                 </inertia-link>
@@ -33,78 +33,48 @@
         </template>
 
         <div class="max-w-7xl mx-auto px-3">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="row pt-3 px-3">
-                        <div class="col">
-                            <div id="empty" v-if="whatsappsCount <= 0">
-                                <h2 class="text-secondary text-center py-4">
-                                    Oops, we're sorry. <br />
-                                    No item in this list.
-                                </h2>
-                            </div>
-                            <table
-                                v-if="whatsappsCount > 0"
-                                class="table table-hover"
+            <div class="bg-white rounded-md shadow overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">WhatsApp Title</th>
+                    </tr>
+                    <tr
+                        v-for="whatsapp in whatsapps.data"
+                        :key="whatsapp.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    >
+                        <td class="border-t">
+                            <inertia-link
+                                style="color: inherit; text-decoration: inherit;"
+                                class="px-3 py-3 flex items-center focus:text-indigo-500"
+                                :href="route('whatsapps.index', whatsapp.id)"
                             >
-                                <tbody>
-                                    <tr
-                                        v-for="whatsapp in whatsapps"
-                                        v-bind:key="whatsapp.id"
-                                    >
-                                        <td class="col-9">
-                                            {{ whatsapp.title }}
-                                        </td>
-                                        <td class="col-3">
-                                            <div
-                                                class="flex items-center justify-center"
-                                            >
-                                                <inertia-link
-                                                    :href="
-                                                        route(
-                                                            'whatsapps.show',
-                                                            whatsapp
-                                                        )
-                                                    "
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        View</breeze-button
-                                                    ></inertia-link
-                                                >
-                                                <breeze-button
-                                                    type="button"
-                                                    class="ml-3"
-                                                    @click="trash(whatsapp)"
-                                                >
-                                                    <i
-                                                        class="far fa-trash-alt"
-                                                    ></i>
-                                                </breeze-button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="flex items-center justify-center mt-4">
-                                <inertia-link
-                                    :href="route('dashboard')"
-                                    class="btn btn-secondary"
-                                >
-                                    Back
-                                </inertia-link>
-                                <inertia-link
-                                    :href="route('whatsapps.create')"
-                                    class="btn btn-secondary ml-20"
-                                >
-                                    Add
-                                </inertia-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                {{ whatsapp.title }}
+                                <!-- <icon v-if="whatsapp.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" /> -->
+                            </inertia-link>
+                        </td>
+                        <td class="border-t w-px">
+                            <inertia-link
+                                class="px-3 flex items-center"
+                                :href="route('whatsapps.index', whatsapp.id)"
+                                tabindex="-1"
+                            >
+                                <!-- <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" /> -->>
+                            </inertia-link>
+                        </td>
+                    </tr>
+                    <tr v-if="whatsapps.data.length === 0">
+                        <td class="border-t px-3 py-3">
+                            Uh-oh! No whatsapp messages found.
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
+        <breeze-pagination
+            class="mt-6 d-flex align-items-center"
+            :links="whatsapps.links"
+        />
     </breeze-authenticated-layout>
 </template>
 
@@ -113,18 +83,21 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezePagination from "@/Components/Pagination";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezePagination
     },
 
     props: {
         auth: Object,
         errors: Object,
+        flash: Object,
         whatsapps: Object,
         whatsappsCount: Number
     },

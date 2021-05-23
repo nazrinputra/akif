@@ -17,7 +17,7 @@ class WhatsappController extends Controller
      */
     public function index()
     {
-        $whatsapps = Whatsapp::all();
+        $whatsapps = Whatsapp::paginate(10);
         $whatsappsCount = $whatsapps->count();
 
         return Inertia::render('Private/Whatsapp/Index', [
