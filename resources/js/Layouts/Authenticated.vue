@@ -7,16 +7,16 @@
             <!-- Page Content -->
             <div class="md:flex md:flex-shrink-0">
                 <div
-                    class="bg-secondary md:flex-shrink-0 md:w-56 px-6 md:visible sm:invisible flex items-center justify-center"
+                    class="bg-secondary md:flex-shrink-0 md:w-56 px-5 md:flex sm:hidden flex items-center justify-center"
                 >
                     <inertia-link class="mt-1" href="/">
                         <breeze-application-logo class="w-28 h-28" />
                     </inertia-link>
                 </div>
                 <div
-                    class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md"
+                    class="bg-white border-b w-full md:px-12 text-sm md:text-md"
                 >
-                    <nav class="bg-white border-b border-gray-100">
+                    <nav class="bg-white border-b border-gray-100 sm:mt-4">
                         <!-- Primary Navigation Menu -->
                         <div class="max-w-7xl mx-auto md:pt-3 lg:px-8">
                             <div class="flex justify-between">
@@ -200,7 +200,7 @@
             </div>
             <div class="md:flex md:flex-grow md:overflow-hidden">
                 <div
-                    class="hidden md:block bg-secondary flex-shrink-0 w-56 p-12 overflow-y-auto"
+                    class="hidden md:block bg-secondary flex-shrink-0 w-56 px-5 overflow-y-auto"
                     id="main-menu"
                 >
                     <breeze-main-menu />

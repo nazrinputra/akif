@@ -19833,13 +19833,13 @@ var _hoisted_3 = {
   "class": "md:flex md:flex-shrink-0"
 };
 var _hoisted_4 = {
-  "class": "bg-secondary md:flex-shrink-0 md:w-56 px-6 md:visible sm:invisible flex items-center justify-center"
+  "class": "bg-secondary md:flex-shrink-0 md:w-56 px-5 md:flex sm:hidden flex items-center justify-center"
 };
 var _hoisted_5 = {
-  "class": "bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md"
+  "class": "bg-white border-b w-full md:px-12 text-sm md:text-md"
 };
 var _hoisted_6 = {
-  "class": "bg-white border-b border-gray-100"
+  "class": "bg-white border-b border-gray-100 sm:mt-4"
 };
 var _hoisted_7 = {
   "class": "max-w-7xl mx-auto md:pt-3 lg:px-8"
@@ -19935,7 +19935,7 @@ var _hoisted_33 = {
   "class": "md:flex md:flex-grow md:overflow-hidden"
 };
 var _hoisted_34 = {
-  "class": "hidden md:block bg-secondary flex-shrink-0 w-56 p-12 overflow-y-auto",
+  "class": "hidden md:block bg-secondary flex-shrink-0 w-56 px-5 overflow-y-auto",
   id: "main-menu"
 };
 var _hoisted_35 = {
@@ -22490,8 +22490,8 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "row px-5"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
-  "class": "pt-2.5 ml-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, " "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
+  "class": "pt-2.5 ml-12"
 }, " Dashboard view for crew. ")], -1
 /* HOISTED */
 );
@@ -22509,7 +22509,7 @@ var _hoisted_6 = {
   "class": "row p-3"
 };
 var _hoisted_7 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Counter", -1
@@ -22523,7 +22523,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Counter");
 
 var _hoisted_11 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "WhatsApps", -1
@@ -22537,7 +22537,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("WhatsApps");
 
 var _hoisted_15 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Cars", -1
@@ -22551,7 +22551,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Cars");
 
 var _hoisted_19 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Customers", -1
@@ -22565,7 +22565,7 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Customers");
 
 var _hoisted_23 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Packages", -1
@@ -22579,7 +22579,7 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Packages");
 
 var _hoisted_27 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Services", -1
@@ -22593,21 +22593,21 @@ var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Services");
 
 var _hoisted_31 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Personalities", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, " Manage customer personalities to help counter crew. ", -1
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, " Manage customer personalities. ", -1
 /* HOISTED */
 );
 
 var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Personalities");
 
 var _hoisted_35 = {
-  "class": "col-lg-3 col-md-4 col-sm-6 pb-5"
+  "class": "col-lg-3 col-md-6 col-sm-6 pb-5"
 };
 
 var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Crews", -1
