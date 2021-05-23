@@ -1,100 +1,106 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title"> - Edit WhatsApp </teleport>
+        <teleport to="title">
+            - Create Cutomer
+        </teleport>
         <template #header>
             <inertia-link
-                :href="route('whatsapps.index')"
+                :href="route('customers.index')"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                View existing WhatsApp message
+                Add new customer
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('whatsapps.index')" :active="false">
-                WhatsApps
+            <breeze-nav-link :href="route('customers.index')" :active="false">
+                Customer
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                WhatsApp
+                customer
             </span>
         </template>
-
-        <breeze-trashed-message
-            v-if="whatsapp.deleted_at"
-            class="mb-6"
-            @restore="restore(whatsapp)"
-        >
-            This message has been deleted.
-        </breeze-trashed-message>
 
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form
-                    @submit.prevent="
-                        form.put(route('whatsapps.update', whatsapp))
-                    "
-                >
+                <form @submit.prevent="form.post(route('customers.store'))">
                     <div class="mt-3 p-3">
-                        <label for="title">Title</label>
+                        <label for="name">Name</label>
                         <input
                             type="text"
-                            id="title"
+                            id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.title
+                                form.errors.name
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.title"
-                            @keydown="form.clearErrors('title')"
+                            v-model="form.name"
+                            @keydown="form.clearErrors('name')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.title
+                            form.errors.name
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="message">Message</label>
-                        <textarea
-                            rows="7"
-                            id="message"
+                        <label for="phone_no">Phone Number</label>
+                        <input
+                            type="number"
+                            id="phone_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.message
+                                form.errors.phone_no
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.message"
-                            @keydown="form.clearErrors('message')"
+                            v-model="form.phone_no"
+                            @keydown="form.clearErrors('phone_no')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.message
+                            form.errors.phone_no
                         }}</span>
                     </div>
+                    <div class="mt-3 p-3">
+                        <label for="gender">Gender</label>
+                        <input
+                            type="text"
+                            id="gender"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.gender
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.gender"
+                            @keydown="form.clearErrors('gender')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.gender
+                        }}</span>
+                    </div>
+
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <inertia-link
-                            v-if="!whatsapp.deleted_at"
-                            as="button"
-                            @click="destroy(whatsapp)"
-                            class="btn btn-outline-secondary"
+                            :href="route('customers.index')"
+                            class="btn btn-secondary"
                         >
-                            Delete
+                            Back
                         </inertia-link>
                         <breeze-button
-                            class="ml-auto"
                             :class="{
                                 'opacity-25': form.processing
                             }"
                             :disabled="form.processing"
                         >
-                            Update
+                            Submit
                         </breeze-button>
                     </div>
                 </form>
@@ -108,7 +114,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -116,41 +121,23 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeTrashedMessage
+        BreezeButton
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object,
-        whatsapp: Object
+        flash: Object
     },
 
     setup() {
         const form = useForm({
-            title: null,
-            message: null
+            name: null,
+            phone_no: null,
+            gender: null
         });
 
         return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
-    methods: {
-        loadData() {
-            this.form.title = this.whatsapp.title;
-            this.form.message = this.whatsapp.message;
-        },
-        destroy(whatsapp) {
-            this.$inertia.delete(route("whatsapps.destroy", whatsapp));
-        },
-        restore(whatsapp) {
-            this.$inertia.put(route("whatsapps.restore", whatsapp));
-        }
     }
 };
 </script>

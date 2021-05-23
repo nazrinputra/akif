@@ -22,6 +22,7 @@ class CreatePackagesTable extends Migration
             $table->string('duration');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
