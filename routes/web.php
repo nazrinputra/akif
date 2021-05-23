@@ -71,19 +71,19 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('customers', CustomerController::class)->parameters([
         'customers' => 'customer:slug'
-    ])->only(['index', 'show']);
+    ]);
 
     Route::resource('services', ServiceController::class)->parameters([
         'services' => 'service:slug'
-    ])->only(['index', 'show']);
+    ]);
 
     Route::resource('packages', PackageController::class)->parameters([
         'packages' => 'package:slug'
-    ])->only(['index', 'show']);
+    ]);
 
     Route::resource('personalities', PersonalityController::class)->parameters([
         'personalities' => 'personality:slug'
-    ])->only(['index', 'show']);
+    ]);
 
     Route::resource('crews', UserController::class)->parameters([
         'crews' => 'crew:slug'

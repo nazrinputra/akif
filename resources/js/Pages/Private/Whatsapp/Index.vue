@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Whatsapps
+            - List WhatsApp
         </teleport>
 
         <template #header>
@@ -9,7 +9,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of WhatsApp messages for the store.
+                List of WhatsApp messages for the store
             </h6>
             <inertia-link
                 :href="route('whatsapps.create')"

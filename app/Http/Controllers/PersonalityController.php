@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Personality;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PersonalityController extends Controller
 {
@@ -31,7 +33,7 @@ class PersonalityController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Personality/Create');
     }
 
     /**
@@ -42,7 +44,17 @@ class PersonalityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        Personality::create($request->only('name', 'slug', 'description'));
+
+        return Redirect::route('personalities.index')->with('success', 'Personality added successfully.');
     }
 
     /**
