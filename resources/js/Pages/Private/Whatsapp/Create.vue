@@ -4,6 +4,12 @@
             - Whatsapp Create
         </teleport>
         <template #header>
+            <inertia-link
+                :href="route('whatsapps.index')"
+                class="btn btn-secondary"
+            >
+                <i class="fas fa-chevron-left"></i>
+            </inertia-link>
             <h6 class="pt-2.5 mx-auto">
                 Add new WhatsApp message.
             </h6>
@@ -36,42 +42,66 @@
             </span>
         </template>
 
-        <div class="max-w-7xl mx-auto px-3">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="row pt-3 px-3">
-                        <div class="col">
-                            <form @submit.prevent="store">
-                                <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-                                    <breeze-text-input
-                                        v-model="form.title"
-                                        :error="form.errors.title"
-                                        class="pr-6 pb-8 w-full lg:w-1/2"
-                                        label="Title"
-                                        id="title"
-                                    />
-                                    <breeze-textarea-input
-                                        v-model="form.message"
-                                        :error="form.errors.message"
-                                        class="pr-6 pb-8 w-full lg:w-1/2"
-                                        label="Message"
-                                        id="message"
-                                    />
-                                </div>
-                                <div
-                                    class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center"
-                                >
-                                    <breeze-loading-button
-                                        :loading="form.processing"
-                                        class="btn btn-indigo"
-                                        type="submit"
-                                        >Create Message</breeze-loading-button
-                                    >
-                                </div>
-                            </form>
-                        </div>
+        <div
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
+                <form @submit.prevent="form.post(route('whatsapps.store'))">
+                    <div class="mt-3 p-3">
+                        <label for="title">Title</label>
+                        <input
+                            type="text"
+                            id="title"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.title
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.title"
+                            @keydown="form.clearErrors('title')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.title
+                        }}</span>
                     </div>
-                </div>
+                    <div class="mt-3 p-3">
+                        <label for="message">Message</label>
+                        <textarea
+                            rows="7"
+                            id="message"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.message
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.message"
+                            @keydown="form.clearErrors('message')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.message
+                        }}</span>
+                    </div>
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <inertia-link
+                            :href="route('whatsapps.index')"
+                            class="btn btn-secondary"
+                        >
+                            Back
+                        </inertia-link>
+                        <breeze-button
+                            :class="{
+                                'opacity-25': form.processing
+                            }"
+                            :disabled="form.processing"
+                        >
+                            Submit
+                        </breeze-button>
+                    </div>
+                </form>
             </div>
         </div>
     </breeze-authenticated-layout>
@@ -82,25 +112,14 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeTextInput from "@/Components/TextInput";
-import BreezeSelectInput from "@/Components/SelectInput";
-import BreezeTextareaInput from "@/Components/TextareaInput";
-import BreezeLabel from "@/Components/Label";
-import BreezeValidationErrors from "@/Components/ValidationErrors";
-import BreezeLoadingButton from "@/Components/LoadingButton";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeTextInput,
-        BreezeSelectInput,
-        BreezeLabel,
-        BreezeValidationErrors,
-        BreezeLoadingButton,
-        BreezeTextareaInput
+        BreezeButton
     },
 
     props: {
@@ -109,18 +128,28 @@ export default {
         flash: Object
     },
 
-    data() {
-        return {
-            form: this.$inertia.form({
-                title: null,
-                message: null
-            })
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(this.route("whatsapps.store"));
-        }
+    setup() {
+        const form = useForm({
+            title: null,
+            message: null
+        });
+
+        return { form };
     }
+
+    // data() {
+    //     return {
+    //         form: this.$inertia.form({
+    //             title: "",
+    //             message: ""
+    //         })
+    //     };
+    // },
+
+    // methods: {
+    //     store() {
+    //         this.form.post(this.route("whatsapps.store"));
+    //     }
+    // }
 };
 </script>
