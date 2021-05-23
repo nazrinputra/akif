@@ -209,6 +209,7 @@
                     class="md:flex-1 px-4 py-8 md:p-6 md:overflow-y-auto"
                     scroll-region
                 >
+                    <breeze-flash-messages />
                     <slot />
                 </div>
             </div>
@@ -236,6 +237,7 @@ import BreezeDropdownLink from "@/Components/DropdownLink";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeMainMenu from "@/Components/MainMenu";
+import BreezeFlashMessages from "@/Components/FlashMessages";
 
 export default {
     components: {
@@ -244,7 +246,8 @@ export default {
         BreezeDropdownLink,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeMainMenu
+        BreezeMainMenu,
+        BreezeFlashMessages
     },
 
     data() {

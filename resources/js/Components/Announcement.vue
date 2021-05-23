@@ -14,3 +14,18 @@
         </button>
     </div>
 </template>
+
+<script>
+// <template>
+// <breeze-announcement class="alert-danger fixed-top">
+//     Test announcement
+// </breeze-announcement>
+// </template>
+// import BreezeAnnouncement from '@/Components/Announcement'
+
+// export default {
+//     components: {
+//         BreezeAnnouncement
+//     },
+// }
+</script>

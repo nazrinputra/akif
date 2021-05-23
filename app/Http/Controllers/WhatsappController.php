@@ -54,7 +54,7 @@ class WhatsappController extends Controller
 
         Whatsapp::create($request->only('title', 'slug', 'message'));
 
-        return Redirect::route('whatsapps.index');
+        return Redirect::route('whatsapps.index')->with('success', 'Message added successfully.');
     }
 
     /**
@@ -100,6 +100,6 @@ class WhatsappController extends Controller
     public function destroy(Whatsapp $whatsapp)
     {
         Whatsapp::find($whatsapp->id)->delete();
-        return Redirect::route('whatsapps.index')->with('message', 'Deleted!');
+        return Redirect::route('whatsapps.index')->with('success', 'Message deleted successfully.');
     }
 }

@@ -44,16 +44,6 @@
             </span>
         </template>
 
-        <div class="px-3 pb-6" v-if="hasErrors">
-            <breeze-alert
-                v-for="(error, key) in errors"
-                :key="key"
-                class="alert-danger max-w-7xl mx-auto px-3"
-            >
-                {{ error }}
-            </breeze-alert>
-        </div>
-
         <div class="max-w-7xl mx-auto px-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -121,7 +111,6 @@ import BreezeButton from "@/Components/Button";
 import BreezeInput from "@/Components/Input";
 import BreezeLabel from "@/Components/Label";
 import BreezeValidationErrors from "@/Components/ValidationErrors";
-import BreezeAlert from "@/Components/Alert";
 
 export default {
     components: {
@@ -131,8 +120,7 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeLabel,
-        BreezeValidationErrors,
-        BreezeAlert
+        BreezeValidationErrors
     },
 
     props: {
@@ -154,12 +142,12 @@ export default {
         submit() {
             this.form.post(this.route("whatsapps.store"));
         }
-    },
-
-    computed: {
-        hasErrors() {
-            return Object.keys(this.errors).length > 0;
-        }
     }
+
+    // computed: {
+    //     hasErrors() {
+    //         return Object.keys(this.errors).length > 0;
+    //     }
+    // }
 };
 </script>
