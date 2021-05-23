@@ -27,48 +27,63 @@
             </span>
         </template>
 
-        <div class="max-w-7xl mx-auto px-3">
-            <div class="bg-white rounded-md shadow overflow-x-auto px-20 pb-3">
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">WhatsApp Title</th>
-                    </tr>
-                    <tr
-                        v-for="whatsapp in whatsapps.data"
-                        :key="whatsapp.id"
-                        class="hover:bg-gray-100 focus-within:bg-gray-100"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('whatsapps.edit', whatsapp)"
-                            >
-                                {{ whatsapp.title }}
-                                <i
-                                    v-if="whatsapp.deleted_at"
-                                    class="fas fa-trash opacity-50 ml-3"
-                                ></i>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t w-px">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 flex items-center"
-                                :href="route('whatsapps.edit', whatsapp)"
-                                tabindex="-1"
-                            >
-                                <i class="fas fa-edit"></i>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                    <tr v-if="whatsapps.data.length === 0">
-                        <td class="border-t px-3 py-3">
-                            Uh-oh! No WhatsApp messages found.
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="input-group pb-4">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search something..."
+                class="form-control rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="form.search"
+            />
+            <span class="input-group-append bg-white">
+                <button class="btn border border-left-0" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+        </div>
+
+        <div
+            class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">WhatsApp Title</th>
+                </tr>
+                <tr
+                    v-for="whatsapp in whatsapps.data"
+                    :key="whatsapp.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('whatsapps.edit', whatsapp)"
+                        >
+                            {{ whatsapp.title }}
+                            <i
+                                v-if="whatsapp.deleted_at"
+                                class="fas fa-trash opacity-50 ml-3"
+                            ></i>
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('whatsapps.edit', whatsapp)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+                <tr v-if="whatsapps.data.length === 0">
+                    <td class="border-t px-3 py-3">
+                        Uh-oh! No WhatsApp messages found.
+                    </td>
+                </tr>
+            </table>
         </div>
         <breeze-pagination
             class="mt-6 d-flex align-items-center"
@@ -83,6 +98,9 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import BreezePagination from "@/Components/Pagination";
+// import throttle from "lodash/throttle";
+// import pickBy from "lodash/pickBy";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -98,6 +116,25 @@ export default {
         errors: Object,
         flash: Object,
         whatsapps: Object
+    },
+
+    setup() {
+        const form = useForm({
+            search: null
+        });
+
+        return { form };
     }
+
+    // watch: {
+    //     form: {
+    //         deep: true,
+    //         handler: throttle(function() {
+    //             this.$inertia.get(route("whatsapps.index"), pickBy(this.form), {
+    //                 preserveState: true
+    //             });
+    //         }, 150)
+    //     }
+    // }
 };
 </script>
