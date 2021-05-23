@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('whatsapps', WhatsappController::class)->parameters([
         'whatsapps' => 'whatsapp:slug'
-    ])->only(['index', 'show', 'create', 'store', 'destroy']);
+    ]);
 
     Route::resource('cars', CarController::class)->parameters([
         'cars' => 'car:slug'

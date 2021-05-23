@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
-            - Whatsapp Create
-        </teleport>
+        <teleport to="title"> - Whatsapp {{ whatsapp.name }} </teleport>
         <template #header>
             <inertia-link
                 :href="route('whatsapps.index')"
@@ -11,7 +9,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Add new WhatsApp message.
+                View existing WhatsApp message.
             </h6>
         </template>
         <template #nav>
@@ -28,11 +26,23 @@
             </span>
         </template>
 
+        <breeze-trashed-message
+            v-if="whatsapp.deleted_at"
+            class="mb-6"
+            @restore="restore(whatsapp)"
+        >
+            This message has been deleted.
+        </breeze-trashed-message>
+
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('whatsapps.store'))">
+                <form
+                    @submit.prevent="
+                        form.put(route('whatsapps.update', whatsapp))
+                    "
+                >
                     <div class="mt-3 p-3">
                         <label for="title">Title</label>
                         <input
@@ -73,18 +83,21 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <inertia-link
-                            :href="route('whatsapps.index')"
-                            class="btn btn-secondary"
+                            v-if="!whatsapp.deleted_at"
+                            as="button"
+                            @click="destroy(whatsapp)"
+                            class="btn btn-outline-secondary"
                         >
-                            Back
+                            Delete
                         </inertia-link>
                         <breeze-button
+                            class="ml-auto"
                             :class="{
                                 'opacity-25': form.processing
                             }"
                             :disabled="form.processing"
                         >
-                            Submit
+                            Update
                         </breeze-button>
                     </div>
                 </form>
@@ -98,6 +111,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -105,13 +119,15 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeTrashedMessage
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
+        whatsapp: Object
     },
 
     setup() {
@@ -121,6 +137,23 @@ export default {
         });
 
         return { form };
+    },
+
+    created() {
+        this.loadData();
+    },
+
+    methods: {
+        loadData() {
+            this.form.title = this.whatsapp.title;
+            this.form.message = this.whatsapp.message;
+        },
+        destroy(whatsapp) {
+            this.$inertia.delete(route("whatsapps.destroy", whatsapp));
+        },
+        restore(whatsapp) {
+            this.$inertia.put(route("whatsapps.show", whatsapp));
+        }
     }
 };
 </script>

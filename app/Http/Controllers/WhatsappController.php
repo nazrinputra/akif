@@ -17,7 +17,8 @@ class WhatsappController extends Controller
      */
     public function index()
     {
-        $whatsapps = Whatsapp::paginate(10);
+        $whatsapps = Whatsapp::withTrashed()->paginate(10);
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Whatsapp/Index', [
             'whatsapps' => $whatsapps,
@@ -63,7 +64,8 @@ class WhatsappController extends Controller
      */
     public function show(Whatsapp $whatsapp)
     {
-        return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
+        // return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
+        // TODO restore deleted here?
     }
 
     /**
@@ -74,7 +76,7 @@ class WhatsappController extends Controller
      */
     public function edit(Whatsapp $whatsapp)
     {
-        //
+        return Inertia::render('Private/Whatsapp/Edit', compact('whatsapp'));
     }
 
     /**
@@ -86,7 +88,17 @@ class WhatsappController extends Controller
      */
     public function update(Request $request, Whatsapp $whatsapp)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'message' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->title);
+        $request->merge(['slug' => $slug]);
+
+        $whatsapp->update($request->only('title', 'slug', 'message'));
+
+        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message updated successfully.');
     }
 
     /**
@@ -98,6 +110,6 @@ class WhatsappController extends Controller
     public function destroy(Whatsapp $whatsapp)
     {
         Whatsapp::find($whatsapp->id)->delete();
-        return Redirect::route('whatsapps.index')->with('success', 'Message deleted successfully.');
+        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message deleted successfully.');
     }
 }

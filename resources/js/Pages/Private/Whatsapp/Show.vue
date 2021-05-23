@@ -83,6 +83,7 @@
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
+import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeInput from "@/Components/Input";
 import BreezeLabel from "@/Components/Label";
@@ -92,6 +93,7 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
+        BreezeResponsiveNavLink,
         BreezeButton,
         BreezeInput,
         BreezeLabel,
