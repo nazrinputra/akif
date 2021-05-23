@@ -13,10 +13,7 @@
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link
-                :href="route('whatsapps.index')"
-                :active="route().current('whatsapps.index')"
-            >
+            <breeze-nav-link :href="route('whatsapps.index')" :active="false">
                 WhatsApps
             </breeze-nav-link>
             <span
