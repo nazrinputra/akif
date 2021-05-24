@@ -80,7 +80,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return Inertia::render('Private/Car/Edit', [
+            'car' => $car->load('owners')
+        ]);
     }
 
     /**
@@ -92,7 +94,20 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $request->validate([
+            'plate_no' => ['required', 'max:10'],
+            'brand' => ['required', 'max:10'],
+            'model' => ['required', 'max:50'],
+            'color' => ['required', 'max:50'],
+            'size' => ['required', 'max:5'],
+        ]);
+
+        $slug = Str::slug($request->plate_no);
+        $request->merge(['slug' => $slug]);
+
+        $car->update($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
+
+        return Redirect::back()->with('success', 'Car updated successfully.');
     }
 
     /**
@@ -103,6 +118,13 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return Redirect::route('cars.index')->with('success', 'Car deleted successfully.');
+    }
+
+    public function restore(Car $car)
+    {
+        $car->restore();
+        return Redirect::back()->with('success', 'Car restored successfully.');
     }
 }

@@ -77,7 +77,9 @@ class PersonalityController extends Controller
      */
     public function edit(Personality $personality)
     {
-        //
+        return Inertia::render('Private/Personality/Edit', [
+            'personality' => $personality->load('customers')
+        ]);
     }
 
     /**
@@ -89,7 +91,17 @@ class PersonalityController extends Controller
      */
     public function update(Request $request, Personality $personality)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $personality->update($request->only('name', 'slug', 'description'));
+
+        return Redirect::back()->with('success', 'Personality updated successfully.');
     }
 
     /**
@@ -100,6 +112,13 @@ class PersonalityController extends Controller
      */
     public function destroy(Personality $personality)
     {
-        //
+        $personality->delete();
+        return Redirect::route('personalities.index')->with('success', 'Personality deleted successfully.');
+    }
+
+    public function restore(Personality $personality)
+    {
+        $personality->restore();
+        return Redirect::back()->with('success', 'Personality restored successfully.');
     }
 }

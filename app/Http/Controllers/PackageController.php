@@ -80,7 +80,9 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        return Inertia::render('Private/Package/Edit', [
+            'pkg' => $package->load('services')
+        ]);
     }
 
     /**
@@ -92,7 +94,20 @@ class PackageController extends Controller
      */
     public function update(Request $request, Package $package)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'price' => ['required', 'max:5'],
+            'frequency' => ['required', 'max:50'],
+            'duration' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
+
+        return Redirect::back()->with('success', 'Package updated successfully.');
     }
 
     /**
@@ -103,6 +118,13 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return Redirect::route('packages.index')->with('success', 'Package deleted successfully.');
+    }
+
+    public function restore(Package $package)
+    {
+        $package->restore();
+        return Redirect::back()->with('success', 'Package restored successfully.');
     }
 }

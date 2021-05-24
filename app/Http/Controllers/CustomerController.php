@@ -78,7 +78,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return Inertia::render('Private/Customer/Edit', [
+            'customer' => $customer->load('cars', 'personalities')
+        ]);
     }
 
     /**
@@ -90,7 +92,18 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'phone_no' => ['required', 'max:12'],
+            'gender' => ['required', 'max:50']
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $customer->update($request->only('name', 'slug', 'phone_no', 'gender'));
+
+        return Redirect::back()->with('success', 'Customer updated successfully.');
     }
 
     /**
@@ -101,6 +114,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return Redirect::route('customers.index')->with('success', 'Customer deleted successfully.');
+    }
+
+    public function restore(Customer $customer)
+    {
+        $customer->restore();
+        return Redirect::back()->with('success', 'Customer restored successfully.');
     }
 }
