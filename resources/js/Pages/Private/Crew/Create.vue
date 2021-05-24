@@ -88,7 +88,13 @@
                         <label for="store_id">Store</label>
                         <select
                             v-model="form.store_id"
-                            class=" w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            @change="form.clearErrors('store_id')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.store_id
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
                         >
                             <option
                                 v-for="store in stores"
@@ -106,7 +112,13 @@
                         <label for="role_id">Role</label>
                         <select
                             v-model="form.role_id"
-                            class=" w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            @change="form.clearErrors('role_id')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.role_id
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
                         >
                             <option
                                 v-for="role in roles"

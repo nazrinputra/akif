@@ -68,18 +68,19 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="gender">Gender</label>
-                        <input
-                            type="text"
-                            id="gender"
+                        <select
+                            v-model="form.gender"
+                            @change="form.clearErrors('gender')"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.gender
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.gender"
-                            @keydown="form.clearErrors('gender')"
-                        />
+                        >
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.gender
                         }}</span>

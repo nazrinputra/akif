@@ -27,20 +27,30 @@
             </span>
         </template>
 
-        <div class="input-group pb-4">
+        <!-- TODO add role checking for this filter-->
+        <!-- <div class="input-group pb-4">
+            <select
+                v-if="auth.user.role_id == 1"
+                v-model="form.trashed"
+                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            >
+                <option value="without">Without Trashed</option>
+                <option value="with">With Trashed</option>
+                <option value="only">Only Trashed</option>
+            </select>
             <input
                 type="text"
                 id="search"
                 placeholder="Search something..."
-                class="form-control rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="form.search"
             />
-            <span class="input-group-append bg-white">
+            <span class="input-group-append">
                 <button class="btn border border-left-0" type="button">
                     <i class="fas fa-search"></i>
                 </button>
             </span>
-        </div>
+        </div> -->
 
         <div
             class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -115,6 +125,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        filters: Object,
         customers: Object
     },
 
@@ -130,10 +141,21 @@ export default {
     //     form: {
     //         deep: true,
     //         handler: throttle(function() {
-    //             this.$inertia.get(route("customers.index"), pickBy(this.form), {
+    //             this.$inertia.get(route("whatsapps.index"), pickBy(this.form), {
     //                 preserveState: true
     //             });
     //         }, 150)
+    //     }
+    // },
+
+    // created() {
+    //     this.loadData();
+    // },
+
+    // methods: {
+    //     loadData() {
+    //         this.form.search = this.filters.search;
+    //         this.form.trashed = "without";
     //     }
     // }
 };

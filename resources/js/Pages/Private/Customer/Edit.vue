@@ -10,7 +10,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
+            <h6 v-on:click="isVisible = !isVisible" class="pt-2.5 mx-auto">
                 View existing customer
             </h6>
         </template>
@@ -32,6 +32,16 @@
         >
             This customer has been deleted.
         </breeze-trashed-message>
+
+        <div v-if="isVisible" class="mx-3 mb-4">
+            <span
+                v-for="personality in customer.personalities"
+                :key="personality.id"
+                class="badge badge-pill badge-secondary p-3 mx-2"
+            >
+                {{ personality.name }}
+            </span>
+        </div>
 
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -80,18 +90,19 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="gender">Gender</label>
-                        <input
-                            type="text"
-                            id="gender"
+                        <select
+                            v-model="form.gender"
+                            @change="form.clearErrors('gender')"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.gender
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.gender"
-                            @keydown="form.clearErrors('gender')"
-                        />
+                        >
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.gender
                         }}</span>
@@ -121,6 +132,52 @@
                 </form>
             </div>
         </div>
+
+        <div
+            v-if="customer.cars.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Car Model</th>
+                    <th class="px-3 py-3">Car Plate No</th>
+                </tr>
+                <tr
+                    v-for="car in customer.cars"
+                    :key="car.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('cars.edit', car)"
+                        >
+                            {{ car.model }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('cars.edit', car)"
+                        >
+                            {{ car.plate_no }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('cars.edit', car)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </breeze-authenticated-layout>
 </template>
 
@@ -145,7 +202,8 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        customer: Object
+        customer: Object,
+        isVisible: false
     },
 
     setup() {

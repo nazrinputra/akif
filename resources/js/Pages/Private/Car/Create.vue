@@ -101,18 +101,21 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="size">Size</label>
-                        <input
-                            type="text"
-                            id="size"
+                        <select
+                            v-model="form.size"
+                            @change="form.clearErrors('size')"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.size
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.size"
-                            @keydown="form.clearErrors('size')"
-                        />
+                        >
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.size
                         }}</span>

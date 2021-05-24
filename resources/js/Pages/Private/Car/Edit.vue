@@ -111,7 +111,13 @@
                         <label for="size">Size</label>
                         <select
                             v-model="form.size"
-                            class=" w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            @change="form.clearErrors('size')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.size
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
                         >
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
