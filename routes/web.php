@@ -25,7 +25,7 @@ use App\Http\Controllers\WhatsappController;
 |
 */
 
-// URL::forceScheme('https');
+URL::forceScheme('https');
 
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
