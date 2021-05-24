@@ -109,18 +109,15 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="size">Size</label>
-                        <input
-                            type="text"
-                            id="size"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.size
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                        <select
                             v-model="form.size"
-                            @keydown="form.clearErrors('size')"
-                        />
+                            class=" w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.size
                         }}</span>
@@ -148,6 +145,42 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div
+            v-if="car.owners.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Owner Name</th>
+                </tr>
+                <tr
+                    v-for="owner in car.owners"
+                    :key="owner.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('customers.edit', owner)"
+                        >
+                            {{ owner.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('customers.edit', owner)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
         </div>
     </breeze-authenticated-layout>
 </template>
