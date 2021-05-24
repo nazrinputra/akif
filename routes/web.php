@@ -55,6 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('profile');
 
     Route::get('reports', function () {
-        return Inertia::render('Private//Dashboard/Report');
+        return Inertia::render('Private/Dashboard/Report');
     })->name('reports');
 });
