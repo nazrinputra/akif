@@ -29,7 +29,7 @@
             class="mb-6"
             @restore="restore(pkg)"
         >
-            This service has been deleted.
+            This package has been deleted.
         </breeze-trashed-message>
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
