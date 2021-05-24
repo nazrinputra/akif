@@ -103,6 +103,42 @@
                 </form>
             </div>
         </div>
+
+        <div
+            v-if="personality.customers.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Customer Name</th>
+                </tr>
+                <tr
+                    v-for="customer in personality.customers"
+                    :key="customer.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('customers.edit', customer)"
+                        >
+                            {{ customer.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('customers.edit', customer)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </breeze-authenticated-layout>
 </template>
 

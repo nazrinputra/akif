@@ -92,36 +92,48 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
-                        <input
-                            type="text"
-                            id="store_id"
+                        <select
+                            v-model="form.store_id"
+                            @change="form.clearErrors('store_id')"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.store_id
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.store_id"
-                            @keydown="form.clearErrors('store_id')"
-                        />
+                        >
+                            <option
+                                v-for="store in stores"
+                                :key="store.id"
+                                :value="store.id"
+                            >
+                                {{ store.name }}
+                            </option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.store_id
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="role_id">Role</label>
-                        <input
-                            type="text"
-                            id="role_id"
+                        <select
+                            v-model="form.role_id"
+                            @change="form.clearErrors('role_id')"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.role_id
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.role_id"
-                            @keydown="form.clearErrors('role_id')"
-                        />
+                        >
+                            <option
+                                v-for="role in roles"
+                                :key="role.id"
+                                :value="role.id"
+                            >
+                                {{ role.name }}
+                            </option>
+                        </select>
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.role_id
                         }}</span>
@@ -175,6 +187,8 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        stores: Object,
+        roles: Object,
         crew: Object
     },
 

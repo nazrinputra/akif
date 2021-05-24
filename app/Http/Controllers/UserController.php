@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\Store;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -33,7 +35,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Private/Crew/Create');
+        return Inertia::render('Private/Crew/Create', [
+            'stores' => Store::all(),
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -83,6 +88,8 @@ class UserController extends Controller
     public function edit(User $crew)
     {
         return Inertia::render('Private/Crew/Edit', [
+            'stores' => Store::all(),
+            'roles' => Role::all(),
             'crew' => $crew->load('role', 'store')
         ]);
     }
