@@ -36,6 +36,7 @@
                 <div class="col pb-5">
                     <h2>Reports</h2>
                     <p>Generate monthly reports and statistics.</p>
+                    <i class="fas fa-tools text-9xl"></i>
                 </div>
             </div>
         </div>

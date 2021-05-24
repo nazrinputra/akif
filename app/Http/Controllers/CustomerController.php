@@ -103,7 +103,7 @@ class CustomerController extends Controller
 
         $customer->update($request->only('name', 'slug', 'phone_no', 'gender'));
 
-        return Redirect::back()->with('success', 'Customer updated successfully.');
+        return Redirect::route('customers.edit', $customer)->with('success', 'Customer updated successfully.');
     }
 
     /**

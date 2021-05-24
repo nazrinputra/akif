@@ -15,12 +15,13 @@ class WhatsappController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $whatsapps = Whatsapp::withTrashed()->paginate(10)->withPath('/whatsapps');
         // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Whatsapp/Index', [
+            'filters' => $request->all('search', 'trashed'),
             'whatsapps' => $whatsapps,
         ]);
     }
@@ -97,7 +98,7 @@ class WhatsappController extends Controller
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
-        return Redirect::back()->with('success', 'Message updated successfully.');
+        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message updated successfully.');
     }
 
     /**

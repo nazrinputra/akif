@@ -94,7 +94,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $crew)
     {
         $request->validate([
             'name' => ['required', 'max:50'],
@@ -108,9 +108,9 @@ class UserController extends Controller
         $request->merge(['slug' => $slug]);
         $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
 
-        $user->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+        $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
 
-        return Redirect::back()->with('success', 'Crew updated successfully.');
+        return Redirect::route('crews.edit', $crew)->with('success', 'Crew updated successfully.');
     }
 
     /**

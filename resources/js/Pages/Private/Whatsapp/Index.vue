@@ -28,14 +28,24 @@
         </template>
 
         <div class="input-group pb-4">
+            <!-- TODO add role checking for this filter-->
+            <select
+                v-if="auth.user.role_id == 1"
+                v-model="form.trashed"
+                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            >
+                <option value="without">Without Trashed</option>
+                <option value="with">With Trashed</option>
+                <option value="only">Only Trashed</option>
+            </select>
             <input
                 type="text"
                 id="search"
                 placeholder="Search something..."
-                class="form-control rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="form.search"
             />
-            <span class="input-group-append bg-white">
+            <span class="input-group-append">
                 <button class="btn border border-left-0" type="button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -98,8 +108,8 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import BreezePagination from "@/Components/Pagination";
-// import throttle from "lodash/throttle";
-// import pickBy from "lodash/pickBy";
+import throttle from "lodash/throttle";
+import pickBy from "lodash/pickBy";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -115,16 +125,18 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        filters: Object,
         whatsapps: Object
     },
 
     setup() {
         const form = useForm({
-            search: null
+            search: null,
+            trashed: null
         });
 
         return { form };
-    }
+    },
 
     // watch: {
     //     form: {
@@ -135,6 +147,17 @@ export default {
     //             });
     //         }, 150)
     //     }
-    // }
+    // },
+
+    created() {
+        this.loadData();
+    },
+
+    methods: {
+        loadData() {
+            this.form.search = this.filters.search;
+            this.form.trashed = "without";
+        }
+    }
 };
 </script>

@@ -107,7 +107,7 @@ class CarController extends Controller
 
         $car->update($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
 
-        return Redirect::back()->with('success', 'Car updated successfully.');
+        return Redirect::route('cars.edit', $car)->with('success', 'Car updated successfully.');
     }
 
     /**
