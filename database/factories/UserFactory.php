@@ -32,7 +32,7 @@ class UserFactory extends Factory
         $this->faker->addProvider(new \Faker\Provider\ms_MY\PhoneNumber($this->faker));
 
         $this->stores = Store::all();
-        $this->roles = Role::all();
+        $this->roles = Role::all()->skip(1);
 
         $name = $this->faker->name();
         $slug = Str::slug($name);
