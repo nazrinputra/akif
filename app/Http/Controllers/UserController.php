@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $crews = User::withTrashed()->paginate(10)->withPath('/crews');
+        $crews = User::where('id', '<>', Auth::id())->withTrashed()->paginate(10)->withPath('/crews');
         // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Crew/Index', [
@@ -80,9 +80,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $crew)
     {
-        //
+        return Inertia::render('Private/Crew/Edit', [
+            'crew' => $crew->load('role', 'store')
+        ]);
     }
 
     /**
@@ -94,7 +96,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'phone_no' => ['required', 'max:12'],
+            'email' => ['required', 'max:50'],
+            'store_id' => ['required'],
+            'role_id' => ['required']
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+        $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
+
+        $user->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+
+        return Redirect::back()->with('success', 'Crew updated successfully.');
     }
 
     /**
@@ -103,8 +119,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $crew)
     {
-        //
+        $crew->delete();
+        return Redirect::route('crews.index')->with('success', 'Crew deleted successfully.');
+    }
+
+    public function restore(User $crew)
+    {
+        $crew->restore();
+        return Redirect::back()->with('success', 'Crew restored successfully.');
     }
 }
