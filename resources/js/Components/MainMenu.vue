@@ -87,20 +87,6 @@
         </inertia-link>
         <inertia-link
             class="flex items-center group py-3"
-            :href="route('counter')"
-        >
-            <div
-                :class="
-                    route().current('counter')
-                        ? 'text-white'
-                        : 'text-indigo-300 group-hover:text-white'
-                "
-            >
-                <i class="fas fa-cash-register"></i> Counter
-            </div>
-        </inertia-link>
-        <inertia-link
-            class="flex items-center group py-3"
             :href="route('crews.index')"
         >
             <div
