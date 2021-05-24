@@ -13,7 +13,6 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PersonalityController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\WhatsappController;
-use App\Models\Whatsapp;
 
 /*
 |--------------------------------------------------------------------------
