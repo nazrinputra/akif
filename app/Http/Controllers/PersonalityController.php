@@ -101,7 +101,7 @@ class PersonalityController extends Controller
 
         $personality->update($request->only('name', 'slug', 'description'));
 
-        return Redirect::back()->with('success', 'Personality updated successfully.');
+        return Redirect::route('personalities.edit', $personality)->with('success', 'Personality updated successfully.');
     }
 
     /**

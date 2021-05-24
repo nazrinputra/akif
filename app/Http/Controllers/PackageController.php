@@ -107,7 +107,7 @@ class PackageController extends Controller
 
         $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
 
-        return Redirect::back()->with('success', 'Package updated successfully.');
+        return Redirect::route('packages.edit', $package)->with('success', 'Package updated successfully.');
     }
 
     /**

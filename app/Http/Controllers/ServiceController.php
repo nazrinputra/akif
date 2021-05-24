@@ -101,7 +101,7 @@ class ServiceController extends Controller
 
         $service->update($request->only('name', 'slug', 'price', 'description'));
 
-        return Redirect::back()->with('success', 'Service updated successfully.');
+        return Redirect::route('services.edit', $service)->with('success', 'Service updated successfully.');
     }
 
     /**

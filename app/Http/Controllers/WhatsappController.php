@@ -98,7 +98,7 @@ class WhatsappController extends Controller
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
-        return Redirect::back()->with('success', 'Message updated successfully.');
+        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message updated successfully.');
     }
 
     /**
