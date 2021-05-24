@@ -18,12 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $crews = User::all()->except(Auth::id());
-        $crewsCount = $crews->count();
+        $crews = User::withTrashed()->paginate(10)->withPath('/crews');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Crew/Index', [
             'crews' => $crews,
-            'crewsCount' => $crewsCount
         ]);
     }
 

@@ -17,12 +17,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
-        $customersCount = $customers->count();
+        $customers = Customer::withTrashed()->paginate(10)->withPath('/customers');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Customer/Index', [
             'customers' => $customers,
-            'customersCount' => $customersCount
         ]);
     }
 

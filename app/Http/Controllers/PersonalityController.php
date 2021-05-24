@@ -17,12 +17,11 @@ class PersonalityController extends Controller
      */
     public function index()
     {
-        $personalities = Personality::all();
-        $personalitiesCount = $personalities->count();
+        $personalities = Personality::withTrashed()->paginate(10)->withPath('/personalities');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Personality/Index', [
             'personalities' => $personalities,
-            'personalitiesCount' => $personalitiesCount
         ]);
     }
 

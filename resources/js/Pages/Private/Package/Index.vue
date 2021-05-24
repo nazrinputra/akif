@@ -1,8 +1,9 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Packages
+            - List Packages
         </teleport>
+
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
@@ -17,6 +18,7 @@
                 <i class="fas fa-plus"></i>
             </inertia-link>
         </template>
+
         <template #nav>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
@@ -25,80 +27,78 @@
             </span>
         </template>
 
-        <div class="max-w-7xl mx-auto px-3">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="row pt-3 px-3">
-                        <div class="col">
-                            <div id="empty" v-if="packagesCount <= 0">
-                                <h2 class="text-secondary text-center py-4">
-                                    Oops, we're sorry. <br />
-                                    No item in this list.
-                                </h2>
-                            </div>
-                            <table
-                                v-if="packagesCount > 0"
-                                class="table table-hover"
-                            >
-                                <tbody>
-                                    <tr
-                                        v-for="pkg in packages"
-                                        v-bind:key="pkg.id"
-                                    >
-                                        <td class="col-9">
-                                            {{ pkg.name }}
-                                        </td>
-                                        <td class="col-3">
-                                            <div
-                                                class="flex items-center justify-center"
-                                            >
-                                                <inertia-link
-                                                    :href="
-                                                        route(
-                                                            'packages.show',
-                                                            pkg
-                                                        )
-                                                    "
-                                                    ><breeze-button
-                                                        type="button"
-                                                    >
-                                                        <i
-                                                            class="fas fa-angle-double-right"
-                                                        ></i></breeze-button
-                                                ></inertia-link>
-                                                <breeze-button
-                                                    type="button"
-                                                    class="ml-3"
-                                                    @click="remove"
-                                                >
-                                                    <i
-                                                        class="far fa-trash-alt"
-                                                    ></i>
-                                                </breeze-button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="flex items-center justify-center mt-4">
-                                <inertia-link :href="route('dashboard')"
-                                    ><breeze-button type="button">
-                                        Back
-                                    </breeze-button></inertia-link
-                                >
-                                <breeze-button
-                                    type="button"
-                                    class="ml-20"
-                                    @click="add"
-                                >
-                                    Add
-                                </breeze-button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="input-group pb-4">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search something..."
+                class="form-control rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="form.search"
+            />
+            <span class="input-group-append bg-white">
+                <button class="btn border border-left-0" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
         </div>
+
+        <div
+            class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Package Name</th>
+                    <th class="px-3 py-3">Package Price</th>
+                </tr>
+                <tr
+                    v-for="pkg in packages.data"
+                    :key="pkg.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.edit', pkg)"
+                        >
+                            {{ pkg.name }}
+                            <i
+                                v-if="pkg.deleted_at"
+                                class="fas fa-trash opacity-50 ml-3"
+                            ></i>
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.edit', pkg)"
+                        >
+                            {{ pkg.price }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('packages.edit', pkg)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+                <tr v-if="packages.data.length === 0">
+                    <td class="border-t px-3 py-3" colspan="2">
+                        Uh-oh! No packages found.
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <breeze-pagination
+            class="mt-6 d-flex align-items-center"
+            :links="packages.links"
+        />
     </breeze-authenticated-layout>
 </template>
 
@@ -107,29 +107,44 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezePagination from "@/Components/Pagination";
+// import throttle from "lodash/throttle";
+// import pickBy from "lodash/pickBy";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezePagination
     },
 
     props: {
         auth: Object,
         errors: Object,
-        packages: Object,
-        packagesCount: Number
+        flash: Object,
+        packages: Object
     },
 
-    methods: {
-        add() {
-            alert("Not configured yet");
-        },
-        remove() {
-            alert("Not configured yet");
-        }
+    setup() {
+        const form = useForm({
+            search: null
+        });
+
+        return { form };
     }
+
+    // watch: {
+    //     form: {
+    //         deep: true,
+    //         handler: throttle(function() {
+    //             this.$inertia.get(route("packages.index"), pickBy(this.form), {
+    //                 preserveState: true
+    //             });
+    //         }, 150)
+    //     }
+    // }
 };
 </script>
