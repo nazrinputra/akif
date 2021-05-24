@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -32,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Crew/Create');
     }
 
     /**
@@ -43,7 +45,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'phone_no' => ['required', 'max:12'],
+            'email' => ['required', 'max:50'],
+            'store_id' => ['required'],
+            'role_id' => ['required']
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+        $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
+
+        User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+
+        return Redirect::route('crews.index')->with('success', 'Crew added successfully.');
     }
 
     /**
