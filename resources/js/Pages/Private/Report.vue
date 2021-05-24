@@ -29,15 +29,13 @@
             </breeze-responsive-nav-link>
         </template>
 
-        <div class="max-w-7xl mx-auto px-3">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="row p-3">
-                        <div class="col pb-5">
-                            <h2>Reports</h2>
-                            <p>Generate monthly reports and statistics.</p>
-                        </div>
-                    </div>
+        <div
+            class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="row p-3">
+                <div class="col pb-5">
+                    <h2>Reports</h2>
+                    <p>Generate monthly reports and statistics.</p>
                 </div>
             </div>
         </div>
