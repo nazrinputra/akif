@@ -1,27 +1,27 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Create Package
+            - Create Crew
         </teleport>
         <template #header>
             <inertia-link
-                :href="route('packages.index')"
+                :href="route('crews.index')"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Add new package
+                Add new crew
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('packages.index')" :active="false">
-                Packages
+            <breeze-nav-link :href="route('crews.index')" :active="false">
+                Crews
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Package
+                Crew
             </span>
         </template>
 
@@ -29,7 +29,7 @@
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('packages.store'))">
+                <form @submit.prevent="form.post(route('crews.store'))">
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
@@ -49,82 +49,83 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="price">Price</label>
+                        <label for="phone_no">Phone No</label>
                         <input
                             type="number"
-                            id="price"
+                            id="phone_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.price
+                                form.errors.phone_no
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.price"
-                            @keydown="form.clearErrors('price')"
+                            v-model="form.phone_no"
+                            @keydown="form.clearErrors('phone_no')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.price
+                            form.errors.phone_no
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="frequency">Frequency</label>
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.email
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.email"
+                            @keydown="form.clearErrors('email')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.email
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="store_id">Store</label>
                         <input
                             type="text"
-                            id="frequency"
+                            id="store_id"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.frequency
+                                form.errors.store_id
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.frequency"
-                            @keydown="form.clearErrors('frequency')"
+                            v-model="form.store_id"
+                            @keydown="form.clearErrors('store_id')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.frequency
+                            form.errors.store_id
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="duration">Duration</label>
+                        <label for="role_id">Role</label>
                         <input
                             type="text"
-                            id="duration"
+                            id="role_id"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.duration
+                                form.errors.role_id
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.duration"
-                            @keydown="form.clearErrors('duration')"
+                            v-model="form.role_id"
+                            @keydown="form.clearErrors('role_id')"
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.duration
+                            form.errors.role_id
                         }}</span>
                     </div>
-                    <div class="mt-3 p-3">
-                        <label for="description">Description</label>
-                        <textarea
-                            rows="7"
-                            id="description"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.description
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.description"
-                            @keydown="form.clearErrors('description')"
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.description
-                        }}</span>
-                    </div>
+
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <inertia-link
-                            :href="route('packages.index')"
+                            :href="route('crews.index')"
                             class="btn btn-secondary"
                         >
                             Back
@@ -168,10 +169,10 @@ export default {
     setup() {
         const form = useForm({
             name: null,
-            price: null,
-            frequency: null,
-            duration: null,
-            description: null
+            phone_no: null,
+            email: null,
+            store_id: null,
+            role_id: null
         });
 
         return { form };

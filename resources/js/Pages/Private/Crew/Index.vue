@@ -4,24 +4,18 @@
             - Crews
         </teleport>
         <template #header>
-            <div class="row px-5">
-                <inertia-link
-                    :href="route('dashboard')"
-                    class="btn btn-secondary"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </inertia-link>
-                <h6 class="pt-2.5 ml-3">
-                    View list of crews in the system.
-                </h6>
-                <inertia-link
-                    href="#"
-                    class="btn btn-secondary ml-auto"
-                    @click="add"
-                >
-                    <i class="fas fa-plus"></i>
-                </inertia-link>
-            </div>
+            <inertia-link :href="route('dashboard')" class="btn btn-secondary">
+                <i class="fas fa-chevron-left"></i>
+            </inertia-link>
+            <h6 class="pt-2.5 mx-auto">
+                List of crews
+            </h6>
+            <inertia-link
+                :href="route('crews.create')"
+                class="btn btn-secondary align-self-end"
+            >
+                <i class="fas fa-plus"></i>
+            </inertia-link>
         </template>
         <template #nav>
             <span

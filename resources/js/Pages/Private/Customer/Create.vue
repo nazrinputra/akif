@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Create Cutomer
+            - Create Customer
         </teleport>
         <template #header>
             <inertia-link
@@ -16,12 +16,12 @@
         </template>
         <template #nav>
             <breeze-nav-link :href="route('customers.index')" :active="false">
-                Customer
+                Customers
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                customer
+                Customer
             </span>
         </template>
 
@@ -49,7 +49,7 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="phone_no">Phone Number</label>
+                        <label for="phone_no">Phone No</label>
                         <input
                             type="number"
                             id="phone_no"
