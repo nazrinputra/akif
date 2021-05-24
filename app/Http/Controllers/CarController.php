@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
 {
@@ -31,7 +33,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Car/Create');
     }
 
     /**
@@ -42,7 +44,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'plate_no' => ['required', 'max:10'],
+            'brand' => ['required', 'max:10'],
+            'model' => ['required', 'max:50'],
+            'color' => ['required', 'max:50'],
+            'size' => ['required', 'max:5'],
+        ]);
+
+        $slug = Str::slug($request->plate_no);
+        $request->merge(['slug' => $slug]);
+
+        Car::create($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
+
+        return Redirect::route('cars.index')->with('success', 'Car added successfully.');
     }
 
     /**
