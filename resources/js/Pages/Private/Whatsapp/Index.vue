@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - List WhatsApp
+            - List WhatsApps
         </teleport>
 
         <template #header>

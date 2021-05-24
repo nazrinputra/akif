@@ -17,12 +17,11 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
-        $carsCount = $cars->count();
+        $cars = Car::withTrashed()->paginate(10)->withPath('/cars');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Car/Index', [
             'cars' => $cars,
-            'carsCount' => $carsCount
         ]);
     }
 

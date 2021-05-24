@@ -24,7 +24,7 @@ class CustomerFactory extends Factory
     {
         $this->faker->addProvider(new \Faker\Provider\ms_MY\Person($this->faker));
         $this->faker->addProvider(new \Faker\Provider\ms_MY\PhoneNumber($this->faker));
-        $name = $this->faker->name;
+        $name = $this->faker->name();
         $slug = Str::slug($name);
 
         return [

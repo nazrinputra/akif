@@ -202,7 +202,7 @@
             </div>
             <div class="md:flex md:flex-grow md:overflow-hidden">
                 <div
-                    class="hidden md:block bg-secondary flex-shrink-0 w-56 px-5 overflow-y-auto"
+                    class="hidden md:block bg-secondary flex-shrink-0 w-56 px-5 py-5 overflow-y-auto"
                     id="main-menu"
                 >
                     <breeze-main-menu />

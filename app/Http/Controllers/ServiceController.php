@@ -17,12 +17,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
-        $servicesCount = $services->count();
+        $services = Service::withTrashed()->paginate(10)->withPath('/services');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Service/Index', [
             'services' => $services,
-            'servicesCount' => $servicesCount
         ]);
     }
 

@@ -17,12 +17,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
-        $packagesCount = $packages->count();
+        $packages = Package::withTrashed()->paginate(10)->withPath('/packages');
+        // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Package/Index', [
             'packages' => $packages,
-            'packagesCount' => $packagesCount
         ]);
     }
 

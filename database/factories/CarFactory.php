@@ -27,15 +27,15 @@ class CarFactory extends Factory
     {
         $this->faker->addProvider(new Fakecar($this->faker));
         $this->faker->addProvider(new \Faker\Provider\ms_MY\Miscellaneous($this->faker));
-        $plate_no = $this->faker->jpjNumberPlate;
+        $plate_no = $this->faker->jpjNumberPlate();
         $slug = Str::slug($plate_no);
 
         return [
             'plate_no' => $plate_no,
             'slug' => $slug,
-            'brand' => $this->faker->vehicleBrand,
-            'model' => $this->faker->vehicleModel,
-            'color' => $this->faker->colorName,
+            'brand' => $this->faker->vehicleBrand(),
+            'model' => $this->faker->vehicleModel(),
+            'color' => $this->faker->colorName(),
             'size' => $this->faker->randomElement($this->size)
         ];
     }
