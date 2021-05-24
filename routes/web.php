@@ -39,22 +39,22 @@ Route::resource('promotions', PromotionController::class)->parameters([
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', function () {
-        return Inertia::render('Private/Dashboard');
+        return Inertia::render('Private/Dashboard/Index');
     })->name('dashboard');
 
-    Route::get('reports', function () {
-        return Inertia::render('Private/Report');
-    })->name('reports');
+    Route::get('counter', function () {
+        return Inertia::render('Private/Dashboard/Counter');
+    })->name('counter');
 
     Route::get('profile', function () {
-        return Inertia::render('Private/Profile', [
+        return Inertia::render('Private/Dashboard/Profile', [
             'user' => Auth::user()->load('store')
         ]);
     })->name('profile');
 
-    Route::get('counter', function () {
-        return Inertia::render('Private/Counter');
-    })->name('counter');
+    Route::get('reports', function () {
+        return Inertia::render('Private//Dashboard/Report');
+    })->name('reports');
 });
