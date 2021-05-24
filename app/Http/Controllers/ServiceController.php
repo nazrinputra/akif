@@ -20,9 +20,7 @@ class ServiceController extends Controller
         $services = Service::withTrashed()->paginate(10)->withPath('/services');
         // TODO only allow some role to view deleted
 
-        return Inertia::render('Private/Service/Index', [
-            'services' => $services,
-        ]);
+        return Inertia::render('Private/Service/Index', compact('services'));
     }
 
     /**
@@ -78,7 +76,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return Inertia::render('Private/Service/Edit', [
+            'service' => $service->load('packages')
+        ]);
     }
 
     /**
@@ -90,7 +90,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'price' => ['required', 'max:5'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $service->update($request->only('name', 'slug', 'price', 'description'));
+
+        return Redirect::back()->with('success', 'Service updated successfully.');
     }
 
     /**
@@ -101,6 +112,13 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        return Redirect::route('services.index')->with('success', 'Service deleted successfully.');
+    }
+
+    public function restore(Service $service)
+    {
+        $service->restore();
+        return Redirect::back()->with('success', 'Service restored successfully.');
     }
 }
