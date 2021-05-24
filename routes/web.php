@@ -4,15 +4,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CarController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoreController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\PersonalityController;
 use App\Http\Controllers\PromotionController;
-use App\Http\Controllers\WhatsappController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +18,15 @@ use App\Http\Controllers\WhatsappController;
 |
 */
 
+require __DIR__ . '/auth.php';
+require __DIR__ . '/content/car.php';
+require __DIR__ . '/content/crew.php';
+require __DIR__ . '/content/customer.php';
+require __DIR__ . '/content/package.php';
+require __DIR__ . '/content/personality.php';
+require __DIR__ . '/content/service.php';
+require __DIR__ . '/content/whatsapp.php';
+
 URL::forceScheme('https');
 
 Route::get('/', function () {
@@ -36,7 +38,6 @@ Route::resource('promotions', PromotionController::class)->parameters([
 ])->only(['index', 'show']);
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
-
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
@@ -56,37 +57,4 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('counter', function () {
         return Inertia::render('Private/Counter');
     })->name('counter');
-
-    Route::resource('whatsapps', WhatsappController::class)->parameters([
-        'whatsapps' => 'whatsapp:slug'
-    ]);
-
-    Route::put('whatsapps/{whatsapp:slug}/restore', [WhatsappController::class, 'restore'])
-        ->name('whatsapps.restore');
-
-    Route::resource('cars', CarController::class)->parameters([
-        'cars' => 'car:slug'
-    ])->only(['index', 'show']);
-
-    Route::resource('customers', CustomerController::class)->parameters([
-        'customers' => 'customer:slug'
-    ]);
-
-    Route::resource('services', ServiceController::class)->parameters([
-        'services' => 'service:slug'
-    ]);
-
-    Route::resource('packages', PackageController::class)->parameters([
-        'packages' => 'package:slug'
-    ]);
-
-    Route::resource('personalities', PersonalityController::class)->parameters([
-        'personalities' => 'personality:slug'
-    ]);
-
-    Route::resource('crews', UserController::class)->parameters([
-        'crews' => 'crew:slug'
-    ])->only(['index', 'show']);
 });
-
-require __DIR__ . '/auth.php';
