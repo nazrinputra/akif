@@ -17,7 +17,7 @@ class WhatsappController extends Controller
      */
     public function index()
     {
-        $whatsapps = Whatsapp::withTrashed()->paginate(10);
+        $whatsapps = Whatsapp::withTrashed()->paginate(10)->withPath('/whatsapps');
         // TODO only allow some role to view deleted
 
         return Inertia::render('Private/Whatsapp/Index', [
