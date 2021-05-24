@@ -40,6 +40,7 @@
                     </p>
                     <p>{{ user.name }}</p>
                     <p>{{ user.store.name }}</p>
+                    <i class="fas fa-tools text-9xl"></i>
                 </div>
             </div>
         </div>
