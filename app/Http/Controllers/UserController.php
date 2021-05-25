@@ -74,9 +74,9 @@ class UserController extends Controller
      */
     public function show(User $crew)
     {
-        // return Inertia::render('Private/Crew/Show', [
-        //     'crew' => $crew->load('role', 'store')
-        // ]);
+        return Inertia::render('Private/Crew/Show', [
+            'crew' => $crew->load('role', 'store')
+        ]);
     }
 
     /**
@@ -105,7 +105,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'phone_no' => ['required', 'max:12'],
+            'phone_no' => ['required', 'min:9', 'max:12'],
             'email' => ['required', 'max:50'],
             'store_id' => ['required'],
             'role_id' => ['required']
@@ -114,9 +114,9 @@ class UserController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+        $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'store_id', 'role_id'));
 
-        return Redirect::route('crews.edit', $crew)->with('success', 'Crew updated successfully.');
+        return Redirect::route('crews.show', $crew)->with('success', 'Crew updated successfully.');
     }
 
     /**

@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Create Crew
+            - Show Crew
         </teleport>
         <template #header>
             <inertia-link
@@ -11,7 +11,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Add new crew
+                View existing crew
             </h6>
         </template>
         <template #nav>
@@ -24,12 +24,18 @@
                 Crew
             </span>
         </template>
-
+        <breeze-trashed-message
+            v-if="crew.deleted_at"
+            class="mb-6"
+            @restore="restore(crew)"
+        >
+            This crew has been deleted.
+        </breeze-trashed-message>
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('crews.store'))">
+                <form>
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
@@ -43,7 +49,7 @@
                             "
                             v-model="form.name"
                             @keydown="form.clearErrors('name')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.name
@@ -62,7 +68,7 @@
                             "
                             v-model="form.phone_no"
                             @keydown="form.clearErrors('phone_no')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.phone_no
@@ -81,7 +87,7 @@
                             "
                             v-model="form.email"
                             @keydown="form.clearErrors('email')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.email
@@ -98,14 +104,10 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            required
+                            disabled
                         >
-                            <option
-                                v-for="store in stores"
-                                :key="store.id"
-                                :value="store.id"
-                            >
-                                {{ store.name }}
+                            <option :value="crew.store_id">
+                                {{ crew.store.name }}
                             </option>
                         </select>
                         <span class="text-red-700 mt-2 text-sm">{{
@@ -123,14 +125,10 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            required
+                            disabled
                         >
-                            <option
-                                v-for="role in roles"
-                                :key="role.id"
-                                :value="role.id"
-                            >
-                                {{ role.name }}
+                            <option :value="crew.role_id">
+                                {{ crew.role.name }}
                             </option>
                         </select>
                         <span class="text-red-700 mt-2 text-sm">{{
@@ -142,19 +140,21 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <inertia-link
-                            :href="route('crews.index')"
-                            class="btn btn-secondary"
+                            v-if="!crew.deleted_at"
+                            as="button"
+                            @click="destroy(crew)"
+                            class="btn btn-outline-secondary"
                         >
-                            Back
+                            Delete
                         </inertia-link>
-                        <breeze-button
-                            :class="{
-                                'opacity-25': form.processing
-                            }"
-                            :disabled="form.processing"
+                        <inertia-link
+                            v-if="!crew.deleted_at"
+                            class="ml-auto btn btn-secondary"
+                            as="button"
+                            :href="route('crews.edit', crew)"
                         >
-                            Submit
-                        </breeze-button>
+                            Edit
+                        </inertia-link>
                     </div>
                 </form>
             </div>
@@ -167,6 +167,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -174,15 +175,15 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeTrashedMessage
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        stores: Object,
-        roles: Object
+        crew: Object
     },
 
     setup() {
@@ -195,6 +196,26 @@ export default {
         });
 
         return { form };
+    },
+
+    created() {
+        this.loadData();
+    },
+
+    methods: {
+        loadData() {
+            this.form.name = this.crew.name;
+            this.form.phone_no = this.crew.phone_no;
+            this.form.email = this.crew.email;
+            this.form.store_id = this.crew.store_id;
+            this.form.role_id = this.crew.role_id;
+        },
+        destroy(crew) {
+            this.$inertia.delete(route("crews.destroy", crew));
+        },
+        restore(crew) {
+            this.$inertia.put(route("crews.restore", crew));
+        }
     }
 };
 </script>
