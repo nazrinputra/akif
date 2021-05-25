@@ -40,6 +40,7 @@
                             "
                             v-model="form.plate_no"
                             @keydown="form.clearErrors('plate_no')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.plate_no
@@ -58,6 +59,7 @@
                             "
                             v-model="form.brand"
                             @keydown="form.clearErrors('brand')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.brand
@@ -76,6 +78,7 @@
                             "
                             v-model="form.model"
                             @keydown="form.clearErrors('model')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.model
@@ -94,6 +97,7 @@
                             "
                             v-model="form.color"
                             @keydown="form.clearErrors('color')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.color
@@ -110,6 +114,7 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
+                            required
                         >
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
