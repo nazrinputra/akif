@@ -80,7 +80,9 @@
 
                                             <template #content>
                                                 <breeze-dropdown-link
-                                                    :href="route('profile')"
+                                                    :href="
+                                                        route('profiles.show')
+                                                    "
                                                     as="button"
                                                 >
                                                     My Profile
@@ -168,7 +170,7 @@
 
                                 <div class="mt-3 space-y-1">
                                     <breeze-responsive-nav-link
-                                        :href="route('profile')"
+                                        :href="route('profiles.show')"
                                         as="button"
                                     >
                                         My Profile
