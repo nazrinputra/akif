@@ -7,7 +7,7 @@
             <!-- Page Content -->
             <div class="md:flex md:flex-shrink-0">
                 <div
-                    class="bg-secondary md:flex-shrink-0 md:w-56 px-5 md:flex sm:hidden flex items-center justify-center"
+                    class="bg-secondary md:flex-shrink-0 md:w-56 px-5 hidden md:flex items-center justify-center"
                 >
                     <inertia-link class="mt-1" href="/">
                         <breeze-application-logo class="w-28 h-28" />
@@ -16,13 +16,13 @@
                 <div
                     class="bg-white border-b w-full md:px-10 text-sm md:text-md"
                 >
-                    <nav class="bg-white border-b border-gray-100 sm:mt-4">
+                    <nav class="bg-white border-b border-gray-100 mt-4 md:mt-0">
                         <!-- Primary Navigation Menu -->
-                        <div class="max-w-7xl mx-auto md:pt-3 lg:px-8">
+                        <div class="max-w-7xl mx-auto md:pt-3 px-8">
                             <div class="flex justify-between">
                                 <div class="flex">
                                     <!-- Navigation Links -->
-                                    <div class="sm:-my-px sm:flex">
+                                    <div class="md:-my-px md:flex">
                                         <breeze-nav-link
                                             v-if="!route().current('dashboard')"
                                             :href="route('dashboard')"
