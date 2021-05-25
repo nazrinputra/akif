@@ -64,9 +64,9 @@ class PersonalityController extends Controller
      */
     public function show(Personality $personality)
     {
-        return Inertia::render('Private/Personality/Show', [
-            'personality' => $personality->load('customers')
-        ]);
+        // return Inertia::render('Private/Personality/Show', [
+        //     'personality' => $personality->load('customers')
+        // ]);
     }
 
     /**

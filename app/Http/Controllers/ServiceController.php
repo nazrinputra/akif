@@ -63,9 +63,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return Inertia::render('Private/Service/Show', [
-            'service' => $service->load('packages')
-        ]);
+        // return Inertia::render('Private/Service/Show', [
+        //     'service' => $service->load('packages')
+        // ]);
     }
 
     /**
