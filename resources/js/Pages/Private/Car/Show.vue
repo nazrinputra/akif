@@ -136,14 +136,13 @@
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
-                        <inertia-link
+                        <breeze-button
                             v-if="!car.deleted_at"
-                            as="button"
                             @click="destroy(car)"
-                            class="btn btn-outline-secondary"
+                            type="button"
                         >
                             Delete
-                        </inertia-link>
+                        </breeze-button>
                         <inertia-link
                             v-if="!car.deleted_at"
                             class="ml-auto btn btn-secondary"
