@@ -17,12 +17,9 @@ class WhatsappController extends Controller
      */
     public function index(Request $request)
     {
-        $whatsapps = Whatsapp::withTrashed()->paginate(10)->withPath('/whatsapps');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Whatsapp/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'whatsapps' => $whatsapps,
+            'whatsapps' => Whatsapp::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/whatsapps'),
         ]);
     }
 
@@ -110,7 +107,7 @@ class WhatsappController extends Controller
     public function destroy(Whatsapp $whatsapp)
     {
         $whatsapp->delete();
-        return Redirect::route('whatsapps.index')->with('success', 'Message deleted successfully.');
+        return Redirect::back()->with('success', 'Message deleted successfully.');
     }
 
     public function restore(Whatsapp $whatsapp)

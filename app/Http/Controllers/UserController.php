@@ -18,13 +18,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $crews = User::where('id', '<>', Auth::id())->withTrashed()->paginate(10)->withPath('/crews');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Crew/Index', [
-            'crews' => $crews,
+            'filters' => $request->all('search', 'trashed'),
+            'crews' => User::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/crews'),
         ]);
     }
 
@@ -128,7 +126,7 @@ class UserController extends Controller
     public function destroy(User $crew)
     {
         $crew->delete();
-        return Redirect::route('crews.index')->with('success', 'Crew deleted successfully.');
+        return Redirect::back()->with('success', 'Crew deleted successfully.');
     }
 
     public function restore(User $crew)

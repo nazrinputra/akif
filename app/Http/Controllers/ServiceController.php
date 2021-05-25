@@ -15,12 +15,12 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::withTrashed()->paginate(10)->withPath('/services');
-        // TODO only allow some role to view deleted
-
-        return Inertia::render('Private/Service/Index', compact('services'));
+        return Inertia::render('Private/Service/Index', [
+            'filters' => $request->all('search', 'trashed'),
+            'services' => Service::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/services'),
+        ]);
     }
 
     /**
@@ -113,7 +113,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
-        return Redirect::route('services.index')->with('success', 'Service deleted successfully.');
+        return Redirect::back()->with('success', 'Service deleted successfully.');
     }
 
     public function restore(Service $service)

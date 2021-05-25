@@ -31,6 +31,6 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
         ]);
 
-        User::factory(20)->create();
+        User::factory(49)->create();
     }
 }

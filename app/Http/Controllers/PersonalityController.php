@@ -15,13 +15,11 @@ class PersonalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $personalities = Personality::withTrashed()->paginate(10)->withPath('/personalities');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Personality/Index', [
-            'personalities' => $personalities,
+            'filters' => $request->all('search', 'trashed'),
+            'personalities' => Personality::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/personalities'),
         ]);
     }
 
@@ -113,7 +111,7 @@ class PersonalityController extends Controller
     public function destroy(Personality $personality)
     {
         $personality->delete();
-        return Redirect::route('personalities.index')->with('success', 'Personality deleted successfully.');
+        return Redirect::back()->with('success', 'Personality deleted successfully.');
     }
 
     public function restore(Personality $personality)

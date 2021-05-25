@@ -15,13 +15,11 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $packages = Package::withTrashed()->paginate(10)->withPath('/packages');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Package/Index', [
-            'packages' => $packages,
+            'filters' => $request->all('search', 'trashed'),
+            'packages' => Package::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/packages'),
         ]);
     }
 
@@ -119,7 +117,7 @@ class PackageController extends Controller
     public function destroy(Package $package)
     {
         $package->delete();
-        return Redirect::route('packages.index')->with('success', 'Package deleted successfully.');
+        return Redirect::back()->with('success', 'Package deleted successfully.');
     }
 
     public function restore(Package $package)

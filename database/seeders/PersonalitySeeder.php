@@ -14,6 +14,6 @@ class PersonalitySeeder extends Seeder
      */
     public function run()
     {
-        Personality::factory(10)->create();
+        Personality::factory(15)->create();
     }
 }

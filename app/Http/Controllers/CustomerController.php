@@ -15,13 +15,11 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::withTrashed()->paginate(10)->withPath('/customers');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Customer/Index', [
-            'customers' => $customers,
+            'filters' => $request->all('search', 'trashed'),
+            'customers' => Customer::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/customers'),
         ]);
     }
 
@@ -115,7 +113,7 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return Redirect::route('customers.index')->with('success', 'Customer deleted successfully.');
+        return Redirect::back()->with('success', 'Customer deleted successfully.');
     }
 
     public function restore(Customer $customer)
