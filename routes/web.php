@@ -19,6 +19,7 @@ use App\Http\Controllers\PromotionController;
 */
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/content/dashboard.php';
 require __DIR__ . '/content/car.php';
 require __DIR__ . '/content/crew.php';
 require __DIR__ . '/content/customer.php';
@@ -44,15 +45,11 @@ Route::group(['middleware' => 'auth'], function () {
         return Inertia::render('Private/Dashboard/Index');
     })->name('dashboard');
 
-    Route::get('counter', function () {
-        return Inertia::render('Private/Dashboard/Counter');
-    })->name('counter');
+    Route::get('reports', function () {
+        return Inertia::render('Private/Dashboard/Report');
+    })->name('reports');
 
     Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
 
     Route::put('profiles', [ProfileController::class, 'update'])->name('profiles.update');
-
-    Route::get('reports', function () {
-        return Inertia::render('Private/Dashboard/Report');
-    })->name('reports');
 });
