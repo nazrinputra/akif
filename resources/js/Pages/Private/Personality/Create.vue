@@ -98,7 +98,6 @@
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
-import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import { useForm } from "@inertiajs/inertia-vue3";
 
@@ -106,7 +105,6 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink,
         BreezeButton
     },
 
