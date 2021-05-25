@@ -1,45 +1,43 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Edit Service
+            - Show Service
         </teleport>
         <template #header>
             <inertia-link
-                :href="route('services.show', service)"
+                :href="route('services.index')"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Edit existing service
+                View existing service
             </h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('services.index')" :active="false">
                 Services
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('services.show', service)"
-                :active="false"
-            >
-                Service
-            </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Edit
+                Service
             </span>
         </template>
+
+        <breeze-trashed-message
+            v-if="service.deleted_at"
+            class="mb-6"
+            @restore="restore(service)"
+        >
+            This service has been deleted.
+        </breeze-trashed-message>
 
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form
-                    @submit.prevent="
-                        form.put(route('services.update', service))
-                    "
-                >
+                <form>
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
@@ -53,7 +51,7 @@
                             "
                             v-model="form.name"
                             @keydown="form.clearErrors('name')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.name
@@ -72,7 +70,7 @@
                             "
                             v-model="form.price"
                             @keydown="form.clearErrors('price')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.price
@@ -91,7 +89,7 @@
                             "
                             v-model="form.description"
                             @keydown="form.clearErrors('description')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.description
@@ -101,14 +99,20 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <breeze-button
-                            class="ml-auto"
-                            :class="{
-                                'opacity-25': form.processing
-                            }"
-                            :disabled="form.processing"
+                            v-if="!service.deleted_at"
+                            @click="destroy(service)"
+                            type="button"
                         >
-                            Update
+                            Delete
                         </breeze-button>
+                        <inertia-link
+                            v-if="!service.deleted_at"
+                            class="ml-auto btn btn-secondary"
+                            as="button"
+                            :href="route('services.edit', service)"
+                        >
+                            Edit
+                        </inertia-link>
                     </div>
                 </form>
             </div>
@@ -157,6 +161,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -164,7 +169,8 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeTrashedMessage
     },
 
     props: {
@@ -193,6 +199,12 @@ export default {
             this.form.name = this.service.name;
             this.form.price = this.service.price;
             this.form.description = this.service.description;
+        },
+        destroy(service) {
+            this.$inertia.delete(route("services.destroy", service));
+        },
+        restore(service) {
+            this.$inertia.put(route("services.restore", service));
         }
     }
 };

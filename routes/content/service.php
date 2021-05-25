@@ -5,7 +5,7 @@ use App\Http\Controllers\ServiceController;
 
 Route::resource('services', ServiceController::class)->parameters([
     'services' => 'service:slug'
-])->middleware('auth')->except('show');
+])->middleware('auth');
 
 Route::put('services/{service:slug}/restore', [ServiceController::class, 'restore'])
     ->name('services.restore')->middleware('auth');
