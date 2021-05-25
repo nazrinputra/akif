@@ -64,9 +64,9 @@ class PersonalityController extends Controller
      */
     public function show(Personality $personality)
     {
-        // return Inertia::render('Private/Personality/Show', [
-        //     'personality' => $personality->load('customers')
-        // ]);
+        return Inertia::render('Private/Personality/Show', [
+            'personality' => $personality->load('customers')
+        ]);
     }
 
     /**
@@ -101,7 +101,7 @@ class PersonalityController extends Controller
 
         $personality->update($request->only('name', 'slug', 'description'));
 
-        return Redirect::route('personalities.edit', $personality)->with('success', 'Personality updated successfully.');
+        return Redirect::route('personalities.show', $personality)->with('success', 'Personality updated successfully.');
     }
 
     /**

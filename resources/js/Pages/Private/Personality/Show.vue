@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Create Personality
+            - Show Personality
         </teleport>
         <template #header>
             <inertia-link
@@ -11,7 +11,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Add new personality
+                View existing personality
             </h6>
         </template>
         <template #nav>
@@ -27,12 +27,18 @@
                 Personality
             </span>
         </template>
-
+        <breeze-trashed-message
+            v-if="personality.deleted_at"
+            class="mb-6"
+            @restore="restore(personality)"
+        >
+            This personality has been deleted.
+        </breeze-trashed-message>
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('personalities.store'))">
+                <form>
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
@@ -46,7 +52,7 @@
                             "
                             v-model="form.name"
                             @keydown="form.clearErrors('name')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.name
@@ -65,7 +71,7 @@
                             "
                             v-model="form.description"
                             @keydown="form.clearErrors('description')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.description
@@ -74,23 +80,60 @@
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
-                        <inertia-link
-                            :href="route('services.index')"
-                            class="btn btn-secondary"
-                        >
-                            Back
-                        </inertia-link>
                         <breeze-button
-                            :class="{
-                                'opacity-25': form.processing
-                            }"
-                            :disabled="form.processing"
+                            v-if="!personality.deleted_at"
+                            @click="destroy(personality)"
+                            type="button"
                         >
-                            Submit
+                            Delete
                         </breeze-button>
+                        <inertia-link
+                            v-if="!personality.deleted_at"
+                            class="ml-auto btn btn-secondary"
+                            as="button"
+                            :href="route('personalities.edit', personality)"
+                        >
+                            Edit
+                        </inertia-link>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div
+            v-if="personality.customers.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Customer Name</th>
+                </tr>
+                <tr
+                    v-for="customer in personality.customers"
+                    :key="customer.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('customers.edit', customer)"
+                        >
+                            {{ customer.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('customers.edit', customer)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
         </div>
     </breeze-authenticated-layout>
 </template>
@@ -100,6 +143,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -107,13 +151,15 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeTrashedMessage
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
+        personality: Object
     },
 
     setup() {
@@ -123,6 +169,23 @@ export default {
         });
 
         return { form };
+    },
+
+    created() {
+        this.loadData();
+    },
+
+    methods: {
+        loadData() {
+            this.form.name = this.personality.name;
+            this.form.description = this.personality.description;
+        },
+        destroy(personality) {
+            this.$inertia.delete(route("personalities.destroy", personality));
+        },
+        restore(personality) {
+            this.$inertia.put(route("personalities.restore", personality));
+        }
     }
 };
 </script>
