@@ -40,7 +40,7 @@ Route::resource('promotions', PromotionController::class)->parameters([
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('stores.show');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Private/Dashboard/Index');
     })->name('dashboard');

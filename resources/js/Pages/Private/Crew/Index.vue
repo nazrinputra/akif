@@ -9,7 +9,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of crews for the crew
+                List of crews for the store
             </h6>
             <inertia-link
                 :href="route('crews.create')"
@@ -68,7 +68,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('crews.edit', crew)"
+                            :href="route('crews.show', crew)"
                         >
                             {{ crew.name }}
                             <i
@@ -81,10 +81,10 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('crews.edit', crew)"
+                            :href="route('crews.show', crew)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-eye"></i>
                         </inertia-link>
                     </td>
                 </tr>

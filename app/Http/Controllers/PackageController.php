@@ -67,9 +67,9 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        // return Inertia::render('Private/Package/Show', [
-        //     'pkg' => $package->load('services')
-        // ]);
+        return Inertia::render('Private/Package/Show', [
+            'pkg' => $package->load('services')
+        ]);
     }
 
     /**
@@ -107,7 +107,7 @@ class PackageController extends Controller
 
         $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
 
-        return Redirect::route('packages.edit', $package)->with('success', 'Package updated successfully.');
+        return Redirect::route('packages.show', $package)->with('success', 'Package updated successfully.');
     }
 
     /**

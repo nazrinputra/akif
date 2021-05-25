@@ -67,9 +67,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        // return Inertia::render('Private/Car/Show', [
-        //     'car' => $car->load('owners')
-        // ]);
+        return Inertia::render('Private/Car/Show', [
+            'car' => $car->load('owners')
+        ]);
     }
 
     /**
@@ -107,7 +107,7 @@ class CarController extends Controller
 
         $car->update($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
 
-        return Redirect::route('cars.edit', $car)->with('success', 'Car updated successfully.');
+        return Redirect::route('cars.show', $car)->with('success', 'Car updated successfully.');
     }
 
     /**

@@ -5,36 +5,33 @@
         </teleport>
         <template #header>
             <inertia-link
-                :href="route('customers.index')"
+                :href="route('customers.show', customer)"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 v-on:click="isVisible = !isVisible" class="pt-2.5 mx-auto">
-                View existing customer
+            <h6 class="pt-2.5 mx-auto">
+                Edit existing customer
             </h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('customers.index')" :active="false">
                 Customers
             </breeze-nav-link>
+            <breeze-nav-link
+                :href="route('customers.show', customer)"
+                :active="false"
+            >
+                Customer
+            </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Customer
+                Edit
             </span>
         </template>
 
-        <breeze-trashed-message
-            v-if="customer.deleted_at"
-            class="mb-6"
-            @restore="restore(customer)"
-        >
-            This customer has been deleted.
-        </breeze-trashed-message>
-
         <div
-            v-if="isVisible"
             class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
@@ -91,6 +88,7 @@
                             "
                             v-model="form.name"
                             @keydown="form.clearErrors('name')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.name
@@ -109,6 +107,7 @@
                             "
                             v-model="form.phone_no"
                             @keydown="form.clearErrors('phone_no')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.phone_no
@@ -125,6 +124,7 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
+                            required
                         >
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -137,14 +137,6 @@
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
-                        <inertia-link
-                            v-if="!customer.deleted_at"
-                            as="button"
-                            @click="destroy(customer)"
-                            class="btn btn-outline-secondary"
-                        >
-                            Delete
-                        </inertia-link>
                         <breeze-button
                             class="ml-auto"
                             :class="{
@@ -212,7 +204,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -220,16 +211,14 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeTrashedMessage
+        BreezeButton
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        customer: Object,
-        isVisible: false
+        customer: Object
     },
 
     setup() {
@@ -251,12 +240,6 @@ export default {
             this.form.name = this.customer.name;
             this.form.phone_no = this.customer.phone_no;
             this.form.gender = this.customer.gender;
-        },
-        destroy(customer) {
-            this.$inertia.delete(route("customers.destroy", customer));
-        },
-        restore(customer) {
-            this.$inertia.put(route("customers.restore", customer));
         }
     }
 };

@@ -43,6 +43,7 @@
                             "
                             v-model="form.name"
                             @keydown="form.clearErrors('name')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.name
@@ -61,6 +62,7 @@
                             "
                             v-model="form.phone_no"
                             @keydown="form.clearErrors('phone_no')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.phone_no
@@ -79,6 +81,7 @@
                             "
                             v-model="form.email"
                             @keydown="form.clearErrors('email')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.email
@@ -95,6 +98,7 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
+                            required
                         >
                             <option
                                 v-for="store in stores"
@@ -119,6 +123,7 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
+                            required
                         >
                             <option
                                 v-for="role in roles"

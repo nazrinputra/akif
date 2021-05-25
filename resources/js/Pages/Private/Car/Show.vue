@@ -1,38 +1,40 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Edit Car
+            - Show Car
         </teleport>
         <template #header>
-            <inertia-link
-                :href="route('cars.show', car)"
-                class="btn btn-secondary"
-            >
+            <inertia-link :href="route('cars.index')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Edit existing car
+                View existing car
             </h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('cars.index')" :active="false">
                 Cars
             </breeze-nav-link>
-            <breeze-nav-link :href="route('cars.show', car)" :active="false">
-                Car
-            </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Edit
+                Car
             </span>
         </template>
+
+        <breeze-trashed-message
+            v-if="car.deleted_at"
+            class="mb-6"
+            @restore="restore(car)"
+        >
+            This car has been deleted.
+        </breeze-trashed-message>
 
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.put(route('cars.update', car))">
+                <form>
                     <div class="mt-3 p-3">
                         <label for="plate_no">Plate No</label>
                         <input
@@ -46,7 +48,7 @@
                             "
                             v-model="form.plate_no"
                             @keydown="form.clearErrors('plate_no')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.plate_no
@@ -65,7 +67,7 @@
                             "
                             v-model="form.brand"
                             @keydown="form.clearErrors('brand')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.brand
@@ -84,7 +86,7 @@
                             "
                             v-model="form.model"
                             @keydown="form.clearErrors('model')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.model
@@ -103,7 +105,7 @@
                             "
                             v-model="form.color"
                             @keydown="form.clearErrors('color')"
-                            required
+                            disabled
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.color
@@ -120,7 +122,7 @@
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            required
+                            disabled
                         >
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
@@ -135,14 +137,20 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <breeze-button
-                            class="ml-auto"
-                            :class="{
-                                'opacity-25': form.processing
-                            }"
-                            :disabled="form.processing"
+                            v-if="!car.deleted_at"
+                            @click="destroy(car)"
+                            type="button"
                         >
-                            Update
+                            Delete
                         </breeze-button>
+                        <inertia-link
+                            v-if="!car.deleted_at"
+                            class="ml-auto btn btn-secondary"
+                            as="button"
+                            :href="route('cars.edit', car)"
+                        >
+                            Edit
+                        </inertia-link>
                     </div>
                 </form>
             </div>
@@ -191,6 +199,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -198,7 +207,8 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeTrashedMessage
     },
 
     props: {
@@ -231,6 +241,12 @@ export default {
             this.form.model = this.car.model;
             this.form.color = this.car.color;
             this.form.size = this.car.size;
+        },
+        destroy(car) {
+            this.$inertia.delete(route("cars.destroy", car));
+        },
+        restore(car) {
+            this.$inertia.put(route("cars.restore", car));
         }
     }
 };

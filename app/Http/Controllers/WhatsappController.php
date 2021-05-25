@@ -65,7 +65,7 @@ class WhatsappController extends Controller
      */
     public function show(Whatsapp $whatsapp)
     {
-        // return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
+        return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
     }
 
     /**
@@ -98,7 +98,7 @@ class WhatsappController extends Controller
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
-        return Redirect::route('whatsapps.edit', $whatsapp)->with('success', 'Message updated successfully.');
+        return Redirect::route('whatsapps.show', $whatsapp)->with('success', 'Message updated successfully.');
     }
 
     /**

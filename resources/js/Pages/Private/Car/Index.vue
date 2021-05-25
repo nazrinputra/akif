@@ -69,7 +69,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.edit', car)"
+                            :href="route('cars.show', car)"
                         >
                             {{ car.model }}
                             <i
@@ -82,7 +82,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.edit', car)"
+                            :href="route('cars.show', car)"
                         >
                             {{ car.plate_no }}
                         </inertia-link>
@@ -91,10 +91,10 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('cars.edit', car)"
+                            :href="route('cars.show', car)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-eye"></i>
                         </inertia-link>
                     </td>
                 </tr>

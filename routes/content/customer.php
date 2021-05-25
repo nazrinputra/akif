@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 
-Route::resource('customers', CustomerController::class)->parameters([
-    'customers' => 'customer:slug'
-])->middleware('auth')->except('show');
+Route::group(
+    ['middleware' => ['auth', 'verified']],
+    function () {
+        Route::resource('customers', CustomerController::class)->parameters([
+            'customers' => 'customer:slug'
+        ])->middleware('auth');
 
-Route::put('customers/{customer:slug}/restore', [CustomerController::class, 'restore'])
-    ->name('customers.restore')->middleware('auth');
+        Route::put('customers/{customer:slug}/restore', [CustomerController::class, 'restore'])
+            ->name('customers.restore')->middleware('auth');
+    }
+);

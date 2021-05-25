@@ -65,9 +65,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // return Inertia::render('Private/Customer/Show', [
-        //     'customer' => $customer->load('cars', 'personalities')
-        // ]);
+        return Inertia::render('Private/Customer/Show', [
+            'customer' => $customer->load('cars', 'personalities')
+        ]);
     }
 
     /**
@@ -103,7 +103,7 @@ class CustomerController extends Controller
 
         $customer->update($request->only('name', 'slug', 'phone_no', 'gender'));
 
-        return Redirect::route('customers.edit', $customer)->with('success', 'Customer updated successfully.');
+        return Redirect::route('customers.show', $customer)->with('success', 'Customer updated successfully.');
     }
 
     /**

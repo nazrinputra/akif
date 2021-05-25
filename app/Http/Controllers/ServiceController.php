@@ -63,9 +63,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        // return Inertia::render('Private/Service/Show', [
-        //     'service' => $service->load('packages')
-        // ]);
+        return Inertia::render('Private/Service/Show', [
+            'service' => $service->load('packages')
+        ]);
     }
 
     /**
@@ -101,7 +101,7 @@ class ServiceController extends Controller
 
         $service->update($request->only('name', 'slug', 'price', 'description'));
 
-        return Redirect::route('services.edit', $service)->with('success', 'Service updated successfully.');
+        return Redirect::route('services.show', $service)->with('success', 'Service updated successfully.');
     }
 
     /**

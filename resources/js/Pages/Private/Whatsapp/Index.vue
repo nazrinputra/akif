@@ -68,7 +68,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('whatsapps.edit', whatsapp)"
+                            :href="route('whatsapps.show', whatsapp)"
                         >
                             {{ whatsapp.title }}
                             <i
@@ -81,10 +81,10 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('whatsapps.edit', whatsapp)"
+                            :href="route('whatsapps.show', whatsapp)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-eye"></i>
                         </inertia-link>
                     </td>
                 </tr>

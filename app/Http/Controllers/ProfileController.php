@@ -85,14 +85,22 @@ class ProfileController extends Controller
             'email' => ['required', 'max:50'],
             'store_id' => ['required'],
             'role_id' => ['required'],
-            'password' => ['required', 'confirmed', 'min:8']
         ]);
+
+        if ($request->has('password') && $request->password != '') {
+            $request->validate([
+                'password' => ['required', 'confirmed', 'min:8']
+            ]);
+
+            $password = Hash::make($request->password);
+            $request->merge(['password' => $password]);
+        } else {
+            $password = Auth::user()->password;
+            $request->merge(['password' => $password]);
+        }
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
-
-        $password = Hash::make($request->password);
-        $request->merge(['password' => $password]);
 
         Auth::user()->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
 
