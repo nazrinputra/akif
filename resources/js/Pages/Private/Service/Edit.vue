@@ -142,7 +142,7 @@
                             {{ pkg.name }}
                         </inertia-link>
                     </td>
-                    <td class="border-t w-px">
+                    <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
