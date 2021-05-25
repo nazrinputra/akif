@@ -23,13 +23,25 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'Owner',
             'slug' => 'owner',
-            'description' => 'Owner of Akif'
+            'description' => 'Owner of Akif Car Grooming Center'
         ]);
 
         Role::create([
-            'name' => 'Worker',
-            'slug' => 'worker',
-            'description' => 'Worker at Akif'
+            'name' => 'Quality Checker',
+            'slug' => 'Quality Checker',
+            'description' => 'Quality Checker for Akif Car Grooming Center'
+        ]);
+
+        Role::create([
+            'name' => 'Detailer',
+            'slug' => 'Detailer',
+            'description' => 'Detailer for Akif Car Grooming Center'
+        ]);
+
+        Role::create([
+            'name' => 'Crew',
+            'slug' => 'Crew',
+            'description' => 'Crew at Akif Car Grooming Center'
         ]);
     }
 }
