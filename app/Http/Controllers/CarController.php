@@ -15,13 +15,11 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::withTrashed()->paginate(10)->withPath('/cars');
-        // TODO only allow some role to view deleted
-
         return Inertia::render('Private/Car/Index', [
-            'cars' => $cars,
+            'filters' => $request->all('search', 'trashed'),
+            'cars' => Car::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/cars')
         ]);
     }
 
@@ -119,7 +117,7 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-        return Redirect::route('cars.index')->with('success', 'Car deleted successfully.');
+        return Redirect::back()->with('success', 'Car deleted successfully.');
     }
 
     public function restore(Car $car)
