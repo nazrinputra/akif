@@ -1,21 +1,21 @@
 <template>
     <breeze-authenticated-layout>
         <teleport to="title">
-            - Counter
+            - Personality
         </teleport>
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Register customer car into queue.
+                Link customer and personality in the system.
             </h6>
         </template>
         <template #nav>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Counter
+                Personality
             </span>
         </template>
 
@@ -24,7 +24,7 @@
         >
             <div class="row p-3">
                 <div class="col-2 mx-auto">
-                    <h2>Counter</h2>
+                    <h2>Personality</h2>
                     <i class="fas fa-tools text-9xl"></i>
                 </div>
             </div>
