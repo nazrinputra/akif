@@ -43,6 +43,7 @@
                             "
                             v-model="form.title"
                             @keydown="form.clearErrors('title')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.title
@@ -61,6 +62,7 @@
                             "
                             v-model="form.message"
                             @keydown="form.clearErrors('message')"
+                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.message
