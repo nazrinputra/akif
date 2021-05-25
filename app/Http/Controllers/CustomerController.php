@@ -65,9 +65,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return Inertia::render('Private/Customer/Show', [
-            'customer' => $customer->load('cars', 'personalities')
-        ]);
+        // return Inertia::render('Private/Customer/Show', [
+        //     'customer' => $customer->load('cars', 'personalities')
+        // ]);
     }
 
     /**

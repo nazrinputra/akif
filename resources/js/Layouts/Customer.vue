@@ -20,18 +20,24 @@
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
                 :class="
-                    route().current('store', 'tambak-bugis') ? 'active' : ''
+                    route().current('stores.show', 'tambak-bugis')
+                        ? 'active'
+                        : ''
                 "
                 class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'tambak-bugis')"
+                :href="route('stores.show', 'tambak-bugis')"
                 >Tambak Bugis</inertia-link
             >
         </li>
         <li class="nav-item  mx-0 mx-lg-1">
             <inertia-link
-                :class="route().current('store', 'bukit-katil') ? 'active' : ''"
+                :class="
+                    route().current('stores.show', 'bukit-katil')
+                        ? 'active'
+                        : ''
+                "
                 class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('store', 'bukit-katil')"
+                :href="route('stores.show', 'bukit-katil')"
                 >Bukit Katil</inertia-link
             >
         </li>

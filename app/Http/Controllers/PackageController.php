@@ -67,9 +67,9 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        return Inertia::render('Private/Package/Show', [
-            'pkg' => $package->load('services')
-        ]);
+        // return Inertia::render('Private/Package/Show', [
+        //     'pkg' => $package->load('services')
+        // ]);
     }
 
     /**

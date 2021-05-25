@@ -58,7 +58,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link
-                                :href="route('store', 'tambak-bugis')"
+                                :href="route('stores.show', 'tambak-bugis')"
                                 class="text-decoration-none"
                             >
                                 <img
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link
-                                :href="route('store', 'bukit-katil')"
+                                :href="route('stores.show', 'bukit-katil')"
                                 class="text-decoration-none"
                             >
                                 <img
@@ -103,7 +103,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        flash: Object
     }
 };
 </script>

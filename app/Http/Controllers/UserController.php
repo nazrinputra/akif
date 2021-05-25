@@ -74,9 +74,9 @@ class UserController extends Controller
      */
     public function show(User $crew)
     {
-        return Inertia::render('Private/Crew/Show', [
-            'crew' => $crew->load('role', 'store')
-        ]);
+        // return Inertia::render('Private/Crew/Show', [
+        //     'crew' => $crew->load('role', 'store')
+        // ]);
     }
 
     /**
@@ -113,7 +113,6 @@ class UserController extends Controller
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
-        $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
 
         $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
 

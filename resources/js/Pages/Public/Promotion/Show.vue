@@ -86,6 +86,7 @@ export default {
     props: {
         auth: Object,
         errors: Object,
+        flash: Object,
         promotion: Object
     }
 };

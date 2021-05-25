@@ -50,7 +50,7 @@ class StoreController extends Controller
     {
         return Inertia::render('Public/Store', [
             'store' => $store,
-            'queuesCount' => Queue::where('store_id', $store->id)->count()
+            'queues' => Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get(),
         ]);
     }
 

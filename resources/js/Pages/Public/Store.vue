@@ -155,13 +155,15 @@ export default {
     props: {
         auth: Object,
         errors: Object,
+        flash: Object,
         store: Object,
-        queuesCount: Number
+        queues: Object
     },
 
     data() {
         return {
             polling: null,
+            queuesCount: 0,
             waiting: [],
             grooming: [],
             completed: [],
@@ -170,7 +172,8 @@ export default {
     },
 
     mounted() {
-        this.getQueue();
+        this.queuesCount = this.queues.length;
+        this.sortQueue();
         this.pollData();
     },
 
@@ -179,6 +182,17 @@ export default {
     },
 
     methods: {
+        sortQueue() {
+            this.waiting = this.queues.filter(queues =>
+                queues.status.includes("Waiting")
+            );
+            this.grooming = this.queues.filter(queues =>
+                queues.status.includes("Grooming")
+            );
+            this.completed = this.queues.filter(queues =>
+                queues.status.includes("Completed")
+            );
+        },
         getQueue() {
             let self = this;
             axios.get(route("queues.index", route().params)).then(response => {
@@ -191,6 +205,10 @@ export default {
                 self.completed = response.data.filter(queues =>
                     queues.status.includes("Completed")
                 );
+                self.queuesCount =
+                    self.waiting.length +
+                    self.grooming.length +
+                    self.completed.length;
             });
         },
         pollData() {

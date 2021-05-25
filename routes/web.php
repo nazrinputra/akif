@@ -2,9 +2,9 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
 
 /*
@@ -37,7 +37,7 @@ Route::resource('promotions', PromotionController::class)->parameters([
     'promotions' => 'package:slug'
 ])->only(['index', 'show']);
 
-Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('store');
+Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('stores.show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', function () {
@@ -48,11 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
         return Inertia::render('Private/Dashboard/Counter');
     })->name('counter');
 
-    Route::get('profile', function () {
-        return Inertia::render('Private/Dashboard/Profile', [
-            'user' => Auth::user()->load('store')
-        ]);
-    })->name('profile');
+    Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
+
+    Route::put('profiles', [ProfileController::class, 'update'])->name('profiles.update');
 
     Route::get('reports', function () {
         return Inertia::render('Private/Dashboard/Report');
