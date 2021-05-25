@@ -45,11 +45,6 @@
                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="form.search"
             />
-            <span class="input-group-append">
-                <button class="btn border border-left-0" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </span>
         </div>
 
         <div
