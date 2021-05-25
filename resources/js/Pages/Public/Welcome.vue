@@ -103,7 +103,8 @@ export default {
 
     props: {
         auth: Object,
-        errors: Object
+        errors: Object,
+        flash: Object
     }
 };
 </script>
