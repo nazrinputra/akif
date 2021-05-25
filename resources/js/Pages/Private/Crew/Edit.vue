@@ -15,13 +15,16 @@
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('crews.show', crew)" :active="false">
+            <breeze-nav-link :href="route('crews.index')" :active="false">
                 Crews
+            </breeze-nav-link>
+            <breeze-nav-link :href="route('crews.show', crew)" :active="false">
+                Crew
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Crew
+                Edit
             </span>
         </template>
 
@@ -162,7 +165,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -170,8 +172,7 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeTrashedMessage
+        BreezeButton
     },
 
     props: {

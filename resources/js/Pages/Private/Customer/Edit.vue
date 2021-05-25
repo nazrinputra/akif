@@ -18,10 +18,16 @@
             <breeze-nav-link :href="route('customers.index')" :active="false">
                 Customers
             </breeze-nav-link>
+            <breeze-nav-link
+                :href="route('customers.show', customer)"
+                :active="false"
+            >
+                Customer
+            </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Customer
+                Edit
             </span>
         </template>
 
@@ -198,7 +204,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -206,8 +211,7 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeResponsiveNavLink,
-        BreezeButton,
-        BreezeTrashedMessage
+        BreezeButton
     },
 
     props: {
@@ -236,12 +240,6 @@ export default {
             this.form.name = this.customer.name;
             this.form.phone_no = this.customer.phone_no;
             this.form.gender = this.customer.gender;
-        },
-        destroy(customer) {
-            this.$inertia.delete(route("customers.destroy", customer));
-        },
-        restore(customer) {
-            this.$inertia.put(route("customers.restore", customer));
         }
     }
 };

@@ -15,13 +15,16 @@
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('cars.show', car)" :active="false">
+            <breeze-nav-link :href="route('cars.index')" :active="false">
                 Cars
+            </breeze-nav-link>
+            <breeze-nav-link :href="route('cars.show', car)" :active="false">
+                Car
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Car
+                Edit
             </span>
         </template>
 
