@@ -13,7 +13,7 @@
                     <polygon points="0 11 2 9 7 14 18 3 20 5 7 18" />
                 </svg>
                 <div class="py-4 text-white text-sm font-medium">
-                    {{ $page.props.flash.success }}
+                    <span v-html="$page.props.flash.success"></span>
                 </div>
             </div>
             <button type="button" class="group mr-2 p-2" @click="show = false">

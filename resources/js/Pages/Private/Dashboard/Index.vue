@@ -46,13 +46,13 @@
                     </p>
                 </div>
                 <div class="col-6 pb-5">
-                    <h2>Personality</h2>
+                    <h2>Behaviour</h2>
                     <p>Link customer and personality.</p>
                     <p>
                         <inertia-link
                             class="btn btn-secondary"
-                            :href="route('personality')"
-                            >Personality</inertia-link
+                            :href="route('behaviour')"
+                            >Behaviour</inertia-link
                         >
                     </p>
                 </div>

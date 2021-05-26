@@ -19,7 +19,7 @@ class CarController extends Controller
     {
         return Inertia::render('Private/Car/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'cars' => Car::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/cars')
+            'cars' => Car::select('*')->filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/cars')
         ]);
     }
 
@@ -49,7 +49,7 @@ class CarController extends Controller
             'size' => ['required', 'max:5'],
         ]);
 
-        $plate_no = trim($request->plate_no);
+        $plate_no = preg_replace('/\s+/', '', $request->plate_no);
         $slug = Str::slug($plate_no);
         $request->merge(['slug' => $slug]);
 

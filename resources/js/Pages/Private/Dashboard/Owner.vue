@@ -42,7 +42,9 @@
                                     v-for="car in cars"
                                     :key="car.id"
                                     :value="car.id"
-                                    >{{ car.plate_no }}</option
+                                    >{{
+                                        car.model + " - " + car.plate_no
+                                    }}</option
                                 >
                             </select>
                             <span class="text-red-700 mt-2 text-sm">{{
