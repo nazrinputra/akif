@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PersonalityController;
@@ -44,6 +45,9 @@ Route::post('owner/unlink', function (Request $request) {
     return Redirect::back();
 })->name('owner.unlink');
 
+Route::get('customers/search', [CustomerController::class, 'search'])
+    ->name('customers.search');
+
 Route::get('personalities/search', [PersonalityController::class, 'search'])
     ->name('personalities.search');
 
@@ -61,9 +65,6 @@ Route::post('personality/unlink', function (Request $request) {
     return Redirect::back();
 })->name('personality.unlink');
 
-Route::get('customers/search', [CustomerController::class, 'search'])
-    ->name('customers.search');
-
 Route::get('services/search', [ServiceController::class, 'search'])
     ->name('services.search');
 
@@ -80,6 +81,9 @@ Route::post('package/unlink', function (Request $request) {
     $service->packages()->detach($package);
     return Redirect::back();
 })->name('package.unlink');
+
+Route::get('packages/search', [PackageController::class, 'search'])
+    ->name('packages.search');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
