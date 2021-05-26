@@ -2,11 +2,13 @@
 
 use App\Models\Car;
 use App\Models\Customer;
+use App\Models\Personality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\PersonalityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,21 +26,36 @@ Route::get('store/{store:slug}/queues', [QueueController::class, 'index'])->name
 Route::get('cars/search', [CarController::class, 'search'])
     ->name('cars.search');
 
-Route::post('owner', function (Request $request) {
+Route::post('owner/link', function (Request $request) {
     $customer = Customer::find($request->customer_id);
     $car = Car::find($request->car_id);
-
-    if ($customer->cars->contains($car)) {
-        return Redirect::back()->with(
-            'error',
-            'Link already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">View customer</a> or <a href="' . route('cars.show', $car) . '"style="color:#fff;text-decoration:underline;">view car</a>'
-        );
-    }
-
     $car->owners()->save($customer);
-
-    return Redirect::route('customers.show', $customer)->with('success', 'Owner linked successfully. <a href="' . route('cars.show', $car) . '"style="color:#fff;text-decoration:underline;">View car</a> or <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">view customer</a>');
+    return Redirect::back();
 })->name('owner.link');
+
+Route::post('owner/unlink', function (Request $request) {
+    $customer = Customer::find($request->customer_id);
+    $car = Car::find($request->car_id);
+    $car->owners()->detach($customer);
+    return Redirect::back();
+})->name('owner.unlink');
+
+Route::get('personalities/search', [PersonalityController::class, 'search'])
+    ->name('personalities.search');
+
+Route::post('personality/link', function (Request $request) {
+    $customer = Customer::find($request->customer_id);
+    $personality = Personality::find($request->personality_id);
+    $customer->personalities()->save($personality);
+    return Redirect::back();
+})->name('personality.link');
+
+Route::post('personality/unlink', function (Request $request) {
+    $customer = Customer::find($request->customer_id);
+    $personality = personality::find($request->personality_id);
+    $customer->personalities()->detach($personality);
+    return Redirect::back();
+})->name('personality.unlink');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

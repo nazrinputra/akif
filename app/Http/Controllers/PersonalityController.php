@@ -123,4 +123,12 @@ class PersonalityController extends Controller
         $personality->restore();
         return Redirect::back()->with('success', 'Personality restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Personality::where('name', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
 }
