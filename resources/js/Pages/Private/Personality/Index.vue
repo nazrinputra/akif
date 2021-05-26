@@ -31,7 +31,8 @@
         <div class="input-group pb-4">
             <select
                 v-if="auth.user.role_id == 1"
-                v-model="form.trashed"
+                :value="filters.trashed"
+                @input="this.form.trashed = $event.target.value"
                 class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
                 <option value="without">Without Trashed</option>
@@ -43,7 +44,8 @@
                 id="search"
                 placeholder="Search something..."
                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="form.search"
+                :value="filters.search"
+                @input="this.form.search = $event.target.value"
             />
         </div>
 
@@ -126,7 +128,7 @@ export default {
     data() {
         return {
             form: {
-                search: this.filters.search
+                search: null
             }
         };
     },
@@ -144,11 +146,6 @@ export default {
                 );
             }, 150)
         }
-    },
-
-    created() {
-        this.form.search = this.filters.search;
-        this.form.trashed = this.filters.trashed;
     }
 };
 </script>
