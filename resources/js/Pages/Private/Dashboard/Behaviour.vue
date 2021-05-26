@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <template #title>
-            - Personality
+            - Behaviour
         </template>
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
@@ -15,7 +15,7 @@
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Personality
+                Behaviour
             </span>
         </template>
 
@@ -23,7 +23,7 @@
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form @submit.prevent="form.post(route('personality.store'))">
+                <form @submit.prevent="form.post(route('behaviour.store'))">
                     <div class="row">
                         <div class="mt-3 p-3 col-6">
                             <label for="customer_id">Customer</label><br />
