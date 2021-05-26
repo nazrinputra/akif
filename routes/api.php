@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PersonalityController;
 
 /*
@@ -56,6 +57,9 @@ Route::post('personality/unlink', function (Request $request) {
     $customer->personalities()->detach($personality);
     return Redirect::back();
 })->name('personality.unlink');
+
+Route::get('customers/search', [CustomerController::class, 'search'])
+    ->name('customers.search');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

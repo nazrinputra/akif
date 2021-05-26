@@ -125,4 +125,12 @@ class CustomerController extends Controller
         $customer->restore();
         return Redirect::back()->with('success', 'Customer restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Customer::where('name', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('phone_no', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
 }

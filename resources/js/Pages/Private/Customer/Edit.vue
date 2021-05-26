@@ -61,6 +61,11 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
                         <inertia-link
+                            v-if="
+                                !customer.personalities.some(
+                                    data => data.id === personality.id
+                                )
+                            "
                             as="button"
                             href="#"
                             @click="linkPersonality(personality)"
@@ -365,7 +370,7 @@ export default {
                         this.flash.warning =
                             "Car unlinked from customer. <a href='" +
                             route("cars.show", car) +
-                            " 'style='text-decoration:underline;' class='text-yellow-800'>View car</a>";
+                            " 'style='color:#92400e;text-decoration:underline;'>View car</a>";
                     }
                 }
             );
@@ -401,7 +406,7 @@ export default {
                         this.flash.warning =
                             "Personality unlinked from customer. <a href='" +
                             route("personalities.show", personality) +
-                            " 'style='text-decoration:underline;' class='text-yellow-800'>View personality</a>";
+                            " 'style='color:#92400e;text-decoration:underline;'>View personality</a>";
                     }
                 }
             );
