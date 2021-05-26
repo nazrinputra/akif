@@ -122,8 +122,8 @@ export default {
 
     setup() {
         const form = useForm({
-            customer_id: null,
-            personality_id: null
+            service_id: null,
+            package_id: null
         });
 
         return { form };
