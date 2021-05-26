@@ -130,4 +130,9 @@ class CarController extends Controller
         $car->restore();
         return Redirect::back()->with('success', 'Car restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Car::where('plate_no', 'like', '%' . $request->input('query') . '%')->orWhere('model', 'like', '%' . $request->input('query') . '%')->limit(3)->get();
+    }
 }

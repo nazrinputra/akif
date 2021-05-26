@@ -152,6 +152,56 @@
             </div>
         </div>
 
+        <div class="input-group pt-4">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search something..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formSearch.query"
+            />
+        </div>
+
+        <div
+            class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr v-if="cars.length > 0" class="text-left font-bold">
+                    <th class="px-3 py-3">Car Model</th>
+                    <th class="px-3 py-3">Car Plate No</th>
+                </tr>
+                <tr
+                    v-for="car in cars"
+                    :key="car.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td
+                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                    >
+                        {{ car.model }}
+                    </td>
+                    <td class="border-t px-3 focus:text-indigo-500">
+                        {{ car.plate_no }}
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <inertia-link
+                            as="button"
+                            href="#"
+                            @click="link(car)"
+                            tabindex="-1"
+                        >
+                            <i @click="link(car)" class="fas fa-link"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+                <tr v-if="cars.length === 0">
+                    <td class="border-t px-3 py-3" colspan="2">
+                        Link more car for this customer.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <div
             v-if="customer.cars.length > 0"
             class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -205,6 +255,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import throttle from "lodash/throttle";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -241,6 +292,41 @@ export default {
             this.form.name = this.customer.name;
             this.form.phone_no = this.customer.phone_no;
             this.form.gender = this.customer.gender;
+        },
+        link(car) {
+            axios.post(route("owner.link"), {
+                car_id: car.id,
+                customer_id: this.customer.id
+            });
+        }
+    },
+
+    data() {
+        return {
+            formSearch: {
+                query: null
+            },
+
+            cars: []
+        };
+    },
+
+    watch: {
+        formSearch: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formSearch.query && this.formSearch.query != "") {
+                    axios
+                        .get(route("cars.search"), {
+                            params: { query: this.formSearch.query }
+                        })
+                        .then(response => {
+                            this.cars = response.data;
+                        });
+                } else {
+                    this.cars = [];
+                }
+            }, 150)
         }
     }
 };
