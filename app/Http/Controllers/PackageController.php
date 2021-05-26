@@ -19,7 +19,7 @@ class PackageController extends Controller
     {
         return Inertia::render('Private/Package/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'packages' => Package::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/packages'),
+            'packages' => Package::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/packages'),
         ]);
     }
 

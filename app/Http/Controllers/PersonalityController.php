@@ -19,7 +19,7 @@ class PersonalityController extends Controller
     {
         return Inertia::render('Private/Personality/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'personalities' => Personality::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/personalities'),
+            'personalities' => Personality::filter($request->only('search', 'trashed'))->withQueryString()->paginate(10)->withPath('/personalities'),
         ]);
     }
 

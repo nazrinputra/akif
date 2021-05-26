@@ -19,7 +19,7 @@ class ServiceController extends Controller
     {
         return Inertia::render('Private/Service/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'services' => Service::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/services'),
+            'services' => Service::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/services'),
         ]);
     }
 
