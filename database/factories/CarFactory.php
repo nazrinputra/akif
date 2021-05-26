@@ -27,7 +27,7 @@ class CarFactory extends Factory
     {
         $this->faker->addProvider(new Fakecar($this->faker));
         $this->faker->addProvider(new \Faker\Provider\ms_MY\Miscellaneous($this->faker));
-        $plate_no = $this->faker->jpjNumberPlate();
+        $plate_no = trim($this->faker->jpjNumberPlate());
         $slug = Str::slug($plate_no);
 
         return [

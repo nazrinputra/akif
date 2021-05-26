@@ -52,7 +52,7 @@
                     v-if="$page.props.flash.error"
                     class="py-4 text-white text-sm font-medium"
                 >
-                    {{ $page.props.flash.error }}
+                    <span v-html="$page.props.flash.error"></span>
                 </div>
                 <div v-else class="py-4 text-white text-sm font-medium">
                     <span v-if="Object.keys($page.props.errors).length === 1"

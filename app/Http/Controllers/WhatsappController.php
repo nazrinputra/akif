@@ -49,6 +49,10 @@ class WhatsappController extends Controller
         $slug = Str::slug($request->title);
         $request->merge(['slug' => $slug]);
 
+        if ($whatsapp = Whatsapp::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'WhatsApp message already exist! <a href="' . route('whatsapps.show', $whatsapp) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
         Whatsapp::create($request->only('title', 'slug', 'message'));
 
         return Redirect::route('whatsapps.index')->with('success', 'Message added successfully.');

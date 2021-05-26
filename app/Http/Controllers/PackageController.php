@@ -52,6 +52,10 @@ class PackageController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
+        if ($package = Package::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'Package already exist! <a href="' . route('packages.show', $package) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
         Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
 
         return Redirect::route('packages.index')->with('success', 'Package added successfully.');
