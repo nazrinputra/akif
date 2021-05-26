@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - Show Customer
-        </teleport>
+        </template>
         <template #header>
             <inertia-link
                 :href="route('customers.index')"

@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - List Crews
-        </teleport>
+        </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">

@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - Create Car
-        </teleport>
+        </template>
         <template #header>
             <inertia-link :href="route('cars.index')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>

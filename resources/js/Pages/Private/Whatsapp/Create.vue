@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - Create WhatsApp
-        </teleport>
+        </template>
         <template #header>
             <inertia-link
                 :href="route('whatsapps.index')"

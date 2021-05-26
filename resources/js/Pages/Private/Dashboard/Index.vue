@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - Dashboard
-        </teleport>
+        </template>
         <template #header>
             <h6 class="pt-2.5 mx-auto">
                 Dashboard view for crew.
