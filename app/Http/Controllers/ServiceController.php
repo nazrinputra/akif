@@ -125,4 +125,12 @@ class ServiceController extends Controller
         $service->restore();
         return Redirect::back()->with('success', 'Service restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Service::where('name', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
 }

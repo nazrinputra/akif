@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Inertia\Inertia;
+use App\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
@@ -129,5 +131,13 @@ class CarController extends Controller
     {
         $car->restore();
         return Redirect::back()->with('success', 'Car restored successfully.');
+    }
+
+    public function search(Request $request)
+    {
+        return Car::where('plate_no', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('model', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
     }
 }

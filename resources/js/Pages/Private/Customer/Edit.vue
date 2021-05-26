@@ -31,13 +31,60 @@
             </span>
         </template>
 
+        <div class="input-group pt-3">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search personality..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formPersonality.query"
+            />
+        </div>
+
+        <div
+            v-if="personalities.length > 0"
+            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Personalities</th>
+                </tr>
+                <tr
+                    v-for="personality in personalities"
+                    :key="personality.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td
+                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                    >
+                        {{ personality.name }}
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <inertia-link
+                            v-if="
+                                !customer.personalities.some(
+                                    data => data.id === personality.id
+                                )
+                            "
+                            as="button"
+                            href="#"
+                            @click="linkPersonality(personality)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-link"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <div
             v-if="customer.personalities.length > 0"
             class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Personalities</th>
+                    <th class="px-3 py-3">Current Personalities</th>
                 </tr>
                 <tr
                     v-for="personality in customer.personalities"
@@ -53,14 +100,14 @@
                             {{ personality.name }}
                         </inertia-link>
                     </td>
-                    <td class="border-t w-px md:table-cell hidden">
+                    <td class="border-t w-px md:table-cell hidden pr-3">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('personalities.edit', personality)"
+                            as="button"
+                            href="#"
+                            @click="unlinkPersonality(personality)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-unlink"></i>
                         </inertia-link>
                     </td>
                 </tr>
@@ -152,14 +199,63 @@
             </div>
         </div>
 
+        <div class="input-group pt-3">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search car..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formCar.query"
+            />
+        </div>
+
         <div
-            v-if="customer.cars.length > 0"
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            v-if="cars.length > 0"
+            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Car Model</th>
                     <th class="px-3 py-3">Car Plate No</th>
+                </tr>
+                <tr
+                    v-for="car in cars"
+                    :key="car.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td
+                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                    >
+                        {{ car.model }}
+                    </td>
+                    <td class="border-t px-3 focus:text-indigo-500">
+                        {{ car.plate_no }}
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <inertia-link
+                            v-if="
+                                !customer.cars.some(data => data.id === car.id)
+                            "
+                            as="button"
+                            href="#"
+                            @click="linkCar(car)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-link"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="customer.cars.length > 0"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Owned Car Model</th>
+                    <th class="px-3 py-3">Owned Car Plate No</th>
                 </tr>
                 <tr
                     v-for="car in customer.cars"
@@ -170,7 +266,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.edit', car)"
+                            :href="route('cars.show', car)"
                         >
                             {{ car.model }}
                         </inertia-link>
@@ -179,19 +275,19 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.edit', car)"
+                            :href="route('cars.show', car)"
                         >
                             {{ car.plate_no }}
                         </inertia-link>
                     </td>
-                    <td class="border-t w-px md:table-cell hidden">
+                    <td class="border-t w-px md:table-cell hidden pr-3">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('cars.edit', car)"
+                            as="button"
+                            href="#"
+                            @click="unlinkCar(car)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-unlink"></i>
                         </inertia-link>
                     </td>
                 </tr>
@@ -205,6 +301,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import throttle from "lodash/throttle";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -241,6 +338,133 @@ export default {
             this.form.name = this.customer.name;
             this.form.phone_no = this.customer.phone_no;
             this.form.gender = this.customer.gender;
+        },
+        linkCar(car) {
+            this.$inertia.post(
+                route("owner.link"),
+                {
+                    car_id: car.id,
+                    customer_id: this.customer.id
+                },
+                {
+                    onSuccess: () => {
+                        this.formCar.query = "";
+                        this.cars = [];
+                        this.flash.success =
+                            "Car linked successfully to customer. <a href='" +
+                            route("cars.show", car) +
+                            " 'style='color:#fff;text-decoration:underline;'>View car</a>";
+                    }
+                }
+            );
+        },
+        unlinkCar(car) {
+            this.$inertia.post(
+                route("owner.unlink"),
+                {
+                    car_id: car.id,
+                    customer_id: this.customer.id
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.warning =
+                            "Car unlinked from customer. <a href='" +
+                            route("cars.show", car) +
+                            " 'style='color:#92400e;text-decoration:underline;'>View car</a>";
+                    }
+                }
+            );
+        },
+        linkPersonality(personality) {
+            this.$inertia.post(
+                route("personality.link"),
+                {
+                    personality_id: personality.id,
+                    customer_id: this.customer.id
+                },
+                {
+                    onSuccess: () => {
+                        this.formPersonality.query = "";
+                        this.personalities = [];
+                        this.flash.success =
+                            "Personality linked successfully to customer. <a href='" +
+                            route("personalities.show", personality) +
+                            " 'style='color:#fff;text-decoration:underline;'>View personality</a>";
+                    }
+                }
+            );
+        },
+        unlinkPersonality(personality) {
+            this.$inertia.post(
+                route("personality.unlink"),
+                {
+                    personality_id: personality.id,
+                    customer_id: this.customer.id
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.warning =
+                            "Personality unlinked from customer. <a href='" +
+                            route("personalities.show", personality) +
+                            " 'style='color:#92400e;text-decoration:underline;'>View personality</a>";
+                    }
+                }
+            );
+        }
+    },
+
+    data() {
+        return {
+            formCar: {
+                query: null
+            },
+            cars: [],
+            formPersonality: {
+                query: null
+            },
+            personalities: []
+        };
+    },
+
+    watch: {
+        formCar: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formCar.query && this.formCar.query != "") {
+                    axios
+                        .get(route("cars.search"), {
+                            params: {
+                                query: this.formCar.query
+                            }
+                        })
+                        .then(response => {
+                            this.cars = response.data;
+                        });
+                } else {
+                    this.cars = [];
+                }
+            }, 150)
+        },
+        formPersonality: {
+            deep: true,
+            handler: throttle(function() {
+                if (
+                    this.formPersonality.query &&
+                    this.formPersonality.query != ""
+                ) {
+                    axios
+                        .get(route("personalities.search"), {
+                            params: {
+                                query: this.formPersonality.query
+                            }
+                        })
+                        .then(response => {
+                            this.personalities = response.data;
+                        });
+                } else {
+                    this.personalities = [];
+                }
+            }, 150)
         }
     }
 };

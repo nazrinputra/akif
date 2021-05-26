@@ -129,4 +129,12 @@ class PackageController extends Controller
         $package->restore();
         return Redirect::back()->with('success', 'Package restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Package::where('name', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
 }
