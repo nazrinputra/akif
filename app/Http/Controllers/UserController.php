@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use App\Models\Store;
 use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Store;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -52,12 +53,14 @@ class UserController extends Controller
             'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
             'store_id' => ['required'],
-            'role_id' => ['required']
+            'role_id' => ['required'],
+            'password' => ['required', 'confirmed', 'min:8']
         ]);
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
-        $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
+        $password = Hash::make($request->password);
+        $request->merge(['password' => $password]);
 
         if ($crew = User::where('slug', $request->slug)->orWhere('phone_no', $request->phone_no)->orWhere('email', $request->email)->first()) {
             return Redirect::back()->with('error', 'Crew already exist! <a href="' . route('crews.show', $crew) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
