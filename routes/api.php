@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Car;
+use App\Models\Package;
+use App\Models\Service;
 use App\Models\Customer;
 use App\Models\Personality;
 use Illuminate\Http\Request;
@@ -8,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PersonalityController;
 
@@ -60,6 +63,23 @@ Route::post('personality/unlink', function (Request $request) {
 
 Route::get('customers/search', [CustomerController::class, 'search'])
     ->name('customers.search');
+
+Route::get('services/search', [ServiceController::class, 'search'])
+    ->name('services.search');
+
+Route::post('package/link', function (Request $request) {
+    $service = Service::find($request->service_id);
+    $package = Package::find($request->package_id);
+    $service->packages()->save($package);
+    return Redirect::back();
+})->name('package.link');
+
+Route::post('package/unlink', function (Request $request) {
+    $service = Service::find($request->service_id);
+    $package = Package::find($request->package_id);
+    $service->packages()->detach($package);
+    return Redirect::back();
+})->name('package.unlink');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

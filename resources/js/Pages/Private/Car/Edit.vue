@@ -212,7 +212,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('customers.edit', owner)"
+                            :href="route('customers.show', owner)"
                         >
                             {{ owner.name }}
                         </inertia-link>
