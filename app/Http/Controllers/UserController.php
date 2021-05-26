@@ -59,6 +59,10 @@ class UserController extends Controller
         $request->merge(['slug' => $slug]);
         $request->merge(['password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi']); // password
 
+        if ($crew = User::where('slug', $request->slug)->orWhere('phone_no', $request->phone_no)->orWhere('email', $request->email)->first()) {
+            return Redirect::back()->with('error', 'Crew already exist! <a href="' . route('crews.show', $crew) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
         User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
 
         return Redirect::route('crews.index')->with('success', 'Crew added successfully.');

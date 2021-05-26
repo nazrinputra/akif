@@ -49,8 +49,13 @@ class CarController extends Controller
             'size' => ['required', 'max:5'],
         ]);
 
-        $slug = Str::slug($request->plate_no);
+        $plate_no = trim($request->plate_no);
+        $slug = Str::slug($plate_no);
         $request->merge(['slug' => $slug]);
+
+        if ($car = Car::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'Car already exist! <a href="' . route('cars.show', $car) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
 
         Car::create($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
 

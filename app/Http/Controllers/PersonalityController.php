@@ -49,6 +49,10 @@ class PersonalityController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
+        if ($personality = Personality::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'Personality already exist! <a href="' . route('personalities.show', $personality) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
         Personality::create($request->only('name', 'slug', 'description'));
 
         return Redirect::route('personalities.index')->with('success', 'Personality added successfully.');
