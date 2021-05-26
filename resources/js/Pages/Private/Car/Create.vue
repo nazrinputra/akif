@@ -1,8 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <teleport to="title">
+        <template #title>
             - Create Car
-        </teleport>
+        </template>
         <template #header>
             <inertia-link :href="route('cars.index')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
@@ -152,7 +152,6 @@
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
-import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import { useForm } from "@inertiajs/inertia-vue3";
 
@@ -160,7 +159,6 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink,
         BreezeButton
     },
 

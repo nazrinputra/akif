@@ -19,7 +19,7 @@ class CarController extends Controller
     {
         return Inertia::render('Private/Car/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'cars' => Car::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/cars')
+            'cars' => Car::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/cars')
         ]);
     }
 

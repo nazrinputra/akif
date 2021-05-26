@@ -19,7 +19,7 @@ class WhatsappController extends Controller
     {
         return Inertia::render('Private/Whatsapp/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'whatsapps' => Whatsapp::filter($request->only('search', 'trashed'))->paginate(10)->withPath('/whatsapps'),
+            'whatsapps' => Whatsapp::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/whatsapps'),
         ]);
     }
 
