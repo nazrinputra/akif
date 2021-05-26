@@ -148,13 +148,60 @@
             </div>
         </div>
 
+        <div class="input-group pt-3">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search customer..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formCustomer.query"
+            />
+        </div>
+
         <div
-            v-if="car.owners.length > 0"
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            v-if="customers.length > 0"
+            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Owner Name</th>
+                    <th class="px-3 py-3">Customer Name</th>
+                </tr>
+                <tr
+                    v-for="customer in customers"
+                    :key="customer.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td
+                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                    >
+                        {{ customer.name }}
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <inertia-link
+                            v-if="
+                                !car.owners.some(
+                                    data => data.id === customer.id
+                                )
+                            "
+                            as="button"
+                            href="#"
+                            @click="linkCustomer(customer)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-link"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="car.owners.length > 0"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Linked Owner Name</th>
                 </tr>
                 <tr
                     v-for="owner in car.owners"
@@ -170,14 +217,14 @@
                             {{ owner.name }}
                         </inertia-link>
                     </td>
-                    <td class="border-t w-px md:table-cell hidden">
+                    <td class="border-t w-px md:table-cell hidden pr-3">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('customers.edit', owner)"
+                            as="button"
+                            href="#"
+                            @click="unlinkCustomer(owner)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-unlink"></i>
                         </inertia-link>
                     </td>
                 </tr>
@@ -191,6 +238,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
+import throttle from "lodash/throttle";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -231,6 +279,72 @@ export default {
             this.form.model = this.car.model;
             this.form.color = this.car.color;
             this.form.size = this.car.size;
+        },
+        linkCustomer(customer) {
+            this.$inertia.post(
+                route("owner.link"),
+                {
+                    customer_id: customer.id,
+                    car_id: this.car.id
+                },
+                {
+                    onSuccess: () => {
+                        this.formCustomer.query = "";
+                        this.customers = [];
+                        this.flash.success =
+                            "Customer linked successfully to car. <a href='" +
+                            route("customers.show", customer) +
+                            " 'style='color:#fff;text-decoration:underline;'>View customer</a>";
+                    }
+                }
+            );
+        },
+        unlinkCustomer(customer) {
+            this.$inertia.post(
+                route("owner.unlink"),
+                {
+                    car_id: this.car.id,
+                    customer_id: customer.id
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.warning =
+                            "Customer unlinked from car. <a href='" +
+                            route("customers.show", customer) +
+                            " 'style='color:#92400e;text-decoration:underline;'>View customer</a>";
+                    }
+                }
+            );
+        }
+    },
+
+    data() {
+        return {
+            formCustomer: {
+                query: null
+            },
+            customers: []
+        };
+    },
+
+    watch: {
+        formCustomer: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formCustomer.query && this.formCustomer.query != "") {
+                    axios
+                        .get(route("customers.search"), {
+                            params: {
+                                query: this.formCustomer.query
+                            }
+                        })
+                        .then(response => {
+                            this.customers = response.data;
+                        });
+                } else {
+                    this.customers = [];
+                }
+            }, 150)
         }
     }
 };
