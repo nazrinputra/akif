@@ -124,42 +124,44 @@
             />
         </div>
 
-        <div
-            v-if="packages.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Package Name</th>
-                </tr>
-                <tr
-                    v-for="pkg in packages"
-                    :key="pkg.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td
-                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+        <transition name="fade">
+            <div
+                v-if="packages.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Package Name</th>
+                    </tr>
+                    <tr
+                        v-for="pkg in packages"
+                        :key="pkg.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
                     >
-                        {{ pkg.name }}
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            v-if="
-                                !service.packages.some(
-                                    data => data.id === pkg.id
-                                )
-                            "
-                            as="button"
-                            href="#"
-                            @click="linkPackage(pkg)"
-                            tabindex="-1"
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
-                            <i class="fas fa-link"></i>
-                        </inertia-link>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                            {{ pkg.name }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <inertia-link
+                                v-if="
+                                    !service.packages.some(
+                                        data => data.id === pkg.id
+                                    )
+                                "
+                                as="button"
+                                href="#"
+                                @click="linkPackage(pkg)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-link"></i>
+                            </inertia-link>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
 
         <div
             v-if="service.packages.length > 0"
