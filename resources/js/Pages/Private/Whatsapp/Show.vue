@@ -41,38 +41,20 @@
                         <input
                             type="text"
                             id="title"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.title
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.title"
-                            @keydown="form.clearErrors('title')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="whatsapp.title"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.title
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="message">Message</label>
                         <textarea
                             rows="7"
                             id="message"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.message
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.message"
-                            @keydown="form.clearErrors('message')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="whatsapp.message"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.message
-                        }}</span>
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
@@ -104,7 +86,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -121,24 +102,7 @@ export default {
         whatsapp: Object
     },
 
-    setup() {
-        const form = useForm({
-            title: null,
-            message: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.title = this.whatsapp.title;
-            this.form.message = this.whatsapp.message;
-        },
         destroy(whatsapp) {
             this.$inertia.delete(route("whatsapps.destroy", whatsapp));
         },

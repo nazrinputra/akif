@@ -41,99 +41,54 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.name
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.name"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="phone_no">Phone No</label>
                         <input
                             type="number"
                             id="phone_no"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.phone_no
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.phone_no"
-                            @keydown="form.clearErrors('phone_no')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.phone_no"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.phone_no
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="email">Email</label>
                         <input
                             type="email"
                             id="email"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.email
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.email"
-                            @keydown="form.clearErrors('email')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.email"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.email
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
                         <select
-                            v-model="form.store_id"
-                            @change="form.clearErrors('store_id')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.store_id
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                            :value="crew.store_id"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             disabled
                         >
                             <option :value="crew.store_id">
                                 {{ crew.store.name }}
                             </option>
                         </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.store_id
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="role_id">Role</label>
                         <select
-                            v-model="form.role_id"
-                            @change="form.clearErrors('role_id')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.role_id
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                            :value="crew.role_id"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             disabled
                         >
                             <option :value="crew.role_id">
                                 {{ crew.role.name }}
                             </option>
                         </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.role_id
-                        }}</span>
                     </div>
 
                     <div
@@ -166,7 +121,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -183,30 +137,7 @@ export default {
         crew: Object
     },
 
-    setup() {
-        const form = useForm({
-            name: null,
-            phone_no: null,
-            email: null,
-            store_id: null,
-            role_id: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.name = this.crew.name;
-            this.form.phone_no = this.crew.phone_no;
-            this.form.email = this.crew.email;
-            this.form.store_id = this.crew.store_id;
-            this.form.role_id = this.crew.role_id;
-        },
         destroy(crew) {
             this.$inertia.delete(route("crews.destroy", crew));
         },

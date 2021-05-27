@@ -41,115 +41,61 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.name
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.name"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="price">Price</label>
                         <input
                             type="number"
                             id="price"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.price"
-                            @keydown="form.clearErrors('price')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.price"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.price
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="frequency">Frequency</label>
                         <input
                             type="text"
                             id="frequency"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.frequency
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.frequency"
-                            @keydown="form.clearErrors('frequency')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.frequency"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.frequency
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="duration">Duration</label>
                         <input
                             type="text"
                             id="duration"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.duration
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.duration"
-                            @keydown="form.clearErrors('duration')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.duration"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.duration
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"
                             id="description"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.description
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.description"
-                            @keydown="form.clearErrors('description')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.description"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.description
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="promotion">Promotion</label>
                         <select
-                            v-model="form.promotion"
-                            @change="form.clearErrors('promotion')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.promotion
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                            :value="pkg.promotion"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             disabled
                         >
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.promotion
-                        }}</span>
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
@@ -217,7 +163,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -234,32 +179,7 @@ export default {
         pkg: Object
     },
 
-    setup() {
-        const form = useForm({
-            name: null,
-            price: null,
-            frequency: null,
-            duration: null,
-            description: null,
-            promotion: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.name = this.pkg.name;
-            this.form.price = this.pkg.price;
-            this.form.frequency = this.pkg.frequency;
-            this.form.duration = this.pkg.duration;
-            this.form.description = this.pkg.description;
-            this.form.promotion = this.pkg.promotion;
-        },
         destroy(pkg) {
             this.$inertia.delete(route("packages.destroy", pkg));
         },
