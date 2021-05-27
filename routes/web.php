@@ -1,7 +1,6 @@
 <?php
 
 use Inertia\Inertia;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProfileController;
@@ -27,9 +26,6 @@ require __DIR__ . '/content/package.php';
 require __DIR__ . '/content/personality.php';
 require __DIR__ . '/content/service.php';
 require __DIR__ . '/content/whatsapp.php';
-require __DIR__ . '/content/owner.php';
-require __DIR__ . '/content/promotion.php';
-require __DIR__ . '/content/behaviour.php';
 
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
