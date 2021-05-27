@@ -67,7 +67,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $queues = $customer->queues;
+        $queues = $customer->queues->whereNotIn('status', ['Waiting', 'Grooming', 'Completed']);
         return Inertia::render('Private/Customer/Show', [
             'customer' => $customer->load('cars', 'personalities'),
             'queues' => $queues->load('store')
