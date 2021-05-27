@@ -88,6 +88,12 @@
                                                     My Profile
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
+                                                    :href="route('counter')"
+                                                    as="button"
+                                                >
+                                                    Counter
+                                                </breeze-dropdown-link>
+                                                <breeze-dropdown-link
                                                     :href="route('reports')"
                                                     as="button"
                                                 >
