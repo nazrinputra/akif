@@ -16,7 +16,8 @@ class Package extends Model
         'price',
         'frequency',
         'duration',
-        'description'
+        'description',
+        'promotion'
     ];
 
     public function scopeFilter($query, array $filters)

@@ -125,6 +125,26 @@
                             form.errors.description
                         }}</span>
                     </div>
+                    <div class="mt-3 p-3">
+                        <label for="promotion">Promotion</label>
+                        <select
+                            v-model="form.promotion"
+                            @change="form.clearErrors('promotion')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.promotion
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                        >
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.promotion
+                        }}</span>
+                    </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
@@ -174,7 +194,8 @@ export default {
             price: null,
             frequency: null,
             duration: null,
-            description: null
+            description: null,
+            promotion: null
         });
 
         return { form };

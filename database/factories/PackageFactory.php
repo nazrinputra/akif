@@ -15,6 +15,8 @@ class PackageFactory extends Factory
      */
     protected $model = Package::class;
 
+    protected $promotion = ['Yes', 'No'];
+
     /**
      * Define the model's default state.
      *
@@ -32,6 +34,7 @@ class PackageFactory extends Factory
             'frequency' => $this->faker->words(3, true),
             'duration' => $this->faker->words(3, true),
             'description' => $this->faker->sentences(5, true),
+            'promotion' => $this->faker->randomElement($this->promotion)
         ];
     }
 }

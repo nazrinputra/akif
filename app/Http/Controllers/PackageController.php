@@ -47,6 +47,7 @@ class PackageController extends Controller
             'frequency' => ['required', 'max:50'],
             'duration' => ['required', 'max:50'],
             'description' => ['required', 'max:255'],
+            'promotion' => ['required']
         ]);
 
         $slug = Str::slug($request->name);
@@ -56,7 +57,7 @@ class PackageController extends Controller
             return Redirect::back()->with('error', 'Package already exist! <a href="' . route('packages.show', $package) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
+        Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
 
         return Redirect::route('packages.index')->with('success', 'Package added successfully.');
     }
@@ -102,12 +103,13 @@ class PackageController extends Controller
             'frequency' => ['required', 'max:50'],
             'duration' => ['required', 'max:50'],
             'description' => ['required', 'max:255'],
+            'promotion' => ['required']
         ]);
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description'));
+        $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
 
         return Redirect::route('packages.show', $package)->with('success', 'Package updated successfully.');
     }
