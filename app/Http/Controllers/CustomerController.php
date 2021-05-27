@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Customer;
 use Illuminate\Support\Str;
@@ -54,9 +55,15 @@ class CustomerController extends Controller
             return Redirect::back()->with('error', 'Customer already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Customer::create($request->only('name', 'slug', 'phone_no', 'gender'));
+        $createdCustomer = Customer::create($request->only('name', 'slug', 'phone_no', 'gender'));
 
-        return Redirect::route('customers.index')->with('success', 'Customer added successfully.');
+        if ($request->input('car_id') != null) {
+            $car = Car::find($request->input('car_id'));
+            $car->owners()->save($createdCustomer);
+            return Redirect::route('customers.show', $createdCustomer)->with('success', 'Customer added successfully and linked to car.');
+        }
+
+        return Redirect::route('customers.show', $createdCustomer)->with('success', 'Customer added successfully.');
     }
 
     /**
