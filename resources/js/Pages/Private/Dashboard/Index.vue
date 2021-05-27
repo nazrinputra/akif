@@ -23,39 +23,6 @@
                         >
                     </p>
                 </div>
-                <div class="col-md-6 col-sm-12 pb-5">
-                    <h2>Owner</h2>
-                    <p>Link car and customer.</p>
-                    <p>
-                        <inertia-link
-                            class="btn btn-secondary"
-                            :href="route('owner')"
-                            >Owner</inertia-link
-                        >
-                    </p>
-                </div>
-                <div class="col-md-6 col-sm-12 pb-5">
-                    <h2>Promotion</h2>
-                    <p>Link package and service.</p>
-                    <p>
-                        <inertia-link
-                            class="btn btn-secondary"
-                            :href="route('promotion')"
-                            >Promotion</inertia-link
-                        >
-                    </p>
-                </div>
-                <div class="col-md-6 col-sm-12 pb-5">
-                    <h2>Behaviour</h2>
-                    <p>Link customer and personality.</p>
-                    <p>
-                        <inertia-link
-                            class="btn btn-secondary"
-                            :href="route('behaviour')"
-                            >Behaviour</inertia-link
-                        >
-                    </p>
-                </div>
             </div>
         </div>
     </breeze-authenticated-layout>
