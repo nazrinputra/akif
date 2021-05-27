@@ -57,9 +57,9 @@ class PackageController extends Controller
             return Redirect::back()->with('error', 'Package already exist! <a href="' . route('packages.show', $package) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
+        $createdPackage = Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
 
-        return Redirect::route('packages.index')->with('success', 'Package added successfully.');
+        return Redirect::route('packages.show', $createdPackage)->with('success', 'Package added successfully.');
     }
 
     /**

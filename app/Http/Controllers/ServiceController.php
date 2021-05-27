@@ -54,9 +54,9 @@ class ServiceController extends Controller
             return Redirect::back()->with('error', 'Service already exist! <a href="' . route('services.show', $service) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Service::create($request->only('name', 'slug', 'price', 'description'));
+        $createdService = Service::create($request->only('name', 'slug', 'price', 'description'));
 
-        return Redirect::route('services.index')->with('success', 'Service added successfully.');
+        return Redirect::route('services.show', $createdService)->with('success', 'Service added successfully.');
     }
 
     /**
