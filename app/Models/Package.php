@@ -43,4 +43,9 @@ class Package extends Model
     {
         return $this->belongsToMany(Service::class);
     }
+
+    public function queues()
+    {
+        return $this->belongsToMany(Queue::class);
+    }
 }
