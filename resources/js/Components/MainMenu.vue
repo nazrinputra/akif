@@ -87,6 +87,20 @@
         </inertia-link>
         <inertia-link
             class="flex items-center group py-3"
+            :href="route('cars.index')"
+        >
+            <div
+                :class="
+                    route().current('cars.index')
+                        ? 'text-white'
+                        : 'text-indigo-300 group-hover:text-white'
+                "
+            >
+                <i class="fas fa-history"></i> History
+            </div>
+        </inertia-link>
+        <inertia-link
+            class="flex items-center group py-3"
             :href="route('crews.index')"
         >
             <div

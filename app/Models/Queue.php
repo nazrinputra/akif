@@ -14,6 +14,11 @@ class Queue extends Model
         return $this->belongsTo(Store::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function car()
     {
         return $this->belongsTo(Car::class);
