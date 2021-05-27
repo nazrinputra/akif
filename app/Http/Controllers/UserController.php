@@ -66,9 +66,9 @@ class UserController extends Controller
             return Redirect::back()->with('error', 'Crew already exist! <a href="' . route('crews.show', $crew) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+        $createdCrew = User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
 
-        return Redirect::route('crews.index')->with('success', 'Crew added successfully.');
+        return Redirect::route('crews.show', $createdCrew)->with('success', 'Crew added successfully.');
     }
 
     /**

@@ -53,9 +53,9 @@ class WhatsappController extends Controller
             return Redirect::back()->with('error', 'WhatsApp message already exist! <a href="' . route('whatsapps.show', $whatsapp) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Whatsapp::create($request->only('title', 'slug', 'message'));
+        $createdWhatsapp = Whatsapp::create($request->only('title', 'slug', 'message'));
 
-        return Redirect::route('whatsapps.index')->with('success', 'Message added successfully.');
+        return Redirect::route('whatsapps.show', $createdWhatsapp)->with('success', 'Message added successfully.');
     }
 
     /**

@@ -53,9 +53,9 @@ class PersonalityController extends Controller
             return Redirect::back()->with('error', 'Personality already exist! <a href="' . route('personalities.show', $personality) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        Personality::create($request->only('name', 'slug', 'description'));
+        $createdPersonality = Personality::create($request->only('name', 'slug', 'description'));
 
-        return Redirect::route('personalities.index')->with('success', 'Personality added successfully.');
+        return Redirect::route('personalities.show', $createdPersonality)->with('success', 'Personality added successfully.');
     }
 
     /**
