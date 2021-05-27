@@ -34,7 +34,7 @@
         <div class="input-group pt-3">
             <input
                 type="text"
-                id="search"
+                id="searchPersonality"
                 placeholder="Search personality..."
                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="formPersonality.query"
@@ -202,7 +202,7 @@
         <div class="input-group pt-3">
             <input
                 type="text"
-                id="search"
+                id="searchCar"
                 placeholder="Search car..."
                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="formCar.query"
@@ -299,7 +299,6 @@
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
-import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeButton from "@/Components/Button";
 import throttle from "lodash/throttle";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -308,7 +307,6 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink,
         BreezeButton
     },
 
