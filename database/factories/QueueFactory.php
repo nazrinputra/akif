@@ -6,7 +6,6 @@ use App\Models\Car;
 use App\Models\Customer;
 use App\Models\Queue;
 use App\Models\Store;
-use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QueueFactory extends Factory

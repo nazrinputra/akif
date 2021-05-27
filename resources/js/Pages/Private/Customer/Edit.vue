@@ -209,44 +209,48 @@
             />
         </div>
 
-        <div
-            v-if="cars.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Car Model</th>
-                    <th class="px-3 py-3">Car Plate No</th>
-                </tr>
-                <tr
-                    v-for="car in cars"
-                    :key="car.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td
-                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+        <transition name="fade">
+            <div
+                v-if="cars.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Car Model</th>
+                        <th class="px-3 py-3">Car Plate No</th>
+                    </tr>
+                    <tr
+                        v-for="car in cars"
+                        :key="car.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
                     >
-                        {{ car.model }}
-                    </td>
-                    <td class="border-t px-3 focus:text-indigo-500">
-                        {{ car.plate_no }}
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            v-if="
-                                !customer.cars.some(data => data.id === car.id)
-                            "
-                            as="button"
-                            href="#"
-                            @click="linkCar(car)"
-                            tabindex="-1"
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
-                            <i class="fas fa-link"></i>
-                        </inertia-link>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                            {{ car.model }}
+                        </td>
+                        <td class="border-t px-3 focus:text-indigo-500">
+                            {{ car.plate_no }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <inertia-link
+                                v-if="
+                                    !customer.cars.some(
+                                        data => data.id === car.id
+                                    )
+                                "
+                                as="button"
+                                href="#"
+                                @click="linkCar(car)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-link"></i>
+                            </inertia-link>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
 
         <div
             v-if="customer.cars.length > 0"

@@ -131,6 +131,26 @@
                             form.errors.description
                         }}</span>
                     </div>
+                    <div class="mt-3 p-3">
+                        <label for="promotion">Promotion</label>
+                        <select
+                            v-model="form.promotion"
+                            @change="form.clearErrors('promotion')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.promotion
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                        >
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.promotion
+                        }}</span>
+                    </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
@@ -158,42 +178,44 @@
             />
         </div>
 
-        <div
-            v-if="services.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Service Name</th>
-                </tr>
-                <tr
-                    v-for="service in services"
-                    :key="service.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td
-                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+        <transition name="fade">
+            <div
+                v-if="services.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Service Name</th>
+                    </tr>
+                    <tr
+                        v-for="service in services"
+                        :key="service.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
                     >
-                        {{ service.name }}
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            v-if="
-                                !pkg.services.some(
-                                    data => data.id === service.id
-                                )
-                            "
-                            as="button"
-                            href="#"
-                            @click="linkService(service)"
-                            tabindex="-1"
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
-                            <i class="fas fa-link"></i>
-                        </inertia-link>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                            {{ service.name }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <inertia-link
+                                v-if="
+                                    !pkg.services.some(
+                                        data => data.id === service.id
+                                    )
+                                "
+                                as="button"
+                                href="#"
+                                @click="linkService(service)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-link"></i>
+                            </inertia-link>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
 
         <div
             v-if="pkg.services.length > 0"
@@ -260,7 +282,8 @@ export default {
             price: null,
             frequency: null,
             duration: null,
-            description: null
+            description: null,
+            promotion: null
         });
 
         return { form };
@@ -277,6 +300,7 @@ export default {
             this.form.frequency = this.pkg.frequency;
             this.form.duration = this.pkg.duration;
             this.form.description = this.pkg.description;
+            this.form.promotion = this.pkg.promotion;
         },
         linkService(service) {
             this.$inertia.post(

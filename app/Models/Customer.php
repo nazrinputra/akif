@@ -42,6 +42,11 @@ class Customer extends Model
         return $this->belongsToMany(Car::class);
     }
 
+    public function queues()
+    {
+        return $this->hasMany(Queue::class);
+    }
+
     public function personalities()
     {
         return $this->belongsToMany(Personality::class);

@@ -21,6 +21,7 @@ class CreatePackagesTable extends Migration
             $table->string('frequency');
             $table->string('duration');
             $table->text('description');
+            $table->string('promotion');
             $table->timestamps();
             $table->softDeletes();
         });

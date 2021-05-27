@@ -34,7 +34,7 @@
         </breeze-trashed-message>
 
         <div
-            v-if="isVisible && customer.personalities.length > 0"
+            v-show="isVisible && customer.personalities.length > 0"
             class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
@@ -201,6 +201,55 @@
                 </tr>
             </table>
         </div>
+
+        <div
+            v-if="queues.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap" id="accordionHistory">
+                <tr
+                    class="text-left font-bold"
+                    id="headingHistory"
+                    data-toggle="collapse"
+                    data-target="#collapseHistory"
+                    aria-expanded="true"
+                    aria-controls="collapseHistory"
+                >
+                    <th class="px-3 py-3 hover:bg-gray-100" colspan="2">
+                        History
+                    </th>
+                </tr>
+                <tr
+                    v-for="visit in queues"
+                    :key="visit.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100 collapse"
+                    id="collapseHistory"
+                    aria-labelledby="headingHistory"
+                    data-parent="#accordionHistory"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('histories.show', visit)"
+                        >
+                            {{ "Visited " + visit.store.name + " " }}
+                            {{ diffForHumans(visit.created_at) }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('histories.show', visit)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </breeze-authenticated-layout>
 </template>
 
@@ -209,6 +258,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
+import moment from "moment";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -224,6 +274,7 @@ export default {
         errors: Object,
         flash: Object,
         customer: Object,
+        queues: Object,
         isVisible: false
     },
 
@@ -252,6 +303,9 @@ export default {
         },
         restore(customer) {
             this.$inertia.put(route("customers.restore", customer));
+        },
+        diffForHumans(date) {
+            return moment(date, "YYYYMMDD").fromNow();
         }
     }
 };

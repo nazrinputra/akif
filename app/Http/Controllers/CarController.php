@@ -70,8 +70,10 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
+        $queues = $car->queues->whereNotIn('status', ['Waiting', 'Grooming', 'Completed']);
         return Inertia::render('Private/Car/Show', [
-            'car' => $car->load('owners')
+            'car' => $car->load('owners'),
+            'queues' => $queues->load('store')
         ]);
     }
 

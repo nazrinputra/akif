@@ -16,7 +16,8 @@ class Package extends Model
         'price',
         'frequency',
         'duration',
-        'description'
+        'description',
+        'promotion'
     ];
 
     public function scopeFilter($query, array $filters)
@@ -42,5 +43,10 @@ class Package extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    public function queues()
+    {
+        return $this->belongsToMany(Queue::class);
     }
 }
