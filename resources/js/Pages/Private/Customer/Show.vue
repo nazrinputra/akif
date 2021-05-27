@@ -79,58 +79,31 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.name
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="customer.name"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="phone_no">Phone No</label>
                         <input
                             type="number"
                             id="phone_no"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.phone_no
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.phone_no"
-                            @keydown="form.clearErrors('phone_no')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="customer.phone_no"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.phone_no
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="gender">Gender</label>
                         <select
-                            v-model="form.gender"
-                            @change="form.clearErrors('gender')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.gender
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                            :value="customer.gender"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             disabled
                         >
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.gender
-                        }}</span>
                     </div>
 
                     <div
@@ -259,7 +232,6 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import moment from "moment";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -278,26 +250,7 @@ export default {
         isVisible: false
     },
 
-    setup() {
-        const form = useForm({
-            name: null,
-            phone_no: null,
-            gender: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.name = this.customer.name;
-            this.form.phone_no = this.customer.phone_no;
-            this.form.gender = this.customer.gender;
-        },
         destroy(customer) {
             this.$inertia.delete(route("customers.destroy", customer));
         },

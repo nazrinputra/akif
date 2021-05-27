@@ -40,88 +40,46 @@
                         <input
                             type="text"
                             id="plate_no"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.plate_no
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.plate_no"
-                            @keydown="form.clearErrors('plate_no')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="car.plate_no"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.plate_no
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="brand">Brand</label>
                         <input
                             type="text"
                             id="brand"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.brand
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.brand"
-                            @keydown="form.clearErrors('brand')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="car.brand"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.brand
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="model">Model</label>
                         <input
                             type="text"
                             id="model"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.model
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.model"
-                            @keydown="form.clearErrors('model')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="car.model"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.model
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="color">Color</label>
                         <input
                             type="text"
                             id="color"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.color
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.color"
-                            @keydown="form.clearErrors('color')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="car.color"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.color
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="size">Size</label>
                         <select
-                            v-model="form.size"
-                            @change="form.clearErrors('size')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.size
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
+                            :value="car.size"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             disabled
                         >
                             <option value="S">Small</option>
@@ -129,9 +87,6 @@
                             <option value="L">Large</option>
                             <option value="XL">Extra Large</option>
                         </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.size
-                        }}</span>
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
@@ -249,7 +204,6 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
 import moment from "moment";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -267,30 +221,7 @@ export default {
         queues: Object
     },
 
-    setup() {
-        const form = useForm({
-            plate_no: null,
-            brand: null,
-            model: null,
-            color: null,
-            size: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.plate_no = this.car.plate_no;
-            this.form.brand = this.car.brand;
-            this.form.model = this.car.model;
-            this.form.color = this.car.color;
-            this.form.size = this.car.size;
-        },
         destroy(car) {
             this.$inertia.delete(route("cars.destroy", car));
         },

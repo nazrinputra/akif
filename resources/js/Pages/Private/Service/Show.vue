@@ -43,57 +43,30 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.name
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="service.name"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="price">Price</label>
                         <input
                             type="number"
                             id="price"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.price"
-                            @keydown="form.clearErrors('price')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="service.price"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.price
-                        }}</span>
                     </div>
                     <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"
                             id="description"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.description
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.description"
-                            @keydown="form.clearErrors('description')"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="service.description"
                             disabled
                         />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.description
-                        }}</span>
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
@@ -161,7 +134,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -178,26 +150,7 @@ export default {
         service: Object
     },
 
-    setup() {
-        const form = useForm({
-            name: null,
-            price: null,
-            description: null
-        });
-
-        return { form };
-    },
-
-    created() {
-        this.loadData();
-    },
-
     methods: {
-        loadData() {
-            this.form.name = this.service.name;
-            this.form.price = this.service.price;
-            this.form.description = this.service.description;
-        },
         destroy(service) {
             this.$inertia.delete(route("services.destroy", service));
         },
