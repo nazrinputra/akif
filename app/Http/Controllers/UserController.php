@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         return Inertia::render('Private/Crew/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'crews' => User::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/crews'),
+            'crews' => User::where('id', '<>', Auth::id())->filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
         ]);
     }
 

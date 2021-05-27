@@ -19,7 +19,7 @@ class CustomerController extends Controller
     {
         return Inertia::render('Private/Customer/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'customers' => Customer::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/customers'),
+            'customers' => Customer::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
         ]);
     }
 

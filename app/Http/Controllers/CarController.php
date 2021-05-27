@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Inertia\Inertia;
-use App\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
@@ -21,7 +19,7 @@ class CarController extends Controller
     {
         return Inertia::render('Private/Car/Index', [
             'filters' => $request->all('search', 'trashed'),
-            'cars' => Car::select('*')->filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()->withPath('/cars')
+            'cars' => Car::select('*')->filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
         ]);
     }
 

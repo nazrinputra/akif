@@ -75,7 +75,7 @@
                                                 firstPromotion
                                             )
                                         "
-                                        >View more</inertia-link
+                                        >View promotion</inertia-link
                                     >
                                 </p>
                             </div>

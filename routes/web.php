@@ -31,8 +31,6 @@ require __DIR__ . '/content/owner.php';
 require __DIR__ . '/content/promotion.php';
 require __DIR__ . '/content/behaviour.php';
 
-URL::forceScheme('https');
-
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 })->name('welcome');
