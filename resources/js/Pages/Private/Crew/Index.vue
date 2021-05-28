@@ -9,7 +9,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of crews for the store
+                List of crews
             </h6>
             <inertia-link
                 :href="route('crews.create')"

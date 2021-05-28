@@ -9,7 +9,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of personalities for the customer
+                List of personalities
             </h6>
             <inertia-link
                 :href="route('personalities.create')"
