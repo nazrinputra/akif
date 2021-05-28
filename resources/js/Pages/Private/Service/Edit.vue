@@ -45,6 +45,7 @@
                         <input
                             type="text"
                             id="name"
+                            placeholder="Name"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.name
@@ -64,6 +65,7 @@
                         <input
                             type="number"
                             id="price"
+                            placeholder="Price"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.price
@@ -83,6 +85,7 @@
                         <textarea
                             rows="7"
                             id="description"
+                            placeholder="Description"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.description

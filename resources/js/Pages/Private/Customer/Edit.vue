@@ -125,6 +125,7 @@
                         <label for="name">Name</label>
                         <input
                             type="text"
+                            placeholder="Name"
                             id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -144,6 +145,7 @@
                         <label for="phone_no">Phone No</label>
                         <input
                             type="number"
+                            placeholder="Phone No"
                             id="phone_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -172,6 +174,7 @@
                             "
                             required
                         >
+                            <option value="" disabled>Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -321,7 +324,7 @@ export default {
         const form = useForm({
             name: null,
             phone_no: null,
-            gender: null
+            gender: ""
         });
 
         return { form };

@@ -34,6 +34,7 @@
                         <label for="name">Name</label>
                         <input
                             type="text"
+                            placeholder="Name"
                             id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -53,6 +54,7 @@
                         <label for="phone_no">Phone No</label>
                         <input
                             type="number"
+                            placeholder="Phone No"
                             id="phone_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -72,6 +74,7 @@
                         <label for="email">Email</label>
                         <input
                             type="email"
+                            placeholder="Email"
                             id="email"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -100,6 +103,7 @@
                             "
                             required
                         >
+                            <option value="" disabled>Select store</option>
                             <option
                                 v-for="store in stores"
                                 :key="store.id"
@@ -125,6 +129,7 @@
                             "
                             required
                         >
+                            <option value="" disabled>Select Role</option>
                             <option
                                 v-for="role in roles"
                                 :key="role.id"
@@ -141,6 +146,7 @@
                         <label for="password">Password</label>
                         <input
                             type="password"
+                            placeholder="Password"
                             id="password"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -162,6 +168,7 @@
                         >
                         <input
                             type="password"
+                            placeholder="Confirm Password"
                             id="password_confirmation"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -228,8 +235,8 @@ export default {
             name: null,
             phone_no: null,
             email: null,
-            store_id: null,
-            role_id: null,
+            store_id: "",
+            role_id: "",
             password: null,
             password_confirmation: null
         });
