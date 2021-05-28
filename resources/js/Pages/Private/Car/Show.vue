@@ -176,7 +176,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('histories.show', visit)"
+                            :href="route('queues.show', visit)"
                         >
                             {{ "Visited " + visit.store.name + " " }}
                             {{ diffForHumans(visit.created_at) }}
@@ -186,7 +186,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('histories.show', visit)"
+                            :href="route('queues.show', visit)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>
@@ -203,7 +203,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default {
     components: {
@@ -229,7 +229,8 @@ export default {
             this.$inertia.put(route("cars.restore", car));
         },
         diffForHumans(date) {
-            return moment(date, "YYYYMMDD").fromNow();
+            var local = moment.tz(date, "Asia/Kuala_Lumpur").format();
+            return moment(local).fromNow();
         }
     }
 };

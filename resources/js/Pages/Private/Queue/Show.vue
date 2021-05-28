@@ -1,27 +1,27 @@
 <template>
     <breeze-authenticated-layout>
         <template #title>
-            - Show History
+            - Show Queue
         </template>
         <template #header>
             <inertia-link
-                :href="route('histories.index')"
+                :href="route('queues.index')"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                View history
+                View queue
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('histories.index')" :active="false">
-                Histories
+            <breeze-nav-link :href="route('queues.index')" :active="false">
+                Queues
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                History
+                Queue
             </span>
         </template>
 
@@ -36,7 +36,7 @@
                             type="text"
                             id="store"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="history.store.name"
+                            :value="queue.store.name"
                             disabled
                         />
                     </div>
@@ -46,7 +46,7 @@
                             type="text"
                             id="created_at"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="readableForHumans(history.created_at)"
+                            :value="readableForHumans(queue.created_at)"
                             disabled
                         />
                     </div>
@@ -56,7 +56,7 @@
                             type="text"
                             id="status"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="history.status"
+                            :value="queue.status"
                             disabled
                         />
                     </div>
@@ -76,16 +76,16 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('customers.show', history.customer)"
+                            :href="route('customers.show', queue.customer)"
                         >
-                            {{ history.customer.name }}
+                            {{ queue.customer.name }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('customers.show', history.customer)"
+                            :href="route('customers.show', queue.customer)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>
@@ -108,25 +108,97 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.show', history.car)"
+                            :href="route('cars.show', queue.car)"
                         >
-                            {{ history.car.model }}
+                            {{ queue.car.model }}
                         </inertia-link>
                     </td>
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('cars.show', history.car)"
+                            :href="route('cars.show', queue.car)"
                         >
-                            {{ history.car.plate_no }}
+                            {{ queue.car.plate_no }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('cars.show', history.car)"
+                            :href="route('cars.show', queue.car)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="queue.packages.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Package Name</th>
+                </tr>
+                <tr
+                    v-for="pkg in queue.packages"
+                    :key="pkg.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.show', pkg)"
+                        >
+                            {{ pkg.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('packages.show', pkg)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="queue.services.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Service Name</th>
+                </tr>
+                <tr
+                    v-for="service in queue.services"
+                    :key="service.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('services.show', service)"
+                        >
+                            {{ service.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('services.show', service)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>
@@ -142,7 +214,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default {
     components: {
@@ -155,12 +227,14 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        history: Object
+        queue: Object
     },
 
     methods: {
         readableForHumans(date) {
-            return moment(date).format("MMMM Do YYYY, HH:mm:ss");
+            return moment(date)
+                .tz("Asia/Kuala_Lumpur")
+                .format("MMMM Do YYYY, HH:mm:ss");
         }
     }
 };

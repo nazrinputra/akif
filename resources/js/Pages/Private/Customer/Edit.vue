@@ -60,19 +60,18 @@
                         {{ personality.name }}
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
+                        <breeze-button
                             v-if="
                                 !customer.personalities.some(
                                     data => data.id === personality.id
                                 )
                             "
-                            as="button"
-                            href="#"
+                            type="button"
                             @click="linkPersonality(personality)"
                             tabindex="-1"
                         >
                             <i class="fas fa-link"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>
@@ -80,7 +79,7 @@
 
         <div
             v-if="customer.personalities.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -101,21 +100,20 @@
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            as="button"
-                            href="#"
+                        <breeze-button
+                            type="button"
                             @click="unlinkPersonality(personality)"
                             tabindex="-1"
                         >
                             <i class="fas fa-unlink"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>
         </div>
 
         <div
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
                 <form
@@ -233,19 +231,18 @@
                             {{ car.plate_no }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
-                            <inertia-link
+                            <breeze-button
                                 v-if="
                                     !customer.cars.some(
                                         data => data.id === car.id
                                     )
                                 "
-                                as="button"
-                                href="#"
+                                type="button"
                                 @click="linkCar(car)"
                                 tabindex="-1"
                             >
                                 <i class="fas fa-link"></i>
-                            </inertia-link>
+                            </breeze-button>
                         </td>
                     </tr>
                 </table>
@@ -285,14 +282,13 @@
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            as="button"
-                            href="#"
+                        <breeze-button
+                            type="button"
                             @click="unlinkCar(car)"
                             tabindex="-1"
                         >
                             <i class="fas fa-unlink"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>
@@ -353,9 +349,7 @@ export default {
                         this.formCar.query = "";
                         this.cars = [];
                         this.flash.success =
-                            "Car linked successfully to customer. <a href='" +
-                            route("cars.show", car) +
-                            " 'style='color:#fff;text-decoration:underline;'>View car</a>";
+                            "Car linked successfully to customer.";
                     }
                 }
             );
@@ -389,9 +383,7 @@ export default {
                         this.formPersonality.query = "";
                         this.personalities = [];
                         this.flash.success =
-                            "Personality linked successfully to customer. <a href='" +
-                            route("personalities.show", personality) +
-                            " 'style='color:#fff;text-decoration:underline;'>View personality</a>";
+                            "Personality linked successfully to customer.";
                     }
                 }
             );

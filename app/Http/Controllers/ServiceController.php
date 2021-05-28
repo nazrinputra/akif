@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use Inertia\Inertia;
 use App\Models\Service;
 use Illuminate\Support\Str;
@@ -55,6 +56,12 @@ class ServiceController extends Controller
         }
 
         $createdService = Service::create($request->only('name', 'slug', 'price', 'description'));
+
+        if ($request->input('package_id') != null) {
+            $package = Package::find($request->input('package_id'));
+            $package->services()->save($createdService);
+            return Redirect::route('services.show', $createdService)->with('success', 'Service added successfully and linked to package.');
+        }
 
         return Redirect::route('services.show', $createdService)->with('success', 'Service added successfully.');
     }

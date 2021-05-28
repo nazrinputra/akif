@@ -26,7 +26,7 @@ require __DIR__ . '/content/package.php';
 require __DIR__ . '/content/personality.php';
 require __DIR__ . '/content/service.php';
 require __DIR__ . '/content/whatsapp.php';
-require __DIR__ . '/content/history.php';
+require __DIR__ . '/content/queue.php';
 
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');

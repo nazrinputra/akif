@@ -160,12 +160,14 @@
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
                                         >
-                                            <i
+                                            <breeze-button
                                                 @click="
                                                     selectCustomer(customer)
                                                 "
-                                                class="far fa-check-circle cursor-pointer"
-                                            ></i>
+                                                type="button"
+                                            >
+                                                <i class="fas fa-check"></i>
+                                            </breeze-button>
                                         </td>
                                     </tr>
                                 </table>
@@ -194,10 +196,12 @@
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
                                         >
-                                            <i
+                                            <breeze-button
+                                                type="button"
                                                 @click="clearCustomer()"
-                                                class="fas fa-check-circle cursor-pointer"
-                                            ></i>
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </breeze-button>
                                         </td>
                                     </tr>
                                 </table>
