@@ -88,14 +88,13 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="promotion">Promotion</label>
-                        <select
-                            :value="pkg.promotion"
+                        <input
+                            type="text"
+                            id="promotion"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="pkg.name"
                             disabled
-                        >
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
+                        />
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
