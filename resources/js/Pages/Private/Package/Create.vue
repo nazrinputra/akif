@@ -34,6 +34,7 @@
                         <label for="name">Name</label>
                         <input
                             type="text"
+                            placeholder="Name"
                             id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -53,6 +54,7 @@
                         <label for="price">Price</label>
                         <input
                             type="number"
+                            placeholder="Price"
                             id="price"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -72,6 +74,7 @@
                         <label for="frequency">Frequency</label>
                         <input
                             type="text"
+                            placeholder="Frequency"
                             id="frequency"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -91,6 +94,7 @@
                         <label for="duration">Duration</label>
                         <input
                             type="text"
+                            placeholder="Duration"
                             id="duration"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -111,6 +115,7 @@
                         <textarea
                             rows="7"
                             id="description"
+                            placeholder="Description"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.description
@@ -138,6 +143,7 @@
                             "
                             required
                         >
+                            <option value="" disabled>Select Promotion</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -195,7 +201,7 @@ export default {
             frequency: null,
             duration: null,
             description: null,
-            promotion: null
+            promotion: ""
         });
 
         return { form };

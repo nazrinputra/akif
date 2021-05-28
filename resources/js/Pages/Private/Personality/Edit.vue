@@ -47,6 +47,7 @@
                         <label for="name">Name</label>
                         <input
                             type="text"
+                            placeholder="Name"
                             id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -67,6 +68,7 @@
                         <textarea
                             rows="7"
                             id="description"
+                            placeholder="Description"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.description
