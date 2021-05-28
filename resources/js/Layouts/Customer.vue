@@ -89,3 +89,15 @@
         </div>
     </teleport>
 </template>
+
+<script>
+import moment from "moment";
+
+export default {
+    methods: {
+        currentYear() {
+            return moment().year();
+        }
+    }
+};
+</script>

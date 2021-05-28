@@ -33,10 +33,17 @@
 
 <script>
 import BreezeApplicationLogo from "@/Components/ApplicationLogo";
+import moment from "moment";
 
 export default {
     components: {
         BreezeApplicationLogo
+    },
+
+    methods: {
+        currentYear() {
+            return moment().year();
+        }
     }
 };
 </script>

@@ -176,7 +176,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('histories.show', visit)"
+                            :href="route('queues.show', visit)"
                         >
                             {{ "Visited " + visit.store.name + " " }}
                             {{ diffForHumans(visit.created_at) }}
@@ -186,7 +186,7 @@
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('histories.show', visit)"
+                            :href="route('queues.show', visit)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>

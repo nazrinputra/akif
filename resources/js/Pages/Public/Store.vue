@@ -195,7 +195,7 @@ export default {
         },
         getQueue() {
             let self = this;
-            axios.get(route("queues.index", route().params)).then(response => {
+            axios.get(route("queues.search", route().params)).then(response => {
                 self.waiting = response.data.filter(queues =>
                     queues.status.includes("Waiting")
                 );

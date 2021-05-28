@@ -234,7 +234,7 @@
                     class="text-primary text-decoration-none"
                     >Akif Car Grooming Center</inertia-link
                 >
-                2021</small
+                {{ currentYear() }}</small
             >
         </div>
     </teleport>
@@ -248,6 +248,7 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeMainMenu from "@/Components/MainMenu";
 import BreezeFlashMessages from "@/Components/FlashMessages";
+import moment from "moment";
 
 export default {
     components: {
@@ -264,6 +265,12 @@ export default {
         return {
             showingNavigationDropdown: false
         };
+    },
+
+    methods: {
+        currentYear() {
+            return moment().year();
+        }
     }
 };
 </script>
