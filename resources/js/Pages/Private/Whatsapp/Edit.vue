@@ -43,6 +43,7 @@
                         <input
                             type="text"
                             id="title"
+                            placeholder="Title"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.title
@@ -62,6 +63,7 @@
                         <textarea
                             rows="7"
                             id="message"
+                            placeholder="Message"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.message

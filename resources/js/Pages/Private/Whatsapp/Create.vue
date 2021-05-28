@@ -34,6 +34,7 @@
                         <label for="title">Title</label>
                         <input
                             type="text"
+                            placeholder="Title"
                             id="title"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -54,6 +55,7 @@
                         <textarea
                             rows="7"
                             id="message"
+                            placeholder="Message"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.message

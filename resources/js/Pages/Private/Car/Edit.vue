@@ -37,6 +37,7 @@
                         <label for="plate_no">Plate No</label>
                         <input
                             type="text"
+                            placeholder="Plate no"
                             id="plate_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -56,6 +57,7 @@
                         <label for="brand">Brand</label>
                         <input
                             type="text"
+                            placeholder="Brand"
                             id="brand"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -75,6 +77,7 @@
                         <label for="model">Model</label>
                         <input
                             type="text"
+                            placeholder="Model"
                             id="model"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -94,6 +97,7 @@
                         <label for="color">Color</label>
                         <input
                             type="text"
+                            placeholder="Color"
                             id="color"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -122,6 +126,7 @@
                             "
                             required
                         >
+                            <option value="" disabled>Select Size</option>
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
                             <option value="L">Large</option>
@@ -259,7 +264,7 @@ export default {
             plate_no: null,
             brand: null,
             model: null,
-            color: null,
+            color: "",
             size: null
         });
 
