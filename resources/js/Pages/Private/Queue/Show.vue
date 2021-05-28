@@ -135,6 +135,78 @@
                 </tr>
             </table>
         </div>
+
+        <div
+            v-if="queue.packages.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Package Name</th>
+                </tr>
+                <tr
+                    v-for="pkg in queue.packages"
+                    :key="pkg.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.show', pkg)"
+                        >
+                            {{ pkg.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('packages.show', pkg)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="queue.services.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Service Name</th>
+                </tr>
+                <tr
+                    v-for="service in queue.services"
+                    :key="service.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('services.show', service)"
+                        >
+                            {{ service.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('services.show', service)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </breeze-authenticated-layout>
 </template>
 

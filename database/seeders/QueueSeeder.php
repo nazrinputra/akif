@@ -27,23 +27,25 @@ class QueueSeeder extends Seeder
         $services = Service::all()->pluck('id');
 
         /**
-         * Assign random queue to every packages
+         * Assign random service to every queues
          */
-        foreach ($packages as $package) {
-            DB::table('package_queue')->insert([
-                'package_id' => $package,
-                'queue_id' => $faker->randomElement($queues)
+        foreach ($queues as $queue) {
+            DB::table('queue_service')->insert([
+                'service_id' => $faker->randomElement($services),
+                'queue_id' => $queue
             ]);
         }
 
         /**
-         * Assign random queue to every services
+         * Assign random queue to every packages three times
          */
-        foreach ($services as $service) {
-            DB::table('queue_service')->insert([
-                'service_id' => $service,
-                'queue_id' => $faker->randomElement($queues)
-            ]);
+        foreach ($packages as $package) {
+            for ($i = 0; $i < 3; $i++) {
+                DB::table('package_queue')->insert([
+                    'package_id' => $package,
+                    'queue_id' => $faker->randomElement($queues)
+                ]);
+            }
         }
     }
 }
