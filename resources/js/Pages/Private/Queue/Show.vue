@@ -142,7 +142,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default {
     components: {
@@ -160,7 +160,9 @@ export default {
 
     methods: {
         readableForHumans(date) {
-            return moment(date).format("MMMM Do YYYY, HH:mm:ss");
+            return moment(date)
+                .tz("Asia/Kuala_Lumpur")
+                .format("MMMM Do YYYY, HH:mm:ss");
         }
     }
 };

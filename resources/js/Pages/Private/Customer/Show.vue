@@ -231,7 +231,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeTrashedMessage from "@/Components/TrashedMessage";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default {
     components: {
@@ -258,7 +258,8 @@ export default {
             this.$inertia.put(route("customers.restore", customer));
         },
         diffForHumans(date) {
-            return moment(date, "YYYYMMDD").fromNow();
+            var local = moment.tz(date, "Asia/Kuala_Lumpur").format();
+            return moment(local).fromNow();
         }
     }
 };
