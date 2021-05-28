@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -13,9 +14,11 @@ class QueueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Store $store)
+    public function index()
     {
-        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get();
+        return Inertia::render('Private/Queue/Index', [
+            'queues' => Queue::whereNotIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car')->paginate(10)->withQueryString()
+        ]);
     }
 
     /**
@@ -47,7 +50,9 @@ class QueueController extends Controller
      */
     public function show(Queue $queue)
     {
-        //
+        return Inertia::render('Private/Queue/Show', [
+            'queue' => $queue->load('car', 'customer', 'store')
+        ]);
     }
 
     /**
@@ -82,5 +87,10 @@ class QueueController extends Controller
     public function destroy(Queue $queue)
     {
         //
+    }
+
+    public function search(Store $store)
+    {
+        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get();
     }
 }

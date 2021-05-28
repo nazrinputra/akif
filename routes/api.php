@@ -26,7 +26,7 @@ use App\Http\Controllers\PersonalityController;
 |
 */
 
-Route::get('store/{store:slug}/queues', [QueueController::class, 'index'])->name('queues.index');
+Route::get('store/{store:slug}/queues', [QueueController::class, 'search'])->name('queues.search');
 
 Route::get('cars/search', [CarController::class, 'search'])
     ->name('cars.search');

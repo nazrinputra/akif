@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Car;
-use App\Models\Customer;
 use App\Models\Queue;
 use App\Models\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,9 +18,9 @@ class QueueFactory extends Factory
 
     protected $stores;
 
-    protected $cars;
+    protected $car;
 
-    protected $customers;
+    protected $customer;
 
     protected $status = ['Waiting', 'Grooming', 'Completed', 'Collected', 'Cancelled'];
 
@@ -33,13 +32,13 @@ class QueueFactory extends Factory
     public function definition()
     {
         $this->stores = Store::all();
-        $this->cars  = Car::all();
-        $this->customers  = Customer::all();
+        $this->car  = $this->faker->randomElement(Car::all());
+        $this->customer  = $this->car->owners->first();
 
         return [
             'store_id' => $this->faker->randomElement($this->stores),
-            'car_id' => $this->faker->randomElement($this->cars),
-            'customer_id' => $this->faker->randomElement($this->customers),
+            'car_id' => $this->car,
+            'customer_id' => $this->customer,
             'status' => $this->faker->randomElement($this->status),
         ];
     }
