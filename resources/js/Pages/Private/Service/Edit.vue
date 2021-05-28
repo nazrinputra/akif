@@ -144,19 +144,18 @@
                             {{ pkg.name }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
-                            <inertia-link
+                            <breeze-button
                                 v-if="
                                     !service.packages.some(
                                         data => data.id === pkg.id
                                     )
                                 "
-                                as="button"
-                                href="#"
+                                type="button"
                                 @click="linkPackage(pkg)"
                                 tabindex="-1"
                             >
                                 <i class="fas fa-link"></i>
-                            </inertia-link>
+                            </breeze-button>
                         </td>
                     </tr>
                 </table>
@@ -186,14 +185,13 @@
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            as="button"
-                            href="#"
+                        <breeze-button
+                            type="button"
                             @click="unlinkPackage(pkg)"
                             tabindex="-1"
                         >
                             <i class="fas fa-unlink"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>

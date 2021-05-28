@@ -178,19 +178,18 @@
                             {{ customer.name }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
-                            <inertia-link
+                            <breeze-button
                                 v-if="
                                     !car.owners.some(
                                         data => data.id === customer.id
                                     )
                                 "
-                                as="button"
-                                href="#"
+                                type="button"
                                 @click="linkCustomer(customer)"
                                 tabindex="-1"
                             >
                                 <i class="fas fa-link"></i>
-                            </inertia-link>
+                            </breeze-button>
                         </td>
                     </tr>
                 </table>
@@ -220,14 +219,13 @@
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            as="button"
-                            href="#"
+                        <breeze-button
+                            type="button"
                             @click="unlinkCustomer(owner)"
                             tabindex="-1"
                         >
                             <i class="fas fa-unlink"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>
@@ -292,9 +290,7 @@ export default {
                         this.formCustomer.query = "";
                         this.customers = [];
                         this.flash.success =
-                            "Customer linked successfully to car. <a href='" +
-                            route("customers.show", customer) +
-                            " 'style='color:#fff;text-decoration:underline;'>View customer</a>";
+                            "Customer linked successfully to car.";
                     }
                 }
             );

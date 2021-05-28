@@ -129,10 +129,12 @@
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
                                         >
-                                            <i
+                                            <breeze-button
+                                                type="button"
                                                 @click="selectCar(car)"
-                                                class="far fa-check-circle cursor-pointer"
-                                            ></i>
+                                            >
+                                                <i class="fas fa-check"></i
+                                            ></breeze-button>
                                         </td>
                                     </tr>
                                 </table>
@@ -169,10 +171,12 @@
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
                                         >
-                                            <i
+                                            <breeze-button
+                                                type="button"
                                                 @click="clearCar()"
-                                                class="fas fa-check-circle cursor-pointer"
-                                            ></i>
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </breeze-button>
                                         </td>
                                     </tr>
                                 </table>

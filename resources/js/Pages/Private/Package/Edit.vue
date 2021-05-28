@@ -198,19 +198,18 @@
                             {{ service.name }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
-                            <inertia-link
+                            <breeze-button
                                 v-if="
                                     !pkg.services.some(
                                         data => data.id === service.id
                                     )
                                 "
-                                as="button"
-                                href="#"
+                                type="button"
                                 @click="linkService(service)"
                                 tabindex="-1"
                             >
                                 <i class="fas fa-link"></i>
-                            </inertia-link>
+                            </breeze-button>
                         </td>
                     </tr>
                 </table>
@@ -240,14 +239,13 @@
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
-                        <inertia-link
-                            as="button"
-                            href="#"
+                        <breeze-button
+                            type="button"
                             @click="unlinkService(service)"
                             tabindex="-1"
                         >
                             <i class="fas fa-unlink"></i>
-                        </inertia-link>
+                        </breeze-button>
                     </td>
                 </tr>
             </table>
