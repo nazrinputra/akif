@@ -2,6 +2,25 @@
     <teleport to="title">
         <slot name="title" />
     </teleport>
+    <teleport to="#homeButton">
+        <inertia-link class="navbar-brand" href="/"
+            ><img
+                class="flex md:hidden img-thumbnail"
+                src="/img/logo-navbar.png"
+                alt="Akif"
+        /></inertia-link>
+    </teleport>
+    <teleport to="#menuButton">
+        <button
+            type="button"
+            class="flex md:hidden text-uppercase font-weight-bold text-white text-xl"
+        >
+            <i class="fas fa-ellipsis-h"></i>
+        </button>
+    </teleport>
+    <teleport to="#navLinks">
+        <breeze-responsive-main-menu />
+    </teleport>
     <div class="pt-12">
         <div class="min-h-screen bg-gray-100">
             <!-- Page Content -->
@@ -18,7 +37,7 @@
                 >
                     <nav class="bg-white border-b border-gray-100 mt-4 md:mt-0">
                         <!-- Primary Navigation Menu -->
-                        <div class="max-w-7xl mx-auto md:pt-3 px-8">
+                        <div class="max-w-7xl mx-auto pt-10 md:pt-3 px-8">
                             <div class="flex justify-between">
                                 <div class="flex">
                                     <!-- Navigation Links -->
@@ -248,6 +267,7 @@ import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import BreezeMainMenu from "@/Components/MainMenu";
 import BreezeFlashMessages from "@/Components/FlashMessages";
+import BreezeResponsiveMainMenu from "@/Components/ResponsiveMainMenu";
 import moment from "moment";
 
 export default {
@@ -258,7 +278,8 @@ export default {
         BreezeNavLink,
         BreezeResponsiveNavLink,
         BreezeMainMenu,
-        BreezeFlashMessages
+        BreezeFlashMessages,
+        BreezeResponsiveMainMenu
     },
 
     data() {
