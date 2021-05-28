@@ -77,16 +77,13 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="size">Size</label>
-                        <select
-                            :value="car.size"
+                        <input
+                            type="text"
+                            id="size"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="car.size"
                             disabled
-                        >
-                            <option value="S">Small</option>
-                            <option value="M">Medium</option>
-                            <option value="L">Large</option>
-                            <option value="XL">Extra Large</option>
-                        </select>
+                        />
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"

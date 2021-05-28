@@ -68,27 +68,23 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
-                        <select
-                            :value="crew.store_id"
+                        <input
+                            type="text"
+                            id="store"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.store.name"
                             disabled
-                        >
-                            <option :value="crew.store_id">
-                                {{ crew.store.name }}
-                            </option>
-                        </select>
+                        />
                     </div>
                     <div class="mt-3 p-3">
                         <label for="role_id">Role</label>
-                        <select
-                            :value="crew.role_id"
+                        <input
+                            type="text"
+                            id="role"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.role.name"
                             disabled
-                        >
-                            <option :value="crew.role_id">
-                                {{ crew.role.name }}
-                            </option>
-                        </select>
+                        />
                     </div>
 
                     <div

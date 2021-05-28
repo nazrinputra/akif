@@ -96,14 +96,13 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="gender">Gender</label>
-                        <select
-                            :value="customer.gender"
+                        <input
+                            type="text"
+                            id="gender"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="customer.gender"
                             disabled
-                        >
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
+                        />
                     </div>
 
                     <div
