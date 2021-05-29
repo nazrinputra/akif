@@ -11,6 +11,18 @@
                 />
             </div>
 
+            <div
+                v-if="formCustomer.query && customers.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Oops, we could not find any matching customers.
+                <inertia-link
+                    :href="route('customers.create')"
+                    class="text-blue-500 text-decoration-none"
+                    >Create new?</inertia-link
+                >
+            </div>
+
             <transition name="fade">
                 <div
                     v-if="customers.length > 0"
@@ -130,7 +142,7 @@ export default {
     methods: {
         selectCustomer(customer) {
             this.customer = customer;
-            this.formCustomer.query = "";
+            this.formCustomer.query = null;
             this.customers = [];
             this.$emit("selectCustomer", customer);
         },

@@ -11,6 +11,18 @@
                 />
             </div>
 
+            <div
+                v-if="formCar.query && cars.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Oops, we could not find any matching cars.
+                <inertia-link
+                    :href="route('cars.create')"
+                    class="text-blue-500 text-decoration-none"
+                    >Create new?</inertia-link
+                >
+            </div>
+
             <transition name="fade">
                 <div
                     v-if="cars.length > 0"
@@ -140,7 +152,7 @@ export default {
     methods: {
         selectCar(car) {
             this.car = car;
-            this.formCar.query = "";
+            this.formCar.query = null;
             this.cars = [];
             this.$emit("selectCar", car);
         },

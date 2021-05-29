@@ -11,6 +11,18 @@
                 />
             </div>
 
+            <div
+                v-if="formPackage.query && packages.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Oops, we could not find any matching packages.
+                <inertia-link
+                    :href="route('packages.create')"
+                    class="text-blue-500 text-decoration-none"
+                    >Create new?</inertia-link
+                >
+            </div>
+
             <transition name="fade">
                 <div
                     v-if="packages.length > 0"
@@ -130,7 +142,7 @@ export default {
     methods: {
         selectPackage(pkg) {
             this.pkg = pkg;
-            this.formPackage.query = "";
+            this.formPackage.query = null;
             this.packages = [];
             this.$emit("selectPackage", this.pkg);
         },
