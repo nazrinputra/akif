@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Package;
+use App\Models\Service;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -58,6 +59,11 @@ class PackageController extends Controller
         }
 
         $createdPackage = Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
+
+        foreach ($request->services as $id) {
+            $service = Service::find($id);
+            $createdPackage->services()->save($service);
+        }
 
         return Redirect::route('packages.show', $createdPackage)->with('success', 'Package added successfully.');
     }
