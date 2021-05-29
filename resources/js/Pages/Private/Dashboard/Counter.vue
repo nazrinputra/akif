@@ -70,7 +70,23 @@
                     :class="show.stepFour ? 'active' : ''"
                     @click="stepFour"
                 >
-                    <div class="md-step-circle"><span>4</span></div>
+                    <div class="md-step-circle">
+                        <span v-if="services.length === 0">4</span>
+                        <span v-if="services.length > 0"
+                            ><i class="fas fa-check"></i
+                        ></span>
+                    </div>
+                    <div class="md-step-title">Service</div>
+                    <div class="md-step-optional">Optional</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                </div>
+                <div
+                    class="md-step cursor-pointer"
+                    :class="show.stepFive ? 'active' : ''"
+                    @click="stepFive"
+                >
+                    <div class="md-step-circle"><span>5</span></div>
                     <div class="md-step-title">Review</div>
                     <div class="md-step-bar-left"></div>
                     <div class="md-step-bar-right"></div>
@@ -103,13 +119,23 @@
 
             <breeze-step-four
                 v-show="show.stepFour"
+                @back="stepThree"
+                @next="stepFive()"
+                @selectService="selectService($event)"
+                @removeService="removeService($event)"
+            />
+
+            <breeze-step-five
+                v-show="show.stepFive"
                 :car="car"
                 @editCar="editCar()"
                 :customer="customer"
                 @editCustomer="editCustomer()"
                 :pkg="pkg"
                 @editPackage="editPackage()"
-                @back="stepThree"
+                :services="services"
+                @editService="editService()"
+                @back="stepFour"
             />
         </div>
     </breeze-authenticated-layout>
@@ -123,6 +149,7 @@ import BreezeStepOne from "@/Components/StepOne";
 import BreezeStepTwo from "@/Components/StepTwo";
 import BreezeStepThree from "@/Components/StepThree";
 import BreezeStepFour from "@/Components/StepFour";
+import BreezeStepFive from "@/Components/StepFive";
 
 export default {
     components: {
@@ -132,7 +159,8 @@ export default {
         BreezeStepOne,
         BreezeStepTwo,
         BreezeStepThree,
-        BreezeStepFour
+        BreezeStepFour,
+        BreezeStepFive
     },
 
     props: {
@@ -147,11 +175,13 @@ export default {
                 stepOne: true,
                 stepTwo: false,
                 stepThree: false,
-                stepFour: false
+                stepFour: false,
+                stepFive: false
             },
             car: null,
             customer: null,
-            pkg: null
+            pkg: null,
+            services: []
         };
     },
 
@@ -161,24 +191,35 @@ export default {
             this.show.stepTwo = false;
             this.show.stepThree = false;
             this.show.stepFour = false;
+            this.show.stepFive = false;
         },
         stepTwo() {
             this.show.stepOne = false;
             this.show.stepTwo = true;
             this.show.stepThree = false;
             this.show.stepFour = false;
+            this.show.stepFive = false;
         },
         stepThree() {
             this.show.stepOne = false;
             this.show.stepTwo = false;
             this.show.stepThree = true;
             this.show.stepFour = false;
+            this.show.stepFive = false;
         },
         stepFour() {
             this.show.stepOne = false;
             this.show.stepTwo = false;
             this.show.stepThree = false;
             this.show.stepFour = true;
+            this.show.stepFive = false;
+        },
+        stepFive() {
+            this.show.stepOne = false;
+            this.show.stepTwo = false;
+            this.show.stepThree = false;
+            this.show.stepFour = false;
+            this.show.stepFive = true;
         },
         selectCar(data) {
             this.car = data;
@@ -206,6 +247,15 @@ export default {
         },
         editPackage() {
             this.stepThree();
+        },
+        selectService(data) {
+            this.services.push(data);
+        },
+        removeService(data) {
+            this.services.splice(data, 1);
+        },
+        editService() {
+            this.stepFour();
         }
     }
 };

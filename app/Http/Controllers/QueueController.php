@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
 use App\Models\Package;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -48,6 +49,11 @@ class QueueController extends Controller
 
         $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id'));
         $createdQueue->packages()->save($package);
+
+        foreach ($request->services_id as $id) {
+            $service = Service::find($id);
+            $createdQueue->services()->save($service);
+        }
 
         return Redirect::route('queues.show', $createdQueue)->with('success', 'Queue created successfully.');
     }
