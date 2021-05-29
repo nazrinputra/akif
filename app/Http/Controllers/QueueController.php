@@ -48,7 +48,10 @@ class QueueController extends Controller
         $package = Package::find($request->package_id);
 
         $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id'));
-        $createdQueue->packages()->save($package);
+
+        if ($package) {
+            $createdQueue->packages()->save($package);
+        }
 
         foreach ($request->services_id as $id) {
             $service = Service::find($id);
