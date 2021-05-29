@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -67,6 +68,8 @@ class UserController extends Controller
         }
 
         $createdCrew = User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+
+        event(new Registered($createdCrew));
 
         return Redirect::route('crews.show', $createdCrew)->with('success', 'Crew added successfully.');
     }
