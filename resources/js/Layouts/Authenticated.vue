@@ -201,6 +201,12 @@
                                         My Profile
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
+                                        :href="route('counter')"
+                                        as="button"
+                                    >
+                                        Counter
+                                    </breeze-responsive-nav-link>
+                                    <breeze-responsive-nav-link
                                         :href="route('reports')"
                                         as="button"
                                     >

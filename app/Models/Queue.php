@@ -9,6 +9,17 @@ class Queue extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'status' => 'Waiting',
+    ];
+
+    protected $fillable = [
+        'store_id',
+        'car_id',
+        'customer_id',
+        'status',
+    ];
+
     public function store()
     {
         return $this->belongsTo(Store::class);
