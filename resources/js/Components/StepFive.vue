@@ -1,5 +1,20 @@
 <template>
     <div class="container">
+        <div v-if="!car" class="p-3">
+            <div
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <i class="fas fa-exclamation-triangle"></i> It looks like you
+                have not selected any car.
+                <span
+                    @click="editCar()"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    Select car?
+                </span>
+            </div>
+        </div>
+
         <div v-if="car" class="p-3">
             <div
                 class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -32,6 +47,21 @@
             </div>
         </div>
 
+        <div v-if="!customer" class="p-3">
+            <div
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <i class="fas fa-exclamation-triangle"></i> It looks like you
+                have not selected any customer.
+                <span
+                    @click="editCustomer()"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    Select customer?
+                </span>
+            </div>
+        </div>
+
         <div v-if="customer" class="p-3">
             <div
                 class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -58,6 +88,28 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div v-if="!product" class="p-3">
+            <div
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <i class="fas fa-exclamation-triangle"></i> You have to choose
+                either a package or at least one service. Choose
+                <span
+                    @click="editPackage()"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    package
+                </span>
+                or
+                <span
+                    @click="editService()"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    service
+                </span>
             </div>
         </div>
 
@@ -129,7 +181,11 @@
             <breeze-button type="button" @click="back">
                 Back
             </breeze-button>
-            <breeze-button type="button" @click="submit">
+            <breeze-button
+                type="button"
+                @click="submit"
+                :disabled="!car || !customer || !product"
+            >
                 Submit
             </breeze-button>
         </div>
@@ -145,6 +201,16 @@ export default {
     },
 
     props: ["car", "customer", "pkg", "services"],
+
+    computed: {
+        product: function() {
+            if (this.pkg || this.services.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
 
     methods: {
         back() {
@@ -166,10 +232,14 @@ export default {
             this.$emit("editService");
         },
         submit() {
+            let pkg_id = null;
+            if (this.pkg) {
+                pkg_id = this.pkg.id;
+            }
             this.$inertia.post(route("queues.store"), {
                 car_id: this.car.id,
                 customer_id: this.customer.id,
-                package_id: this.pkg.id,
+                package_id: pkg_id,
                 services_id: this.services.map(service => service.id)
             });
         }
