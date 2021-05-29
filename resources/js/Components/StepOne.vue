@@ -1,165 +1,158 @@
 <template>
     <div class="container">
-        <form @submit.prevent="submit">
-            <div class="p-3">
-                <label for="plate_no">Plate No</label>
+        <div class="p-3">
+            <div v-if="!car" class="input-group">
                 <input
                     type="text"
-                    placeholder="Plate No"
-                    id="plate_no"
-                    class="w-full rounded-md shadow-sm"
-                    :class="
-                        formCar.errors.plate_no
-                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                    "
-                    v-model="formCar.plate_no"
-                    @keydown="formCar.clearErrors('plate_no')"
-                    required
+                    id="searchCar"
+                    placeholder="Search car..."
+                    class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    v-model="formCar.query"
                 />
-                <span class="text-red-700 mt-2 text-sm">{{
-                    formCar.errors.plate_no
-                }}</span>
-            </div>
-            <div class="mt-3 p-3">
-                <label for="brand">Brand</label>
-                <input
-                    type="text"
-                    placeholder="Brand"
-                    id="brand"
-                    class="w-full rounded-md shadow-sm"
-                    :class="
-                        formCar.errors.brand
-                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                    "
-                    v-model="formCar.brand"
-                    @keydown="formCar.clearErrors('brand')"
-                    required
-                />
-                <span class="text-red-700 mt-2 text-sm">{{
-                    formCar.errors.brand
-                }}</span>
-            </div>
-            <div class="mt-3 p-3">
-                <label for="model">Model</label>
-                <input
-                    type="text"
-                    placeholder="Model"
-                    id="model"
-                    class="w-full rounded-md shadow-sm"
-                    :class="
-                        formCar.errors.model
-                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                    "
-                    v-model="formCar.model"
-                    @keydown="formCar.clearErrors('model')"
-                    required
-                />
-                <span class="text-red-700 mt-2 text-sm">{{
-                    formCar.errors.model
-                }}</span>
-            </div>
-            <div class="mt-3 p-3">
-                <label for="color">Color</label>
-                <input
-                    type="text"
-                    placeholder="Color"
-                    id="color"
-                    class="w-full rounded-md shadow-sm"
-                    :class="
-                        formCar.errors.color
-                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                    "
-                    v-model="formCar.color"
-                    @keydown="formCar.clearErrors('color')"
-                    required
-                />
-                <span class="text-red-700 mt-2 text-sm">{{
-                    formCar.errors.color
-                }}</span>
-            </div>
-            <div class="mt-3 p-3">
-                <label for="size">Size</label>
-                <select
-                    v-model="formCar.size"
-                    @change="formCar.clearErrors('size')"
-                    class="w-full rounded-md shadow-sm"
-                    :class="
-                        formCar.errors.size
-                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                    "
-                    required
-                >
-                    <option value="" disabled>Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">Extra Large</option>
-                </select>
-                <span class="text-red-700 mt-2 text-sm">{{
-                    formCar.errors.size
-                }}</span>
             </div>
 
-            <div
-                class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
-            >
-                <inertia-link
-                    :href="route('dashboard')"
-                    class="btn btn-secondary"
+            <transition name="fade">
+                <div
+                    v-if="cars.length > 0"
+                    class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
-                    Cancel
-                </inertia-link>
-                <breeze-button type="button" @click="next">
-                    Next
-                </breeze-button>
-            </div>
-        </form>
+                    <table class="w-full whitespace-nowrap">
+                        <tr class="text-left font-bold">
+                            <th class="px-3 py-3">Car Model</th>
+                            <th class="px-3 py-3">Car Plate No</th>
+                        </tr>
+                        <tr
+                            v-for="car in cars"
+                            :key="car.id"
+                            class="hover:bg-gray-100 focus-within:bg-gray-100"
+                        >
+                            <td
+                                class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                            >
+                                {{ car.model }}
+                            </td>
+                            <td class="border-t px-3 focus:text-indigo-500">
+                                {{ car.plate_no }}
+                            </td>
+                            <td class="border-t w-px md:table-cell hidden pr-3">
+                                <breeze-button
+                                    type="button"
+                                    @click="selectCar(car)"
+                                >
+                                    <i class="fas fa-check"></i
+                                ></breeze-button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div
+                    v-if="car"
+                    class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                >
+                    <table class="w-full whitespace-nowrap">
+                        <tr class="text-left font-bold">
+                            <th class="px-3 py-3">
+                                Selected Car Model
+                            </th>
+                            <th class="px-3 py-3">
+                                Selected Car Plate No
+                            </th>
+                        </tr>
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td
+                                class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                            >
+                                {{ car.model }}
+                            </td>
+                            <td class="border-t px-3 focus:text-indigo-500">
+                                {{ car.plate_no }}
+                            </td>
+                            <td class="border-t w-px md:table-cell hidden pr-3">
+                                <breeze-button
+                                    type="button"
+                                    @click="clearCar()"
+                                >
+                                    <i class="fas fa-times"></i>
+                                </breeze-button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </transition>
+        </div>
+
+        <div
+            class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+        >
+            <inertia-link :href="route('dashboard')" class="btn btn-secondary">
+                Cancel
+            </inertia-link>
+            <breeze-button type="button" @click="next">
+                Next
+            </breeze-button>
+        </div>
     </div>
 </template>
 
 <script>
 import BreezeButton from "@/Components/Button";
-import { useForm } from "@inertiajs/inertia-vue3";
+import throttle from "lodash/throttle";
 
 export default {
     components: {
         BreezeButton
     },
 
-    setup() {
-        const formCar = useForm({
-            plate_no: null,
-            brand: null,
-            model: null,
-            color: null,
-            size: "",
-            completed: false
-        });
+    data() {
+        return {
+            formCar: {
+                query: null
+            },
+            cars: [],
+            car: null
+        };
+    },
 
-        return { formCar };
+    watch: {
+        formCar: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formCar.query && this.formCar.query != "") {
+                    axios
+                        .get(route("cars.search"), {
+                            params: {
+                                query: this.formCar.query
+                            }
+                        })
+                        .then(response => {
+                            this.cars = response.data;
+                        });
+                } else {
+                    this.cars = [];
+                }
+            }, 150)
+        }
     },
 
     methods: {
-        next() {
-            this.checkStepOne();
-            this.$emit("next", this.formCar);
+        selectCar(car) {
+            this.car = car;
+            this.formCar.query = "";
+            this.cars = [];
+            this.$emit("selectCar", car);
         },
-        checkStepOne() {
-            if (
-                this.formCar.brand &&
-                this.formCar.color &&
-                this.formCar.model &&
-                this.formCar.plate_no &&
-                this.formCar.size != ""
-            ) {
-                this.formCar.completed = true;
+        clearCar() {
+            this.car = null;
+            this.$emit("clearCar");
+        },
+        next() {
+            if (this.car) {
+                this.$emit("next");
             } else {
-                this.formCar.completed = false;
+                this.$emit("next");
             }
         }
     }

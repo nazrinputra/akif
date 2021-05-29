@@ -8,7 +8,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Register customer car into queue.
+                Register into queue.
             </h6>
         </template>
         <template #nav>
@@ -29,10 +29,8 @@
                     @click="stepOne"
                 >
                     <div class="md-step-circle">
-                        <span v-if="!completed.stepOne">1</span>
-                        <span v-if="completed.stepOne"
-                            ><i class="fas fa-check"></i
-                        ></span>
+                        <span v-if="!car">1</span>
+                        <span v-if="car"><i class="fas fa-check"></i></span>
                     </div>
                     <div class="md-step-title">Car</div>
                     <div class="md-step-bar-left"></div>
@@ -44,8 +42,8 @@
                     @click="stepTwo"
                 >
                     <div class="md-step-circle">
-                        <span v-if="!completed.stepTwo">2</span>
-                        <span v-if="completed.stepTwo"
+                        <span v-if="!customer">2</span>
+                        <span v-if="customer"
                             ><i class="fas fa-check"></i
                         ></span>
                     </div>
@@ -53,13 +51,15 @@
                     <div class="md-step-bar-left"></div>
                     <div class="md-step-bar-right"></div>
                 </div>
-                <!-- FIXME package selction does not work -->
                 <div
                     class="md-step cursor-pointer"
                     :class="show.stepThree ? 'active' : ''"
                     @click="stepThree"
                 >
-                    <div class="md-step-circle"><span>3</span></div>
+                    <div class="md-step-circle">
+                        <span v-if="!pkg">3</span>
+                        <span v-if="pkg"><i class="fas fa-check"></i></span>
+                    </div>
                     <div class="md-step-title">Package</div>
                     <div class="md-step-optional">Optional</div>
                     <div class="md-step-bar-left"></div>
@@ -79,32 +79,37 @@
 
             <breeze-step-one
                 v-show="show.stepOne"
-                @next="
-                    stepTwo();
-                    setCar($event);
-                "
+                :car="car"
+                @next="stepTwo()"
+                @selectCar="selectCar($event)"
+                @clearCar="clearCar()"
             />
 
             <breeze-step-two
                 v-show="show.stepTwo"
                 @back="stepOne"
-                @next="
-                    stepThree();
-                    setCustomer($event);
-                "
+                @next="stepThree()"
+                @selectCustomer="selectCustomer($event)"
+                @clearCustomer="clearCustomer()"
             />
 
             <breeze-step-three
                 v-show="show.stepThree"
-                @package-selected="package_id = $event"
                 @back="stepTwo"
-                @next="stepFour"
+                @next="stepFour()"
+                @selectPackage="selectPackage($event)"
+                @clearPackage="clearPackage()"
             />
 
             <breeze-step-four
                 v-show="show.stepFour"
+                :car="car"
+                @editCar="editCar()"
+                :customer="customer"
+                @editCustomer="editCustomer()"
+                :pkg="pkg"
+                @editPackage="editPackage()"
                 @back="stepThree"
-                @next="finalStep"
             />
         </div>
     </breeze-authenticated-layout>
@@ -144,15 +149,9 @@ export default {
                 stepThree: false,
                 stepFour: false
             },
-            completed: {
-                stepOne: false,
-                stepTwo: false,
-                stepThree: false,
-                stepFour: false
-            },
-            formCar: null,
-            formCustomer: null,
-            package_id: null
+            car: null,
+            customer: null,
+            pkg: null
         };
     },
 
@@ -181,19 +180,32 @@ export default {
             this.show.stepThree = false;
             this.show.stepFour = true;
         },
-        finalStep() {
-            alert("Coming soon...");
-            // this.formCar.post(route("cars.store"));
-            // this.formCustomer.post(route("customers.store"));
-            // TODO add counter.store route for all forms at once, make a single form for all items;
+        selectCar(data) {
+            this.car = data;
         },
-        setCar(data) {
-            this.formCar = data;
-            this.completed.stepOne = data.completed;
+        clearCar() {
+            this.car = null;
         },
-        setCustomer(data) {
-            this.formCustomer = data;
-            this.completed.stepTwo = data.completed;
+        editCar() {
+            this.stepOne();
+        },
+        selectCustomer(data) {
+            this.customer = data;
+        },
+        clearCustomer() {
+            this.customer = null;
+        },
+        editCustomer() {
+            this.stepTwo();
+        },
+        selectPackage(data) {
+            this.pkg = data;
+        },
+        clearPackage() {
+            this.pkg = null;
+        },
+        editPackage() {
+            this.stepThree();
         }
     }
 };

@@ -1,11 +1,10 @@
 <template>
     <div class="container">
         <div class="p-3">
-            <label for="search">Package</label>
             <div v-if="!pkg" class="input-group">
                 <input
                     type="text"
-                    id="search"
+                    id="searchPackage"
                     placeholder="Search package..."
                     class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     v-model="formPackage.query"
@@ -63,7 +62,7 @@
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
-                                    @click="clearPackage"
+                                    @click="clearPackage()"
                                     type="button"
                                 >
                                     <i class="fas fa-times"></i>
@@ -133,13 +132,12 @@ export default {
             this.pkg = pkg;
             this.formPackage.query = "";
             this.packages = [];
+            this.$emit("selectPackage", this.pkg);
         },
         clearPackage() {
             this.pkg = null;
-        }
-    },
-
-    methods: {
+            this.$emit("clearPackage");
+        },
         back() {
             this.$emit("back");
         },

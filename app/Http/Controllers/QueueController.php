@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
+use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class QueueController extends Controller
 {
@@ -17,7 +20,7 @@ class QueueController extends Controller
     public function index()
     {
         return Inertia::render('Private/Queue/Index', [
-            'queues' => Queue::whereNotIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car')->paginate(10)->withQueryString()
+            'queues' => Queue::with('car')->paginate(10)
         ]);
     }
 
@@ -39,7 +42,14 @@ class QueueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = Auth::user()->store;
+        $request->merge(['store_id' => $store->id]);
+        $package = Package::find($request->package_id);
+
+        $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id'));
+        $createdQueue->packages()->save($package);
+
+        return Redirect::route('queues.show', $createdQueue)->with('success', 'Queue created successfully.');
     }
 
     /**
