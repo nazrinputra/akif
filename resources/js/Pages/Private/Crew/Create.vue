@@ -103,7 +103,7 @@
                             "
                             required
                         >
-                            <option value="" disabled>Select store</option>
+                            <option value="" disabled>Select Store</option>
                             <option
                                 v-for="store in stores"
                                 :key="store.id"
