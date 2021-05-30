@@ -50,6 +50,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Private/Dashboard/Report');
     })->name('reports');
 
+    Route::get('roles', function () {
+        return Inertia::render('Private/Dashboard/Role');
+    })->name('roles');
+
     Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
 
     Route::put('profiles', [ProfileController::class, 'update'])->name('profiles.update');

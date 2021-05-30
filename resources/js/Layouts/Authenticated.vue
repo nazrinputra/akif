@@ -119,6 +119,12 @@
                                                     Reports
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
+                                                    :href="route('roles')"
+                                                    as="button"
+                                                >
+                                                    Roles
+                                                </breeze-dropdown-link>
+                                                <breeze-dropdown-link
                                                     :href="route('logout')"
                                                     method="post"
                                                     as="button"
@@ -211,6 +217,12 @@
                                         as="button"
                                     >
                                         Reports
+                                    </breeze-responsive-nav-link>
+                                    <breeze-responsive-nav-link
+                                        :href="route('roles')"
+                                        as="button"
+                                    >
+                                        Roles
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('logout')"
