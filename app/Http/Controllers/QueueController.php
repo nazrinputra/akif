@@ -18,10 +18,11 @@ class QueueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Private/Queue/Index', [
-            'queues' => Queue::with('car')->paginate(10)
+            'filters' => $request->all('search', 'status'),
+            'queues' => Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString()
         ]);
     }
 
