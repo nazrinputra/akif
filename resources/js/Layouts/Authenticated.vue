@@ -113,6 +113,12 @@
                                                     Counter
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
+                                                    :href="route('reports')"
+                                                    as="button"
+                                                >
+                                                    Reports
+                                                </breeze-dropdown-link>
+                                                <breeze-dropdown-link
                                                     :href="route('logout')"
                                                     method="post"
                                                     as="button"

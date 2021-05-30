@@ -24,18 +24,21 @@ class RoleAndPermissionSeeder extends Seeder
         $createCrew = Permission::create(['name' => 'create_crews']);
         $editCrew = Permission::create(['name' => 'edit_crews']);
         $deleteCrew = Permission::create(['name' => 'delete_crews']);
+        $editRole = Permission::create(['name' => 'edit_role']);
+        $editStore = Permission::create(['name' => 'edit_store']);
 
         // create roles and assign created permissions
+        Role::create(['name' => 'Super Admin'])
+            ->givePermissionTo(Permission::all());
 
-        // this can be done as separate statements
-        $owner = Role::create(['name' => 'owner']);
-        $owner->givePermissionTo($createCrew, $editCrew, $deleteCrew, $restoreDeleted);
+        Role::create(['name' => 'Admin']);
 
-        // or may be done by chaining
-        Role::create(['name' => 'admin'])
-            ->givePermissionTo([$createCrew, $editCrew, $deleteCrew, $viewDeleted]);
+        Role::create(['name' => 'Owner']);
 
-        $superAdmin = Role::create(['name' => 'super-admin']);
-        $superAdmin->givePermissionTo(Permission::all());
+        Role::create(['name' => 'Crew']);
+
+        Role::create(['name' => 'Detailer']);
+
+        Role::create(['name' => 'Quality Checker']);
     }
 }
