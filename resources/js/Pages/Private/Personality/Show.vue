@@ -50,6 +50,16 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="color">Color</label>
+                        <input
+                            type="text"
+                            id="color"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="personality.color"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"

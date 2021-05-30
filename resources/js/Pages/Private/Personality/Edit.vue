@@ -64,6 +64,29 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="color">Color</label>
+                        <select
+                            v-model="form.color"
+                            @change="form.clearErrors('color')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.color
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                        >
+                            <option value="" disabled>Select Color</option>
+                            <option value="Green">Green</option>
+                            <option value="Yellow">Yellow</option>
+                            <option value="Red">Red</option>
+                            <option value="Black">Black</option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.color
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"
@@ -209,6 +232,7 @@ export default {
     setup() {
         const form = useForm({
             name: null,
+            color: "",
             description: null
         });
 
@@ -222,6 +246,7 @@ export default {
     methods: {
         loadData() {
             this.form.name = this.personality.name;
+            this.form.color = this.personality.color;
             this.form.description = this.personality.description;
         },
         linkCustomer(customer) {

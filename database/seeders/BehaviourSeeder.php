@@ -32,21 +32,5 @@ class BehaviourSeeder extends Seeder
                 'personality_id' => $faker->randomElement($personalities)
             ]);
         }
-
-        /**
-         * Check personality which is not selected
-         */
-        $selected = DB::table('customer_personality')->distinct()->pluck('personality_id');
-        $available = $personalities->diff($selected);
-
-        /**
-         * Assign queue(s) to non selected
-         */
-        foreach ($available as $missing) {
-            DB::table('customer_personality')->insert([
-                'customer_id' => $faker->randomElement($customers),
-                'personality_id' => $missing
-            ]);
-        }
     }
 }

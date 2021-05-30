@@ -43,6 +43,7 @@ class PersonalityController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
+            'color' => ['required'],
             'description' => ['required', 'max:255'],
         ]);
 
@@ -53,7 +54,7 @@ class PersonalityController extends Controller
             return Redirect::back()->with('error', 'Personality already exist! <a href="' . route('personalities.show', $personality) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdPersonality = Personality::create($request->only('name', 'slug', 'description'));
+        $createdPersonality = Personality::create($request->only('name', 'slug', 'color', 'description'));
 
         return Redirect::route('personalities.show', $createdPersonality)->with('success', 'Personality added successfully.');
     }
@@ -101,7 +102,7 @@ class PersonalityController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        $personality->update($request->only('name', 'slug', 'description'));
+        $personality->update($request->only('name', 'slug', 'color', 'description'));
 
         return Redirect::route('personalities.show', $personality)->with('success', 'Personality updated successfully.');
     }
