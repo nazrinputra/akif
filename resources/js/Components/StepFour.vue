@@ -13,7 +13,7 @@
 
             <div
                 v-if="formService.query && services.length == 0"
-                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 Oops, we could not find any matching services.
                 <span
