@@ -27,6 +27,19 @@
             </span>
         </template>
 
+        <div class="input-group pb-4">
+            <select
+                v-if="auth.user.role_id == 7"
+                :value="filters.trashed"
+                @input="this.form.trashed = $event.target.value"
+                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            >
+                <option value="without">Without Trashed</option>
+                <option value="with">With Trashed</option>
+                <option value="only">Only Trashed</option>
+            </select>
+        </div>
+
         <div
             class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
@@ -82,6 +95,8 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezePagination from "@/Components/Pagination";
+import throttle from "lodash/throttle";
+import pickBy from "lodash/pickBy";
 
 export default {
     components: {
@@ -95,7 +110,27 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        filters: Object,
         roles: Object
+    },
+
+    data() {
+        return {
+            form: {
+                trashed: null
+            }
+        };
+    },
+
+    watch: {
+        form: {
+            deep: true,
+            handler: throttle(function() {
+                this.$inertia.get(route("roles.index"), pickBy(this.form), {
+                    preserveState: true
+                });
+            }, 150)
+        }
     }
 };
 </script>

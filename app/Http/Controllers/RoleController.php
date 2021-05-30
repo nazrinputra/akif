@@ -15,10 +15,11 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Private/Role/Index', [
-            'roles' => Role::paginate(10)
+            'filters' => $request->all('trashed'),
+            'roles' => Role::filter($request->only('trashed'))->paginate(10)->withQueryString()
         ]);
     }
 
