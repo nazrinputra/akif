@@ -17,9 +17,7 @@ class CreateCarsTable extends Migration
             $table->id();
             $table->string('slug');
             $table->string('plate_no')->unique();
-            $table->string('brand');
             $table->string('model');
-            $table->string('color');
             $table->string('size');
             $table->timestamps();
             $table->softDeletes();

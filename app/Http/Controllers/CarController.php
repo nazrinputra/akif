@@ -44,9 +44,7 @@ class CarController extends Controller
     {
         $request->validate([
             'plate_no' => ['required', 'max:10'],
-            'brand' => ['required', 'max:10'],
             'model' => ['required', 'max:50'],
-            'color' => ['required', 'max:50'],
             'size' => ['required', 'max:5'],
         ]);
 
@@ -58,7 +56,7 @@ class CarController extends Controller
             return Redirect::back()->with('error', 'Car already exist! <a href="' . route('cars.show', $car) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdCar = Car::create($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
+        $createdCar = Car::create($request->only('plate_no', 'slug', 'model', 'size'));
 
         if ($request->input('customer_id') != null) {
             $customer = Customer::find($request->input('customer_id'));
@@ -108,16 +106,14 @@ class CarController extends Controller
     {
         $request->validate([
             'plate_no' => ['required', 'max:10'],
-            'brand' => ['required', 'max:10'],
             'model' => ['required', 'max:50'],
-            'color' => ['required', 'max:50'],
             'size' => ['required', 'max:5'],
         ]);
 
         $slug = Str::slug($request->plate_no);
         $request->merge(['slug' => $slug]);
 
-        $car->update($request->only('plate_no', 'slug', 'brand', 'model', 'color', 'size'));
+        $car->update($request->only('plate_no', 'slug', 'model', 'size'));
 
         return Redirect::route('cars.show', $car)->with('success', 'Car updated successfully.');
     }
