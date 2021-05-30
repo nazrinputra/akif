@@ -27,10 +27,9 @@
             </span>
         </template>
 
-        <!-- TODO add role checking for this filter-->
         <div class="input-group pb-4">
             <select
-                v-if="auth.user.role_id == 1"
+                v-if="hasAnyPermission(['view_deleted'])"
                 :value="filters.trashed"
                 @input="this.form.trashed = $event.target.value"
                 class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

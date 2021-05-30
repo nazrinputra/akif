@@ -1,28 +1,25 @@
 <template>
     <breeze-authenticated-layout>
         <template #title>
-            - Edit Service
+            - Edit Role
         </template>
         <template #header>
             <inertia-link
-                :href="route('services.show', service)"
+                :href="route('roles.show', role)"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Edit existing service
+                Edit existing role
             </h6>
         </template>
         <template #nav>
-            <breeze-nav-link :href="route('services.index')" :active="false">
-                Services
+            <breeze-nav-link :href="route('roles.index')" :active="false">
+                Roles
             </breeze-nav-link>
-            <breeze-nav-link
-                :href="route('services.show', service)"
-                :active="false"
-            >
-                Service
+            <breeze-nav-link :href="route('roles.show', role)" :active="false">
+                Role
             </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
@@ -32,20 +29,16 @@
         </template>
 
         <div
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
-                <form
-                    @submit.prevent="
-                        form.put(route('services.update', service))
-                    "
-                >
+                <form @submit.prevent="form.put(route('roles.update', role))">
                     <div class="mt-3 p-3">
                         <label for="name">Name</label>
                         <input
                             type="text"
-                            id="name"
                             placeholder="Name"
+                            id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.name
@@ -60,46 +53,7 @@
                             form.errors.name
                         }}</span>
                     </div>
-                    <div class="mt-3 p-3">
-                        <label for="price">Price</label>
-                        <input
-                            type="number"
-                            id="price"
-                            placeholder="Price"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.price"
-                            @keydown="form.clearErrors('price')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.price
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="description">Description</label>
-                        <textarea
-                            rows="7"
-                            id="description"
-                            placeholder="Description"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.description
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.description"
-                            @keydown="form.clearErrors('description')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.description
-                        }}</span>
-                    </div>
+
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
@@ -121,50 +75,52 @@
             <input
                 type="text"
                 id="search"
-                placeholder="Search package..."
+                placeholder="Search permission..."
                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="formPackage.query"
+                v-model="formPermission.query"
             />
         </div>
 
         <div
-            v-if="formPackage.query && packages.length == 0"
+            v-if="formPermission.query && permissions.length == 0"
             class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
-            Oops, we could not find any matching packages.
+            Oops, we could not find any matching permissions.
         </div>
 
         <transition name="fade">
             <div
-                v-if="packages.length > 0"
+                v-if="permissions.length > 0"
                 class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Package Name</th>
+                        <th class="px-3 py-3">Permissions</th>
                     </tr>
                     <tr
-                        v-for="pkg in packages"
-                        :key="pkg.id"
+                        v-for="permission in permissions"
+                        :key="permission.id"
                         class="hover:bg-gray-100 focus-within:bg-gray-100"
                     >
-                        <td
-                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
-                        >
-                            {{ pkg.name }}
+                        <td class="border-t">
+                            <span
+                                class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            >
+                                {{ toTitle(permission.name) }}
+                            </span>
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
                                 v-if="
-                                    !service.packages.some(
-                                        data => data.id === pkg.id
+                                    !role.permissions.some(
+                                        data => data.id === permission.id
                                     )
                                 "
                                 type="button"
-                                @click="linkPackage(pkg)"
+                                @click="givePermission(permission)"
                                 tabindex="-1"
                             >
-                                <i class="fas fa-link"></i>
+                                <i class="fas fa-check"></i>
                             </breeze-button>
                         </td>
                     </tr>
@@ -173,34 +129,32 @@
         </transition>
 
         <div
-            v-if="service.packages.length > 0"
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            v-if="role.permissions.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Package Name</th>
+                    <th class="px-3 py-3">Allowed Permissions</th>
                 </tr>
                 <tr
-                    v-for="pkg in service.packages"
-                    :key="pkg.id"
+                    v-for="permission in role.permissions"
+                    :key="permission.id"
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
                     <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                        <span
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('packages.show', pkg)"
                         >
-                            {{ pkg.name }}
-                        </inertia-link>
+                            {{ toTitle(permission.name) }}
+                        </span>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
                         <breeze-button
                             type="button"
-                            @click="unlinkPackage(pkg)"
+                            @click="revokePermission(permission)"
                             tabindex="-1"
                         >
-                            <i class="fas fa-unlink"></i>
+                            <i class="fas fa-times"></i>
                         </breeze-button>
                     </td>
                 </tr>
@@ -227,14 +181,13 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        service: Object
+        role: Object
     },
 
     setup() {
         const form = useForm({
             name: null,
-            price: null,
-            description: null
+            phone_no: null
         });
 
         return { form };
@@ -246,42 +199,42 @@ export default {
 
     methods: {
         loadData() {
-            this.form.name = this.service.name;
-            this.form.price = this.service.price;
-            this.form.description = this.service.description;
+            this.form.name = this.role.name;
         },
-        linkPackage(pkg) {
+        toTitle(string) {
+            return string
+                .split("_")
+                .map(word => {
+                    return word.slice(0, 1).toUpperCase() + word.slice(1);
+                })
+                .join(" ");
+        },
+        revokePermission(permission) {
             this.$inertia.post(
-                route("package.link"),
+                route("roles.revoke"),
                 {
-                    service_id: this.service.id,
-                    package_id: pkg.id
+                    role_id: this.role.id,
+                    permission_id: permission.id
                 },
                 {
                     onSuccess: () => {
-                        this.formPackage.query = "";
-                        this.packages = [];
-                        this.flash.success =
-                            "Package linked successfully to service. <a href='" +
-                            route("packages.show", pkg) +
-                            " 'style='color:#fff;text-decoration:underline;'>View package</a>";
+                        this.flash.warning = "Permission revoked successfully.";
                     }
                 }
             );
         },
-        unlinkPackage(pkg) {
+        givePermission(permission) {
             this.$inertia.post(
-                route("package.unlink"),
+                route("roles.give"),
                 {
-                    service_id: this.service.id,
-                    package_id: pkg.id
+                    role_id: this.role.id,
+                    permission_id: permission.id
                 },
                 {
                     onSuccess: () => {
-                        this.flash.warning =
-                            "Package unlinked from service. <a href='" +
-                            route("packages.show", pkg) +
-                            " 'style='color:#92400e;text-decoration:underline;'>View package</a>";
+                        this.formPermission.query = "";
+                        this.permissions = [];
+                        this.flash.success = "Permission added successfully.";
                     }
                 }
             );
@@ -290,29 +243,32 @@ export default {
 
     data() {
         return {
-            formPackage: {
+            formPermission: {
                 query: null
             },
-            packages: []
+            permissions: []
         };
     },
 
     watch: {
-        formPackage: {
+        formPermission: {
             deep: true,
             handler: throttle(function() {
-                if (this.formPackage.query && this.formPackage.query != "") {
+                if (
+                    this.formPermission.query &&
+                    this.formPermission.query != ""
+                ) {
                     axios
-                        .get(route("packages.search"), {
+                        .get(route("permissions.search"), {
                             params: {
-                                query: this.formPackage.query
+                                query: this.formPermission.query
                             }
                         })
                         .then(response => {
-                            this.packages = response.data;
+                            this.permissions = response.data;
                         });
                 } else {
-                    this.packages = [];
+                    this.permissions = [];
                 }
             }, 150)
         }

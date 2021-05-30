@@ -16,6 +16,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\PersonalityController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,13 @@ Route::get('packages/all', [PackageController::class, 'all'])
 
 Route::get('whatsapps/search', [WhatsappController::class, 'search'])
     ->name('whatsapps.search');
+
+Route::get('permissions/search', [RoleController::class, 'search'])
+    ->name('permissions.search');
+
+Route::post('roles/revoke', [RoleController::class, 'revoke'])->name('roles.revoke');
+
+Route::post('roles/give', [RoleController::class, 'give'])->name('roles.give');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

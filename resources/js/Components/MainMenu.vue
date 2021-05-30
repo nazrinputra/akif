@@ -115,6 +115,20 @@
         </inertia-link>
         <inertia-link
             class="flex items-center group py-3"
+            :href="route('roles.index')"
+        >
+            <div
+                :class="
+                    route().current('roles.index')
+                        ? 'text-white'
+                        : 'text-indigo-300 group-hover:text-white'
+                "
+            >
+                <i class="fas fa-user-cog"></i> Roles
+            </div>
+        </inertia-link>
+        <inertia-link
+            class="flex items-center group py-3"
             :href="route('cars.index')"
         >
             <div

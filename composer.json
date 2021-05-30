@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "pelmered/fake-car": "^1.6",
+        "spatie/laravel-permission": "^4.0",
         "tightenco/ziggy": "^1.1"
     },
     "require-dev": {

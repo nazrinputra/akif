@@ -8,9 +8,9 @@ Route::group(
     function () {
         Route::resource('customers', CustomerController::class)->parameters([
             'customers' => 'customer:slug'
-        ])->middleware('auth');
+        ]);
 
         Route::put('customers/{customer:slug}/restore', [CustomerController::class, 'restore'])
-            ->name('customers.restore')->middleware('auth');
+            ->name('customers.restore');
     }
 );

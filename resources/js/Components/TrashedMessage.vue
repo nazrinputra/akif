@@ -7,6 +7,7 @@
             </div>
         </div>
         <button
+            v-if="hasAnyPermission(['restore_deleted'])"
             class="text-sm text-yellow-800 hover:underline"
             tabindex="-1"
             type="button"

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone_no',
         'password',
-        'role_id',
         'store_id'
     ];
 
@@ -40,6 +39,13 @@ class User extends Authenticatable implements MustVerifyEmail
             } else {
                 $query;
             }
+        });
+    }
+
+    public function getPermissionArray()
+    {
+        return $this->getAllPermissions()->mapWithKeys(function ($pr) {
+            return [$pr['name'] => true];
         });
     }
 
@@ -70,10 +76,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function store()
     {
         return $this->belongsTo(Store::class);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
     }
 }

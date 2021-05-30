@@ -17,7 +17,7 @@ class CreateWhatsappsTable extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('slug');
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
             $table->softDeletes();
         });

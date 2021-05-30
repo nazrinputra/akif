@@ -67,6 +67,16 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="role_id">Role</label>
+                        <input
+                            type="text"
+                            id="store"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="crew.roles[0].name"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
                         <input
                             type="text"
@@ -76,29 +86,25 @@
                             disabled
                         />
                     </div>
-                    <div class="mt-3 p-3">
-                        <label for="role_id">Role</label>
-                        <input
-                            type="text"
-                            id="role"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="crew.role.name"
-                            disabled
-                        />
-                    </div>
 
                     <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-start"
                     >
                         <breeze-button
-                            v-if="!crew.deleted_at"
+                            v-if="
+                                !crew.deleted_at &&
+                                    hasAnyPermission(['delete_crews'])
+                            "
                             @click="destroy(crew)"
                             type="button"
                         >
                             Delete
                         </breeze-button>
                         <inertia-link
-                            v-if="!crew.deleted_at"
+                            v-if="
+                                !crew.deleted_at &&
+                                    hasAnyPermission(['edit_crews'])
+                            "
                             class="ml-auto btn btn-secondary"
                             as="button"
                             :href="route('crews.edit', crew)"
