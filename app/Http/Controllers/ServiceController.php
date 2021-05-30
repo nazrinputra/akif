@@ -140,4 +140,9 @@ class ServiceController extends Controller
             ->limit(3)
             ->get();
     }
+
+    public function all()
+    {
+        return Service::all();
+    }
 }
