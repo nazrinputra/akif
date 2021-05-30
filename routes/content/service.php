@@ -8,9 +8,9 @@ Route::group(
     function () {
         Route::resource('services', ServiceController::class)->parameters([
             'services' => 'service:slug'
-        ])->middleware('auth');
+        ]);
 
         Route::put('services/{service:slug}/restore', [ServiceController::class, 'restore'])
-            ->name('services.restore')->middleware('auth');
+            ->name('services.restore');
     }
 );

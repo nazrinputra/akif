@@ -119,7 +119,7 @@
                                                     Reports
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
-                                                    :href="route('roles')"
+                                                    :href="route('roles.index')"
                                                     as="button"
                                                 >
                                                     Roles
@@ -219,7 +219,7 @@
                                         Reports
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
-                                        :href="route('roles')"
+                                        :href="route('roles.index')"
                                         as="button"
                                     >
                                         Roles

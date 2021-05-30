@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class RoleController extends Controller
 {
@@ -14,7 +17,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Private/Role/Index', [
+            'roles' => Role::paginate(10)
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Role/Create');
     }
 
     /**
@@ -35,7 +40,21 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        if ($role = Role::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'Role already exist! <a href="' . route('roles.show', $role) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
+        $createdRole = Role::create($request->only('name', 'slug', 'description'));
+
+        return Redirect::route('roles.show', $createdRole)->with('success', 'Role added successfully.');
     }
 
     /**
@@ -46,7 +65,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return Inertia::render('Private/Role/Show', [
+            'role' => $role->load('crews')
+        ]);
     }
 
     /**
@@ -57,7 +78,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return Inertia::render('Private/Role/Edit', [
+            'role' => $role->load('crews')
+        ]);
     }
 
     /**
@@ -69,7 +92,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $role->update($request->only('name', 'slug', 'description'));
+
+        return Redirect::route('roles.show', $role)->with('success', 'Role updated successfully.');
     }
 
     /**
@@ -80,6 +113,13 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return Redirect::back()->with('success', 'Role deleted successfully.');
+    }
+
+    public function restore(Role $role)
+    {
+        $role->restore();
+        return Redirect::back()->with('success', 'Role deleted successfully.');
     }
 }

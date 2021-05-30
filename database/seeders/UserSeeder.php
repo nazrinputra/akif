@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('ms_MY');
         $stores = Store::all()->pluck('id');
-        $admin = Role::first();
+        $admin = Role::where('name', 'Administrator')->first();
 
         User::create([
             'name' => 'Admin',

@@ -28,6 +28,7 @@ require __DIR__ . '/content/personality.php';
 require __DIR__ . '/content/service.php';
 require __DIR__ . '/content/whatsapp.php';
 require __DIR__ . '/content/queue.php';
+require __DIR__ . '/content/role.php';
 
 URL::forceScheme('https');
 
@@ -49,10 +50,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('reports', function () {
         return Inertia::render('Private/Dashboard/Report');
     })->name('reports');
-
-    Route::get('roles', function () {
-        return Inertia::render('Private/Dashboard/Role');
-    })->name('roles');
 
     Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
 

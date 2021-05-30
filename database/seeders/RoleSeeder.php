@@ -15,10 +15,9 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'id' => 1,
-            'name' => 'Administrator',
-            'slug' => 'administrator',
-            'description' => 'Administrator for the system'
+            'name' => 'Crew',
+            'slug' => 'Crew',
+            'description' => 'Crew at Akif Car Grooming Center'
         ]);
 
         Role::create([
@@ -28,21 +27,22 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'Quality Checker',
-            'slug' => 'Quality Checker',
-            'description' => 'Quality Checker for Akif Car Grooming Center'
-        ]);
-
-        Role::create([
             'name' => 'Detailer',
             'slug' => 'Detailer',
             'description' => 'Detailer for Akif Car Grooming Center'
         ]);
 
         Role::create([
-            'name' => 'Crew',
-            'slug' => 'Crew',
-            'description' => 'Crew at Akif Car Grooming Center'
+            'id' => 7,
+            'name' => 'Administrator',
+            'slug' => 'administrator',
+            'description' => 'Administrator for the system'
+        ]);
+
+        Role::create([
+            'name' => 'Quality Checker',
+            'slug' => 'Quality Checker',
+            'description' => 'Quality Checker for Akif Car Grooming Center'
         ]);
     }
 }
