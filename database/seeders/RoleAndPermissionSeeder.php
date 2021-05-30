@@ -27,18 +27,13 @@ class RoleAndPermissionSeeder extends Seeder
         $editRole = Permission::create(['name' => 'edit_role']);
         $editStore = Permission::create(['name' => 'edit_store']);
 
-        // create roles and assign created permissions
+        // create roles and assign permissions
         Role::create(['name' => 'Super Admin'])
             ->givePermissionTo(Permission::all());
-
         Role::create(['name' => 'Admin']);
-
         Role::create(['name' => 'Owner']);
-
         Role::create(['name' => 'Crew']);
-
         Role::create(['name' => 'Detailer']);
-
         Role::create(['name' => 'Quality Checker']);
     }
 }
