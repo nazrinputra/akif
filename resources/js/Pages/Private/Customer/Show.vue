@@ -33,41 +33,43 @@
             This customer has been deleted.
         </breeze-trashed-message>
 
-        <div
-            v-show="isVisible && customer.personalities.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Personalities</th>
-                </tr>
-                <tr
-                    v-for="personality in customer.personalities"
-                    :key="personality.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('personalities.show', personality)"
-                        >
-                            {{ personality.name }}
-                        </inertia-link>
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('personalities.show', personality)"
-                            tabindex="-1"
-                        >
-                            <i class="fas fa-eye"></i>
-                        </inertia-link>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <transition name="fade">
+            <div
+                v-show="isVisible && customer.personalities.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Personalities</th>
+                    </tr>
+                    <tr
+                        v-for="personality in customer.personalities"
+                        :key="personality.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    >
+                        <td class="border-t">
+                            <inertia-link
+                                style="color: inherit; text-decoration: inherit;"
+                                class="px-3 py-3 flex items-center focus:text-indigo-500"
+                                :href="route('personalities.show', personality)"
+                            >
+                                {{ personality.name }}
+                            </inertia-link>
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden">
+                            <inertia-link
+                                style="color: inherit; text-decoration: inherit;"
+                                class="px-3 flex items-center"
+                                :href="route('personalities.show', personality)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-eye"></i>
+                            </inertia-link>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
 
         <div
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -91,16 +93,6 @@
                             id="phone_no"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="customer.phone_no"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="gender">Gender</label>
-                        <input
-                            type="text"
-                            id="gender"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="customer.gender"
                             disabled
                         />
                     </div>

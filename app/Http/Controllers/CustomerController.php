@@ -45,7 +45,6 @@ class CustomerController extends Controller
         $request->validate([
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'max:12'],
-            'gender' => ['required', 'max:50']
         ]);
 
         $slug = Str::slug($request->name);
@@ -55,7 +54,7 @@ class CustomerController extends Controller
             return Redirect::back()->with('error', 'Customer already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdCustomer = Customer::create($request->only('name', 'slug', 'phone_no', 'gender'));
+        $createdCustomer = Customer::create($request->only('name', 'slug', 'phone_no'));
 
         if ($request->input('car_id') != null) {
             $car = Car::find($request->input('car_id'));
@@ -106,13 +105,12 @@ class CustomerController extends Controller
         $request->validate([
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'max:12'],
-            'gender' => ['required', 'max:50']
         ]);
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        $customer->update($request->only('name', 'slug', 'phone_no', 'gender'));
+        $customer->update($request->only('name', 'slug', 'phone_no'));
 
         return Redirect::route('customers.show', $customer)->with('success', 'Customer updated successfully.');
     }

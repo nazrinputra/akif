@@ -31,7 +31,6 @@ class CustomerFactory extends Factory
             'name' => $name,
             'slug' => $slug,
             'phone_no' => $this->faker->mobileNumber(false, false),
-            'gender' => $this->faker->randomElement(['Male', 'Female']),
         ];
     }
 }
