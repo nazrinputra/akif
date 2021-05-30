@@ -19,7 +19,6 @@ use App\Http\Controllers\PromotionController;
 */
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/content/dashboard.php';
 require __DIR__ . '/content/car.php';
 require __DIR__ . '/content/crew.php';
 require __DIR__ . '/content/customer.php';
@@ -45,6 +44,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Private/Dashboard/Index');
     })->name('dashboard');
+
+    Route::get('counter', function () {
+        return Inertia::render('Private/Dashboard/Counter');
+    })->name('counter');
 
     Route::get('reports', function () {
         return Inertia::render('Private/Dashboard/Report');
