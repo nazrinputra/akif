@@ -13,6 +13,7 @@ class Personality extends Model
     protected $fillable = [
         'name',
         'slug',
+        'color',
         'description'
     ];
 

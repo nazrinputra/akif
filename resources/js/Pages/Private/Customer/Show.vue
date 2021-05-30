@@ -36,38 +36,21 @@
         <transition name="fade">
             <div
                 v-show="isVisible && customer.personalities.length > 0"
-                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                class="mb-3 p-3"
             >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Personalities</th>
-                    </tr>
-                    <tr
-                        v-for="personality in customer.personalities"
-                        :key="personality.id"
-                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                <span
+                    v-for="personality in customer.personalities"
+                    :key="personality.id"
+                >
+                    <inertia-link
+                        class="mx-1 badge badge-pill"
+                        :class="tagging(personality.color)"
+                        style="font-size: 125% !important;"
+                        :href="route('personalities.show', personality)"
                     >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('personalities.show', personality)"
-                            >
-                                {{ personality.name }}
-                            </inertia-link>
-                        </td>
-                        <td class="border-t w-px md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 flex items-center"
-                                :href="route('personalities.show', personality)"
-                                tabindex="-1"
-                            >
-                                <i class="fas fa-eye"></i>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
+                        <p class="px-2 pb-1 pt-3">{{ personality.name }}</p>
+                    </inertia-link>
+                </span>
             </div>
         </transition>
 
@@ -251,6 +234,20 @@ export default {
         diffForHumans(date) {
             var local = moment.tz(date, "Asia/Kuala_Lumpur").format();
             return moment(local).fromNow();
+        },
+        tagging(color) {
+            if (color == "Red") {
+                return "badge-danger";
+            }
+            if (color == "Yellow") {
+                return "badge-warning";
+            }
+            if (color == "Green") {
+                return "badge-success";
+            }
+            if (color == "Black") {
+                return "badge-dark";
+            }
         }
     }
 };

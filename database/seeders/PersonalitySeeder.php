@@ -14,6 +14,34 @@ class PersonalitySeeder extends Seeder
      */
     public function run()
     {
-        Personality::factory(15)->create();
+        $faker = \Faker\Factory::create('ms_MY');
+
+        Personality::create([
+            'name' => 'Normal',
+            'slug' => 'normal',
+            'color' => 'Green',
+            'description' => $faker->sentence()
+        ]);
+
+        Personality::create([
+            'name' => 'Caution',
+            'slug' => 'caution',
+            'color' => 'Yellow',
+            'description' => $faker->sentence()
+        ]);
+
+        Personality::create([
+            'name' => 'Alert',
+            'slug' => 'alert',
+            'color' => 'Red',
+            'description' => $faker->sentence()
+        ]);
+
+        Personality::create([
+            'name' => 'Banned',
+            'slug' => 'banned',
+            'color' => 'Black',
+            'description' => $faker->sentence()
+        ]);
     }
 }

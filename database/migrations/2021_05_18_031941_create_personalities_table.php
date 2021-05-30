@@ -17,6 +17,7 @@ class CreatePersonalitiesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug');
+            $table->string('color');
             $table->string('description');
             $table->timestamps();
             $table->softDeletes();
