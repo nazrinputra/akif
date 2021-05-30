@@ -27,6 +27,7 @@ require __DIR__ . '/content/personality.php';
 require __DIR__ . '/content/service.php';
 require __DIR__ . '/content/whatsapp.php';
 require __DIR__ . '/content/queue.php';
+require __DIR__ . '/content/role.php';
 
 URL::forceScheme('https');
 
