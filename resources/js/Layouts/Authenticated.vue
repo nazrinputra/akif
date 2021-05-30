@@ -113,12 +113,6 @@
                                                     Counter
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
-                                                    :href="route('roles.index')"
-                                                    as="button"
-                                                >
-                                                    Roles
-                                                </breeze-dropdown-link>
-                                                <breeze-dropdown-link
                                                     :href="route('logout')"
                                                     method="post"
                                                     as="button"

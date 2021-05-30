@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Store;
@@ -55,7 +54,6 @@ class ProfileController extends Controller
     {
         return Inertia::render('Private/Dashboard/Profile', [
             'stores' => Store::all(),
-            'roles' => Role::all(),
         ]);
     }
 
@@ -84,7 +82,6 @@ class ProfileController extends Controller
             'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
             'store_id' => ['required'],
-            'role_id' => ['required'],
         ]);
 
         if ($request->has('password') && $request->password != '') {
@@ -102,7 +99,7 @@ class ProfileController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        Auth::user()->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id', 'role_id'));
+        Auth::user()->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id'));
 
         return Redirect::route('profiles.show')->with('success', 'Profile updated successfully.');
     }

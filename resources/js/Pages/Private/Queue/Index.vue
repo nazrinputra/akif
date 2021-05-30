@@ -23,7 +23,7 @@
 
         <div class="input-group pb-4">
             <select
-                v-if="auth.user.role_id == 7"
+                v-if="auth.user.id == 1"
                 :value="filters.status"
                 @input="this.form.status = $event.target.value"
                 class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

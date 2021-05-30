@@ -76,16 +76,6 @@
                             disabled
                         />
                     </div>
-                    <div class="mt-3 p-3">
-                        <label for="role_id">Role</label>
-                        <input
-                            type="text"
-                            id="role"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="crew.role.name"
-                            disabled
-                        />
-                    </div>
 
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"

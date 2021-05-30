@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             QueueSeeder::class,
             PromotionSeeder::class,
-            RoleSeeder::class,
             UserSeeder::class,
             WhatsappSeeder::class,
         ]);

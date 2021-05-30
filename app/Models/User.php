@@ -24,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone_no',
         'password',
-        'role_id',
         'store_id'
     ];
 
@@ -70,10 +69,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function store()
     {
         return $this->belongsTo(Store::class);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
     }
 }
