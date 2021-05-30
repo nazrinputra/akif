@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\Customer;
 use App\Models\Personality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
@@ -25,6 +26,8 @@ use App\Http\Controllers\PersonalityController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+URL::forceScheme('https');
 
 Route::get('store/{store:slug}/queues', [QueueController::class, 'search'])->name('queues.search');
 
