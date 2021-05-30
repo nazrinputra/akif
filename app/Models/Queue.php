@@ -11,6 +11,7 @@ class Queue extends Model
 
     protected $attributes = [
         'status' => 'Waiting',
+        'remarks' => 'None'
     ];
 
     protected $fillable = [
