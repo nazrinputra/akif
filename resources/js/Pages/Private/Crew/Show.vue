@@ -78,17 +78,23 @@
                     </div>
 
                     <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-start"
                     >
                         <breeze-button
-                            v-if="!crew.deleted_at"
+                            v-if="
+                                !crew.deleted_at &&
+                                    hasAnyPermission(['delete_crews'])
+                            "
                             @click="destroy(crew)"
                             type="button"
                         >
                             Delete
                         </breeze-button>
                         <inertia-link
-                            v-if="!crew.deleted_at"
+                            v-if="
+                                !crew.deleted_at &&
+                                    hasAnyPermission(['edit_crews'])
+                            "
                             class="ml-auto btn btn-secondary"
                             as="button"
                             :href="route('crews.edit', crew)"

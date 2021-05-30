@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $faker = \Faker\Factory::create('ms_MY');
         $stores = Store::all()->pluck('id');
 
-        $admin = User::create([
+        User::create([
             'id' => 1,
             'name' => 'Admin',
             'store_id' => $faker->randomElement($stores),
@@ -27,10 +27,19 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-        ]);
+        ])->assignRole('super-admin');
 
-        $admin->assignRole('super-admin');
+        User::create([
+            'id' => 2,
+            'name' => 'Akif',
+            'store_id' => $faker->randomElement($stores),
+            'slug' => 'akif',
+            'phone_no' => '0129876543',
+            'email' => 'akif@email.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
+        ])->assignRole('admin');
 
-        User::factory(49)->create();
+        User::factory(48)->create();
     }
 }

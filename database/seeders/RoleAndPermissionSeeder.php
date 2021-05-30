@@ -19,20 +19,21 @@ class RoleAndPermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        $createCrew = Permission::create(['name' => 'create crews']);
-        $editCrew = Permission::create(['name' => 'edit crews']);
-        $deleteCrew = Permission::create(['name' => 'delete crews']);
-        $restoreCrew = Permission::create(['name' => 'restore crews']);
+        $viewDeleted = Permission::create(['name' => 'view_deleted']);
+        $restoreDeleted = Permission::create(['name' => 'restore_deleted']);
+        $createCrew = Permission::create(['name' => 'create_crews']);
+        $editCrew = Permission::create(['name' => 'edit_crews']);
+        $deleteCrew = Permission::create(['name' => 'delete_crews']);
 
         // create roles and assign created permissions
 
         // this can be done as separate statements
         $owner = Role::create(['name' => 'owner']);
-        $owner->givePermissionTo($createCrew, $editCrew, $deleteCrew, $restoreCrew);
+        $owner->givePermissionTo($createCrew, $editCrew, $deleteCrew, $restoreDeleted);
 
         // or may be done by chaining
         Role::create(['name' => 'admin'])
-            ->givePermissionTo([$createCrew, $editCrew]);
+            ->givePermissionTo([$createCrew, $editCrew, $deleteCrew, $viewDeleted]);
 
         $superAdmin = Role::create(['name' => 'super-admin']);
         $superAdmin->givePermissionTo(Permission::all());
