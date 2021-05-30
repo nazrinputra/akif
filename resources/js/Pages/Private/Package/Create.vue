@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="mt-3 p-3">
-                        <label for="search">Services</label>
+                        <label for="search">Services (optional)</label>
                         <div class="input-group">
                             <input
                                 type="text"
