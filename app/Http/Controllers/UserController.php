@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -36,6 +37,7 @@ class UserController extends Controller
     {
         return Inertia::render('Private/Crew/Create', [
             'stores' => Store::all(),
+            'roles' => Role::all(),
         ]);
     }
 
@@ -51,6 +53,7 @@ class UserController extends Controller
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
+            'role_id' => ['required'],
             'store_id' => ['required'],
             'password' => ['required', 'confirmed', 'min:8']
         ]);
@@ -65,6 +68,8 @@ class UserController extends Controller
         }
 
         $createdCrew = User::create($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id'));
+        $role = Role::find($request->role_id);
+        $createdCrew->syncRoles($role);
 
         event(new Registered($createdCrew));
 
@@ -80,7 +85,7 @@ class UserController extends Controller
     public function show(User $crew)
     {
         return Inertia::render('Private/Crew/Show', [
-            'crew' => $crew->load('store')
+            'crew' => $crew->load('store', 'roles')
         ]);
     }
 
@@ -94,7 +99,8 @@ class UserController extends Controller
     {
         return Inertia::render('Private/Crew/Edit', [
             'stores' => Store::all(),
-            'crew' => $crew->load('store')
+            'roles' => Role::all(),
+            'crew' => $crew->load('store', 'roles')
         ]);
     }
 
@@ -111,6 +117,7 @@ class UserController extends Controller
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'min:9', 'max:12'],
             'email' => ['required', 'max:50'],
+            'role_id' => ['required'],
             'store_id' => ['required'],
         ]);
 
@@ -118,6 +125,8 @@ class UserController extends Controller
         $request->merge(['slug' => $slug]);
 
         $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'store_id'));
+        $role = Role::find($request->role_id);
+        $crew->syncRoles($role);
 
         return Redirect::route('crews.show', $crew)->with('success', 'Crew updated successfully.');
     }

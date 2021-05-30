@@ -94,6 +94,32 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="role_id">Role</label>
+                        <select
+                            v-model="form.role_id"
+                            @change="form.clearErrors('role_id')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.role_id
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                        >
+                            <option value="" disabled>Select Role</option>
+                            <option
+                                v-for="role in roles"
+                                :key="role.id"
+                                :value="role.id"
+                            >
+                                {{ role.name }}
+                            </option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.role_id
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
                         <select
                             v-model="form.store_id"
@@ -157,6 +183,7 @@ export default {
         errors: Object,
         flash: Object,
         stores: Object,
+        roles: Object,
         crew: Object
     },
 
@@ -165,6 +192,7 @@ export default {
             name: null,
             phone_no: null,
             email: null,
+            role_id: "",
             store_id: ""
         });
 
@@ -180,6 +208,7 @@ export default {
             this.form.name = this.crew.name;
             this.form.phone_no = this.crew.phone_no;
             this.form.email = this.crew.email;
+            this.form.role_id = this.crew.roles[0].id;
             this.form.store_id = this.crew.store_id;
         }
     }

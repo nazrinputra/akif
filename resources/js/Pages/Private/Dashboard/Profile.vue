@@ -79,11 +79,37 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="role_id">Role</label>
+                        <select
+                            :disabled="!hasAnyPermission(['edit_role'])"
+                            v-model="form.role_id"
+                            @change="form.clearErrors('role_id')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.role_id
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                        >
+                            <option value="" disabled>Select Role</option>
+                            <option
+                                v-for="role in roles"
+                                :key="role.id"
+                                :value="role.id"
+                            >
+                                {{ role.name }}
+                            </option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.role_id
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="store_id">Store</label>
-                        <!-- TODO add role checking for disable-->
                         <select
                             v-model="form.store_id"
-                            :disabled="auth.user.id != 1"
+                            :disabled="!hasAnyPermission(['edit_store'])"
                             @change="form.clearErrors('store_id')"
                             class="w-full rounded-md shadow-sm"
                             :class="
@@ -179,7 +205,8 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        stores: Object
+        stores: Object,
+        roles: Object
     },
 
     setup() {
@@ -187,6 +214,7 @@ export default {
             name: null,
             phone_no: null,
             email: null,
+            role_id: null,
             store_id: null,
             password: null,
             password_confirmation: null
@@ -205,6 +233,7 @@ export default {
             this.form.phone_no = this.auth.user.phone_no;
             this.form.email = this.auth.user.email;
             this.form.store_id = this.auth.user.store_id;
+            this.form.role_id = this.auth.user.roles[0].id;
         },
         submit() {
             this.form.put(route("profiles.update"), {

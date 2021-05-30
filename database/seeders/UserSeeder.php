@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-        ])->assignRole('super-admin');
+        ])->assignRole('Super Admin');
 
         User::create([
             'id' => 2,
@@ -38,8 +39,13 @@ class UserSeeder extends Seeder
             'email' => 'akif@email.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-        ])->assignRole('admin');
+        ])->assignRole('Admin');
 
-        User::factory(48)->create();
+        $users = User::factory(48)->create();
+
+        $roles = Role::all()->skip(3);
+        foreach ($users as $user) {
+            $user->assignRole($faker->randomElement($roles));
+        }
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
@@ -54,6 +55,7 @@ class ProfileController extends Controller
     {
         return Inertia::render('Private/Dashboard/Profile', [
             'stores' => Store::all(),
+            'roles' => Role::all()
         ]);
     }
 
@@ -81,6 +83,7 @@ class ProfileController extends Controller
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
+            'role_id' => ['required'],
             'store_id' => ['required'],
         ]);
 
@@ -100,6 +103,8 @@ class ProfileController extends Controller
         $request->merge(['slug' => $slug]);
 
         Auth::user()->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id'));
+        $role = Role::find($request->role_id);
+        Auth::user()->syncRoles($role);
 
         return Redirect::route('profiles.show')->with('success', 'Profile updated successfully.');
     }
