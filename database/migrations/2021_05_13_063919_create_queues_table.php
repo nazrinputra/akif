@@ -19,7 +19,7 @@ class CreateQueuesTable extends Migration
             $table->foreignId('car_id')->constrained();
             $table->foreignId('customer_id')->constrained();
             $table->string('status');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }
