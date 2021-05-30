@@ -14,7 +14,6 @@ class Customer extends Model
         'name',
         'slug',
         'phone_no',
-        'gender'
     ];
 
     public function scopeFilter($query, array $filters)

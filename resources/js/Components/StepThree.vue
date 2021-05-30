@@ -16,11 +16,12 @@
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 Oops, we could not find any matching packages.
-                <inertia-link
-                    :href="route('packages.create')"
-                    class="text-blue-500 text-decoration-none"
-                    >Create new?</inertia-link
+                <span
+                    @click="viewAll"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
                 >
+                    View all?
+                </span>
             </div>
 
             <transition name="fade">
@@ -155,6 +156,11 @@ export default {
         },
         next() {
             this.$emit("next");
+        },
+        viewAll() {
+            axios.get(route("packages.all")).then(response => {
+                this.packages = response.data;
+            });
         }
     }
 };

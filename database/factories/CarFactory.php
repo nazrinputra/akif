@@ -33,9 +33,7 @@ class CarFactory extends Factory
         return [
             'plate_no' => $plate_no,
             'slug' => $slug,
-            'brand' => $this->faker->vehicleBrand(),
             'model' => $this->faker->vehicleModel(),
-            'color' => $this->faker->colorName(),
             'size' => $this->faker->randomElement($this->size)
         ];
     }

@@ -71,6 +71,9 @@ Route::post('personality/unlink', function (Request $request) {
 Route::get('services/search', [ServiceController::class, 'search'])
     ->name('services.search');
 
+Route::get('services/all', [ServiceController::class, 'all'])
+    ->name('services.all');
+
 Route::post('package/link', function (Request $request) {
     $service = Service::find($request->service_id);
     $package = Package::find($request->package_id);
@@ -87,6 +90,9 @@ Route::post('package/unlink', function (Request $request) {
 
 Route::get('packages/search', [PackageController::class, 'search'])
     ->name('packages.search');
+
+Route::get('packages/all', [PackageController::class, 'all'])
+    ->name('packages.all');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

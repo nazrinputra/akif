@@ -60,6 +60,16 @@
                             disabled
                         />
                     </div>
+                    <div class="mt-3 p-3">
+                        <label for="remarks">Remarks</label>
+                        <input
+                            type="text"
+                            id="remarks"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="queue.remarks"
+                            disabled
+                        />
+                    </div>
                 </form>
             </div>
         </div>

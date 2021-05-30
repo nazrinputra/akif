@@ -145,4 +145,9 @@ class PackageController extends Controller
             ->limit(3)
             ->get();
     }
+
+    public function all()
+    {
+        return Package::all();
+    }
 }

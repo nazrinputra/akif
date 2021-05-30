@@ -175,6 +175,17 @@
             </div>
         </div>
 
+        <div class="mb-3 p-3">
+            <label for="remarks">Remarks</label>
+            <textarea
+                rows="7"
+                id="remarks"
+                placeholder="Remarks"
+                class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="remarks"
+            />
+        </div>
+
         <div
             class="p-3 bg-gray-50 border-t border-gray-100 row justify-between"
         >
@@ -201,6 +212,12 @@ export default {
     },
 
     props: ["car", "customer", "pkg", "services"],
+
+    data() {
+        return {
+            remarks: null
+        };
+    },
 
     computed: {
         product: function() {
@@ -232,15 +249,19 @@ export default {
             this.$emit("editService");
         },
         submit() {
-            let pkg_id = null;
+            let pkg_id,
+                remarks = null;
+
             if (this.pkg) {
                 pkg_id = this.pkg.id;
             }
+
             this.$inertia.post(route("queues.store"), {
                 car_id: this.car.id,
                 customer_id: this.customer.id,
                 package_id: pkg_id,
-                services_id: this.services.map(service => service.id)
+                services_id: this.services.map(service => service.id),
+                remarks: this.remarks
             });
         }
     }

@@ -91,7 +91,7 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="search">Package</label>
+                        <label for="search">Package (optional)</label>
                         <div v-if="!pkg" class="input-group">
                             <input
                                 type="text"

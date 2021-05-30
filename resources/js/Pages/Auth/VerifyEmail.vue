@@ -47,7 +47,8 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        status: String
+        status: String,
+        flash: Object
     },
 
     data() {

@@ -70,30 +70,9 @@
                             form.errors.phone_no
                         }}</span>
                     </div>
-                    <div class="mt-3 p-3">
-                        <label for="gender">Gender</label>
-                        <select
-                            v-model="form.gender"
-                            @change="form.clearErrors('gender')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.gender
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                        >
-                            <option value="" disabled>Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.gender
-                        }}</span>
-                    </div>
 
                     <div class="mt-3 p-3">
-                        <label for="search">Car</label>
+                        <label for="search">Car (optional)</label>
                         <div v-if="!car" class="input-group">
                             <input
                                 type="text"
@@ -235,7 +214,6 @@ export default {
         const form = useForm({
             name: null,
             phone_no: null,
-            gender: "",
             car_id: null
         });
 

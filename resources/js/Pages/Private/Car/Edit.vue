@@ -54,26 +54,6 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="brand">Brand</label>
-                        <input
-                            type="text"
-                            placeholder="Brand"
-                            id="brand"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.brand
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.brand"
-                            @keydown="form.clearErrors('brand')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.brand
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
                         <label for="model">Model</label>
                         <input
                             type="text"
@@ -91,26 +71,6 @@
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.model
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="color">Color</label>
-                        <input
-                            type="text"
-                            placeholder="Color"
-                            id="color"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.color
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.color"
-                            @keydown="form.clearErrors('color')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.color
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
@@ -262,9 +222,7 @@ export default {
     setup() {
         const form = useForm({
             plate_no: null,
-            brand: null,
             model: null,
-            color: "",
             size: null
         });
 
@@ -278,9 +236,7 @@ export default {
     methods: {
         loadData() {
             this.form.plate_no = this.car.plate_no;
-            this.form.brand = this.car.brand;
             this.form.model = this.car.model;
-            this.form.color = this.car.color;
             this.form.size = this.car.size;
         },
         linkCustomer(customer) {
