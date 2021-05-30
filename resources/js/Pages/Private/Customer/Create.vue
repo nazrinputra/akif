@@ -83,6 +83,13 @@
                             />
                         </div>
 
+                        <div
+                            v-if="formCar.query && cars.length == 0"
+                            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                        >
+                            Oops, we could not find any matching cars.
+                        </div>
+
                         <transition name="fade">
                             <div
                                 v-if="cars.length > 0"

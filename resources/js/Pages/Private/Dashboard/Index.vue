@@ -95,10 +95,8 @@
 
                     <div
                         v-if="!formCar.query && cars.length == 0"
-                        class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-                    >
-                        Quickly search for existing cars in the system.
-                    </div>
+                        class="mb-3"
+                    ></div>
 
                     <div
                         v-if="formCar.query && cars.length == 0"
