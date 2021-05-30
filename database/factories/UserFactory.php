@@ -32,14 +32,15 @@ class UserFactory extends Factory
         $this->faker->addProvider(new \Faker\Provider\ms_MY\PhoneNumber($this->faker));
 
         $this->stores = Store::all();
-        $this->roles = Role::all()->where('name', '<>', 'Administrator');
+        $this->roles = Role::all();
 
+        $roles = $this->roles->whereNotIn('name', ['Administrator', 'Owner']);
         $name = $this->faker->name();
         $slug = Str::slug($name);
 
         return [
             'name' => $name,
-            'role_id' => $this->faker->randomElement($this->roles),
+            'role_id' => $this->faker->randomElement($roles),
             'store_id' => $this->faker->randomElement($this->stores),
             'email' => $this->faker->unique()->safeEmail(),
             'slug' => $slug,

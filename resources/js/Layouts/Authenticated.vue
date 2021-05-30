@@ -113,12 +113,6 @@
                                                     Counter
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
-                                                    :href="route('reports')"
-                                                    as="button"
-                                                >
-                                                    Reports
-                                                </breeze-dropdown-link>
-                                                <breeze-dropdown-link
                                                     :href="route('roles.index')"
                                                     as="button"
                                                 >
@@ -217,12 +211,6 @@
                                         as="button"
                                     >
                                         Reports
-                                    </breeze-responsive-nav-link>
-                                    <breeze-responsive-nav-link
-                                        :href="route('roles.index')"
-                                        as="button"
-                                    >
-                                        Roles
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('logout')"
