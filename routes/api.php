@@ -14,6 +14,7 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\PersonalityController;
 
 /*
@@ -93,6 +94,9 @@ Route::get('packages/search', [PackageController::class, 'search'])
 
 Route::get('packages/all', [PackageController::class, 'all'])
     ->name('packages.all');
+
+Route::get('whatsapps/search', [WhatsappController::class, 'search'])
+    ->name('whatsapps.search');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

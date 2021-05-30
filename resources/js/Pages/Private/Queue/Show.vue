@@ -74,6 +74,116 @@
             </div>
         </div>
 
+        <div class="input-group pt-3">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search WhatsApp message..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formWhatsapp.query"
+            />
+        </div>
+
+        <div
+            v-if="!formWhatsapp.query && whatsapps.length == 0 && !whatsapp"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            Send a message to the customer?
+        </div>
+
+        <transition name="fade">
+            <div
+                v-if="whatsapps.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">WhatsApp Title</th>
+                    </tr>
+                    <tr
+                        v-for="whatsapp in whatsapps"
+                        :key="whatsapp.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    >
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                        >
+                            {{ whatsapp.title }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <breeze-button
+                                type="button"
+                                @click="selectWhatsapp(whatsapp)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-check"></i>
+                            </breeze-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
+
+        <div
+            v-if="whatsapp"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Selected WhatsApp Title</th>
+                </tr>
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('whatsapps.show', whatsapp)"
+                        >
+                            {{ whatsapp.title }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <breeze-button
+                            type="button"
+                            @click="clearWhatsapp()"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-times"></i>
+                        </breeze-button>
+                    </td>
+                </tr>
+            </table>
+
+            <div
+                class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+            >
+                <inertia-link
+                    :href="
+                        route('whatsapps.send', {
+                            whatsapp: whatsapp,
+                            customer: queue.customer
+                        })
+                    "
+                    class="btn btn-secondary"
+                >
+                    Preview
+                </inertia-link>
+                <a
+                    as="button"
+                    class="mr-3 btn btn-secondary ml-auto"
+                    target="_blank"
+                    :href="
+                        'https://api.whatsapp.com/send?phone=6' +
+                            queue.customer.phone_no +
+                            '&text=' +
+                            whatsapp.message
+                    "
+                >
+                    Send
+                </a>
+            </div>
+        </div>
+
         <div
             class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
@@ -225,6 +335,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import moment from "moment-timezone";
+import throttle from "lodash/throttle";
 
 export default {
     components: {
@@ -240,11 +351,50 @@ export default {
         queue: Object
     },
 
+    data() {
+        return {
+            formWhatsapp: {
+                query: null
+            },
+            whatsapps: [],
+            whatsapp: null
+        };
+    },
+
+    watch: {
+        formWhatsapp: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formWhatsapp.query && this.formWhatsapp.query != "") {
+                    axios
+                        .get(route("whatsapps.search"), {
+                            params: {
+                                query: this.formWhatsapp.query
+                            }
+                        })
+                        .then(response => {
+                            this.whatsapps = response.data;
+                        });
+                } else {
+                    this.whatsapps = [];
+                }
+            }, 150)
+        }
+    },
+
     methods: {
         readableForHumans(date) {
             return moment(date)
                 .tz("Asia/Kuala_Lumpur")
                 .format("MMMM Do YYYY, HH:mm:ss");
+        },
+        selectWhatsapp(whatsapp) {
+            this.whatsapp = whatsapp;
+            this.formWhatsapp.query = null;
+            this.whatsapps = [];
+        },
+        clearWhatsapp() {
+            this.whatsapp = null;
         }
     }
 };

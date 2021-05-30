@@ -12,5 +12,8 @@ Route::group(
 
         Route::put('whatsapps/{whatsapp:slug}/restore', [WhatsappController::class, 'restore'])
             ->name('whatsapps.restore')->middleware('auth');
+
+        Route::get('whatsapps/{whatsapp:slug}/send/customers/{customer:slug}', [WhatsappController::class, 'send'])
+            ->name('whatsapps.send')->middleware('auth');
     }
 );
