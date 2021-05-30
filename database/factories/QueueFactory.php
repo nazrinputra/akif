@@ -40,6 +40,7 @@ class QueueFactory extends Factory
             'car_id' => $this->car,
             'customer_id' => $this->customer,
             'status' => $this->faker->randomElement($this->status),
+            'remarks' => ucwords($this->faker->words(3, true)),
         ];
     }
 }

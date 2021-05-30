@@ -47,7 +47,7 @@ class QueueController extends Controller
         $request->merge(['store_id' => $store->id]);
         $package = Package::find($request->package_id);
 
-        $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id'));
+        $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id', 'remarks'));
 
         if ($package) {
             $createdQueue->packages()->save($package);

@@ -18,6 +18,7 @@ class Queue extends Model
         'car_id',
         'customer_id',
         'status',
+        'remarks'
     ];
 
     public function store()
