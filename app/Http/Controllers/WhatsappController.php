@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Inertia\Inertia;
 use App\Models\Whatsapp;
 use Illuminate\Support\Str;
@@ -118,5 +119,21 @@ class WhatsappController extends Controller
     {
         $whatsapp->restore();
         return Redirect::back()->with('success', 'Message restored successfully.');
+    }
+
+    public function search(Request $request)
+    {
+        return Whatsapp::where('title', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('message', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
+
+    public function send(Whatsapp $whatsapp, $customer)
+    {
+        return Inertia::render('Private/Whatsapp/Send', [
+            'whatsapp' => $whatsapp,
+            'customer' => Customer::where('slug', $customer)->first()
+        ]);
     }
 }
