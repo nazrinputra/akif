@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
 use App\Models\Package;
 use App\Models\Service;
+use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -45,12 +48,91 @@ class QueueController extends Controller
     public function store(Request $request)
     {
         $store = Auth::user()->store;
-        $request->merge(['store_id' => $store->id]);
-        $package = Package::find($request->package_id);
 
-        $createdQueue = Queue::create($request->only('store_id', 'car_id', 'customer_id', 'remarks'));
+        if ($request->car_id) {
+            $car = Car::find($request->car_id);
 
-        if ($package) {
+            if ($request->customer_id) {
+                $customer = Customer::find($request->customer_id);
+
+                if (!$car->owners->contains($customer)) {
+                    $car->owners()->save($customer);
+                }
+            }
+
+            if (!$request->customer_id) {
+                $request->validate([
+                    'name' => ['required', 'max:50'],
+                    'phone_no' => ['required', 'max:12'],
+                ]);
+
+                $slug = Str::slug($request->name);
+                $request->merge(['slug' => $slug]);
+
+                if ($existingCustomer = Customer::where('slug', $request->slug)->orWhere('phone_no', $request->phone_no)->first()) {
+                    return Redirect::back()->with('error', 'Customer already exist! <a href="' . route('customers.show', $existingCustomer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+                }
+
+                $customer = Customer::create($request->only('name', 'slug', 'phone_no'));
+
+                $car->owners()->save($customer);
+            }
+        }
+
+        if (!$request->car_id) {
+            $request->validate([
+                'plate_no' => ['required', 'max:10'],
+                'model' => ['required', 'max:50'],
+                'size' => ['required', 'max:5'],
+            ]);
+
+            $plate_no = strtoupper(preg_replace('/\s+/', '', $request->plate_no));
+            $slug = Str::slug($plate_no);
+            $request->merge(['slug' => $slug]);
+            $request->merge(['plate_no' => $plate_no]);
+
+            if ($existingCar = Car::where('slug', $request->slug)->first()) {
+                return Redirect::back()->with('error', 'Car already exist! <a href="' . route('cars.show', $existingCar) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+            }
+
+            $car = Car::create($request->only('plate_no', 'slug', 'model', 'size'));
+
+            if ($request->customer_id) {
+                $customer = Customer::find($request->customer_id);
+
+                if (!$car->owners->contains($customer)) {
+                    $car->owners()->save($customer);
+                }
+            }
+
+            if (!$request->customer_id) {
+                $request->validate([
+                    'name' => ['required', 'max:50'],
+                    'phone_no' => ['required', 'max:12'],
+                ]);
+
+                $slug = Str::slug($request->name);
+                $request->merge(['slug' => $slug]);
+
+                if ($existingCustomer = Customer::where('slug', $request->slug)->orWhere('phone_no', $request->phone_no)->first()) {
+                    return Redirect::back()->with('error', 'Customer already exist! <a href="' . route('customers.show', $existingCustomer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+                }
+
+                $customer = Customer::create($request->only('name', 'slug', 'phone_no'));
+
+                $car->owners()->save($customer);
+            }
+        }
+
+        $createdQueue = Queue::create([
+            'store_id' => $store->id,
+            'car_id' => $car->id,
+            'customer_id' => $customer->id,
+            'remarks' => $request->input('remarks')
+        ]);
+
+        if ($request->package_id) {
+            $package = Package::find($request->package_id);
             $createdQueue->packages()->save($package);
         }
 
