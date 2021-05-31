@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Permission;
 
@@ -18,8 +19,15 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->hasRole('Super Admin')) {
+            $roles = Role::all();
+        } else {
+            $roles = Role::whereNotIn('name', ['Super Admin'])->get();
+        }
+
+
         return Inertia::render('Private/Role/Index', [
-            'roles' => Role::all()
+            'roles' => $roles
         ]);
     }
 
@@ -47,6 +55,11 @@ class RoleController extends Controller
 
         $createdRole = Role::create($request->only('name'));
 
+        foreach ($request->crews as $id) {
+            $crew = User::find($id);
+            $crew->assignRole($createdRole);
+        }
+
         return Redirect::route('roles.show', $createdRole)->with('success', 'Role added successfully.');
     }
 
@@ -73,7 +86,8 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         return Inertia::render('Private/Role/Edit', [
-            'role' => $role->load('permissions')
+            'role' => $role->load('permissions'),
+            'crews' => User::role($role)->get()
         ]);
     }
 
@@ -104,10 +118,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return Redirect::back()->with('success', 'Role deleted successfully.');
+        return Redirect::route('roles.index')->with('success', 'Role deleted successfully.');
     }
 
-    public function revoke(Request $request)
+    public function revoke_permission(Request $request)
     {
         $role = Role::find($request->role_id);
         $permission = Permission::find($request->permission_id);
@@ -115,7 +129,7 @@ class RoleController extends Controller
         return Redirect::back();
     }
 
-    public function give(Request $request)
+    public function give_permission(Request $request)
     {
         $role = Role::find($request->role_id);
         $permission = Permission::find($request->permission_id);
@@ -128,5 +142,21 @@ class RoleController extends Controller
         return Permission::where('name', 'like', '%' . $request->input('query') . '%')
             ->limit(3)
             ->get();
+    }
+
+    public function revoke_role(Request $request)
+    {
+        $role = Role::find($request->role_id);
+        $crew = User::find($request->crew_id);
+        $crew->removeRole($role);
+        return Redirect::back();
+    }
+
+    public function give_role(Request $request)
+    {
+        $role = Role::find($request->role_id);
+        $crew = User::find($request->crew_id);
+        $crew->assignRole($role);
+        return Redirect::back();
     }
 }
