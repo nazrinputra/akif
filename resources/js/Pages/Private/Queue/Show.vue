@@ -70,6 +70,30 @@
                             disabled
                         />
                     </div>
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-end"
+                    >
+                        <inertia-link
+                            v-if="
+                                !hasAnyPermission(['edit_closed_queue']) &&
+                                    queue.status != 'Collected' &&
+                                    queue.status != 'Cancelled'
+                            "
+                            class="btn btn-secondary"
+                            as="button"
+                            :href="route('queues.edit', queue)"
+                        >
+                            Edit
+                        </inertia-link>
+                        <inertia-link
+                            v-if="hasAnyPermission(['edit_closed_queue'])"
+                            class="btn btn-secondary"
+                            as="button"
+                            :href="route('queues.edit', queue)"
+                        >
+                            Edit
+                        </inertia-link>
+                    </div>
                 </form>
             </div>
         </div>

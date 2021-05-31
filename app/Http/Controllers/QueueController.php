@@ -83,7 +83,9 @@ class QueueController extends Controller
      */
     public function edit(Queue $queue)
     {
-        //
+        return Inertia::render('Private/Queue/Edit', [
+            'queue' => $queue->load('car', 'customer', 'store', 'packages', 'services')
+        ]);
     }
 
     /**
