@@ -20,18 +20,6 @@ class UserSeeder extends Seeder
         $stores = Store::all()->pluck('id');
 
         User::create([
-            'id' => 1,
-            'name' => 'Admin',
-            'store_id' => $faker->randomElement($stores),
-            'slug' => 'admin',
-            'phone_no' => '0123456789',
-            'email' => 'admin@email.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-        ])->assignRole('Super Admin');
-
-        User::create([
-            'id' => 2,
             'name' => 'Akif',
             'store_id' => $faker->randomElement($stores),
             'slug' => 'akif',
@@ -39,11 +27,21 @@ class UserSeeder extends Seeder
             'email' => 'akif@email.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
+        ])->assignRole('Super Admin');
+
+        User::create([
+            'name' => 'Admin',
+            'store_id' => $faker->randomElement($stores),
+            'slug' => 'admin',
+            'phone_no' => '0123456789',
+            'email' => 'admin@email.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
         ])->assignRole('Admin');
 
         $users = User::factory(48)->create();
 
-        $roles = Role::all()->skip(3);
+        $roles = Role::whereNotIn('name', ['Super Admin', 'Admin', 'Owner'])->get();
         foreach ($users as $user) {
             $user->assignRole($faker->randomElement($roles));
         }
