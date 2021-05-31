@@ -52,11 +52,117 @@
                     </div>
 
                     <div class="mt-3 p-3">
+                        <label for="search">Permissions (optional)</label>
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                id="searchPermission"
+                                placeholder="Search permission..."
+                                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                v-model="formPermission.query"
+                            />
+                        </div>
+
+                        <div
+                            v-if="
+                                formPermission.query && permissions.length == 0
+                            "
+                            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                        >
+                            Oops, we could not find any matching permissions.
+                        </div>
+
+                        <transition name="fade">
+                            <div
+                                v-if="permissions.length > 0"
+                                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                            >
+                                <table class="w-full whitespace-nowrap">
+                                    <tr class="text-left font-bold">
+                                        <th class="px-3 py-3">
+                                            Permission Name
+                                        </th>
+                                    </tr>
+                                    <tr
+                                        v-for="permission in permissions"
+                                        :key="permission.id"
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                    >
+                                        <td
+                                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                                        >
+                                            {{ toTitle(permission.name) }}
+                                        </td>
+                                        <td
+                                            class="border-t w-px md:table-cell hidden pr-3"
+                                        >
+                                            <breeze-button
+                                                v-if="
+                                                    !selectedPermissions.some(
+                                                        data =>
+                                                            data.id ===
+                                                            permission.id
+                                                    )
+                                                "
+                                                type="button"
+                                                @click="
+                                                    selectPermission(permission)
+                                                "
+                                                tabindex="-1"
+                                            >
+                                                <i class="fas fa-check"></i>
+                                            </breeze-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </transition>
+
+                        <div
+                            v-if="selectedPermissions.length > 0"
+                            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                        >
+                            <table class="w-full whitespace-nowrap">
+                                <tr class="text-left font-bold">
+                                    <th class="px-3 py-3">
+                                        Selected Permissions Name
+                                    </th>
+                                </tr>
+                                <tr
+                                    v-for="(permission,
+                                    index) in selectedPermissions"
+                                    :key="permission.id"
+                                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                >
+                                    <td class="border-t">
+                                        <span
+                                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                                        >
+                                            {{ toTitle(permission.name) }}
+                                        </span>
+                                    </td>
+                                    <td
+                                        class="border-t w-px md:table-cell hidden pr-3"
+                                    >
+                                        <breeze-button
+                                            type="button"
+                                            @click="removePermission(index)"
+                                            tabindex="-1"
+                                        >
+                                            <i class="fas fa-times"></i>
+                                        </breeze-button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 p-3">
                         <label for="search">Crews (optional)</label>
                         <div class="input-group">
                             <input
                                 type="text"
-                                id="search"
+                                id="searchCrew"
                                 placeholder="Search crew..."
                                 class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 v-model="formCrew.query"
@@ -94,7 +200,7 @@
                                         >
                                             <breeze-button
                                                 v-if="
-                                                    !selectedcrews.some(
+                                                    !selectedCrews.some(
                                                         data =>
                                                             data.id === crew.id
                                                     )
@@ -112,7 +218,7 @@
                         </transition>
 
                         <div
-                            v-if="selectedcrews.length > 0"
+                            v-if="selectedCrews.length > 0"
                             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                         >
                             <table class="w-full whitespace-nowrap">
@@ -122,7 +228,7 @@
                                     </th>
                                 </tr>
                                 <tr
-                                    v-for="(crew, index) in selectedcrews"
+                                    v-for="(crew, index) in selectedCrews"
                                     :key="crew.id"
                                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                                 >
@@ -198,6 +304,7 @@ export default {
     setup() {
         const form = useForm({
             name: null,
+            permissions: [],
             crews: []
         });
 
@@ -210,7 +317,12 @@ export default {
                 query: null
             },
             crews: [],
-            selectedcrews: []
+            selectedCrews: [],
+            formPermission: {
+                query: null
+            },
+            permissions: [],
+            selectedPermissions: []
         };
     },
 
@@ -232,6 +344,27 @@ export default {
                     this.crews = [];
                 }
             }, 150)
+        },
+        formPermission: {
+            deep: true,
+            handler: throttle(function() {
+                if (
+                    this.formPermission.query &&
+                    this.formPermission.query != ""
+                ) {
+                    axios
+                        .get(route("permissions.search"), {
+                            params: {
+                                query: this.formPermission.query
+                            }
+                        })
+                        .then(response => {
+                            this.permissions = response.data;
+                        });
+                } else {
+                    this.permissions = [];
+                }
+            }, 150)
         }
     },
 
@@ -239,16 +372,37 @@ export default {
         selectCrew(crew) {
             this.formCrew.query = "";
             this.crews = [];
-            this.selectedcrews.push(crew);
+            this.selectedCrews.push(crew);
         },
         removeCrew(index) {
-            this.selectedcrews.splice(index, 1);
+            this.selectedCrews.splice(index, 1);
+        },
+        selectPermission(permission) {
+            this.formPermission.query = "";
+            this.permissions = [];
+            this.selectedPermissions.push(permission);
+        },
+        removePermission(index) {
+            this.selectedPermissions.splice(index, 1);
         },
         submit() {
-            if (this.selectedcrews.length > 0) {
-                this.form.crews = this.selectedcrews.map(crew => crew.id);
+            if (this.selectedPermissions.length > 0) {
+                this.form.permissions = this.selectedPermissions.map(
+                    permission => permission.id
+                );
+            }
+            if (this.selectedCrews.length > 0) {
+                this.form.crews = this.selectedCrews.map(crew => crew.id);
             }
             this.form.post(route("roles.store"));
+        },
+        toTitle(string) {
+            return string
+                .split("_")
+                .map(word => {
+                    return word.slice(0, 1).toUpperCase() + word.slice(1);
+                })
+                .join(" ");
         }
     }
 };

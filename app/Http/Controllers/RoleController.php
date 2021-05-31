@@ -55,6 +55,11 @@ class RoleController extends Controller
 
         $createdRole = Role::create($request->only('name'));
 
+        foreach ($request->permissions as $id) {
+            $permission = Permission::find($id);
+            $createdRole->givePermissionTo($permission);
+        }
+
         foreach ($request->crews as $id) {
             $crew = User::find($id);
             $crew->assignRole($createdRole);
