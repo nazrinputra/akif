@@ -97,7 +97,14 @@ class QueueController extends Controller
      */
     public function update(Request $request, Queue $queue)
     {
-        //
+        $request->validate([
+            'status' => ['required', 'max:10'],
+            'remarks' => ['required', 'max:255'],
+        ]);
+
+        $queue->update($request->only('status', 'remarks'));
+
+        return Redirect::route('queues.show', $queue)->with('success', 'Queue updated successfully.');
     }
 
     /**
