@@ -26,5 +26,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'delete_crews']);
         Permission::create(['name' => 'edit_role']);
         Permission::create(['name' => 'edit_store']);
+        Permission::create(['name' => 'edit_closed_queue']);
     }
 }
