@@ -208,8 +208,15 @@ export default {
             this.form.name = this.crew.name;
             this.form.phone_no = this.crew.phone_no;
             this.form.email = this.crew.email;
-            this.form.role_id = this.crew.roles[0].id;
+            this.form.role_id = this.getRole();
             this.form.store_id = this.crew.store_id;
+        },
+        getRole() {
+            if (this.crew.roles[0]) {
+                return this.crew.roles[0].id;
+            } else {
+                return "";
+            }
         }
     }
 };

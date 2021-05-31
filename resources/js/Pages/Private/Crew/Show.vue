@@ -72,7 +72,7 @@
                             type="text"
                             id="store"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="crew.roles[0].name"
+                            :value="getRole()"
                             disabled
                         />
                     </div>
@@ -145,6 +145,13 @@ export default {
         },
         restore(crew) {
             this.$inertia.put(route("crews.restore", crew));
+        },
+        getRole() {
+            if (this.crew.roles[0]) {
+                return this.crew.roles[0].name;
+            } else {
+                return "No Role";
+            }
         }
     }
 };

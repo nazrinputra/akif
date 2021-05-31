@@ -233,13 +233,20 @@ export default {
             this.form.phone_no = this.auth.user.phone_no;
             this.form.email = this.auth.user.email;
             this.form.store_id = this.auth.user.store_id;
-            this.form.role_id = this.auth.user.roles[0].id;
+            this.form.role_id = this.getRole();
         },
         submit() {
             this.form.put(route("profiles.update"), {
                 onSuccess: () =>
                     this.form.reset("password", "password_confirmation")
             });
+        },
+        getRole() {
+            if (this.auth.user.roles[0]) {
+                return this.auth.user.roles[0].id;
+            } else {
+                return "";
+            }
         }
     }
 };
