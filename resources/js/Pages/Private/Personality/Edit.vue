@@ -268,9 +268,7 @@ export default {
                         this.formCustomer.query = "";
                         this.personalities = [];
                         this.flash.success =
-                            "Customer linked successfully to personality. <a href='" +
-                            route("customers.show", customer) +
-                            " 'style='color:#fff;text-decoration:underline;'>View customer</a>";
+                            "Customer linked successfully to personality.";
                     }
                 }
             );

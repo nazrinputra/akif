@@ -262,9 +262,7 @@ export default {
                         this.formPackage.query = "";
                         this.packages = [];
                         this.flash.success =
-                            "Package linked successfully to service. <a href='" +
-                            route("packages.show", pkg) +
-                            " 'style='color:#fff;text-decoration:underline;'>View package</a>";
+                            "Package linked successfully to service.";
                     }
                 }
             );
