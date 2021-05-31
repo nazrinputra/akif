@@ -4,7 +4,6 @@ use App\Models\Car;
 use App\Models\Customer;
 use App\Models\Personality;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Redirect;
