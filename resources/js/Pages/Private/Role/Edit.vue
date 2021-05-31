@@ -160,6 +160,92 @@
                 </tr>
             </table>
         </div>
+
+        <div class="input-group pt-3">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search crew..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formCrew.query"
+            />
+        </div>
+
+        <div
+            v-if="formCrew.query && searchCrews.length == 0"
+            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            Oops, we could not find any crews without a role.
+        </div>
+
+        <transition name="fade">
+            <div
+                v-if="searchCrews.length > 0"
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Crews</th>
+                    </tr>
+                    <tr
+                        v-for="crew in searchCrews"
+                        :key="crew.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    >
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                        >
+                            {{ crew.name }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <breeze-button
+                                v-if="!crews.some(data => data.id === crew.id)"
+                                type="button"
+                                @click="giveRole(crew)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-link"></i>
+                            </breeze-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </transition>
+
+        <div
+            v-if="crews.length > 0"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Assigned Crews</th>
+                </tr>
+                <tr
+                    v-for="crew in crews"
+                    :key="crew.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('crews.show', crew)"
+                        >
+                            {{ crew.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <breeze-button
+                            type="button"
+                            @click="revokeRole(crew)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-unlink"></i>
+                        </breeze-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </breeze-authenticated-layout>
 </template>
 
@@ -181,7 +267,8 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        role: Object
+        role: Object,
+        crews: Object
     },
 
     setup() {
@@ -211,7 +298,7 @@ export default {
         },
         revokePermission(permission) {
             this.$inertia.post(
-                route("roles.revoke"),
+                route("permissions.revoke"),
                 {
                     role_id: this.role.id,
                     permission_id: permission.id
@@ -225,7 +312,7 @@ export default {
         },
         givePermission(permission) {
             this.$inertia.post(
-                route("roles.give"),
+                route("permissions.give"),
                 {
                     role_id: this.role.id,
                     permission_id: permission.id
@@ -238,6 +325,34 @@ export default {
                     }
                 }
             );
+        },
+        revokeRole(crew) {
+            this.$inertia.post(
+                route("roles.revoke"),
+                {
+                    role_id: this.role.id,
+                    crew_id: crew.id
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.warning = "Role revoked successfully.";
+                    }
+                }
+            );
+        },
+        giveRole(crew) {
+            this.$inertia.post(
+                route("roles.give"),
+                {
+                    role_id: this.role.id,
+                    crew_id: crew.id
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.success = "Role assigned successfully.";
+                    }
+                }
+            );
         }
     },
 
@@ -246,7 +361,11 @@ export default {
             formPermission: {
                 query: null
             },
-            permissions: []
+            permissions: [],
+            formCrew: {
+                query: null
+            },
+            searchCrews: []
         };
     },
 
@@ -269,6 +388,24 @@ export default {
                         });
                 } else {
                     this.permissions = [];
+                }
+            }, 150)
+        },
+        formCrew: {
+            deep: true,
+            handler: throttle(function() {
+                if (this.formCrew.query && this.formCrew.query != "") {
+                    axios
+                        .get(route("crews.search"), {
+                            params: {
+                                query: this.formCrew.query
+                            }
+                        })
+                        .then(response => {
+                            this.searchCrews = response.data;
+                        });
+                } else {
+                    this.searchCrews = [];
                 }
             }, 150)
         }

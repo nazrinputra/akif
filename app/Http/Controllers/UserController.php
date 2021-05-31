@@ -148,4 +148,9 @@ class UserController extends Controller
         $crew->restore();
         return Redirect::back()->with('success', 'Crew restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return User::doesntHave('roles')->where('name', 'like', '%' . $request->input('query') . '%')->limit(3)->get();
+    }
 }
