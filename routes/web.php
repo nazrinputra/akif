@@ -19,15 +19,15 @@ use App\Http\Controllers\PromotionController;
 */
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/content/car.php';
-require __DIR__ . '/content/crew.php';
-require __DIR__ . '/content/customer.php';
-require __DIR__ . '/content/package.php';
-require __DIR__ . '/content/personality.php';
-require __DIR__ . '/content/service.php';
-require __DIR__ . '/content/whatsapp.php';
-require __DIR__ . '/content/queue.php';
-require __DIR__ . '/content/role.php';
+require __DIR__ . '/web/car.php';
+require __DIR__ . '/web/crew.php';
+require __DIR__ . '/web/customer.php';
+require __DIR__ . '/web/package.php';
+require __DIR__ . '/web/personality.php';
+require __DIR__ . '/web/service.php';
+require __DIR__ . '/web/whatsapp.php';
+require __DIR__ . '/web/queue.php';
+require __DIR__ . '/web/role.php';
 
 URL::forceScheme('https');
 
