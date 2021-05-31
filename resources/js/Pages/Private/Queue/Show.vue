@@ -75,7 +75,7 @@
                     >
                         <inertia-link
                             v-if="
-                                !hasAnyPermission(['edit_closed_queue']) &&
+                                !hasAnyPermission(['reopen_queues']) &&
                                     queue.status != 'Collected' &&
                                     queue.status != 'Cancelled'
                             "
@@ -86,7 +86,7 @@
                             Edit
                         </inertia-link>
                         <inertia-link
-                            v-if="hasAnyPermission(['edit_closed_queue'])"
+                            v-if="hasAnyPermission(['reopen_queues'])"
                             class="btn btn-secondary"
                             as="button"
                             :href="route('queues.edit', queue)"

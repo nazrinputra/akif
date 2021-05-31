@@ -6,6 +6,6 @@ use App\Http\Controllers\QueueController;
 Route::group(
     ['middleware' => ['auth', 'verified']],
     function () {
-        Route::resource('queues', QueueController::class)->only('index', 'store', 'edit', 'show');
+        Route::resource('queues', QueueController::class)->except('create', 'destroy');
     }
 );

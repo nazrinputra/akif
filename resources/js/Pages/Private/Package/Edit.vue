@@ -324,9 +324,7 @@ export default {
                         this.formService.query = "";
                         this.services = [];
                         this.flash.success =
-                            "Service linked successfully to package. <a href='" +
-                            route("services.show", service) +
-                            " 'style='color:#fff;text-decoration:underline;'>View service</a>";
+                            "Service linked successfully to package.";
                     }
                 }
             );
