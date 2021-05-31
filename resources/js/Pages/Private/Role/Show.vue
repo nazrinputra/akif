@@ -104,14 +104,26 @@
             v-if="role.permissions.length > 0"
             class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Permissions</th>
+            <table class="w-full whitespace-nowrap" id="accordionPermission">
+                <tr
+                    class="text-left font-bold"
+                    id="headingPermission"
+                    data-toggle="collapse"
+                    data-target="#collapsePermission"
+                    aria-expanded="true"
+                    aria-controls="collapsePermission"
+                >
+                    <th class="px-3 py-3 hover:bg-gray-100" colspan="2">
+                        Permissions
+                    </th>
                 </tr>
                 <tr
                     v-for="permission in role.permissions"
                     :key="permission.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100 collapse"
+                    id="collapsePermission"
+                    aria-labelledby="headingPermission"
+                    data-parent="#accordionPermission"
                 >
                     <td class="border-t">
                         <span

@@ -29,21 +29,8 @@
                     @click="stepOne"
                 >
                     <div class="md-step-circle">
-                        <span v-if="!car">1</span>
-                        <span v-if="car"><i class="fas fa-check"></i></span>
-                    </div>
-                    <div class="md-step-title">Car</div>
-                    <div class="md-step-bar-left"></div>
-                    <div class="md-step-bar-right"></div>
-                </div>
-                <div
-                    class="md-step cursor-pointer"
-                    :class="show.stepTwo ? 'active' : ''"
-                    @click="stepTwo"
-                >
-                    <div class="md-step-circle">
-                        <span v-if="!customer">2</span>
-                        <span v-if="customer"
+                        <span v-if="!checkStepOne">1</span>
+                        <span v-if="checkStepOne"
                             ><i class="fas fa-check"></i
                         ></span>
                     </div>
@@ -53,40 +40,30 @@
                 </div>
                 <div
                     class="md-step cursor-pointer"
+                    :class="show.stepTwo ? 'active' : ''"
+                    @click="stepTwo"
+                >
+                    <div class="md-step-circle">
+                        <span v-if="!checkStepTwo">2</span>
+                        <span v-if="checkStepTwo"
+                            ><i class="fas fa-check"></i
+                        ></span>
+                    </div>
+                    <div class="md-step-title">Product</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                </div>
+                <div
+                    class="md-step cursor-pointer"
                     :class="show.stepThree ? 'active' : ''"
                     @click="stepThree"
                 >
                     <div class="md-step-circle">
-                        <span v-if="!pkg">3</span>
-                        <span v-if="pkg"><i class="fas fa-check"></i></span>
-                    </div>
-                    <div class="md-step-title">Package</div>
-                    <div class="md-step-optional">Optional</div>
-                    <div class="md-step-bar-left"></div>
-                    <div class="md-step-bar-right"></div>
-                </div>
-                <div
-                    class="md-step cursor-pointer"
-                    :class="show.stepFour ? 'active' : ''"
-                    @click="stepFour"
-                >
-                    <div class="md-step-circle">
-                        <span v-if="services.length === 0">4</span>
-                        <span v-if="services.length > 0"
+                        <span v-if="!checkStepOne || !checkStepTwo">3</span>
+                        <span v-if="checkStepOne && checkStepTwo"
                             ><i class="fas fa-check"></i
                         ></span>
                     </div>
-                    <div class="md-step-title">Service</div>
-                    <div class="md-step-optional">Optional</div>
-                    <div class="md-step-bar-left"></div>
-                    <div class="md-step-bar-right"></div>
-                </div>
-                <div
-                    class="md-step cursor-pointer"
-                    :class="show.stepFive ? 'active' : ''"
-                    @click="stepFive"
-                >
-                    <div class="md-step-circle"><span>5</span></div>
                     <div class="md-step-title">Review</div>
                     <div class="md-step-bar-left"></div>
                     <div class="md-step-bar-right"></div>
@@ -95,47 +72,35 @@
 
             <breeze-step-one
                 v-show="show.stepOne"
-                :car="car"
+                :form="form"
                 @next="stepTwo()"
                 @selectCar="selectCar($event)"
                 @clearCar="clearCar()"
-            />
-
-            <breeze-step-two
-                v-show="show.stepTwo"
-                @back="stepOne"
-                @next="stepThree()"
                 @selectCustomer="selectCustomer($event)"
                 @clearCustomer="clearCustomer()"
             />
 
-            <breeze-step-three
-                v-show="show.stepThree"
-                @back="stepTwo"
-                @next="stepFour()"
+            <breeze-step-two
+                v-show="show.stepTwo"
+                :form="form"
+                @back="stepOne()"
+                @next="stepThree()"
                 @selectPackage="selectPackage($event)"
                 @clearPackage="clearPackage()"
-            />
-
-            <breeze-step-four
-                v-show="show.stepFour"
-                @back="stepThree"
-                @next="stepFive()"
                 @selectService="selectService($event)"
                 @removeService="removeService($event)"
             />
 
-            <breeze-step-five
-                v-show="show.stepFive"
+            <breeze-step-three
+                v-show="show.stepThree"
                 :car="car"
-                @editCar="editCar()"
                 :customer="customer"
-                @editCustomer="editCustomer()"
                 :pkg="pkg"
-                @editPackage="editPackage()"
                 :services="services"
-                @editService="editService()"
-                @back="stepFour"
+                :form="form"
+                @back="stepTwo()"
+                @editStepOne="stepOne()"
+                @submit="form.post(route('queues.store'))"
             />
         </div>
     </breeze-authenticated-layout>
@@ -148,8 +113,7 @@ import BreezeButton from "@/Components/Button";
 import BreezeStepOne from "@/Components/StepOne";
 import BreezeStepTwo from "@/Components/StepTwo";
 import BreezeStepThree from "@/Components/StepThree";
-import BreezeStepFour from "@/Components/StepFour";
-import BreezeStepFive from "@/Components/StepFive";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -158,9 +122,7 @@ export default {
         BreezeButton,
         BreezeStepOne,
         BreezeStepTwo,
-        BreezeStepThree,
-        BreezeStepFour,
-        BreezeStepFive
+        BreezeStepThree
     },
 
     props: {
@@ -169,14 +131,48 @@ export default {
         flash: Object
     },
 
+    setup() {
+        const form = useForm({
+            car_id: null,
+            customer_id: null,
+            package_id: null,
+            services_id: [],
+            plate_no: null,
+            model: null,
+            size: "",
+            name: null,
+            phone_no: null,
+            package: null,
+            service: null,
+            remarks: null
+        });
+
+        return { form };
+    },
+
+    computed: {
+        checkStepOne() {
+            if (this.checkCar() && this.checkCustomer()) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        checkStepTwo() {
+            if (this.checkPackage() || this.checkService()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+
     data() {
         return {
             show: {
                 stepOne: true,
                 stepTwo: false,
-                stepThree: false,
-                stepFour: false,
-                stepFive: false
+                stepThree: false
             },
             car: null,
             customer: null,
@@ -190,72 +186,87 @@ export default {
             this.show.stepOne = true;
             this.show.stepTwo = false;
             this.show.stepThree = false;
-            this.show.stepFour = false;
-            this.show.stepFive = false;
         },
         stepTwo() {
             this.show.stepOne = false;
             this.show.stepTwo = true;
             this.show.stepThree = false;
-            this.show.stepFour = false;
-            this.show.stepFive = false;
         },
         stepThree() {
             this.show.stepOne = false;
             this.show.stepTwo = false;
             this.show.stepThree = true;
-            this.show.stepFour = false;
-            this.show.stepFive = false;
-        },
-        stepFour() {
-            this.show.stepOne = false;
-            this.show.stepTwo = false;
-            this.show.stepThree = false;
-            this.show.stepFour = true;
-            this.show.stepFive = false;
-        },
-        stepFive() {
-            this.show.stepOne = false;
-            this.show.stepTwo = false;
-            this.show.stepThree = false;
-            this.show.stepFour = false;
-            this.show.stepFive = true;
         },
         selectCar(data) {
             this.car = data;
+            this.form.car_id = data.id;
+            this.form.model = null;
+            this.form.size = "";
         },
         clearCar() {
             this.car = null;
-        },
-        editCar() {
-            this.stepOne();
+            this.form.car_id = null;
         },
         selectCustomer(data) {
             this.customer = data;
+            this.form.customer_id = data.id;
+            this.form.phone_no = null;
         },
         clearCustomer() {
             this.customer = null;
-        },
-        editCustomer() {
-            this.stepTwo();
+            this.form.customer_id = null;
         },
         selectPackage(data) {
             this.pkg = data;
+            this.form.package_id = data.id;
         },
         clearPackage() {
             this.pkg = null;
-        },
-        editPackage() {
-            this.stepThree();
+            this.form.package_id = null;
         },
         selectService(data) {
             this.services.push(data);
+            this.form.services_id.push(data.id);
         },
         removeService(data) {
             this.services.splice(data, 1);
+            this.form.services_id.splice(data, 1);
         },
-        editService() {
-            this.stepFour();
+        checkCar() {
+            if (this.car) {
+                return true;
+            } else if (
+                this.form.plate_no &&
+                this.form.model &&
+                this.form.size != ""
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        checkCustomer() {
+            if (this.customer) {
+                return true;
+            } else if (this.form.name && this.form.phone_no) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        checkPackage() {
+            if (this.pkg) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        checkService() {
+            if (this.services.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 };

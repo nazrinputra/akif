@@ -1,50 +1,83 @@
 <template>
     <div class="container">
-        <div class="p-3">
-            <div v-if="!customer" class="input-group">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <span
+                    class="nav-link cursor-pointer"
+                    @click="showPackage()"
+                    :class="activePackage ? 'active' : ''"
+                    >Packages</span
+                >
+            </li>
+            <li class="nav-item">
+                <span
+                    class="nav-link cursor-pointer"
+                    @click="showService()"
+                    :class="activeService ? 'active' : ''"
+                    >Services</span
+                >
+            </li>
+        </ul>
+
+        <div class="p-3" v-show="activePackage">
+            <div v-if="!pkg" class="input-group">
                 <input
                     type="text"
-                    id="searchCustomer"
-                    placeholder="Search customer..."
+                    id="searchPackage"
+                    placeholder="Search package..."
                     class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="formCustomer.query"
+                    v-model="form.package"
                 />
             </div>
 
             <div
-                v-if="formCustomer.query && customers.length == 0"
+                v-if="!form.package && packages.length == 0"
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
-                Oops, we could not find any matching customers.
-                <inertia-link
-                    :href="route('customers.create')"
-                    class="text-blue-500 text-decoration-none"
-                    >Create new?</inertia-link
+                Start typing to search packages.
+                <span
+                    @click="viewAllPackages"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
                 >
+                    View all?
+                </span>
+            </div>
+
+            <div
+                v-if="form.package && packages.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Oops, we could not find any matching packages.
+                <span
+                    @click="viewAllPackages"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    View all?
+                </span>
             </div>
 
             <transition name="fade">
                 <div
-                    v-if="customers.length > 0"
+                    v-if="packages.length > 0"
                     class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
-                            <th class="px-3 py-3">Customer Name</th>
+                            <th class="px-3 py-3">Package Name</th>
                         </tr>
                         <tr
-                            v-for="customer in customers"
-                            :key="customer.id"
+                            v-for="pkg in packages"
+                            :key="pkg.id"
                             class="hover:bg-gray-100 focus-within:bg-gray-100"
                         >
                             <td
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
-                                {{ customer.name }}
+                                {{ pkg.name }}
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
-                                    @click="selectCustomer(customer)"
+                                    @click="selectPackage(pkg)"
                                     type="button"
                                 >
                                     <i class="fas fa-check"></i>
@@ -57,25 +90,25 @@
 
             <transition name="fade">
                 <div
-                    v-if="customer"
+                    v-if="pkg"
                     class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">
-                                Selected Customer Name
+                                Selected Package Name
                             </th>
                         </tr>
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
-                                {{ customer.name }}
+                                {{ pkg.name }}
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
+                                    @click="clearPackage()"
                                     type="button"
-                                    @click="clearCustomer()"
                                 >
                                     <i class="fas fa-times"></i>
                                 </breeze-button>
@@ -84,6 +117,117 @@
                     </table>
                 </div>
             </transition>
+        </div>
+
+        <div class="p-3" v-show="activeService">
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="searchService"
+                    placeholder="Search service..."
+                    class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    v-model="form.service"
+                />
+            </div>
+
+            <div
+                v-if="!form.service && services.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Start typing to search for services.
+                <span
+                    @click="viewAllServices"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    View all?
+                </span>
+            </div>
+
+            <div
+                v-if="form.service && services.length == 0"
+                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                Oops, we could not find any matching services.
+                <span
+                    @click="viewAllServices"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    View all?
+                </span>
+            </div>
+
+            <transition name="fade">
+                <div
+                    v-if="services.length > 0"
+                    class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                >
+                    <table class="w-full whitespace-nowrap">
+                        <tr class="text-left font-bold">
+                            <th class="px-3 py-3">Service Name</th>
+                        </tr>
+                        <tr
+                            v-for="service in services"
+                            :key="service.id"
+                            class="hover:bg-gray-100 focus-within:bg-gray-100"
+                        >
+                            <td
+                                class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                            >
+                                {{ service.name }}
+                            </td>
+                            <td class="border-t w-px md:table-cell hidden pr-3">
+                                <breeze-button
+                                    v-if="
+                                        !selectedServices.some(
+                                            data => data.id === service.id
+                                        )
+                                    "
+                                    type="button"
+                                    @click="selectService(service)"
+                                    tabindex="-1"
+                                >
+                                    <i class="fas fa-check"></i>
+                                </breeze-button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </transition>
+
+            <div
+                v-if="selectedServices.length > 0"
+                class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">Selected Service Name</th>
+                    </tr>
+                    <tr
+                        v-for="(service, index) in selectedServices"
+                        :key="service.id"
+                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                    >
+                        <td class="border-t">
+                            <inertia-link
+                                style="color: inherit; text-decoration: inherit;"
+                                class="px-3 py-3 flex items-center focus:text-indigo-500"
+                                :href="route('services.show', service)"
+                            >
+                                {{ service.name }}
+                            </inertia-link>
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <breeze-button
+                                type="button"
+                                @click="removeService(index)"
+                                tabindex="-1"
+                            >
+                                <i class="fas fa-times"></i>
+                            </breeze-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div
@@ -100,61 +244,107 @@
 </template>
 
 <script>
-import BreezeButton from "@/Components/Button";
 import throttle from "lodash/throttle";
+import BreezeButton from "@/Components/Button";
 
 export default {
     components: {
         BreezeButton
     },
 
+    props: ["form"],
+
     data() {
         return {
-            formCustomer: {
-                query: null
-            },
-            customers: [],
-            customer: null
+            packages: [],
+            pkg: null,
+            services: [],
+            selectedServices: [],
+            activePackage: true,
+            activeService: false
         };
     },
 
     watch: {
-        formCustomer: {
+        form: {
             deep: true,
             handler: throttle(function() {
-                if (this.formCustomer.query && this.formCustomer.query != "") {
+                if (this.form.package && this.form.package != "") {
                     axios
-                        .get(route("customers.search"), {
+                        .get(route("packages.search"), {
                             params: {
-                                query: this.formCustomer.query
+                                query: this.form.package
                             }
                         })
                         .then(response => {
-                            this.customers = response.data;
+                            this.packages = response.data;
                         });
-                } else {
-                    this.customers = [];
+                }
+                if (!this.form.package || this.form.package == "") {
+                    this.packages = [];
+                }
+                if (this.form.service && this.form.service != "") {
+                    axios
+                        .get(route("services.search"), {
+                            params: {
+                                query: this.form.service
+                            }
+                        })
+                        .then(response => {
+                            this.services = response.data;
+                        });
+                }
+                if (!this.form.service || this.form.service == "") {
+                    this.services = [];
                 }
             }, 150)
         }
     },
 
     methods: {
-        selectCustomer(customer) {
-            this.customer = customer;
-            this.formCustomer.query = null;
-            this.customers = [];
-            this.$emit("selectCustomer", customer);
+        selectPackage(pkg) {
+            this.pkg = pkg;
+            this.form.package = null;
+            this.packages = [];
+            this.$emit("selectPackage", this.pkg);
         },
-        clearCustomer() {
-            this.customer = null;
-            this.$emit("clearCustomer");
+        clearPackage() {
+            this.pkg = null;
+            this.$emit("clearPackage");
         },
         back() {
             this.$emit("back");
         },
         next() {
             this.$emit("next");
+        },
+        viewAllPackages() {
+            axios.get(route("packages.all")).then(response => {
+                this.packages = response.data;
+            });
+        },
+        viewAllServices() {
+            axios.get(route("services.all")).then(response => {
+                this.services = response.data;
+            });
+        },
+        selectService(service) {
+            this.form.service = null;
+            this.services = [];
+            this.selectedServices.push(service);
+            this.$emit("selectService", service);
+        },
+        removeService(index) {
+            this.selectedServices.splice(index, 1);
+            this.$emit("removeService", index);
+        },
+        showPackage() {
+            this.activePackage = true;
+            this.activeService = false;
+        },
+        showService() {
+            this.activePackage = false;
+            this.activeService = true;
         }
     }
 };
