@@ -4,7 +4,7 @@
             - Dashboard
         </template>
         <template #header>
-            <div class="input-group">
+            <!-- <div class="input-group">
                 <input
                     type="text"
                     id="searchCar"
@@ -12,11 +12,82 @@
                     class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     v-model="formCar.query"
                 />
-            </div>
+            </div> -->
         </template>
+        <div
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div
+                class="container bg-opacity-10 bg-no-repeat bg-right bg-contain"
+                style="background-image: url('/img/car-wash.png')"
+            >
+                <div class="row">
+                    <h2 class="text-secondary text-7xl font-sans mr-3 my-auto">
+                        Welcome,<br />
+                        <span class="text-primary text-4xl font-sans my-auto">{{
+                            $page.props.auth.user.name
+                        }}</span>
+                    </h2>
+
+                    <!-- <img
+                        class="img-fluid w-40 h-40 bg-cover"
+                        src="/img/car-wash.png"
+                    /> -->
+                </div>
+            </div>
+        </div>
+        <div
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-counter primary">
+                            <i class="fas fa-users"></i>
+                            <span class="count-numbers">12</span>
+                            <span class="count-name">Total Customers</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-counter danger">
+                            <i class="fas fa-house-user"></i>
+                            <span class="count-numbers">599</span>
+                            <span class="count-name">This Month Customers</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-counter success">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="count-numbers">6875</span>
+                            <span class="count-name">New Customer</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-counter info">
+                            <i class="fas fa-address-book"></i>
+                            <span class="count-numbers">35</span>
+                            <span class="count-name">Old Customer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="searchCar"
+                placeholder="Search car..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formCar.query"
+            />
+        </div>
 
         <div
-            class="px-6 py-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
                 <div class="mt-3">
@@ -122,3 +193,64 @@ export default {
     }
 };
 </script>
+
+<style>
+.card-counter {
+    box-shadow: 2px 2px 10px #dadada;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: 0.3s linear all;
+}
+
+.card-counter:hover {
+    box-shadow: 4px 4px 20px #dadada;
+    transition: 0.3s linear all;
+}
+
+.card-counter.primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.card-counter.danger {
+    background-color: #ef5350;
+    color: #fff;
+}
+
+.card-counter.success {
+    background-color: #66bb6a;
+    color: #fff;
+}
+
+.card-counter.info {
+    background-color: #26c6da;
+    color: #fff;
+}
+
+.card-counter i {
+    font-size: 5em;
+    opacity: 0.2;
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+}
+
+.card-counter .count-name {
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+}
+</style>
