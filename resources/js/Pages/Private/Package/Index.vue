@@ -12,6 +12,7 @@
                 List of packages
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['create_packages'])"
                 :href="route('packages.create')"
                 class="btn btn-secondary align-self-end"
             >

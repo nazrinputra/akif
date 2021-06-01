@@ -48,11 +48,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('counter', function () {
         return Inertia::render('Private/Dashboard/Counter');
-    })->name('counter');
+    })->name('counter')->middleware(['can:create_queues']);
 
     Route::get('reports', function () {
         return Inertia::render('Private/Dashboard/Report');
-    })->name('reports');
+    })->name('reports')->middleware(['can:view_report']);
 
     Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
 

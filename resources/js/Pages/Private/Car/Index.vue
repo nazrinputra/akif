@@ -12,6 +12,7 @@
                 List of cars
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['create_cars'])"
                 :href="route('cars.create')"
                 class="btn btn-secondary align-self-end"
             >
