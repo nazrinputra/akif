@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
 
         $owner = Role::create(['name' => 'Owner']);
         $owner->givePermissionTo(['create_crews', 'edit_crews', 'delete_crews']);
-        $owner->givePermissionTo(['create_roles', 'edit_roles', 'delete_roles']);
+        $owner->givePermissionTo(['create_roles', 'edit_roles']);
         $owner->givePermissionTo(['create_cars', 'edit_cars', 'delete_cars']);
         $owner->givePermissionTo(['create_customers', 'edit_customers', 'delete_customers']);
         $owner->givePermissionTo(['create_packages', 'edit_packages', 'delete_packages']);
