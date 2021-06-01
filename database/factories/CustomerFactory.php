@@ -31,6 +31,7 @@ class CustomerFactory extends Factory
             'name' => $name,
             'slug' => $slug,
             'phone_no' => $this->faker->mobileNumber(false, false),
+            'created_at' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null)
         ];
     }
 }
