@@ -8,7 +8,7 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                Register into queue.
+                Register new queue.
             </h6>
         </template>
         <template #nav>

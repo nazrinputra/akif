@@ -41,6 +41,7 @@ class QueueFactory extends Factory
             'customer_id' => $this->customer,
             'status' => $this->faker->randomElement($this->status),
             'remarks' => ucwords($this->faker->words(3, true)),
+            'created_at' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null)
         ];
     }
 }
