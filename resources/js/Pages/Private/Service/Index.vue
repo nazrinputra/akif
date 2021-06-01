@@ -12,6 +12,7 @@
                 List of services
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['create_services'])"
                 :href="route('services.create')"
                 class="btn btn-secondary align-self-end"
             >

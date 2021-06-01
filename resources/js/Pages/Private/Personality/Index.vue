@@ -13,6 +13,7 @@
             </h6>
             <inertia-link
                 :href="route('personalities.create')"
+                v-if="hasAnyPermission(['create_personalities'])"
                 class="btn btn-secondary align-self-end"
             >
                 <i class="fas fa-plus"></i>

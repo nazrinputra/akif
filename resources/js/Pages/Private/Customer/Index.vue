@@ -12,6 +12,7 @@
                 List of customers
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['create_customers'])"
                 :href="route('customers.create')"
                 class="btn btn-secondary align-self-end"
             >

@@ -100,14 +100,20 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <breeze-button
-                            v-if="!pkg.deleted_at"
+                            v-if="
+                                !pkg.deleted_at &&
+                                    hasAnyPermission(['delete_packages'])
+                            "
                             @click="destroy(pkg)"
                             type="button"
                         >
                             Delete
                         </breeze-button>
                         <inertia-link
-                            v-if="!pkg.deleted_at"
+                            v-if="
+                                !pkg.deleted_at &&
+                                    hasAnyPermission(['edit_packages'])
+                            "
                             class="ml-auto btn btn-secondary"
                             as="button"
                             :href="route('packages.edit', pkg)"

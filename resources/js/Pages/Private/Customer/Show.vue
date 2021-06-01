@@ -84,14 +84,20 @@
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
                         <breeze-button
-                            v-if="!customer.deleted_at"
+                            v-if="
+                                !customer.deleted_at &&
+                                    hasAnyPermission(['delete_customers'])
+                            "
                             @click="destroy(customer)"
                             type="button"
                         >
                             Delete
                         </breeze-button>
                         <inertia-link
-                            v-if="!customer.deleted_at"
+                            v-if="
+                                !customer.deleted_at &&
+                                    hasAnyPermission(['edit_customers'])
+                            "
                             class="ml-auto btn btn-secondary"
                             as="button"
                             :href="route('customers.edit', customer)"

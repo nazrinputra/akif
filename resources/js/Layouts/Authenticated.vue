@@ -109,6 +109,11 @@
                                                 <breeze-dropdown-link
                                                     :href="route('counter')"
                                                     as="button"
+                                                    v-if="
+                                                        hasAnyPermission([
+                                                            'create_queues'
+                                                        ])
+                                                    "
                                                 >
                                                     Counter
                                                 </breeze-dropdown-link>
@@ -202,6 +207,9 @@
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('counter')"
+                                        v-if="
+                                            hasAnyPermission(['create_queues'])
+                                        "
                                         as="button"
                                     >
                                         Counter

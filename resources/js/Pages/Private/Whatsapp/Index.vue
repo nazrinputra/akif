@@ -12,6 +12,7 @@
                 List of WhatsApp messages
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['create_whatsapps'])"
                 :href="route('whatsapps.create')"
                 class="btn btn-secondary align-self-end"
             >

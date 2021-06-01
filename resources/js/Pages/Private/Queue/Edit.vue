@@ -67,7 +67,6 @@
                             "
                             v-model="form.remarks"
                             @keydown="form.clearErrors('remarks')"
-                            required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.remarks
