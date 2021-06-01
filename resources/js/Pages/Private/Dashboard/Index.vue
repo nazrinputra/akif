@@ -4,15 +4,9 @@
             - Dashboard
         </template>
         <template #header>
-            <!-- <div class="input-group">
-                <input
-                    type="text"
-                    id="searchCar"
-                    placeholder="Search car..."
-                    class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="formCar.query"
-                />
-            </div> -->
+            <h6 class="pt-2.5 mx-auto">
+                Akif Car Grooming Center
+            </h6>
         </template>
         <div
             class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -28,11 +22,6 @@
                             $page.props.auth.user.name
                         }}</span>
                     </h2>
-
-                    <!-- <img
-                        class="img-fluid w-40 h-40 bg-cover"
-                        src="/img/car-wash.png"
-                    /> -->
                 </div>
             </div>
         </div>
@@ -44,7 +33,7 @@
                     <div class="col-md-3">
                         <div class="card-counter primary">
                             <i class="fas fa-users"></i>
-                            <span class="count-numbers">12</span>
+                            <span class="count-numbers">{{ customers }}</span>
                             <span class="count-name">Total Customers</span>
                         </div>
                     </div>
@@ -52,15 +41,15 @@
                     <div class="col-md-3">
                         <div class="card-counter danger">
                             <i class="fas fa-house-user"></i>
-                            <span class="count-numbers">599</span>
-                            <span class="count-name">This Month Customers</span>
+                            <span class="count-numbers">{{ monthly }}</span>
+                            <span class="count-name">Monthly Visits</span>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="card-counter success">
                             <i class="fas fa-user-plus"></i>
-                            <span class="count-numbers">6875</span>
+                            <span class="count-numbers">{{ fresh }}</span>
                             <span class="count-name">New Customer</span>
                         </div>
                     </div>
@@ -68,7 +57,7 @@
                     <div class="col-md-3">
                         <div class="card-counter info">
                             <i class="fas fa-address-book"></i>
-                            <span class="count-numbers">35</span>
+                            <span class="count-numbers">{{ stale }}</span>
                             <span class="count-name">Old Customer</span>
                         </div>
                     </div>
@@ -158,7 +147,11 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
+        customers: Number,
+        monthly: Number,
+        fresh: Number,
+        stale: Number
     },
 
     data() {

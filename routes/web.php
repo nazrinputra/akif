@@ -1,6 +1,9 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Queue;
+use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
@@ -43,7 +46,23 @@ Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('stores
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
-        return Inertia::render('Private/Dashboard/Index');
+        $customers = Customer::all()->count();
+
+        $monthly = Queue::whereDate('created_at', '>', now()->subDays(30))
+            ->distinct()->pluck('car_id')->count();
+
+        $fresh = Customer::whereDate('created_at', '>', now()->subDays(30))->count();
+
+        $new = Customer::whereDate('created_at', '>', now()->subDays(60))->pluck('id')->toArray();
+
+        $stale = Queue::whereDate('created_at', '<', now()->subDays(60))->whereNotIn('customer_id', $new)->count();
+
+        return Inertia::render('Private/Dashboard/Index', [
+            'customers' => $customers,
+            'monthly' => $monthly,
+            'fresh' => $fresh,
+            'stale' => $stale
+        ]);
     })->name('dashboard');
 
     Route::get('counter', function () {
