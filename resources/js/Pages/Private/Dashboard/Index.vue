@@ -4,104 +4,94 @@
             - Dashboard
         </template>
         <template #header>
-            <h6 class="pt-2.5 mx-auto">
-                Dashboard view for crew.
-            </h6>
+            <!-- <div class="input-group">
+                <input
+                    type="text"
+                    id="searchCar"
+                    placeholder="Search car..."
+                    class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    v-model="formCar.query"
+                />
+            </div> -->
         </template>
         <div
-            class="px-6 py-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div
+                class="container bg-opacity-10 bg-no-repeat bg-right bg-contain"
+                style="background-image: url('/img/car-wash.png')"
+            >
+                <div class="row">
+                    <h2 class="text-secondary text-7xl font-sans mr-3 my-auto">
+                        Welcome,<br />
+                        <span class="text-primary text-4xl font-sans my-auto">{{
+                            $page.props.auth.user.name
+                        }}</span>
+                    </h2>
+
+                    <!-- <img
+                        class="img-fluid w-40 h-40 bg-cover"
+                        src="/img/car-wash.png"
+                    /> -->
+                </div>
+            </div>
+        </div>
+        <div
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-lg-3 my-3">
-                        <div class="card bg-c-blue order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right">
-                                    <i class="fa fa-cart-plus f-left"></i
-                                    ><span>486</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Completed Orders<span class="f-right"
-                                        >351</span
-                                    >
-                                </p>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="card-counter primary">
+                            <i class="fas fa-users"></i>
+                            <span class="count-numbers">12</span>
+                            <span class="count-name">Total Customers</span>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3 my-3">
-                        <div class="card bg-c-green order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right">
-                                    <i class="fa fa-rocket f-left"></i
-                                    ><span>486</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Completed Orders<span class="f-right"
-                                        >351</span
-                                    >
-                                </p>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="card-counter danger">
+                            <i class="fas fa-house-user"></i>
+                            <span class="count-numbers">599</span>
+                            <span class="count-name">This Month Customers</span>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3 my-3">
-                        <div class="card bg-c-yellow order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right">
-                                    <i class="fas fa-car f-left"></i
-                                    ><span>486</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Completed Orders<span class="f-right"
-                                        >351</span
-                                    >
-                                </p>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="card-counter success">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="count-numbers">6875</span>
+                            <span class="count-name">New Customer</span>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3 my-3">
-                        <div class="card bg-c-pink order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right">
-                                    <i class="fa fa-credit-card f-left"></i
-                                    ><span>486</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Completed Orders<span class="f-right"
-                                        >351</span
-                                    >
-                                </p>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="card-counter info">
+                            <i class="fas fa-address-book"></i>
+                            <span class="count-numbers">35</span>
+                            <span class="count-name">Old Customer</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="input-group">
+            <input
+                type="text"
+                id="searchCar"
+                placeholder="Search car..."
+                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                v-model="formCar.query"
+            />
+        </div>
+
+        <div
+            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
                 <div class="mt-3">
-                    <div class="input-group">
-                        <input
-                            type="text"
-                            id="searchCar"
-                            placeholder="Search car..."
-                            class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="formCar.query"
-                        />
-                    </div>
-
-                    <div
-                        v-if="!formCar.query && cars.length == 0"
-                        class="mb-3"
-                    ></div>
-
-                    <div
-                        v-if="formCar.query && cars.length == 0"
-                        class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-                    >
+                    <div v-if="formCar.query && cars.length == 0" class="mb-3">
                         Oops, we could not find any matching cars.
                         <inertia-link
                             :href="route('cars.create')"
@@ -111,10 +101,7 @@
                     </div>
 
                     <transition name="fade">
-                        <div
-                            v-if="cars.length > 0"
-                            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-                        >
+                        <div v-if="cars.length > 0" class="mb-3">
                             <table class="w-full whitespace-nowrap">
                                 <tr class="text-left font-bold">
                                     <th class="px-3 py-3">Car Model</th>
@@ -154,36 +141,6 @@
         </div>
     </breeze-authenticated-layout>
 </template>
-
-<style>
-.order-card {
-    color: #fff;
-}
-
-.bg-c-blue {
-    background: linear-gradient(45deg, #4099ff, #73b4ff);
-}
-
-.bg-c-green {
-    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-}
-
-.bg-c-yellow {
-    background: linear-gradient(45deg, #ffb64d, #ffcb80);
-}
-
-.bg-c-pink {
-    background: linear-gradient(45deg, #ff5370, #ff869a);
-}
-
-.f-left {
-    float: left;
-}
-
-.f-right {
-    float: right;
-}
-</style>
 
 <script>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
@@ -236,3 +193,64 @@ export default {
     }
 };
 </script>
+
+<style>
+.card-counter {
+    box-shadow: 2px 2px 10px #dadada;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: 0.3s linear all;
+}
+
+.card-counter:hover {
+    box-shadow: 4px 4px 20px #dadada;
+    transition: 0.3s linear all;
+}
+
+.card-counter.primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.card-counter.danger {
+    background-color: #ef5350;
+    color: #fff;
+}
+
+.card-counter.success {
+    background-color: #66bb6a;
+    color: #fff;
+}
+
+.card-counter.info {
+    background-color: #26c6da;
+    color: #fff;
+}
+
+.card-counter i {
+    font-size: 5em;
+    opacity: 0.2;
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+}
+
+.card-counter .count-name {
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+}
+</style>
