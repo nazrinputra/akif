@@ -52,6 +52,7 @@
             :class="route().current('queues.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('queues.index')"
+            v-if="hasAnyPermission(['view_queues'])"
             >queues</inertia-link
         >
     </li>
@@ -60,7 +61,17 @@
             :class="route().current('crews.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('crews.index')"
+            v-if="hasAnyPermission(['view_crews'])"
             >crews</inertia-link
+        >
+    </li>
+    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+        <inertia-link
+            :class="route().current('roles.index') ? 'active' : ''"
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            :href="route('roles.index')"
+            v-if="hasAnyPermission(['view_roles'])"
+            >roles</inertia-link
         >
     </li>
     <li class="flex md:hidden nav-item  mx-0 mx-lg-1">

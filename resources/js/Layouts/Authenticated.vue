@@ -120,6 +120,11 @@
                                                 <breeze-dropdown-link
                                                     :href="route('reports')"
                                                     as="button"
+                                                    v-if="
+                                                        hasAnyPermission([
+                                                            'view_report'
+                                                        ])
+                                                    "
                                                 >
                                                     Reports
                                                 </breeze-dropdown-link>
@@ -217,6 +222,7 @@
                                     <breeze-responsive-nav-link
                                         :href="route('reports')"
                                         as="button"
+                                        v-if="hasAnyPermission(['view_report'])"
                                     >
                                         Reports
                                     </breeze-responsive-nav-link>
