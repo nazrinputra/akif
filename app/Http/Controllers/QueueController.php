@@ -23,9 +23,15 @@ class QueueController extends Controller
      */
     public function index(Request $request)
     {
+        if (Auth::user()->hasRole(['Super Admin', 'Admin', 'Owner'])) {
+            $queues = Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
+        } else {
+            $queues = Queue::where('store_id', Auth::user()->store->id)->filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
+        }
+
         return Inertia::render('Private/Queue/Index', [
             'filters' => $request->all('search', 'status'),
-            'queues' => Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString()
+            'queues' => $queues
         ]);
     }
 
