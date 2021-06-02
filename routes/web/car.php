@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 
 Route::group(
-    ['middleware' => ['auth', 'verified']],
+    ['middleware' => ['auth']],
     function () {
         Route::resource('cars', CarController::class)->parameters([
             'cars' => 'car:slug'
