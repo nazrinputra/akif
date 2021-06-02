@@ -53,6 +53,7 @@
                     <td class="border-t md:table-cell hidden text-right">
                         <select
                             @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             ><option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
@@ -91,6 +92,7 @@
                     <td class="border-t md:table-cell hidden text-right">
                         <select
                             @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             ><option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
@@ -129,6 +131,7 @@
                     <td class="border-t md:table-cell hidden text-right">
                         <select
                             @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             ><option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
@@ -153,7 +156,7 @@
                 <tr
                     v-for="queue in collected"
                     :key="queue.id"
-                    class="hover:bg-green-300 focus-within:bg-green-300"
+                    class="hover:bg-gray-300 focus-within:bg-gray-300"
                 >
                     <td class="border-t">
                         <span
@@ -166,6 +169,7 @@
                     <td class="border-t md:table-cell hidden text-right">
                         <select
                             @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             ><option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
@@ -190,7 +194,7 @@
                 <tr
                     v-for="queue in cancelled"
                     :key="queue.id"
-                    class="hover:bg-green-300 focus-within:bg-green-300"
+                    class="hover:bg-gray-300 focus-within:bg-gray-300"
                 >
                     <td class="border-t">
                         <span
@@ -203,6 +207,7 @@
                     <td class="border-t md:table-cell hidden text-right">
                         <select
                             @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             ><option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
@@ -273,10 +278,17 @@ export default {
             this.completed = this.queues.filter(queues =>
                 queues.status.includes("Completed")
             );
+            this.collected = this.queues.filter(queues =>
+                queues.status.includes("Collected")
+            );
+            this.cancelled = this.queues.filter(queues =>
+                queues.status.includes("Cancelled")
+            );
         },
         getQueue() {
             let self = this;
-            axios.get(route("queues.search", route().params)).then(response => {
+            let store = this.$page.props.auth.user.store.slug;
+            axios.get(route("queues.search", store)).then(response => {
                 self.waiting = response.data.filter(queues =>
                     queues.status.includes("Waiting")
                 );
