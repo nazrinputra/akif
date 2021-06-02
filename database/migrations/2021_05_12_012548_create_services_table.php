@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('slug');
             $table->string('name')->unique();
             $table->integer('price');
+            $table->integer('commission');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();

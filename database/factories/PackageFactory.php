@@ -31,6 +31,7 @@ class PackageFactory extends Factory
             'slug' => $slug,
             'name' => $name,
             'price' => $this->faker->randomNumber(2, true),
+            'commission' => $this->faker->randomNumber(2, true),
             'frequency' => $this->faker->words(3, true),
             'duration' => $this->faker->words(3, true),
             'description' => $this->faker->sentences(5, true),
