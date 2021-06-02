@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'IT Staff',
             'store_id' => $faker->randomElement($stores),
-            'slug' => 'super-admin',
+            'slug' => 'it-staff',
             'phone_no' => '0129876543',
             'email' => 'akif@email.com',
             'email_verified_at' => now(),
