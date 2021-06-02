@@ -241,6 +241,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        store: Object,
         queues: Object
     },
 
@@ -301,8 +302,7 @@ export default {
         },
         getQueue() {
             let self = this;
-            let store = this.$page.props.auth.user.store.slug;
-            axios.get(route("queues.search", store)).then(response => {
+            axios.get(route("queues.search", this.store)).then(response => {
                 self.waiting = response.data.filter(queues =>
                     queues.status.includes("Waiting")
                 );
