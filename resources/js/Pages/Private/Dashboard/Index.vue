@@ -8,15 +8,17 @@
                 Akif Car Grooming Center
             </h6>
         </template>
+
+        <!-- Welcome for supported devices -->
         <div
-            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="hidden sm:flex px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div
                 class="container bg-opacity-10 bg-no-repeat bg-right bg-contain"
                 style="background-image: url('/img/car-wash.png')"
             >
                 <div class="row">
-                    <h2 class="text-secondary text-7xl font-sans mr-3 my-auto">
+                    <h2 class="text-secondary text-6xl font-sans mr-3 my-auto">
                         Welcome,<br />
                         <span class="text-primary text-4xl font-sans my-auto">{{
                             $page.props.auth.user.name
@@ -25,18 +27,36 @@
                 </div>
             </div>
         </div>
+
+        <!-- Welcome for unsupported devices -->
         <div
-            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="flex sm:hidden p-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="row p-6 justify-content-center">
+                <h2 class="text-secondary text-3xl font-sans mr-3 my-auto">
+                    Welcome,
+                    <span class="text-primary text-xl font-sans my-auto">{{
+                        $page.props.auth.user.name
+                    }}</span>
+                </h2>
+            </div>
+        </div>
+
+        <div
+            class="p-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <inertia-link
+                        :href="route('customers.index')"
+                        class="col-md-3"
+                    >
                         <div class="card-counter primary">
                             <i class="fas fa-users"></i>
                             <span class="count-numbers">{{ customers }}</span>
                             <span class="count-name">Total Customers</span>
                         </div>
-                    </div>
+                    </inertia-link>
 
                     <div class="col-md-3">
                         <div class="card-counter danger">
@@ -76,10 +96,19 @@
         </div>
 
         <div
-            class="px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="p-6 mb-3 bg-white border-b border-gray-200 shadow sm:rounded-lg"
         >
             <div class="container">
                 <div class="mt-3">
+                    <div v-if="!formCar.query && cars.length == 0" class="mb-3">
+                        Start searching for a car or
+                        <inertia-link
+                            :href="route('cars.create')"
+                            class="text-blue-500 text-decoration-none"
+                            >create new</inertia-link
+                        >
+                    </div>
+
                     <div v-if="formCar.query && cars.length == 0" class="mb-3">
                         Oops, we could not find any matching cars.
                         <inertia-link

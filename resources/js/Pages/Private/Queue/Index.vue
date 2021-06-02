@@ -11,6 +11,9 @@
             <h6 class="pt-2.5 mx-auto">
                 List of queues
             </h6>
+            <inertia-link :href="route('counter')" class="btn btn-secondary">
+                <i class="fas fa-cash-register"></i>
+            </inertia-link>
         </template>
 
         <template #nav>

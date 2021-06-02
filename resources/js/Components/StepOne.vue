@@ -294,7 +294,7 @@
         <div
             class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
         >
-            <breeze-button type="button" @click="resetSearch()">
+            <breeze-button type="button" @click="reset()">
                 Reset
             </breeze-button>
             <breeze-button type="button" @click="$emit('next')">
@@ -399,9 +399,14 @@ export default {
             this.cars = [];
             this.disableSearchCar = true;
         },
-        resetSearch() {
+        reset() {
             this.disableSearchCustomer = false;
             this.disableSearchCar = false;
+            this.form.plate_no = null;
+            this.form.model = null;
+            this.form.size = null;
+            this.form.name = null;
+            this.form.phone_no = null;
         }
     }
 };

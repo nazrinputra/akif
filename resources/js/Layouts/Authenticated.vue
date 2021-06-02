@@ -277,6 +277,13 @@
             >
         </div>
     </teleport>
+
+    <breeze-announcement class="block sm:hidden alert-danger fixed-top">
+        <i class="fas fa-exclamation-triangle mx-3"></i><strong>Caution</strong
+        ><i class="fas fa-exclamation-triangle mx-3"></i><br />
+        This system is not meant for small devices!<br />
+        Some features may not work as intended.
+    </breeze-announcement>
 </template>
 
 <script>
@@ -289,6 +296,7 @@ import BreezeMainMenu from "@/Components/MainMenu";
 import BreezeFlashMessages from "@/Components/FlashMessages";
 import BreezeResponsiveMainMenu from "@/Components/ResponsiveMainMenu";
 import moment from "moment";
+import BreezeAnnouncement from "@/Components/Announcement";
 
 export default {
     components: {
@@ -299,7 +307,8 @@ export default {
         BreezeResponsiveNavLink,
         BreezeMainMenu,
         BreezeFlashMessages,
-        BreezeResponsiveMainMenu
+        BreezeResponsiveMainMenu,
+        BreezeAnnouncement
     },
 
     data() {
