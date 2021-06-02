@@ -73,3 +73,9 @@ Route::post('package/remove', function (Request $request) {
     $queue->packages()->detach($package);
     return Redirect::back();
 })->name('package.remove');
+
+Route::post('queues/manage', function (Request $request) {
+    $queue = Queue::find($request->queue_id);
+    $queue->update($request->only('status'));
+    return Redirect::back();
+})->name('manage');

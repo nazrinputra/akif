@@ -266,7 +266,21 @@ export default {
 
     methods: {
         updateStatus(status, queue) {
-            alert(status + " " + queue.car.plate_no);
+            this.$inertia.post(
+                route("manage"),
+                {
+                    queue_id: queue.id,
+                    status: status
+                },
+                {
+                    onSuccess: () => {
+                        this.flash.success =
+                            "Queue status changed to " +
+                            status +
+                            " successfully.";
+                    }
+                }
+            );
         },
         sortQueue() {
             this.waiting = this.queues.filter(queues =>
