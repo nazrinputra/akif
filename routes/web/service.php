@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 
 Route::group(
-    ['middleware' => ['auth', 'verified']],
+    ['middleware' => ['auth']],
     function () {
         Route::resource('services', ServiceController::class)->parameters([
             'services' => 'service:slug'

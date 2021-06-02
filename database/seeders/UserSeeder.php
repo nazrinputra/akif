@@ -20,14 +20,14 @@ class UserSeeder extends Seeder
         $stores = Store::all()->pluck('id');
 
         User::create([
-            'name' => 'Super Admin',
+            'name' => 'IT Staff',
             'store_id' => $faker->randomElement($stores),
-            'slug' => 'super-admin',
+            'slug' => 'it-staff',
             'phone_no' => '0129876543',
             'email' => 'akif@email.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-        ])->assignRole('Super Admin');
+        ])->assignRole('IT');
 
         User::create([
             'name' => 'Owner',
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
 
         $users = User::factory(47)->create();
 
-        $roles = Role::whereNotIn('name', ['Super Admin', 'Admin', 'Owner'])->get();
+        $roles = Role::whereNotIn('name', ['IT', 'Admin', 'Owner'])->get();
         foreach ($users as $user) {
             $user->assignRole($faker->randomElement($roles));
         }

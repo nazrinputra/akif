@@ -9,7 +9,7 @@
                     <h1 class="featurette-heading ">
                         {{ promotion.name }}
                     </h1>
-                    <h4>Price: RM {{ promotion.price }}</h4>
+                    <h4>Starting from RM{{ promotion.price }}</h4>
                     <h5>
                         <span class="text-muted">
                             Frequency: {{ promotion.frequency }} <br />
@@ -19,6 +19,10 @@
                     <p class="lead">
                         {{ promotion.description }}
                     </p>
+                    <span class="text-sm"
+                        >*Price varies according to car sizes and
+                        conditions</span
+                    >
                 </div>
                 <!-- <div class="col-md-5">
                     <svg

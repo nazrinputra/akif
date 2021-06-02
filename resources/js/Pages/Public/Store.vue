@@ -214,7 +214,7 @@ export default {
         pollData() {
             this.polling = setInterval(() => {
                 this.getQueue();
-            }, 60000);
+            }, 10000);
         },
         toggle() {
             this.$refs["fullscreen"].toggle();

@@ -18,6 +18,7 @@ class CreatePackagesTable extends Migration
             $table->string('slug');
             $table->string('name')->unique();
             $table->integer('price');
+            $table->integer('commission');
             $table->string('frequency');
             $table->string('duration');
             $table->text('description');

@@ -49,6 +49,16 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Quality Checker']);
         Role::create(['name' => 'Detailer']);
-        Role::create(['name' => 'Super Admin'])->givePermissionTo(Permission::all());
+        Role::create(['name' => 'Manager']);
+        Role::create(['name' => 'Accountant']);
+        Role::create(['name' => 'Designer']);
+        Role::create(['name' => 'Maintenance']);
+        Role::create(['name' => 'HR']);
+        Role::create(['name' => 'Sales']);
+        Role::create(['name' => 'Painter']);
+        Role::create(['name' => 'Mechanics']);
+        Role::create(['name' => 'Tinted Crew']);
+
+        Role::create(['name' => 'IT'])->givePermissionTo(Permission::all());
     }
 }

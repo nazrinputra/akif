@@ -44,17 +44,12 @@ Route::resource('promotions', PromotionController::class)->parameters([
 
 Route::get('store/{store:slug}', [StoreController::class, 'show'])->name('stores.show');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', function () {
         $customers = Customer::all()->count();
-
-        $monthly = Queue::whereDate('created_at', '>', now()->subDays(30))
-            ->distinct()->pluck('car_id')->count();
-
+        $monthly = Queue::whereDate('created_at', '>', now()->subDays(30))->distinct()->pluck('car_id')->count();
         $fresh = Customer::whereDate('created_at', '>', now()->subDays(30))->count();
-
         $new = Customer::whereDate('created_at', '>', now()->subDays(60))->pluck('id')->toArray();
-
         $stale = Queue::whereDate('created_at', '<', now()->subDays(60))->whereNotIn('customer_id', $new)->count();
 
         return Inertia::render('Private/Dashboard/Index', [
@@ -64,6 +59,32 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             'stale' => $stale
         ]);
     })->name('dashboard');
+
+    Route::get('monthly', function () {
+        $queues = Queue::where('created_at', '>', now()->subDays(30))->with('car')->paginate(10)->withQueryString();
+
+        return Inertia::render('Private/Dashboard/Monthly', [
+            'queues' => $queues
+        ]);
+    })->name('monthly')->middleware(['permission:view_queues|create_queues|edit_queues|reopen_queues']);
+
+    Route::get('fresh', function () {
+        $customers = Customer::whereDate('created_at', '>', now()->subDays(30))->paginate(10)->withQueryString();
+
+        return Inertia::render('Private/Dashboard/Fresh', [
+            'customers' => $customers
+        ]);
+    })->name('fresh')->middleware(['permission:view_customers|create_customers|edit_customers']);
+
+    Route::get('stale', function () {
+        $new = Customer::whereDate('created_at', '>', now()->subDays(60))->pluck('id')->toArray();
+        $stale = Queue::whereDate('created_at', '<', now()->subDays(60))->whereNotIn('customer_id', $new)->pluck('id')->toArray();
+        $customers = Customer::whereIn('id', $stale)->paginate(10)->withQueryString();
+
+        return Inertia::render('Private/Dashboard/Stale', [
+            'customers' => $customers
+        ]);
+    })->name('stale')->middleware(['permission:view_customers|create_customers|edit_customers']);
 
     Route::get('counter', function () {
         return Inertia::render('Private/Dashboard/Counter');

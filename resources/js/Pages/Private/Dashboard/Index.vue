@@ -4,9 +4,23 @@
             - Dashboard
         </template>
         <template #header>
+            <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary align-self-end"
+            >
+                Queues
+            </inertia-link>
             <h6 class="pt-2.5 mx-auto">
                 Akif Car Grooming Center
             </h6>
+            <inertia-link
+                v-if="hasAnyPermission(['create_queues'])"
+                :href="route('counter')"
+                class="btn btn-secondary align-self-end"
+            >
+                Counter
+            </inertia-link>
         </template>
 
         <!-- Welcome for supported devices -->
@@ -58,29 +72,29 @@
                         </div>
                     </inertia-link>
 
-                    <div class="col-md-3">
+                    <inertia-link :href="route('monthly')" class="col-md-3">
                         <div class="card-counter danger">
                             <i class="fas fa-house-user"></i>
                             <span class="count-numbers">{{ monthly }}</span>
-                            <span class="count-name">Monthly Visits</span>
+                            <span class="count-name">Unique Visits</span>
                         </div>
-                    </div>
+                    </inertia-link>
 
-                    <div class="col-md-3">
+                    <inertia-link :href="route('fresh')" class="col-md-3">
                         <div class="card-counter success">
                             <i class="fas fa-user-plus"></i>
                             <span class="count-numbers">{{ fresh }}</span>
-                            <span class="count-name">New Customer</span>
+                            <span class="count-name">New Customers</span>
                         </div>
-                    </div>
+                    </inertia-link>
 
-                    <div class="col-md-3">
+                    <inertia-link :href="route('stale')" class="col-md-3">
                         <div class="card-counter info">
                             <i class="fas fa-address-book"></i>
                             <span class="count-numbers">{{ stale }}</span>
-                            <span class="count-name">Old Customer</span>
+                            <span class="count-name">Old Customers</span>
                         </div>
-                    </div>
+                    </inertia-link>
                 </div>
             </div>
         </div>

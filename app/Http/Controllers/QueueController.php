@@ -23,7 +23,7 @@ class QueueController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->hasRole(['Super Admin', 'Admin', 'Owner'])) {
+        if (Auth::user()->hasRole(['IT', 'Owner'])) {
             $queues = Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
         } else {
             $queues = Queue::where('store_id', Auth::user()->store->id)->filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
@@ -208,6 +208,19 @@ class QueueController extends Controller
 
     public function search(Store $store)
     {
-        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get();
+        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->where('created_at', '>', now()->subDays(1))->with('car:id,plate_no,model')->get();
+    }
+
+    public function manage()
+    {
+        if (Auth::user()->hasRole(['IT', 'Owner'])) {
+            $queues = Queue::where('created_at', '>', now()->subDays(1))->with('car')->get();
+        } else {
+            $queues = Queue::where('created_at', '>', now()->subDays(1))->where('store_id', Auth::user()->store->id)->with('car')->get();
+        }
+
+        return Inertia::render('Private/Queue/Manage', [
+            'queues' => $queues
+        ]);
     }
 }

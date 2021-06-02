@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <template #title>
-            - List Queues
+            - Monthly Visits
         </template>
 
         <template #header>
@@ -9,13 +9,9 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of queues
+                Customer visits this month
             </h6>
-            <inertia-link
-                :href="route('counter')"
-                v-if="hasAnyPermission(['create_queues'])"
-                class="btn btn-secondary"
-            >
+            <inertia-link :href="route('counter')" class="btn btn-secondary">
                 <i class="fas fa-cash-register"></i>
             </inertia-link>
         </template>
@@ -27,29 +23,6 @@
                 Queues
             </span>
         </template>
-
-        <div class="input-group pb-4">
-            <select
-                :value="filters.status"
-                @input="this.form.status = $event.target.value"
-                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-                <option value="All">All</option>
-                <option value="Waiting">Waiting</option>
-                <option value="Grooming">Grooming</option>
-                <option value="Completed">Completed</option>
-                <option value="Collected">Collected</option>
-                <option value="Cancelled">Cancelled</option>
-            </select>
-            <input
-                type="text"
-                id="search"
-                placeholder="Search something..."
-                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                :value="filters.search"
-                @input="this.form.search = $event.target.value"
-            />
-        </div>
 
         <div
             class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -102,8 +75,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezePagination from "@/Components/Pagination";
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
 
 export default {
     components: {
@@ -117,27 +88,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        filters: Object,
         queues: Object
-    },
-
-    data() {
-        return {
-            form: {
-                search: null
-            }
-        };
-    },
-
-    watch: {
-        form: {
-            deep: true,
-            handler: throttle(function() {
-                this.$inertia.get(route("queues.index"), pickBy(this.form), {
-                    preserveState: true
-                });
-            }, 150)
-        }
     }
 };
 </script>
