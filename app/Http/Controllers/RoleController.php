@@ -19,11 +19,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->hasRole('Super Admin')) {
-            $roles = Role::all();
-        } else {
-            $roles = Role::whereNotIn('name', ['Super Admin'])->get();
-        }
+        $roles = Role::all();
 
 
         return Inertia::render('Private/Role/Index', [

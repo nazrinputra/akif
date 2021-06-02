@@ -23,7 +23,7 @@ class QueueController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->hasRole(['Super Admin', 'Owner'])) {
+        if (Auth::user()->hasRole(['IT', 'Owner'])) {
             $queues = Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
         } else {
             $queues = Queue::where('store_id', Auth::user()->store->id)->filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
@@ -213,7 +213,7 @@ class QueueController extends Controller
 
     public function manage()
     {
-        if (Auth::user()->hasRole(['Super Admin', 'Owner'])) {
+        if (Auth::user()->hasRole(['IT', 'Owner'])) {
             $queues = Queue::where('created_at', '>', now()->subDays(1))->with('car')->get();
         } else {
             $queues = Queue::where('created_at', '>', now()->subDays(1))->where('store_id', Auth::user()->store->id)->with('car')->get();
