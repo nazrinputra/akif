@@ -208,6 +208,19 @@ class QueueController extends Controller
 
     public function search(Store $store)
     {
-        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get();
+        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->where('created_at', '>', now()->subDays(1))->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->with('car:id,plate_no,model')->get();
+    }
+
+    public function manage()
+    {
+        if (Auth::user()->hasRole(['Super Admin', 'Owner'])) {
+            $queues = Queue::where('created_at', '>', now()->subDays(1))->with('car')->get();
+        } else {
+            $queues = Queue::where('created_at', '>', now()->subDays(1))->where('store_id', Auth::user()->store->id)->with('car')->get();
+        }
+
+        return Inertia::render('Private/Queue/Manage', [
+            'queues' => $queues
+        ]);
     }
 }
