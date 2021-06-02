@@ -10,6 +10,13 @@
             <h6 class="pt-2.5 mx-auto">
                 Register new queue.
             </h6>
+            <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary"
+            >
+                <i class="fas fa-clipboard-list"></i>
+            </inertia-link>
         </template>
         <template #nav>
             <span
