@@ -13,6 +13,9 @@
             <h6 class="pt-2.5 mx-auto">
                 View queue
             </h6>
+            <inertia-link :href="route('counter')" class="btn btn-secondary">
+                <i class="fas fa-cash-register"></i>
+            </inertia-link>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('queues.index')" :active="false">
