@@ -75,8 +75,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezePagination from "@/Components/Pagination";
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
 
 export default {
     components: {
@@ -90,27 +88,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        filters: Object,
         queues: Object
-    },
-
-    data() {
-        return {
-            form: {
-                search: null
-            }
-        };
-    },
-
-    watch: {
-        form: {
-            deep: true,
-            handler: throttle(function() {
-                this.$inertia.get(route("queues.index"), pickBy(this.form), {
-                    preserveState: true
-                });
-            }, 150)
-        }
     }
 };
 </script>
