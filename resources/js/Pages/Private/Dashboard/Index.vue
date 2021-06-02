@@ -4,9 +4,23 @@
             - Dashboard
         </template>
         <template #header>
+            <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary align-self-end"
+            >
+                Queues
+            </inertia-link>
             <h6 class="pt-2.5 mx-auto">
                 Akif Car Grooming Center
             </h6>
+            <inertia-link
+                v-if="hasAnyPermission(['create_queues'])"
+                :href="route('counter')"
+                class="btn btn-secondary align-self-end"
+            >
+                Counter
+            </inertia-link>
         </template>
 
         <!-- Welcome for supported devices -->
