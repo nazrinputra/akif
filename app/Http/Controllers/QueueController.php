@@ -217,20 +217,20 @@ class QueueController extends Controller
         $user = User::find($request->user_id);
 
         if ($user->hasPermissionTo('both_queues')) {
-            $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status', 'move')
                 ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities', 'store')
                 ->get();
 
-            $all = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
+            $all = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status', 'move')
                 ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities', 'store')
                 ->get();
         } else {
-            $daily = Queue::select('id', 'car_id', 'customer_id', 'status')
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'status', 'move')
                 ->where('store_id', $user->store_id)
                 ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
@@ -238,7 +238,7 @@ class QueueController extends Controller
                 ->with('car', 'customer.personalities')
                 ->get();
 
-            $all = Queue::select('id', 'car_id', 'customer_id', 'status')
+            $all = Queue::select('id', 'car_id', 'customer_id', 'status', 'move')
                 ->where('store_id', $user->store_id)
                 ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
                 ->orderBy('updated_at', 'asc')
