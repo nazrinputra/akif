@@ -85,6 +85,8 @@
                 @clearCar="clearCar()"
                 @selectCustomer="selectCustomer($event)"
                 @clearCustomer="clearCustomer()"
+                @selectPersonality="selectPersonality($event)"
+                @clearPersonality="clearPersonality()"
             />
 
             <breeze-step-two
@@ -102,6 +104,7 @@
                 v-show="show.stepThree"
                 :car="car"
                 :customer="customer"
+                :personality="personality"
                 :pkg="pkg"
                 :services="services"
                 :form="form"
@@ -142,6 +145,7 @@ export default {
         const form = useForm({
             car_id: null,
             customer_id: null,
+            personality_id: null,
             package_id: null,
             services_id: [],
             plate_no: null,
@@ -183,6 +187,7 @@ export default {
             },
             car: null,
             customer: null,
+            personality: null,
             pkg: null,
             services: []
         };
@@ -213,6 +218,14 @@ export default {
         clearCar() {
             this.car = null;
             this.form.car_id = null;
+        },
+        selectPersonality(data) {
+            this.personality = data;
+            this.form.personality_id = data.id;
+        },
+        clearPersonality() {
+            this.personality = null;
+            this.form.personality_id = null;
         },
         selectCustomer(data) {
             this.customer = data;

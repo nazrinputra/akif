@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Models\Package;
 use App\Models\Service;
 use App\Models\Customer;
+use App\Models\Personality;
 use App\Models\User;
 use App\Models\Whatsapp;
 use Illuminate\Support\Str;
@@ -63,8 +64,11 @@ class QueueController extends Controller
             if ($request->customer_id) {
                 $customer = Customer::find($request->customer_id);
 
-                if (!$car->owners->contains($customer)) {
-                    $car->owners()->save($customer);
+                $car->owners()->sync($customer);
+
+                if ($request->personality_id) {
+                    $personality = Personality::find($request->personality_id);
+                    $personality->customers()->sync($customer);
                 }
             }
 
@@ -84,6 +88,11 @@ class QueueController extends Controller
                 $customer = Customer::create($request->only('name', 'slug', 'phone_no'));
 
                 $car->owners()->save($customer);
+
+                if ($request->personality_id) {
+                    $personality = Personality::find($request->personality_id);
+                    $personality->customers()->sync($customer);
+                }
             }
         }
 
@@ -108,8 +117,11 @@ class QueueController extends Controller
             if ($request->customer_id) {
                 $customer = Customer::find($request->customer_id);
 
-                if (!$car->owners->contains($customer)) {
-                    $car->owners()->save($customer);
+                $car->owners()->sync($customer);
+
+                if ($request->personality_id) {
+                    $personality = Personality::find($request->personality_id);
+                    $personality->customers()->sync($customer);
                 }
             }
 
@@ -129,6 +141,11 @@ class QueueController extends Controller
                 $customer = Customer::create($request->only('name', 'slug', 'phone_no'));
 
                 $car->owners()->save($customer);
+
+                if ($request->personality_id) {
+                    $personality = Personality::find($request->personality_id);
+                    $personality->customers()->sync($customer);
+                }
             }
         }
 

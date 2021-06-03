@@ -131,6 +131,107 @@
                     </div>
 
                     <div class="mt-3 p-3">
+                        <label v-if="!personality" for="personality"
+                            >Personality (optional)</label
+                        >
+                        <input
+                            v-if="!personality"
+                            type="text"
+                            placeholder="Personality"
+                            id="personality"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            v-model="form.personality"
+                            @keydown="form.clearErrors('personality')"
+                        />
+
+                        <transition name="fade">
+                            <div
+                                v-if="personalities.length > 0"
+                                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                            >
+                                <table class="w-full whitespace-nowrap">
+                                    <tr class="text-left font-bold">
+                                        <th class="px-3 py-3">
+                                            Personality Name
+                                        </th>
+                                        <td
+                                            class="border-t w-px md:table-cell hidden pr-3"
+                                        >
+                                            <breeze-button
+                                                @click="
+                                                    closeSearchPersonality()
+                                                "
+                                                type="button"
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </breeze-button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        v-for="personality in personalities"
+                                        :key="personality.id"
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                    >
+                                        <td
+                                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                                        >
+                                            {{ personality.name }}
+                                        </td>
+                                        <td
+                                            class="border-t w-px md:table-cell hidden pr-3"
+                                        >
+                                            <breeze-button
+                                                type="button"
+                                                @click="
+                                                    selectPersonality(
+                                                        personality
+                                                    )
+                                                "
+                                            >
+                                                <i class="fas fa-check"></i
+                                            ></breeze-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </transition>
+
+                        <transition name="fade">
+                            <div
+                                v-if="personality"
+                                class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                            >
+                                <table class="w-full whitespace-nowrap">
+                                    <tr class="text-left font-bold">
+                                        <th class="px-3 py-3">
+                                            Selected Personality Name
+                                        </th>
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                    >
+                                        <td
+                                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                                        >
+                                            {{ personality.name }}
+                                        </td>
+                                        <td
+                                            class="border-t w-px md:table-cell hidden pr-3"
+                                        >
+                                            <breeze-button
+                                                type="button"
+                                                @click="clearPersonality()"
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </breeze-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </transition>
+                    </div>
+
+                    <div class="mt-3 p-3">
                         <label v-if="!car" for="plate_no">Plate No</label>
                         <input
                             v-if="!car"
@@ -321,8 +422,11 @@ export default {
             car: null,
             customers: [],
             customer: null,
+            personality: null,
+            personalities: [],
             disableSearchCustomer: false,
-            disableSearchCar: false
+            disableSearchCar: false,
+            disableSearchPersonality: false
         };
     },
 
@@ -333,7 +437,9 @@ export default {
                 if (
                     this.form.plate_no &&
                     this.form.plate_no != "" &&
-                    !this.disableSearchCar
+                    !this.disableSearchCar &&
+                    !this.car &&
+                    !this.form.model
                 ) {
                     axios
                         .get(route("cars.search"), {
@@ -348,7 +454,9 @@ export default {
                 if (
                     this.form.name &&
                     this.form.name != "" &&
-                    !this.disableSearchCustomer
+                    !this.disableSearchCustomer &&
+                    !this.customer &&
+                    !this.form.phone_no
                 ) {
                     axios
                         .get(route("customers.search"), {
@@ -360,11 +468,30 @@ export default {
                             this.customers = response.data;
                         });
                 }
+                if (
+                    this.form.personality &&
+                    this.form.personality != "" &&
+                    !this.disableSearchPersonality &&
+                    !this.personality
+                ) {
+                    axios
+                        .get(route("personalities.search"), {
+                            params: {
+                                query: this.form.personality
+                            }
+                        })
+                        .then(response => {
+                            this.personalities = response.data;
+                        });
+                }
                 if (!this.form.plate_no || this.form.plate_no == "") {
                     this.cars = [];
                 }
                 if (!this.form.name || this.form.name == "") {
                     this.customers = [];
+                }
+                if (!this.form.personality || this.form.personality == "") {
+                    this.personalities = [];
                 }
             }, 150)
         }
@@ -391,6 +518,16 @@ export default {
             this.customer = null;
             this.$emit("clearCustomer");
         },
+        selectPersonality(personality) {
+            this.personality = personality;
+            this.form.personality = null;
+            this.personalities = [];
+            this.$emit("selectPersonality", personality);
+        },
+        clearPersonality() {
+            this.personality = null;
+            this.$emit("clearPersonality");
+        },
         closeSearchCustomer() {
             this.customers = [];
             this.disableSearchCustomer = true;
@@ -399,14 +536,20 @@ export default {
             this.cars = [];
             this.disableSearchCar = true;
         },
+        closeSearchProfile() {
+            this.personalities = [];
+            this.disableSearchPersonality = true;
+        },
         reset() {
             this.disableSearchCustomer = false;
             this.disableSearchCar = false;
+            this.disableSearchPersonality = false;
             this.form.plate_no = null;
             this.form.model = null;
             this.form.size = null;
             this.form.name = null;
             this.form.phone_no = null;
+            this.form.personality = null;
         }
     }
 };
