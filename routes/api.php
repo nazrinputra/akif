@@ -26,9 +26,6 @@ Route::get('store/{store:slug}/queues', [QueueController::class, 'refresh'])->na
 
 Route::post('search/queues', [QueueController::class, 'search'])->name('queues.search');
 
-Route::get('whatsapps/search', [WhatsappController::class, 'search'])
-    ->name('whatsapps.search');
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

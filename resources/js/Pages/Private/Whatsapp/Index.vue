@@ -11,13 +11,6 @@
             <h6 class="pt-2.5 mx-auto">
                 List of WhatsApp messages
             </h6>
-            <inertia-link
-                v-if="hasAnyPermission(['create_whatsapps'])"
-                :href="route('whatsapps.create')"
-                class="btn btn-secondary align-self-end"
-            >
-                <i class="fas fa-plus"></i>
-            </inertia-link>
         </template>
 
         <template #nav>
@@ -28,27 +21,6 @@
             </span>
         </template>
 
-        <div class="input-group pb-4">
-            <select
-                v-if="hasAnyPermission(['view_deleted'])"
-                :value="filters.trashed"
-                @input="this.form.trashed = $event.target.value"
-                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-                <option value="without">Without Trashed</option>
-                <option value="with">With Trashed</option>
-                <option value="only">Only Trashed</option>
-            </select>
-            <input
-                type="text"
-                id="search"
-                placeholder="Search something..."
-                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                :value="filters.search"
-                @input="this.form.search = $event.target.value"
-            />
-        </div>
-
         <div
             class="px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
@@ -57,7 +29,7 @@
                     <th class="px-3 py-3">WhatsApp Title</th>
                 </tr>
                 <tr
-                    v-for="whatsapp in whatsapps.data"
+                    v-for="whatsapp in whatsapps"
                     :key="whatsapp.id"
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
@@ -85,17 +57,13 @@
                         </inertia-link>
                     </td>
                 </tr>
-                <tr v-if="whatsapps.data.length === 0">
+                <tr v-if="whatsapps.length === 0">
                     <td class="border-t px-3 py-3">
                         Uh-oh! No WhatsApp messages found.
                     </td>
                 </tr>
             </table>
         </div>
-        <breeze-pagination
-            class="mt-6 d-flex align-items-center"
-            :links="whatsapps.links"
-        />
     </breeze-authenticated-layout>
 </template>
 
@@ -103,43 +71,19 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import BreezePagination from "@/Components/Pagination";
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton,
-        BreezePagination
+        BreezeButton
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        filters: Object,
         whatsapps: Object
-    },
-
-    data() {
-        return {
-            form: {
-                search: null
-            }
-        };
-    },
-
-    watch: {
-        form: {
-            deep: true,
-            handler: throttle(function() {
-                this.$inertia.get(route("whatsapps.index"), pickBy(this.form), {
-                    preserveState: true
-                });
-            }, 150)
-        }
     }
 };
 </script>

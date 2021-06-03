@@ -8,7 +8,7 @@ Route::group(
     function () {
         Route::resource('whatsapps', WhatsappController::class)->parameters([
             'whatsapps' => 'whatsapp:slug'
-        ]);
+        ])->except('create', 'store');
 
         Route::put('whatsapps/{whatsapp:slug}/restore', [WhatsappController::class, 'restore'])
             ->name('whatsapps.restore');
