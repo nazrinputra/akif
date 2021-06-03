@@ -14,6 +14,13 @@
                 View queue
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary mr-3"
+            >
+                <i class="fas fa-clipboard-list"></i>
+            </inertia-link>
+            <inertia-link
                 :href="route('counter')"
                 v-if="hasAnyPermission(['create_queues'])"
                 class="btn btn-secondary"
@@ -31,79 +38,6 @@
                 Queue
             </span>
         </template>
-
-        <div
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <div class="container">
-                <form>
-                    <div class="mt-3 p-3">
-                        <label for="store">Store Name</label>
-                        <input
-                            type="text"
-                            id="store"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="queue.store.name"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="created_at">Visit Time</label>
-                        <input
-                            type="text"
-                            id="created_at"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="readableForHumans(queue.created_at)"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="status">Status</label>
-                        <input
-                            type="text"
-                            id="status"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="queue.status"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="remarks">Remarks</label>
-                        <input
-                            type="text"
-                            id="remarks"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="queue.remarks"
-                            disabled
-                        />
-                    </div>
-                    <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-end"
-                    >
-                        <inertia-link
-                            v-if="
-                                !hasAnyPermission(['reopen_queues']) &&
-                                    queue.status != 'Collected' &&
-                                    queue.status != 'Cancelled'
-                            "
-                            class="btn btn-secondary"
-                            as="button"
-                            :href="route('queues.edit', queue)"
-                        >
-                            Edit
-                        </inertia-link>
-                        <inertia-link
-                            v-if="hasAnyPermission(['reopen_queues'])"
-                            class="btn btn-secondary"
-                            as="button"
-                            :href="route('queues.edit', queue)"
-                        >
-                            Edit
-                        </inertia-link>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         <div class="input-group pt-3">
             <input
@@ -227,7 +161,7 @@
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Customer Name</th>
+                    <th class="px-3 py-3">Customer</th>
                 </tr>
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
@@ -236,18 +170,20 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
-                            {{ queue.customer.name }}
+                            {{
+                                queue.customer.name +
+                                    " - " +
+                                    queue.customer.phone_no
+                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('customers.show', queue.customer)"
-                            tabindex="-1"
+                        <a
+                            :href="'tel:' + queue.customer.phone_no"
+                            class="mr-3 btn btn-secondary"
                         >
-                            <i class="fas fa-eye"></i>
-                        </inertia-link>
+                            <i class="fas fa-phone"></i>
+                        </a>
                     </td>
                 </tr>
             </table>
@@ -364,6 +300,79 @@
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
+                <form>
+                    <div class="mt-3 p-3">
+                        <label for="store">Store Name</label>
+                        <input
+                            type="text"
+                            id="store"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="queue.store.name"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="created_at">Visit Time</label>
+                        <input
+                            type="text"
+                            id="created_at"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="readableForHumans(queue.created_at)"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="status">Status</label>
+                        <input
+                            type="text"
+                            id="status"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="queue.status"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="remarks">Remarks</label>
+                        <input
+                            type="text"
+                            id="remarks"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="queue.remarks"
+                            disabled
+                        />
+                    </div>
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-end"
+                    >
+                        <inertia-link
+                            v-if="
+                                !hasAnyPermission(['reopen_queues']) &&
+                                    queue.status != 'Collected' &&
+                                    queue.status != 'Cancelled'
+                            "
+                            class="btn btn-secondary"
+                            as="button"
+                            :href="route('queues.edit', queue)"
+                        >
+                            Edit
+                        </inertia-link>
+                        <inertia-link
+                            v-if="hasAnyPermission(['reopen_queues'])"
+                            class="btn btn-secondary"
+                            as="button"
+                            :href="route('queues.edit', queue)"
+                        >
+                            Edit
+                        </inertia-link>
+                    </div>
+                </form>
+            </div>
         </div>
     </breeze-authenticated-layout>
 </template>

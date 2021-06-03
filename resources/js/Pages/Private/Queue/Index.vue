@@ -12,6 +12,13 @@
                 List of queues
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary mr-3"
+            >
+                <i class="fas fa-clipboard-list"></i>
+            </inertia-link>
+            <inertia-link
                 :href="route('counter')"
                 v-if="hasAnyPermission(['create_queues'])"
                 class="btn btn-secondary"
