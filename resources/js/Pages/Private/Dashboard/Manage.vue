@@ -47,6 +47,13 @@
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
+                            <inertia-link
+                                v-if="hasAnyPermission(['both_queues'])"
+                                class="mr-3 badge badge-light p-3"
+                                :href="route('stores.show', queue.store)"
+                                >{{ queue.store.name }}</inertia-link
+                            >
+
                             {{ queue.car.model + " - " + queue.car.plate_no }}
 
                             <span
@@ -96,6 +103,13 @@
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
+                            <inertia-link
+                                v-if="hasAnyPermission(['both_queues'])"
+                                class="mr-3 badge badge-light p-3"
+                                :href="route('stores.show', queue.store)"
+                                >{{ queue.store.name }}</inertia-link
+                            >
+
                             {{ queue.car.model + " - " + queue.car.plate_no }}
 
                             <span
@@ -145,6 +159,13 @@
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
+                            <inertia-link
+                                v-if="hasAnyPermission(['both_queues'])"
+                                class="mr-3 badge badge-light p-3"
+                                :href="route('stores.show', queue.store)"
+                                >{{ queue.store.name }}</inertia-link
+                            >
+
                             {{ queue.car.model + " - " + queue.car.plate_no }}
 
                             <span
@@ -193,6 +214,13 @@
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
+                            <inertia-link
+                                v-if="hasAnyPermission(['both_queues'])"
+                                class="mr-3 badge badge-dark p-3"
+                                :href="route('stores.show', queue.store)"
+                                >{{ queue.store.name }}</inertia-link
+                            >
+
                             {{ queue.car.model + " - " + queue.car.plate_no }}
 
                             <span
@@ -241,6 +269,13 @@
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
+                            <inertia-link
+                                v-if="hasAnyPermission(['both_queues'])"
+                                class="mr-3 badge badge-dark p-3"
+                                :href="route('stores.show', queue.store)"
+                                >{{ queue.store.name }}</inertia-link
+                            >
+
                             {{ queue.car.model + " - " + queue.car.plate_no }}
 
                             <span
@@ -334,18 +369,27 @@ export default {
             this.waiting = this.queues.filter(queues =>
                 queues.status.includes("Waiting")
             );
+            this.waiting.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
+
             this.grooming = this.queues.filter(queues =>
                 queues.status.includes("Grooming")
             );
+            this.grooming.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
+
             this.completed = this.queues.filter(queues =>
                 queues.status.includes("Completed")
             );
+            this.completed.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
+
             this.collected = this.queues.filter(queues =>
                 queues.status.includes("Collected")
             );
+            this.collected.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
+
             this.cancelled = this.queues.filter(queues =>
                 queues.status.includes("Cancelled")
             );
+            this.cancelled.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
         },
         getQueue() {
             let self = this;

@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Models\Package;
 use App\Models\Service;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class QueueController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->hasRole(['IT', 'Owner'])) {
+        if (Auth::user()->hasPermissionTo('both_queues')) {
             $queues = Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
         } else {
             $queues = Queue::where('store_id', Auth::user()->store->id)->filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
@@ -206,19 +207,52 @@ class QueueController extends Controller
         //
     }
 
-    public function search(Store $store)
+    public function refresh(Store $store)
     {
-        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->where('created_at', '>', now()->subDays(1))->with('car:id,plate_no,model')->get();
+        return Queue::select('id', 'car_id', 'status')->where('store_id', $store->id)->whereIn('status', ['Waiting', 'Grooming', 'Completed'])->orderBy('updated_at', 'asc')->with('car:id,plate_no,model')->get();
+    }
+
+    public function search(Request $request)
+    {
+        $user = User::find($request->user_id);
+
+        if ($user->hasPermissionTo('both_queues')) {
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
+                ->where('created_at', '>', now()->subDays(1))
+                ->whereIn('status', ['Collected', 'Cancelled'])
+                ->orderBy('updated_at', 'asc')
+                ->with('car', 'customer.personalities', 'store')
+                ->get();
+
+            $all = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
+                ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
+                ->orderBy('updated_at', 'asc')
+                ->with('car', 'customer.personalities', 'store')
+                ->get();
+        } else {
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'status')
+                ->where('store_id', $user->store_id)
+                ->where('created_at', '>', now()->subDays(1))
+                ->whereIn('status', ['Collected', 'Cancelled'])
+                ->orderBy('updated_at', 'asc')
+                ->with('car', 'customer.personalities')
+                ->get();
+
+            $all = Queue::select('id', 'car_id', 'customer_id', 'status')
+                ->where('store_id', $user->store_id)
+                ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
+                ->orderBy('updated_at', 'asc')
+                ->with('car', 'customer.personalities')
+                ->get();
+        }
+
+        $queues = $daily->merge($all);
+
+        return $queues;
     }
 
     public function manage()
     {
-        $store = Auth::user()->store;
-        $queues = Queue::where('created_at', '>', now()->subDays(1))->where('store_id', Auth::user()->store->id)->with('car')->get();
-
-        return Inertia::render('Private/Queue/Manage', [
-            'store' => $store,
-            'queues' => $queues
-        ]);
+        return Inertia::render('Private/Dashboard/Manage');
     }
 }
