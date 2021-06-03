@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Monthly', [
             'queues' => $queues
         ]);
-    })->name('monthly')->middleware(['permission:view_queues|create_queues|edit_queues|reopen_queues']);
+    })->name('monthly');
 
     Route::get('fresh', function () {
         $customers = Customer::whereDate('created_at', '>', now()->subDays(30))->paginate(10)->withQueryString();
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Fresh', [
             'customers' => $customers
         ]);
-    })->name('fresh')->middleware(['permission:view_customers|create_customers|edit_customers']);
+    })->name('fresh');
 
     Route::get('stale', function () {
         $new = Customer::whereDate('created_at', '>', now()->subDays(60))->pluck('id')->toArray();
@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Stale', [
             'customers' => $customers
         ]);
-    })->name('stale')->middleware(['permission:view_customers|create_customers|edit_customers']);
+    })->name('stale');
 
     Route::get('counter', function () {
         return Inertia::render('Private/Dashboard/Counter');
