@@ -272,6 +272,8 @@ class QueueController extends Controller
 
     public function manage()
     {
-        return Inertia::render('Private/Dashboard/Manage');
+        return Inertia::render('Private/Dashboard/Manage', [
+            'whatsapp' => Whatsapp::first()
+        ]);
     }
 }

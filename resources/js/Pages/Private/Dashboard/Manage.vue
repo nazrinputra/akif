@@ -119,6 +119,7 @@
                 v-show="activeCompleted"
                 v-if="completed.length > 0"
                 :completed="completed"
+                :whatsapp="whatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color:#c3e6cb !important;"
@@ -128,6 +129,7 @@
                 v-show="activeCollected"
                 v-if="collected.length > 0"
                 :collected="collected"
+                :whatsapp="whatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
             />
@@ -136,6 +138,7 @@
                 v-show="activeCancelled"
                 v-if="cancelled.length > 0"
                 :cancelled="cancelled"
+                :whatsapp="whatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
             />
@@ -168,7 +171,8 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
+        whatsapp: Object
     },
 
     data() {
