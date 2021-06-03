@@ -118,6 +118,19 @@
                                                     Counter
                                                 </breeze-dropdown-link>
                                                 <breeze-dropdown-link
+                                                    :href="
+                                                        route('queues.manage')
+                                                    "
+                                                    as="button"
+                                                    v-if="
+                                                        hasAnyPermission([
+                                                            'edit_queues'
+                                                        ])
+                                                    "
+                                                >
+                                                    Q - MS
+                                                </breeze-dropdown-link>
+                                                <breeze-dropdown-link
                                                     :href="route('reports')"
                                                     as="button"
                                                     v-if="
@@ -218,6 +231,13 @@
                                         as="button"
                                     >
                                         Counter
+                                    </breeze-responsive-nav-link>
+                                    <breeze-responsive-nav-link
+                                        :href="route('queues.manage')"
+                                        v-if="hasAnyPermission(['edit_queues'])"
+                                        as="button"
+                                    >
+                                        Q - MS
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('reports')"
