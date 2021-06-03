@@ -3,7 +3,7 @@
         <template #title> - Edit WhatsApp </template>
         <template #header>
             <inertia-link
-                :href="route('whatsapps.index')"
+                :href="route('whatsapps.show', whatsapp)"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>

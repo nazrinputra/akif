@@ -20,6 +20,7 @@ class CreateQueuesTable extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->string('status');
             $table->string('remarks')->nullable();
+            $table->integer('move')->nullable();
             $table->timestamps();
         });
     }

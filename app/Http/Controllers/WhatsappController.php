@@ -16,11 +16,10 @@ class WhatsappController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         return Inertia::render('Private/Whatsapp/Index', [
-            'filters' => $request->all('search', 'trashed'),
-            'whatsapps' => Whatsapp::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
+            'whatsapps' => Whatsapp::all()
         ]);
     }
 
@@ -31,7 +30,7 @@ class WhatsappController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Private/Whatsapp/Create');
+        //
     }
 
     /**
@@ -42,21 +41,7 @@ class WhatsappController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:50'],
-            'message' => ['required', 'max:255'],
-        ]);
-
-        $slug = Str::slug($request->title);
-        $request->merge(['slug' => $slug]);
-
-        if ($whatsapp = Whatsapp::where('slug', $request->slug)->first()) {
-            return Redirect::back()->with('error', 'WhatsApp message already exist! <a href="' . route('whatsapps.show', $whatsapp) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
-        }
-
-        $createdWhatsapp = Whatsapp::create($request->only('title', 'slug', 'message'));
-
-        return Redirect::route('whatsapps.show', $createdWhatsapp)->with('success', 'Message added successfully.');
+        //
     }
 
     /**
@@ -67,6 +52,7 @@ class WhatsappController extends Controller
      */
     public function show(Whatsapp $whatsapp)
     {
+        $whatsapp->message = urldecode($whatsapp->message);
         return Inertia::render('Private/Whatsapp/Show', compact('whatsapp'));
     }
 
@@ -78,6 +64,7 @@ class WhatsappController extends Controller
      */
     public function edit(Whatsapp $whatsapp)
     {
+        $whatsapp->message = urldecode($whatsapp->message);
         return Inertia::render('Private/Whatsapp/Edit', compact('whatsapp'));
     }
 
@@ -92,11 +79,13 @@ class WhatsappController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:50'],
-            'message' => ['required', 'max:255'],
+            'message' => ['required'],
         ]);
 
         $slug = Str::slug($request->title);
+        $message = urlencode($request->message);
         $request->merge(['slug' => $slug]);
+        $request->merge(['message' => $message]);
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
@@ -121,18 +110,11 @@ class WhatsappController extends Controller
         return Redirect::back()->with('success', 'Message restored successfully.');
     }
 
-    public function search(Request $request)
-    {
-        return Whatsapp::where('title', 'like', '%' . $request->input('query') . '%')
-            ->orWhere('message', 'like', '%' . $request->input('query') . '%')
-            ->limit(3)
-            ->get();
-    }
-
     public function send(Whatsapp $whatsapp, $customer)
     {
         return Inertia::render('Private/Whatsapp/Send', [
             'whatsapp' => $whatsapp,
+            'message' => urldecode($whatsapp->message),
             'customer' => Customer::where('slug', $customer)->first()
         ]);
     }

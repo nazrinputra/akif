@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Customer;
+use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -59,7 +60,11 @@ class CustomerController extends Controller
         if ($request->input('car_id') != null) {
             $car = Car::find($request->input('car_id'));
             $car->owners()->save($createdCustomer);
-            return Redirect::route('customers.show', $createdCustomer)->with('success', 'Customer added successfully and linked to car.');
+        }
+
+        if ($request->input('personality_id') != null) {
+            $personality = Personality::find($request->input('personality_id'));
+            $personality->customers()->save($createdCustomer);
         }
 
         return Redirect::route('customers.show', $createdCustomer)->with('success', 'Customer added successfully.');

@@ -15,22 +15,6 @@ class Whatsapp extends Model
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('title', 'like', '%' . $search . '%')
-                ->orWhere('message', 'like', '%' . $search . '%');;
-        })->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
-                $query->withTrashed();
-            } elseif ($trashed === 'only') {
-                $query->onlyTrashed();
-            } else {
-                $query;
-            }
-        });
-    }
-
     /**
      * The attributes that are mass assignable.
      *

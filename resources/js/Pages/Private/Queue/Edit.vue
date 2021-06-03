@@ -14,6 +14,13 @@
                 Edit queue
             </h6>
             <inertia-link
+                v-if="hasAnyPermission(['edit_queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary mr-3"
+            >
+                <i class="fas fa-clipboard-list"></i>
+            </inertia-link>
+            <inertia-link
                 :href="route('counter')"
                 v-if="hasAnyPermission(['create_queues'])"
                 class="btn btn-secondary"
@@ -31,70 +38,6 @@
                 Queue
             </span>
         </template>
-
-        <div
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <div class="container">
-                <form @submit.prevent="form.put(route('queues.update', queue))">
-                    <div class="mt-3 p-3">
-                        <label for="status">Status</label>
-                        <select
-                            v-model="form.status"
-                            @change="form.clearErrors('status')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.status
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                            ><option value="" disabled>Select Status</option>
-                            <option value="Waiting">Waiting</option>
-                            <option value="Grooming">Grooming</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Collected">Collected</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.status
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="remarks">Remarks</label>
-                        <textarea
-                            rows="7"
-                            id="remarks"
-                            placeholder="Remarks"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.remarks
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.remarks"
-                            @keydown="form.clearErrors('remarks')"
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.remarks
-                        }}</span>
-                    </div>
-                    <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button
-                            class="ml-auto"
-                            :class="{
-                                'opacity-25': form.processing
-                            }"
-                            :disabled="form.processing"
-                        >
-                            Update
-                        </breeze-button>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         <div
             class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -346,6 +289,70 @@
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div class="container">
+                <form @submit.prevent="form.put(route('queues.update', queue))">
+                    <div class="mt-3 p-3">
+                        <label for="status">Status</label>
+                        <select
+                            v-model="form.status"
+                            @change="form.clearErrors('status')"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.status
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            required
+                            ><option value="" disabled>Select Status</option>
+                            <option value="Waiting">Waiting</option>
+                            <option value="Grooming">Grooming</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Collected">Collected</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.status
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="remarks">Remarks</label>
+                        <textarea
+                            rows="7"
+                            id="remarks"
+                            placeholder="Remarks"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.remarks
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.remarks"
+                            @keydown="form.clearErrors('remarks')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.remarks
+                        }}</span>
+                    </div>
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button
+                            class="ml-auto"
+                            :class="{
+                                'opacity-25': form.processing
+                            }"
+                            :disabled="form.processing"
+                        >
+                            Update
+                        </breeze-button>
+                    </div>
+                </form>
+            </div>
         </div>
     </breeze-authenticated-layout>
 </template>

@@ -63,6 +63,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'create_queues']);
         Permission::create(['name' => 'edit_queues']);
         Permission::create(['name' => 'reopen_queues']);
+        Permission::create(['name' => 'both_queues']);
 
         // crew
         Permission::create(['name' => 'view_crews']);

@@ -54,7 +54,7 @@
                             rows="7"
                             id="message"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="whatsapp.message"
+                            :value="message"
                             disabled
                         />
                     </div>
@@ -114,16 +114,8 @@ export default {
         errors: Object,
         flash: Object,
         whatsapp: Object,
+        message: String,
         customer: Object
-    },
-
-    methods: {
-        // destroy(whatsapp) {
-        //     this.$inertia.delete(route("whatsapps.destroy", whatsapp));
-        // },
-        // restore(whatsapp) {
-        //     this.$inertia.put(route("whatsapps.restore", whatsapp));
-        // }
     }
 };
 </script>
