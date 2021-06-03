@@ -11,7 +11,8 @@ class Queue extends Model
 
     protected $attributes = [
         'status' => 'Waiting',
-        'remarks' => 'None'
+        'remarks' => 'None',
+        'move' => 0,
     ];
 
     protected $fillable = [
@@ -19,7 +20,8 @@ class Queue extends Model
         'car_id',
         'customer_id',
         'status',
-        'remarks'
+        'remarks',
+        'move'
     ];
 
     public function scopeFilter($query, array $filters)
