@@ -29,6 +29,55 @@
         </template>
 
         <div
+            v-if="completed.length > 0"
+            class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            style="background-color:#c3e6cb !important;"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Completed Queue</th>
+                </tr>
+                <tr
+                    v-for="queue in completed"
+                    :key="queue.id"
+                    class="hover:bg-green-300 focus-within:bg-green-300"
+                >
+                    <td class="border-t">
+                        <span
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                        >
+                            {{ queue.car.model + " - " + queue.car.plate_no }}
+
+                            <span
+                                class="mx-3 badge badge-pill"
+                                :class="tagging(personality.color)"
+                                v-for="personality in queue.customer
+                                    .personalities"
+                                :key="personality.id"
+                            >
+                                {{ personality.name }}
+                            </span>
+                        </span>
+                    </td>
+                    <td class="border-t md:table-cell hidden text-right">
+                        <select
+                            @change="updateStatus($event.target.value, queue)"
+                            :value="queue.status"
+                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            ><option value="" disabled>Select Status</option>
+                            <option value="Waiting">Waiting</option>
+                            <option value="Grooming">Grooming</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Collected">Collected</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
             v-if="waiting.length > 0"
             class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             style="background-color:#f5c6cb !important;"
@@ -48,6 +97,16 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ queue.car.model + " - " + queue.car.plate_no }}
+
+                            <span
+                                class="mx-3 badge badge-pill"
+                                :class="tagging(personality.color)"
+                                v-for="personality in queue.customer
+                                    .personalities"
+                                :key="personality.id"
+                            >
+                                {{ personality.name }}
+                            </span>
                         </span>
                     </td>
                     <td class="border-t md:table-cell hidden text-right">
@@ -87,45 +146,16 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ queue.car.model + " - " + queue.car.plate_no }}
-                        </span>
-                    </td>
-                    <td class="border-t md:table-cell hidden text-right">
-                        <select
-                            @change="updateStatus($event.target.value, queue)"
-                            :value="queue.status"
-                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            ><option value="" disabled>Select Status</option>
-                            <option value="Waiting">Waiting</option>
-                            <option value="Grooming">Grooming</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Collected">Collected</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </div>
 
-        <div
-            v-if="completed.length > 0"
-            class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-            style="background-color:#c3e6cb !important;"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Completed Queue</th>
-                </tr>
-                <tr
-                    v-for="queue in completed"
-                    :key="queue.id"
-                    class="hover:bg-green-300 focus-within:bg-green-300"
-                >
-                    <td class="border-t">
-                        <span
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                        >
-                            {{ queue.car.model + " - " + queue.car.plate_no }}
+                            <span
+                                class="mx-3 badge badge-pill"
+                                :class="tagging(personality.color)"
+                                v-for="personality in queue.customer
+                                    .personalities"
+                                :key="personality.id"
+                            >
+                                {{ personality.name }}
+                            </span>
                         </span>
                     </td>
                     <td class="border-t md:table-cell hidden text-right">
@@ -164,6 +194,16 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ queue.car.model + " - " + queue.car.plate_no }}
+
+                            <span
+                                class="mx-3 badge badge-pill"
+                                :class="tagging(personality.color)"
+                                v-for="personality in queue.customer
+                                    .personalities"
+                                :key="personality.id"
+                            >
+                                {{ personality.name }}
+                            </span>
                         </span>
                     </td>
                     <td class="border-t md:table-cell hidden text-right">
@@ -202,6 +242,16 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ queue.car.model + " - " + queue.car.plate_no }}
+
+                            <span
+                                class="mx-3 badge badge-pill"
+                                :class="tagging(personality.color)"
+                                v-for="personality in queue.customer
+                                    .personalities"
+                                :key="personality.id"
+                            >
+                                {{ personality.name }}
+                            </span>
                         </span>
                     </td>
                     <td class="border-t md:table-cell hidden text-right">
@@ -240,14 +290,12 @@ export default {
     props: {
         auth: Object,
         errors: Object,
-        flash: Object,
-        store: Object,
-        queues: Object
+        flash: Object
     },
 
     data() {
         return {
-            polling: null,
+            queues: [],
             waiting: [],
             grooming: [],
             completed: [],
@@ -257,12 +305,7 @@ export default {
     },
 
     mounted() {
-        this.sortQueue();
-        this.pollData();
-    },
-
-    unmounted() {
-        clearInterval(this.polling);
+        this.getQueue();
     },
 
     methods: {
@@ -275,8 +318,12 @@ export default {
                 },
                 {
                     onSuccess: () => {
+                        this.getQueue();
                         this.flash.success =
-                            "Queue status changed to " +
+                            queue.car.model +
+                            " - " +
+                            queue.car.plate_no +
+                            " status changed to " +
                             status +
                             " successfully.";
                     }
@@ -302,28 +349,28 @@ export default {
         },
         getQueue() {
             let self = this;
-            axios.get(route("queues.search", this.store)).then(response => {
-                self.waiting = response.data.filter(queues =>
-                    queues.status.includes("Waiting")
-                );
-                self.grooming = response.data.filter(queues =>
-                    queues.status.includes("Grooming")
-                );
-                self.completed = response.data.filter(queues =>
-                    queues.status.includes("Completed")
-                );
-                self.collected = response.data.filter(queues =>
-                    queues.status.includes("Collected")
-                );
-                self.cancelled = response.data.filter(queues =>
-                    queues.status.includes("Cancelled")
-                );
-            });
+            axios
+                .post(route("queues.search"), {
+                    user_id: this.auth.user.id
+                })
+                .then(response => {
+                    self.queues = response.data;
+                    this.sortQueue();
+                });
         },
-        pollData() {
-            this.polling = setInterval(() => {
-                this.getQueue();
-            }, 10000);
+        tagging(color) {
+            if (color == "Red") {
+                return "badge-danger";
+            }
+            if (color == "Yellow") {
+                return "badge-warning";
+            }
+            if (color == "Green") {
+                return "badge-success";
+            }
+            if (color == "Black") {
+                return "badge-dark";
+            }
         }
     }
 };
