@@ -31,7 +31,7 @@
         <div
             class="p-5 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg md-stepper-horizontal"
         >
-            <ul class="nav nav-tabs mx-2">
+            <ul class="nav nav-tabs mx-3">
                 <li class="nav-item">
                     <span
                         class="nav-link cursor-pointer"
@@ -74,14 +74,20 @@
                 <li class="nav-item">
                     <span
                         class="nav-link cursor-pointer"
+                        :style="
+                            activeCollected ? 'color: black !important;' : ''
+                        "
                         @click="showCollected()"
-                        :class="activeCollected ? 'active' : ''"
+                        :class="activeCollected ? 'active ' : ''"
                         >Collected</span
                     >
                 </li>
                 <li class="nav-item">
                     <span
                         class="nav-link cursor-pointer"
+                        :style="
+                            activeCancelled ? 'color: black !important;' : ''
+                        "
                         @click="showCancelled()"
                         :class="activeCancelled ? 'active' : ''"
                         >Cancelled</span
@@ -89,383 +95,50 @@
                 </li>
             </ul>
 
-            <div
-                v-if="waiting.length > 0"
+            <breeze-queue-waiting
                 v-show="activeWaiting"
+                v-if="waiting.length > 0"
+                :waiting="waiting"
+                @moveBottom="moveBottom($event)"
+                @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color:#f5c6cb !important;"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Waiting Queue</th>
-                    </tr>
-                    <tr
-                        v-for="queue in waiting"
-                        :key="queue.id"
-                        class="hover:bg-red-300 focus-within:bg-red-300"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <inertia-link
-                                    v-if="hasAnyPermission(['both_queues'])"
-                                    class="mr-3 badge badge-light p-3"
-                                    :href="route('stores.show', queue.store)"
-                                    >{{ queue.store.name }}</inertia-link
-                                >
+            />
 
-                                {{
-                                    queue.car.model + " - " + queue.car.plate_no
-                                }}
-
-                                <span
-                                    class="mx-3 badge badge-pill"
-                                    :class="tagging(personality.color)"
-                                    v-for="personality in queue.customer
-                                        .personalities"
-                                    :key="personality.id"
-                                >
-                                    {{ personality.name }}
-                                </span>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <select
-                                    @click.prevent
-                                    @change.prevent="
-                                        updateStatus($event.target.value, queue)
-                                    "
-                                    :value="queue.status"
-                                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    ><option value="" disabled
-                                        >Select Status</option
-                                    >
-                                    <option value="Waiting">Waiting</option>
-                                    <option value="Grooming">Grooming</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Collected">Collected</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
-                                <button
-                                    class="ml-3 btn btn-light"
-                                    @click.prevent="
-                                        moveBottom(queue.move, queue)
-                                    "
-                                >
-                                    <i class="fas fa-level-down-alt mx-1.5"></i>
-                                </button>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div
+            <breeze-queue-grooming
                 v-show="activeGrooming"
                 v-if="grooming.length > 0"
-                class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                :grooming="grooming"
+                @moveBottom="moveBottom($event)"
+                @updateStatus="updateStatus($event)"
+                class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color:#ffeeba !important;"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Grooming Queue</th>
-                    </tr>
-                    <tr
-                        v-for="queue in grooming"
-                        :key="queue.id"
-                        class="hover:bg-yellow-200 focus-within:bg-yellow-200"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <inertia-link
-                                    v-if="hasAnyPermission(['both_queues'])"
-                                    class="mr-3 badge badge-light p-3"
-                                    :href="route('stores.show', queue.store)"
-                                    >{{ queue.store.name }}</inertia-link
-                                >
+            />
 
-                                {{
-                                    queue.car.model + " - " + queue.car.plate_no
-                                }}
-
-                                <span
-                                    class="mx-3 badge badge-pill"
-                                    :class="tagging(personality.color)"
-                                    v-for="personality in queue.customer
-                                        .personalities"
-                                    :key="personality.id"
-                                >
-                                    {{ personality.name }}
-                                </span>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <select
-                                    @click.prevent
-                                    @change.prevent="
-                                        updateStatus($event.target.value, queue)
-                                    "
-                                    :value="queue.status"
-                                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    ><option value="" disabled
-                                        >Select Status</option
-                                    >
-                                    <option value="Waiting">Waiting</option>
-                                    <option value="Grooming">Grooming</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Collected">Collected</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
-                                <button
-                                    class="ml-3 btn btn-light"
-                                    @click.prevent="
-                                        moveBottom(queue.move, queue)
-                                    "
-                                >
-                                    <i class="fas fa-level-down-alt mx-1.5"></i>
-                                </button>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div
+            <breeze-queue-completed
                 v-show="activeCompleted"
                 v-if="completed.length > 0"
-                class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+                :completed="completed"
+                @updateStatus="updateStatus($event)"
+                class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color:#c3e6cb !important;"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Completed Queue</th>
-                    </tr>
-                    <tr
-                        v-for="queue in completed"
-                        :key="queue.id"
-                        class="hover:bg-green-300 focus-within:bg-green-300"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <inertia-link
-                                    v-if="hasAnyPermission(['both_queues'])"
-                                    class="mr-3 badge badge-light p-3"
-                                    :href="route('stores.show', queue.store)"
-                                    >{{ queue.store.name }}</inertia-link
-                                >
+            />
 
-                                {{
-                                    queue.car.model + " - " + queue.car.plate_no
-                                }}
-
-                                <span
-                                    class="mx-3 badge badge-pill"
-                                    :class="tagging(personality.color)"
-                                    v-for="personality in queue.customer
-                                        .personalities"
-                                    :key="personality.id"
-                                >
-                                    {{ personality.name }}
-                                </span>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <select
-                                    @click.prevent
-                                    @change.prevent="
-                                        updateStatus($event.target.value, queue)
-                                    "
-                                    :value="queue.status"
-                                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    ><option value="" disabled
-                                        >Select Status</option
-                                    >
-                                    <option value="Waiting">Waiting</option>
-                                    <option value="Grooming">Grooming</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Collected">Collected</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
-                                <button class="ml-3 btn btn-light">
-                                    <i class="fab fa-fw fa-whatsapp"></i>
-                                </button>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div
+            <breeze-queue-collected
                 v-show="activeCollected"
                 v-if="collected.length > 0"
-                class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Collected Queue</th>
-                    </tr>
-                    <tr
-                        v-for="queue in collected"
-                        :key="queue.id"
-                        class="hover:bg-gray-300 focus-within:bg-gray-300"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <inertia-link
-                                    v-if="hasAnyPermission(['both_queues'])"
-                                    class="mr-3 badge badge-secondary p-3"
-                                    :href="route('stores.show', queue.store)"
-                                    >{{ queue.store.name }}</inertia-link
-                                >
+                :collected="collected"
+                @updateStatus="updateStatus($event)"
+                class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
+            />
 
-                                {{
-                                    queue.car.model + " - " + queue.car.plate_no
-                                }}
-
-                                <span
-                                    class="mx-3 badge badge-pill"
-                                    :class="tagging(personality.color)"
-                                    v-for="personality in queue.customer
-                                        .personalities"
-                                    :key="personality.id"
-                                >
-                                    {{ personality.name }}
-                                </span>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <select
-                                    @click.prevent
-                                    @change.prevent="
-                                        updateStatus($event.target.value, queue)
-                                    "
-                                    :value="queue.status"
-                                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    ><option value="" disabled
-                                        >Select Status</option
-                                    >
-                                    <option value="Waiting">Waiting</option>
-                                    <option value="Grooming">Grooming</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Collected">Collected</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
-                                <button class="ml-3 btn btn-secondary">
-                                    <i class="fab fa-fw fa-whatsapp"></i>
-                                </button>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div
+            <breeze-queue-cancelled
                 v-show="activeCancelled"
                 v-if="cancelled.length > 0"
-                class="mb-3 px-6 pb-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Cancelled Queue</th>
-                    </tr>
-                    <tr
-                        v-for="queue in cancelled"
-                        :key="queue.id"
-                        class="hover:bg-gray-300 focus-within:bg-gray-300"
-                    >
-                        <td class="border-t">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex items-center focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <inertia-link
-                                    v-if="hasAnyPermission(['both_queues'])"
-                                    class="mr-3 badge badge-secondary p-3"
-                                    :href="route('stores.show', queue.store)"
-                                    >{{ queue.store.name }}</inertia-link
-                                >
-
-                                {{
-                                    queue.car.model + " - " + queue.car.plate_no
-                                }}
-
-                                <span
-                                    class="mx-3 badge badge-pill"
-                                    :class="tagging(personality.color)"
-                                    v-for="personality in queue.customer
-                                        .personalities"
-                                    :key="personality.id"
-                                >
-                                    {{ personality.name }}
-                                </span>
-                            </inertia-link>
-                        </td>
-                        <td class="border-t md:table-cell hidden">
-                            <inertia-link
-                                style="color: inherit; text-decoration: inherit;"
-                                class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
-                                :href="route('queues.show', queue)"
-                            >
-                                <select
-                                    @click.prevent
-                                    @change.prevent="
-                                        updateStatus($event.target.value, queue)
-                                    "
-                                    :value="queue.status"
-                                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    ><option value="" disabled
-                                        >Select Status</option
-                                    >
-                                    <option value="Waiting">Waiting</option>
-                                    <option value="Grooming">Grooming</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Collected">Collected</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
-                                <button class="ml-3 btn btn-secondary">
-                                    <i class="fab fa-fw fa-whatsapp"></i>
-                                </button>
-                            </inertia-link>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                :cancelled="cancelled"
+                @updateStatus="updateStatus($event)"
+                class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
+            />
         </div>
     </breeze-authenticated-layout>
 </template>
@@ -474,14 +147,22 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import BreezePagination from "@/Components/Pagination";
+import BreezeQueueWaiting from "@/Components/QueueWaiting";
+import BreezeQueueGrooming from "@/Components/QueueGrooming";
+import BreezeQueueCompleted from "@/Components/QueueCompleted";
+import BreezeQueueCollected from "@/Components/QueueCollected";
+import BreezeQueueCancelled from "@/Components/QueueCancelled";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezePagination
+        BreezeQueueWaiting,
+        BreezeQueueGrooming,
+        BreezeQueueCompleted,
+        BreezeQueueCollected,
+        BreezeQueueCancelled
     },
 
     props: {
@@ -511,12 +192,12 @@ export default {
     },
 
     methods: {
-        updateStatus(status, queue) {
+        updateStatus(queue) {
             this.$inertia.post(
                 route("manage"),
                 {
                     queue_id: queue.id,
-                    status: status
+                    status: queue.status
                 },
                 {
                     onSuccess: () => {
@@ -526,19 +207,19 @@ export default {
                             " - " +
                             queue.car.plate_no +
                             " status changed to " +
-                            status +
+                            queue.status +
                             " successfully.";
                     }
                 }
             );
         },
-        moveBottom(move, queue) {
-            move = move + 1;
+        moveBottom(queue) {
+            queue.move += 1;
             this.$inertia.post(
                 route("bottom"),
                 {
                     queue_id: queue.id,
-                    move: move
+                    move: queue.move
                 },
                 {
                     onSuccess: () => {
