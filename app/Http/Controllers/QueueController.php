@@ -218,7 +218,7 @@ class QueueController extends Controller
 
         if ($user->hasPermissionTo('both_queues')) {
             $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
-                ->where('created_at', '>', now()->subDays(1))
+                ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities', 'store')
@@ -232,7 +232,7 @@ class QueueController extends Controller
         } else {
             $daily = Queue::select('id', 'car_id', 'customer_id', 'status')
                 ->where('store_id', $user->store_id)
-                ->where('created_at', '>', now()->subDays(1))
+                ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities')
