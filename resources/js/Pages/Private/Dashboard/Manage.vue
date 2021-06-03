@@ -43,9 +43,10 @@
                     class="hover:bg-green-300 focus-within:bg-green-300"
                 >
                     <td class="border-t">
-                        <span
+                        <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('queues.show', queue)"
                         >
                             <inertia-link
                                 v-if="hasAnyPermission(['both_queues'])"
@@ -65,20 +66,37 @@
                             >
                                 {{ personality.name }}
                             </span>
-                        </span>
+                        </inertia-link>
                     </td>
-                    <td class="border-t md:table-cell hidden text-right">
-                        <select
-                            @change="updateStatus($event.target.value, queue)"
-                            :value="queue.status"
-                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            ><option value="" disabled>Select Status</option>
-                            <option value="Waiting">Waiting</option>
-                            <option value="Grooming">Grooming</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Collected">Collected</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
+                    <td class="border-t md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
+                            :href="route('queues.show', queue)"
+                        >
+                            <button
+                                class="mr-3 btn btn-light"
+                                @click.prevent="moveBottom(queue.move, queue)"
+                            >
+                                <i class="fas fa-level-down-alt mx-1.5"></i>
+                            </button>
+                            <select
+                                @click.prevent
+                                @change.prevent="
+                                    updateStatus($event.target.value, queue)
+                                "
+                                :value="queue.status"
+                                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                ><option value="" disabled
+                                    >Select Status</option
+                                >
+                                <option value="Waiting">Waiting</option>
+                                <option value="Grooming">Grooming</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Collected">Collected</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </inertia-link>
                     </td>
                 </tr>
             </table>
@@ -361,6 +379,26 @@ export default {
                             " status changed to " +
                             status +
                             " successfully.";
+                    }
+                }
+            );
+        },
+        moveBottom(move, queue) {
+            move = move + 1;
+            this.$inertia.post(
+                route("bottom"),
+                {
+                    queue_id: queue.id,
+                    move: move
+                },
+                {
+                    onSuccess: () => {
+                        this.getQueue();
+                        this.flash.warning =
+                            queue.car.model +
+                            " - " +
+                            queue.car.plate_no +
+                            " moved to the bottom successfully.";
                     }
                 }
             );
