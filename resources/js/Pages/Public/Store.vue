@@ -195,21 +195,23 @@ export default {
         },
         getQueue() {
             let self = this;
-            axios.get(route("queues.search", route().params)).then(response => {
-                self.waiting = response.data.filter(queues =>
-                    queues.status.includes("Waiting")
-                );
-                self.grooming = response.data.filter(queues =>
-                    queues.status.includes("Grooming")
-                );
-                self.completed = response.data.filter(queues =>
-                    queues.status.includes("Completed")
-                );
-                self.queuesCount =
-                    self.waiting.length +
-                    self.grooming.length +
-                    self.completed.length;
-            });
+            axios
+                .get(route("queues.refresh", route().params))
+                .then(response => {
+                    self.waiting = response.data.filter(queues =>
+                        queues.status.includes("Waiting")
+                    );
+                    self.grooming = response.data.filter(queues =>
+                        queues.status.includes("Grooming")
+                    );
+                    self.completed = response.data.filter(queues =>
+                        queues.status.includes("Completed")
+                    );
+                    self.queuesCount =
+                        self.waiting.length +
+                        self.grooming.length +
+                        self.completed.length;
+                });
         },
         pollData() {
             this.polling = setInterval(() => {
