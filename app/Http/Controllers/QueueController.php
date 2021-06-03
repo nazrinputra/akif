@@ -10,6 +10,7 @@ use App\Models\Package;
 use App\Models\Service;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Whatsapp;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -160,7 +161,8 @@ class QueueController extends Controller
     public function show(Queue $queue)
     {
         return Inertia::render('Private/Queue/Show', [
-            'queue' => $queue->load('car', 'customer', 'store', 'packages', 'services')
+            'queue' => $queue->load('car', 'customer', 'store', 'packages', 'services'),
+            'whatsapps' => Whatsapp::all()
         ]);
     }
 
