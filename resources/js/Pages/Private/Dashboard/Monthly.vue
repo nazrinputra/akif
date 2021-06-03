@@ -11,7 +11,11 @@
             <h6 class="pt-2.5 mx-auto">
                 Customer visits this month
             </h6>
-            <inertia-link :href="route('counter')" class="btn btn-secondary">
+            <inertia-link
+                v-if="hasAnyPermission(['create_queues'])"
+                :href="route('counter')"
+                class="btn btn-secondary"
+            >
                 <i class="fas fa-cash-register"></i>
             </inertia-link>
         </template>
