@@ -44,11 +44,13 @@ class WhatsappController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:50'],
-            'message' => ['required', 'max:255'],
+            'message' => ['required'],
         ]);
 
         $slug = Str::slug($request->title);
+        $message = urlencode($request->message);
         $request->merge(['slug' => $slug]);
+        $request->merge(['message' => $message]);
 
         if ($whatsapp = Whatsapp::where('slug', $request->slug)->first()) {
             return Redirect::back()->with('error', 'WhatsApp message already exist! <a href="' . route('whatsapps.show', $whatsapp) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
@@ -92,11 +94,13 @@ class WhatsappController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:50'],
-            'message' => ['required', 'max:255'],
+            'message' => ['required'],
         ]);
 
         $slug = Str::slug($request->title);
+        $message = urlencode($request->message);
         $request->merge(['slug' => $slug]);
+        $request->merge(['message' => $message]);
 
         $whatsapp->update($request->only('title', 'slug', 'message'));
 
@@ -133,6 +137,7 @@ class WhatsappController extends Controller
     {
         return Inertia::render('Private/Whatsapp/Send', [
             'whatsapp' => $whatsapp,
+            'message' => urldecode($whatsapp->message),
             'customer' => Customer::where('slug', $customer)->first()
         ]);
     }
