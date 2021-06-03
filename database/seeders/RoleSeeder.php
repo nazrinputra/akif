@@ -43,7 +43,9 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['view_deleted']);
         $admin->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues']);
 
-        Role::create(['name' => 'Quality Checker']);
+        $qualityChecker = Role::create(['name' => 'Quality Checker']);
+        $qualityChecker->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues']);
+
         Role::create(['name' => 'Detailer']);
         Role::create(['name' => 'Accountant']);
         Role::create(['name' => 'Designer']);
