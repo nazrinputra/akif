@@ -22,7 +22,9 @@ require __DIR__ . '/api/access.php';
 
 URL::forceScheme('https');
 
-Route::get('store/{store:slug}/queues', [QueueController::class, 'search'])->name('queues.search');
+Route::get('store/{store:slug}/queues', [QueueController::class, 'refresh'])->name('queues.refresh');
+
+Route::post('search/queues', [QueueController::class, 'search'])->name('queues.search');
 
 Route::get('whatsapps/search', [WhatsappController::class, 'search'])
     ->name('whatsapps.search');
