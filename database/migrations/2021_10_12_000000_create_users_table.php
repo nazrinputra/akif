@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('slug');
             $table->string('phone_no')->unique();
             $table->string('ic_no')->unique()->nullable();
+            $table->string('bank');
             $table->string('acc_no')->unique();
             $table->string('email')->unique();
             $table->string('address')->nullable();
@@ -32,10 +33,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('emergency_name_1')->nullable();
-            $table->string('emergency__phone_no_1')->nullable();
+            $table->string('emergency_phone_no_1')->nullable();
             $table->string('emergency_relation_1')->nullable();
             $table->string('emergency_name_2')->nullable();
-            $table->string('emergency__phone_no_2')->nullable();
+            $table->string('emergency_phone_no_2')->nullable();
             $table->string('emergency_relation_2')->nullable();
             $table->rememberToken();
             $table->timestamps();
