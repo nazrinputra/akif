@@ -81,7 +81,7 @@
                     <div class="mt-3 p-3">
                         <label for="role_id">Role</label>
                         <select
-                            :disabled="!hasAnyPermission(['edit_profile'])"
+                            :disabled="!hasAnyPermission(['edit profile'])"
                             v-model="form.role_id"
                             @change="form.clearErrors('role_id')"
                             class="w-full rounded-md shadow-sm"
@@ -109,7 +109,7 @@
                         <label for="store_id">Store</label>
                         <select
                             v-model="form.store_id"
-                            :disabled="!hasAnyPermission(['edit_profile'])"
+                            :disabled="!hasAnyPermission(['edit profile'])"
                             @change="form.clearErrors('store_id')"
                             class="w-full rounded-md shadow-sm"
                             :class="

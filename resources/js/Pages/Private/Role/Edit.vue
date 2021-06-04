@@ -86,6 +86,12 @@
             class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             Oops, we could not find any matching permissions.
+            <span
+                @click="viewAllPermissions"
+                class="text-blue-500 text-decoration-none cursor-pointer"
+            >
+                View all?
+            </span>
         </div>
 
         <transition name="fade">
@@ -290,7 +296,7 @@ export default {
         },
         toTitle(string) {
             return string
-                .split("_")
+                .split(" ")
                 .map(word => {
                     return word.slice(0, 1).toUpperCase() + word.slice(1);
                 })
@@ -353,6 +359,11 @@ export default {
                     }
                 }
             );
+        },
+        viewAllPermissions() {
+            axios.get(route("permissions.all")).then(response => {
+                this.permissions = response.data;
+            });
         }
     },
 

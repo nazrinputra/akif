@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonalityController;
 
 Route::group(
-    ['middleware' => ['auth']],
+    ['middleware' => ['auth', 'can:view personalities']],
     function () {
         Route::resource('personalities', PersonalityController::class)->parameters([
             'personalities' => 'personality:slug'

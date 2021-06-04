@@ -3,6 +3,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('dashboard')"
+            v-if="$page.props.auth.can.length > 0"
         >
             <div
                 :class="
@@ -17,6 +18,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('personalities.index')"
+            v-if="hasAnyPermission(['view personalities'])"
         >
             <div
                 :class="
@@ -32,6 +34,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('whatsapps.index')"
+            v-if="hasAnyPermission(['view whatsapps'])"
         >
             <div
                 :class="
@@ -46,6 +49,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('customers.index')"
+            v-if="hasAnyPermission(['view customers'])"
         >
             <div
                 :class="
@@ -60,6 +64,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('packages.index')"
+            v-if="hasAnyPermission(['view packages'])"
         >
             <div
                 :class="
@@ -74,6 +79,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('services.index')"
+            v-if="hasAnyPermission(['view services'])"
         >
             <div
                 :class="
@@ -88,7 +94,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('queues.index')"
-            v-if="hasAnyPermission(['view_queues'])"
+            v-if="hasAnyPermission(['view queues'])"
         >
             <div
                 :class="
@@ -103,7 +109,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('crews.index')"
-            v-if="hasAnyPermission(['view_crews'])"
+            v-if="hasAnyPermission(['view crews'])"
         >
             <div
                 :class="
@@ -118,7 +124,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('roles.index')"
-            v-if="hasAnyPermission(['view_roles'])"
+            v-if="hasAnyPermission(['view roles'])"
         >
             <div
                 :class="
@@ -133,6 +139,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('cars.index')"
+            v-if="hasAnyPermission(['view cars'])"
         >
             <div
                 :class="

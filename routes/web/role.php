@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 
 Route::group(
-    ['middleware' => ['auth', 'permission:view_roles|create_roles|edit_roles|reopen_roles']],
+    ['middleware' => ['auth', 'can:view roles']],
     function () {
         Route::resource('roles', RoleController::class);
 

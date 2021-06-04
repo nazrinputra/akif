@@ -30,6 +30,9 @@ Route::get('cars/search', [CarController::class, 'search'])
 Route::get('personalities/search', [PersonalityController::class, 'search'])
     ->name('personalities.search');
 
+Route::get('personalities/all', [PersonalityController::class, 'all'])
+    ->name('personalities.all');
+
 Route::post('owner/link', function (Request $request) {
     $customer = Customer::find($request->customer_id);
     $car = Car::find($request->car_id);

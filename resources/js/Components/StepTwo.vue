@@ -31,7 +31,7 @@
             </div>
 
             <div
-                v-if="!form.package && packages.length == 0"
+                v-if="!form.package && packages.length == 0 && !pkg"
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 Start typing to search for packages.
@@ -131,7 +131,11 @@
             </div>
 
             <div
-                v-if="!form.service && services.length == 0"
+                v-if="
+                    !form.service &&
+                        services.length == 0 &&
+                        selectedServices.length == 0
+                "
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 Start typing to search for services.

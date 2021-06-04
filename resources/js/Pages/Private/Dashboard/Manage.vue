@@ -13,7 +13,7 @@
             </h6>
             <inertia-link
                 :href="route('counter')"
-                v-if="hasAnyPermission(['create_queues'])"
+                v-if="hasAnyPermission(['create queues'])"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-cash-register"></i>

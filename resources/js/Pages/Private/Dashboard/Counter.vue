@@ -11,7 +11,7 @@
                 Register new queue.
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['edit_queues'])"
+                v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
                 class="btn btn-secondary"
             >

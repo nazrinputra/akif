@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,10 @@ Route::get('permissions/search', [RoleController::class, 'search'])
 
 Route::get('crews/search', [UserController::class, 'search'])
     ->name('crews.search');
+
+Route::get('permissions/all', function () {
+    return Permission::all();
+})->name('permissions.all');
 
 Route::post('permissions/revoke', [RoleController::class, 'revoke_permission'])->name('permissions.revoke');
 

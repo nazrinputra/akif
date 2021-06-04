@@ -40,8 +40,26 @@ class UserFactory extends Factory
             'slug' => $slug,
             'phone_no' => $this->faker->mobileNumber(false, false),
             'email_verified_at' => now(),
+            'acc_no' => $this->faker->numberBetween($min = 1000000000, $max = 9999999999),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            /**
+         * ic_no
+         * acc_no
+         * address
+         * status
+         * shirt_size
+         * motor_license
+         * car_license
+         * start_at
+         * resign_at
+         * emergency_name_1
+         * emergency_phone_no_1
+         * emergency_relation_1
+         * emergency_name_2
+         * emergency_phone_no_2
+         * emergency_relation_2
+         */
         ];
     }
 

@@ -15,7 +15,7 @@
                     :href="route('queues.show', queue)"
                 >
                     <inertia-link
-                        v-if="hasAnyPermission(['both_queues'])"
+                        v-if="hasAnyPermission(['both queues'])"
                         class="mr-3 badge badge-secondary p-3"
                         :href="route('stores.show', queue.store)"
                         >{{ queue.store.name }}</inertia-link

@@ -12,6 +12,7 @@
     </teleport>
     <teleport to="#menuButton">
         <button
+            v-if="$page.props.auth.can.length > 0"
             type="button"
             class="flex md:hidden text-uppercase font-weight-bold text-white text-xl"
         >
@@ -103,7 +104,7 @@
                                                     as="button"
                                                     v-if="
                                                         hasAnyPermission([
-                                                            'view_report'
+                                                            'view report'
                                                         ])
                                                     "
                                                 >
@@ -114,6 +115,10 @@
                                                         route('profiles.show')
                                                     "
                                                     as="button"
+                                                    v-if="
+                                                        $page.props.auth.can
+                                                            .length != 0
+                                                    "
                                                 >
                                                     My Profile
                                                 </breeze-dropdown-link>
@@ -122,7 +127,7 @@
                                                     as="button"
                                                     v-if="
                                                         hasAnyPermission([
-                                                            'create_queues'
+                                                            'create queues'
                                                         ])
                                                     "
                                                 >
@@ -135,7 +140,7 @@
                                                     as="button"
                                                     v-if="
                                                         hasAnyPermission([
-                                                            'edit_queues'
+                                                            'edit queues'
                                                         ])
                                                     "
                                                 >
@@ -220,20 +225,21 @@
                                     <breeze-responsive-nav-link
                                         :href="route('reports')"
                                         as="button"
-                                        v-if="hasAnyPermission(['view_report'])"
+                                        v-if="hasAnyPermission(['view report'])"
                                     >
                                         View Reports
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('profiles.show')"
                                         as="button"
+                                        v-if="$page.props.auth.can.length != 0"
                                     >
                                         My Profile
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('counter')"
                                         v-if="
-                                            hasAnyPermission(['create_queues'])
+                                            hasAnyPermission(['create queues'])
                                         "
                                         as="button"
                                     >
@@ -241,7 +247,7 @@
                                     </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('queues.manage')"
-                                        v-if="hasAnyPermission(['edit_queues'])"
+                                        v-if="hasAnyPermission(['edit queues'])"
                                         as="button"
                                     >
                                         Q - MS

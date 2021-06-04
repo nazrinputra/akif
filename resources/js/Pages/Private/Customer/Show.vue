@@ -86,7 +86,7 @@
                         <breeze-button
                             v-if="
                                 !customer.deleted_at &&
-                                    hasAnyPermission(['delete_customers'])
+                                    hasAnyPermission(['delete customers'])
                             "
                             @click="destroy(customer)"
                             type="button"
@@ -96,7 +96,7 @@
                         <inertia-link
                             v-if="
                                 !customer.deleted_at &&
-                                    hasAnyPermission(['edit_customers'])
+                                    hasAnyPermission(['edit customers'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"

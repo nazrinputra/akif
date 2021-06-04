@@ -102,7 +102,7 @@
                         <breeze-button
                             v-if="
                                 !pkg.deleted_at &&
-                                    hasAnyPermission(['delete_packages'])
+                                    hasAnyPermission(['delete packages'])
                             "
                             @click="destroy(pkg)"
                             type="button"
@@ -112,7 +112,7 @@
                         <inertia-link
                             v-if="
                                 !pkg.deleted_at &&
-                                    hasAnyPermission(['edit_packages'])
+                                    hasAnyPermission(['edit packages'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"

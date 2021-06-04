@@ -15,24 +15,53 @@ class WhatsappSeeder extends Seeder
      */
     public function run()
     {
-        $completedTitle = 'Completed Message';
-
-        $completedSlug = Str::slug($completedTitle);
-
-        $completedMessage = urldecode('Pelanggan yang dihormati, terima kasih kerana memilih Akif Car Grooming Center. Kami berharap anda berpuas hati dengan servis yang diberikan. Sekiranya terdapat sebarang kekurangan, sila maklumkan kepada kami untuk penambahbaikkan.
+        $collectedTitle = 'Collected Message';
+        $collectedSlug = Str::slug($collectedTitle);
+        $collectedMessage = urlencode('Pelanggan yang dihormati, terima kasih kerana memilih AKIF CAR GROOMING CENTRE. Kami berharap anda berpuas hati dengan servis yang diberikan. Sekiranya terdapat sebarang kekurangan, sila maklumkan kepada kami untuk penambahbaikkan.
 
 Anda boleh mengikuti perkembangan dan promosi terkini dari kami melalui pautan facebook ini, www.facebook.com/akifcarwash
 
-_______
+____________________________
 
-Dear valued customers, thank you for choosing Akif Car Grooming Center. We sincerely hope you are happy with the services we have provided. Should there be any dissatisfaction with any of the services, please do not hesitate to contact us about it.
+
+Dear valued customers, thank you for choosing AKIF CAR GROOMING CENTRE. We sincerely hope you are happy with the services we have provided. Should there be any dissatisfaction with any of the services, please do not hesitate to contact us about it.
 
 You can follow us here on facebook, www.facebook.com/akifcarwash , for the latest information and promotions.');
+
+        $completedTitle = 'Completed Message';
+        $completedSlug = Str::slug($completedTitle);
+        $completedMessage = urlencode('Kami, AKIF CAR GROOMING CENTRE, ingin memaklumkan kepada anda bahawa kenderaan anda telah disiapkan dan sedia untuk diambil. Sila periksa kenderaan anda dan pastikan tiada barang yang tertinggal sebelum meninggalkan premis kami. Terima kasih.
+
+____________________________
+
+
+We, AKIF CAR GROOMING CENTER, would like to inform you that your car has been groomed and is ready to be picked up. Please do check that everything in the car is in order and nothing is left behind before leaving our premise. Thank you.');
+
+        $cancelledTitle = 'Cancelled Message';
+        $cancelledSlug = Str::slug($cancelledTitle);
+        $cancelledMessage = urlencode('Kami ingin meminta maaf sekiranya ada kekurangan pada perkhidmatan kami yang telah menyebabkan anda membatalkan pesanan anda. Kami akan berusaha dan memperbaiki kekurangan dari pihak kami untuk menawarkan perkhidmatan yang lebih baik kepada anda di masa hadapan. Kami harap anda akan datang lagi.
+
+____________________________
+
+
+We would like to apologise if our service in any way has caused you to cancel your appointment. We will try and improve what is lacking on our part to offer a better service to you in the future. We hope you will come again.');
+
+        Whatsapp::create([
+            'title' => $collectedTitle,
+            'slug' => $collectedSlug,
+            'message' => $collectedMessage
+        ]);
 
         Whatsapp::create([
             'title' => $completedTitle,
             'slug' => $completedSlug,
             'message' => $completedMessage
+        ]);
+
+        Whatsapp::create([
+            'title' => $cancelledTitle,
+            'slug' => $cancelledSlug,
+            'message' => $cancelledMessage
         ]);
     }
 }

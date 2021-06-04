@@ -132,4 +132,9 @@ class PersonalityController extends Controller
             ->limit(3)
             ->get();
     }
+
+    public function all()
+    {
+        return Personality::all();
+    }
 }

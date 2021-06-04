@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QueueController;
 
 Route::group(
-    ['middleware' => ['auth', 'permission:view_queues|create_queues|edit_queues|reopen_queues']],
+    ['middleware' => ['auth', 'can:view queues']],
     function () {
         Route::get('queues/manage', [QueueController::class, 'manage'])
             ->name('queues.manage');

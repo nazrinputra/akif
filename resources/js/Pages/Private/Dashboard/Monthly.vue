@@ -12,7 +12,7 @@
                 Customer visits this month
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create_queues'])"
+                v-if="hasAnyPermission(['create queues'])"
                 :href="route('counter')"
                 class="btn btn-secondary"
             >
