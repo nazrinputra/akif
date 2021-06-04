@@ -12,6 +12,7 @@
     </teleport>
     <teleport to="#menuButton">
         <button
+            v-if="$page.props.auth.can.length > 0"
             type="button"
             class="flex md:hidden text-uppercase font-weight-bold text-white text-xl"
         >
@@ -114,6 +115,10 @@
                                                         route('profiles.show')
                                                     "
                                                     as="button"
+                                                    v-if="
+                                                        $page.props.auth.can
+                                                            .length != 0
+                                                    "
                                                 >
                                                     My Profile
                                                 </breeze-dropdown-link>
@@ -227,6 +232,7 @@
                                     <breeze-responsive-nav-link
                                         :href="route('profiles.show')"
                                         as="button"
+                                        v-if="$page.props.auth.can.length != 0"
                                     >
                                         My Profile
                                     </breeze-responsive-nav-link>
