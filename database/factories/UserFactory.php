@@ -58,6 +58,7 @@ class UserFactory extends Factory
             'shirt_size' => $this->faker->randomElement($this->shirt_size),
             'motor_license' => $this->faker->boolean(),
             'car_license' => $this->faker->boolean(),
+            'oku_card' => $this->faker->boolean(),
             'start_at' => now(),
             'resign_at' => now()->addYears(5),
             'emergency_name_1' => $this->faker->name(),

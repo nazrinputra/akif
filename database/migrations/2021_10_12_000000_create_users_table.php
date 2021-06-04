@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('shirt_size')->nullable();
             $table->boolean('motor_license')->nullable();
             $table->boolean('car_license')->nullable();
+            $table->boolean('oku_card')->nullable();
             $table->timestamp('start_at')->nullable();
             $table->timestamp('resign_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();

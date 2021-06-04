@@ -22,24 +22,6 @@ class UserSeeder extends Seeder
         $status = ['Single', 'Married', 'Divorced', 'Complicated', 'Rather Not Say'];
         $shirt_size = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
-        /**
-         * ic_no
-         * acc_no
-         * address
-         * status
-         * shirt_size
-         * motor_license
-         * car_license
-         * start_at
-         * resign_at
-         * emergency_name_1
-         * emergency_phone_no_1
-         * emergency_relation_1
-         * emergency_name_2
-         * emergency_phone_no_2
-         * emergency_relation_2
-         */
-
         User::create([
             'name' => 'IT Staff',
             'store_id' => $faker->randomElement($stores),
@@ -57,6 +39,7 @@ class UserSeeder extends Seeder
             'shirt_size' => $faker->randomElement($shirt_size),
             'motor_license' => $faker->boolean(),
             'car_license' => $faker->boolean(),
+            'oku_card' => $faker->boolean(),
             'start_at' => now(),
             'resign_at' => now()->addYears(5),
             'emergency_name_1' => $faker->name(),
@@ -84,6 +67,7 @@ class UserSeeder extends Seeder
             'shirt_size' => $faker->randomElement($shirt_size),
             'motor_license' => $faker->boolean(),
             'car_license' => $faker->boolean(),
+            'oku_card' => $faker->boolean(),
             'start_at' => now(),
             'resign_at' => now()->addYears(5),
             'emergency_name_1' => $faker->name(),
@@ -111,6 +95,7 @@ class UserSeeder extends Seeder
             'shirt_size' => $faker->randomElement($shirt_size),
             'motor_license' => $faker->boolean(),
             'car_license' => $faker->boolean(),
+            'oku_card' => $faker->boolean(),
             'start_at' => now(),
             'resign_at' => now()->addYears(5),
             'emergency_name_1' => $faker->name(),
