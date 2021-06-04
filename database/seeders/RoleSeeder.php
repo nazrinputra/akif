@@ -28,7 +28,7 @@ class RoleSeeder extends Seeder
         $owner->givePermissionTo(['view deleted']);
         $owner->givePermissionTo(['view report']);
         $owner->givePermissionTo(['edit profile']);
-        $owner->givePermissionTo(['restore_deleted']);
+        $owner->givePermissionTo(['restore deleted']);
         $owner->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues', 'both queues']);
 
         $manager = Role::create(['name' => 'Manager']);
