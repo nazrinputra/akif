@@ -69,32 +69,6 @@
             </div>
         </div>
 
-        <div v-if="personality" class="p-3">
-            <div
-                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-            >
-                <table class="w-full whitespace-nowrap">
-                    <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Personality Name
-                        </th>
-                    </tr>
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td
-                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
-                        >
-                            {{ personality.name }}
-                        </td>
-                        <td class="border-t w-px md:table-cell hidden pr-3">
-                            <breeze-button type="button" @click="editStepOne()">
-                                <i class="fas fa-pen"></i>
-                            </breeze-button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
         <div v-if="!checkCar" class="p-3">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
@@ -275,6 +249,32 @@
                         >Would you like to add one?</span
                     >
                 </span>
+            </div>
+        </div>
+
+        <div v-if="personality" class="p-3">
+            <div
+                class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            >
+                <table class="w-full whitespace-nowrap">
+                    <tr class="text-left font-bold">
+                        <th class="px-3 py-3">
+                            Selected Personality Name
+                        </th>
+                    </tr>
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td
+                            class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                        >
+                            {{ personality.name }}
+                        </td>
+                        <td class="border-t w-px md:table-cell hidden pr-3">
+                            <breeze-button type="button" @click="editStepOne()">
+                                <i class="fas fa-pen"></i>
+                            </breeze-button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
