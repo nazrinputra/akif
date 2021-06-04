@@ -3,6 +3,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('dashboard')"
+            v-if="$page.props.auth.can.length > 0"
         >
             <div
                 :class="
