@@ -4,17 +4,17 @@
             <li class="nav-item">
                 <span
                     class="nav-link cursor-pointer"
-                    @click="showPackage()"
-                    :class="activePackage ? 'active' : ''"
-                    >Packages</span
+                    @click="showService()"
+                    :class="activeService ? 'active' : ''"
+                    >Services</span
                 >
             </li>
             <li class="nav-item">
                 <span
                     class="nav-link cursor-pointer"
-                    @click="showService()"
-                    :class="activeService ? 'active' : ''"
-                    >Services</span
+                    @click="showPackage()"
+                    :class="activePackage ? 'active' : ''"
+                    >Packages</span
                 >
             </li>
         </ul>
@@ -34,7 +34,7 @@
                 v-if="!form.package && packages.length == 0"
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
-                Start typing to search packages.
+                Start typing to search for packages.
                 <span
                     @click="viewAllPackages"
                     class="text-blue-500 text-decoration-none cursor-pointer"
@@ -260,8 +260,8 @@ export default {
             pkg: null,
             services: [],
             selectedServices: [],
-            activePackage: true,
-            activeService: false
+            activePackage: false,
+            activeService: true
         };
     },
 
