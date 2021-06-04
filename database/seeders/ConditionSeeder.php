@@ -24,12 +24,12 @@ class ConditionSeeder extends Seeder
         $healths = Health::all()->pluck('id');
 
         /**
-         * Assign random health to every users
+         * Assign random users to every health
          */
-        foreach ($users as $user) {
+        foreach ($healths as $health) {
             DB::table('health_user')->insert([
-                'user_id' => $user,
-                'health_id' => $faker->randomElement($healths)
+                'health_id' => $health,
+                'user_id' => $faker->randomElement($users)
             ]);
         }
     }
