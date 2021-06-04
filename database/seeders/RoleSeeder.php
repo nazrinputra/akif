@@ -20,6 +20,7 @@ class RoleSeeder extends Seeder
         $owner->givePermissionTo(['view crews', 'create crews', 'edit crews', 'delete crews']);
         $owner->givePermissionTo(['view roles', 'create roles', 'edit roles']);
         $owner->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $owner->givePermissionTo(['view healths', 'create healths', 'edit healths', 'delete healths']);
         $owner->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
         $owner->givePermissionTo(['view packages', 'create packages', 'edit packages', 'delete packages']);
         $owner->givePermissionTo(['view services', 'create services', 'edit services', 'delete services']);
@@ -33,6 +34,7 @@ class RoleSeeder extends Seeder
 
         $manager = Role::create(['name' => 'Manager']);
         $manager->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $manager->givePermissionTo(['view healths', 'create healths', 'edit healths', 'delete healths']);
         $manager->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
         $manager->givePermissionTo(['view deleted']);
         $manager->givePermissionTo(['view report']);
@@ -41,6 +43,7 @@ class RoleSeeder extends Seeder
 
         $admin = Role::create(['name' => 'Admin']);
         $admin->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $admin->givePermissionTo(['view healths', 'create healths', 'edit healths', 'delete healths']);
         $admin->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
         $admin->givePermissionTo(['view deleted']);
         $admin->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
