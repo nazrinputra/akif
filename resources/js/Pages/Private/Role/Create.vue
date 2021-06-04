@@ -332,7 +332,7 @@ export default {
             handler: throttle(function() {
                 if (this.formCrew.query && this.formCrew.query != "") {
                     axios
-                        .get(route("crews.search"), {
+                        .get(route("crews.roles"), {
                             params: {
                                 query: this.formCrew.query
                             }
