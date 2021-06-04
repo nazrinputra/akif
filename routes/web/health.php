@@ -6,9 +6,11 @@ use App\Http\Controllers\HealthController;
 Route::group(
     ['middleware' => ['auth', 'can:view healths']],
     function () {
-        Route::get('healths/manage', [HealthController::class, 'manage'])
-            ->name('healths.manage');
+        Route::resource('healths', HealthController::class)->parameters([
+            'healths' => 'health:slug'
+        ]);
 
-        Route::resource('healths', HealthController::class)->except('create', 'destroy');
+        Route::put('healths/{health:slug}/restore', [HealthController::class, 'restore'])
+            ->name('healths.restore');
     }
 );
