@@ -5,7 +5,7 @@
         </template>
         <template #header>
             <inertia-link
-                v-if="hasAnyPermission(['edit_queues'])"
+                v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
                 class="btn btn-secondary align-self-end"
             >
@@ -15,7 +15,7 @@
                 Akif Car Grooming Center
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create_queues'])"
+                v-if="hasAnyPermission(['create queues'])"
                 :href="route('counter')"
                 class="btn btn-secondary align-self-end"
             >
@@ -58,12 +58,14 @@
 
         <div
             class="p-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            v-if="hasAnyPermission(['view customers', 'view queues'])"
         >
             <div class="container">
                 <div class="row">
                     <inertia-link
                         :href="route('customers.index')"
                         class="col-md-3"
+                        v-if="hasAnyPermission(['view customers'])"
                     >
                         <div class="card-counter primary">
                             <i class="fas fa-users"></i>
@@ -72,7 +74,11 @@
                         </div>
                     </inertia-link>
 
-                    <inertia-link :href="route('monthly')" class="col-md-3">
+                    <inertia-link
+                        :href="route('monthly')"
+                        class="col-md-3"
+                        v-if="hasAnyPermission(['view queues'])"
+                    >
                         <div class="card-counter danger">
                             <i class="fas fa-house-user"></i>
                             <span class="count-numbers">{{ monthly }}</span>
@@ -80,7 +86,11 @@
                         </div>
                     </inertia-link>
 
-                    <inertia-link :href="route('fresh')" class="col-md-3">
+                    <inertia-link
+                        :href="route('fresh')"
+                        class="col-md-3"
+                        v-if="hasAnyPermission(['view customers'])"
+                    >
                         <div class="card-counter success">
                             <i class="fas fa-user-plus"></i>
                             <span class="count-numbers">{{ fresh }}</span>
@@ -88,7 +98,11 @@
                         </div>
                     </inertia-link>
 
-                    <inertia-link :href="route('stale')" class="col-md-3">
+                    <inertia-link
+                        :href="route('stale')"
+                        class="col-md-3"
+                        v-if="hasAnyPermission(['view customers'])"
+                    >
                         <div class="card-counter info">
                             <i class="fas fa-address-book"></i>
                             <span class="count-numbers">{{ stale }}</span>
@@ -99,7 +113,7 @@
             </div>
         </div>
 
-        <div class="input-group">
+        <div class="input-group" v-if="hasAnyPermission(['view cars'])">
             <input
                 type="text"
                 id="searchCar"
@@ -111,6 +125,7 @@
 
         <div
             class="p-6 mb-3 bg-white border-b border-gray-200 shadow sm:rounded-lg"
+            v-if="hasAnyPermission(['view cars'])"
         >
             <div class="container">
                 <div class="mt-3">
@@ -168,6 +183,25 @@
                             </table>
                         </div>
                     </transition>
+                </div>
+            </div>
+        </div>
+
+        <div
+            v-if="!hasAnyPermission(['view customers', 'view cars'])"
+            class="hidden sm:flex px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <div
+                class="container bg-opacity-10 bg-no-repeat bg-right bg-contain"
+                style="background-image: url('/img/car-wash.png')"
+            >
+                <div class="row">
+                    <h2 class="text-secondary text-6xl font-sans mr-3 my-auto">
+                        Welcome,<br />
+                        <span class="text-primary text-4xl font-sans my-auto">{{
+                            $page.props.auth.user.name
+                        }}</span>
+                    </h2>
                 </div>
             </div>
         </div>

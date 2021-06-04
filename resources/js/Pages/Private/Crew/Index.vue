@@ -12,7 +12,7 @@
                 List of crews
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create_crews'])"
+                v-if="hasAnyPermission(['create crews'])"
                 :href="route('crews.create')"
                 class="btn btn-secondary align-self-end"
             >
@@ -30,7 +30,7 @@
 
         <div class="input-group pb-4">
             <select
-                v-if="hasAnyPermission(['view_deleted'])"
+                v-if="hasAnyPermission(['view deleted'])"
                 :value="filters.trashed"
                 @input="this.form.trashed = $event.target.value"
                 class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

@@ -47,7 +47,7 @@
                         <breeze-button
                             v-if="
                                 !role.deleted_at &&
-                                    hasAnyPermission(['delete_roles'])
+                                    hasAnyPermission(['delete roles'])
                             "
                             @click="destroy(role)"
                             type="button"
@@ -57,7 +57,7 @@
                         <inertia-link
                             v-if="
                                 !role.deleted_at &&
-                                    hasAnyPermission(['edit_roles'])
+                                    hasAnyPermission(['edit roles'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"
@@ -173,7 +173,7 @@ export default {
         },
         toTitle(string) {
             return string
-                .split("_")
+                .split(" ")
                 .map(word => {
                     return word.slice(0, 1).toUpperCase() + word.slice(1);
                 })

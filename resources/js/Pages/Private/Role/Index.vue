@@ -12,7 +12,7 @@
                 List of roles
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create_roles'])"
+                v-if="hasAnyPermission(['create roles'])"
                 :href="route('roles.create')"
                 class="btn btn-secondary align-self-end"
             >

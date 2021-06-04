@@ -26,7 +26,7 @@ class QueueController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->hasPermissionTo('both_queues')) {
+        if (Auth::user()->hasPermissionTo('both queues')) {
             $queues = Queue::filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
         } else {
             $queues = Queue::where('store_id', Auth::user()->store->id)->filter($request->only('search', 'status'))->with('car')->paginate(10)->withQueryString();
@@ -235,7 +235,7 @@ class QueueController extends Controller
     {
         $user = User::find($request->user_id);
 
-        if ($user->hasPermissionTo('both_queues')) {
+        if ($user->hasPermissionTo('both queues')) {
             $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status', 'move')
                 ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])

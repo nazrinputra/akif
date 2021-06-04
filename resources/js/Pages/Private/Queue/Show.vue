@@ -14,7 +14,7 @@
                 View queue
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['edit_queues'])"
+                v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
                 class="btn btn-secondary mr-3"
             >
@@ -22,7 +22,7 @@
             </inertia-link>
             <inertia-link
                 :href="route('counter')"
-                v-if="hasAnyPermission(['create_queues'])"
+                v-if="hasAnyPermission(['create queues'])"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-cash-register"></i>
@@ -272,7 +272,7 @@
                     >
                         <inertia-link
                             v-if="
-                                !hasAnyPermission(['reopen_queues']) &&
+                                !hasAnyPermission(['reopen queues']) &&
                                     queue.status != 'Collected' &&
                                     queue.status != 'Cancelled'
                             "
@@ -283,7 +283,7 @@
                             Edit
                         </inertia-link>
                         <inertia-link
-                            v-if="hasAnyPermission(['reopen_queues'])"
+                            v-if="hasAnyPermission(['reopen queues'])"
                             class="btn btn-secondary"
                             as="button"
                             :href="route('queues.edit', queue)"

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WhatsappController;
 
 Route::group(
-    ['middleware' => ['auth', 'can:view_whatsapps']],
+    ['middleware' => ['auth', 'can:view whatsapps']],
     function () {
         Route::resource('whatsapps', WhatsappController::class)->parameters([
             'whatsapps' => 'whatsapp:slug'

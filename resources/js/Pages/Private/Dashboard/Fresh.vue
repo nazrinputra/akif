@@ -12,7 +12,7 @@
                 New customers this month
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create_customers'])"
+                v-if="hasAnyPermission(['create customers'])"
                 :href="route('customers.create')"
                 class="btn btn-secondary align-self-end"
             >

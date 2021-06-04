@@ -62,7 +62,7 @@
                         <breeze-button
                             v-if="
                                 !whatsapp.deleted_at &&
-                                    hasAnyPermission(['delete_whatsapps'])
+                                    hasAnyPermission(['delete whatsapps'])
                             "
                             @click="destroy(whatsapp)"
                             type="button"
@@ -72,7 +72,7 @@
                         <inertia-link
                             v-if="
                                 !whatsapp.deleted_at &&
-                                    hasAnyPermission(['edit_whatsapps'])
+                                    hasAnyPermission(['edit whatsapps'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"

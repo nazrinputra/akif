@@ -17,36 +17,36 @@ class RoleSeeder extends Seeder
     {
 
         $owner = Role::create(['name' => 'Owner']);
-        $owner->givePermissionTo(['view_crews', 'create_crews', 'edit_crews', 'delete_crews']);
-        $owner->givePermissionTo(['view_roles', 'create_roles', 'edit_roles']);
-        $owner->givePermissionTo(['view_cars', 'create_cars', 'edit_cars', 'delete_cars']);
-        $owner->givePermissionTo(['view_customers', 'create_customers', 'edit_customers', 'delete_customers']);
-        $owner->givePermissionTo(['view_packages', 'create_packages', 'edit_packages', 'delete_packages']);
-        $owner->givePermissionTo(['view_services', 'create_services', 'edit_services', 'delete_services']);
-        $owner->givePermissionTo(['view_personalities', 'create_personalities', 'edit_personalities', 'delete_personalities']);
-        $owner->givePermissionTo(['view_whatsapps', 'create_whatsapps', 'edit_whatsapps', 'delete_whatsapps']);
-        $owner->givePermissionTo(['view_deleted']);
-        $owner->givePermissionTo(['view_report']);
-        $owner->givePermissionTo(['edit_profile']);
+        $owner->givePermissionTo(['view crews', 'create crews', 'edit crews', 'delete crews']);
+        $owner->givePermissionTo(['view roles', 'create roles', 'edit roles']);
+        $owner->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $owner->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
+        $owner->givePermissionTo(['view packages', 'create packages', 'edit packages', 'delete packages']);
+        $owner->givePermissionTo(['view services', 'create services', 'edit services', 'delete services']);
+        $owner->givePermissionTo(['view personalities', 'create personalities', 'edit personalities', 'delete personalities']);
+        $owner->givePermissionTo(['view whatsapps', 'create whatsapps', 'edit whatsapps', 'delete whatsapps']);
+        $owner->givePermissionTo(['view deleted']);
+        $owner->givePermissionTo(['view report']);
+        $owner->givePermissionTo(['edit profile']);
         $owner->givePermissionTo(['restore_deleted']);
-        $owner->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues', 'both_queues']);
+        $owner->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues', 'both queues']);
 
         $manager = Role::create(['name' => 'Manager']);
-        $manager->givePermissionTo(['view_cars', 'create_cars', 'edit_cars', 'delete_cars']);
-        $manager->givePermissionTo(['view_customers', 'create_customers', 'edit_customers', 'delete_customers']);
-        $manager->givePermissionTo(['view_deleted']);
-        $manager->givePermissionTo(['view_report']);
-        $manager->givePermissionTo(['edit_profile']);
-        $manager->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues']);
+        $manager->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $manager->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
+        $manager->givePermissionTo(['view deleted']);
+        $manager->givePermissionTo(['view report']);
+        $manager->givePermissionTo(['edit profile']);
+        $manager->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
 
         $admin = Role::create(['name' => 'Admin']);
-        $admin->givePermissionTo(['view_cars', 'create_cars', 'edit_cars', 'delete_cars']);
-        $admin->givePermissionTo(['view_customers', 'create_customers', 'edit_customers', 'delete_customers']);
-        $admin->givePermissionTo(['view_deleted']);
-        $admin->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues']);
+        $admin->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
+        $admin->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
+        $admin->givePermissionTo(['view deleted']);
+        $admin->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
 
         $qualityChecker = Role::create(['name' => 'Quality Checker']);
-        $qualityChecker->givePermissionTo(['view_queues', 'create_queues', 'edit_queues', 'reopen_queues']);
+        $qualityChecker->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
 
         Role::create(['name' => 'Detailer']);
         Role::create(['name' => 'Accountant']);

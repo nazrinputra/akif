@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Monthly', [
             'queues' => $queues
         ]);
-    })->name('monthly')->middleware(['can:view_queues']);
+    })->name('monthly')->middleware(['can:view queues']);
 
     Route::get('fresh', function () {
         $customers = Customer::whereDate('created_at', '>', now()->subDays(30))->paginate(10)->withQueryString();
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Fresh', [
             'customers' => $customers
         ]);
-    })->name('fresh')->middleware(['can:view_customers']);
+    })->name('fresh')->middleware(['can:view customers']);
 
     Route::get('stale', function () {
         $new = Customer::whereDate('created_at', '>', now()->subDays(60))->pluck('id')->toArray();
@@ -84,15 +84,15 @@ Route::group(['middleware' => ['auth']], function () {
         return Inertia::render('Private/Dashboard/Stale', [
             'customers' => $customers
         ]);
-    })->name('stale')->middleware(['can:view_customers']);
+    })->name('stale')->middleware(['can:view customers']);
 
     Route::get('counter', function () {
         return Inertia::render('Private/Dashboard/Counter');
-    })->name('counter')->middleware(['can:create_queues']);
+    })->name('counter')->middleware(['can:create queues']);
 
     Route::get('reports', function () {
         return Inertia::render('Private/Dashboard/Report');
-    })->name('reports')->middleware(['can:view_report']);
+    })->name('reports')->middleware(['can:view report']);
 
     Route::get('profiles', [ProfileController::class, 'show'])->name('profiles.show');
 

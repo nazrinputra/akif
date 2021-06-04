@@ -19,68 +19,68 @@ class PermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // profile
-        Permission::create(['name' => 'edit_profile']);
+        Permission::create(['name' => 'edit profile']);
 
         // report
-        Permission::create(['name' => 'view_report']);
+        Permission::create(['name' => 'view report']);
 
         // soft delete
-        Permission::create(['name' => 'view_deleted']);
-        Permission::create(['name' => 'restore_deleted']);
+        Permission::create(['name' => 'view deleted']);
+        Permission::create(['name' => 'restore deleted']);
 
         // car
-        Permission::create(['name' => 'view_cars']);
-        Permission::create(['name' => 'create_cars']);
-        Permission::create(['name' => 'edit_cars']);
-        Permission::create(['name' => 'delete_cars']);
+        Permission::create(['name' => 'view cars']);
+        Permission::create(['name' => 'create cars']);
+        Permission::create(['name' => 'edit cars']);
+        Permission::create(['name' => 'delete cars']);
 
         // customer
-        Permission::create(['name' => 'view_customers']);
-        Permission::create(['name' => 'create_customers']);
-        Permission::create(['name' => 'edit_customers']);
-        Permission::create(['name' => 'delete_customers']);
+        Permission::create(['name' => 'view customers']);
+        Permission::create(['name' => 'create customers']);
+        Permission::create(['name' => 'edit customers']);
+        Permission::create(['name' => 'delete customers']);
 
         // packages
-        Permission::create(['name' => 'view_packages']);
-        Permission::create(['name' => 'create_packages']);
-        Permission::create(['name' => 'edit_packages']);
-        Permission::create(['name' => 'delete_packages']);
+        Permission::create(['name' => 'view packages']);
+        Permission::create(['name' => 'create packages']);
+        Permission::create(['name' => 'edit packages']);
+        Permission::create(['name' => 'delete packages']);
 
         // services
-        Permission::create(['name' => 'view_services']);
-        Permission::create(['name' => 'create_services']);
-        Permission::create(['name' => 'edit_services']);
-        Permission::create(['name' => 'delete_services']);
+        Permission::create(['name' => 'view services']);
+        Permission::create(['name' => 'create services']);
+        Permission::create(['name' => 'edit services']);
+        Permission::create(['name' => 'delete services']);
 
         // personality
-        Permission::create(['name' => 'view_personalities']);
-        Permission::create(['name' => 'create_personalities']);
-        Permission::create(['name' => 'edit_personalities']);
-        Permission::create(['name' => 'delete_personalities']);
+        Permission::create(['name' => 'view personalities']);
+        Permission::create(['name' => 'create personalities']);
+        Permission::create(['name' => 'edit personalities']);
+        Permission::create(['name' => 'delete personalities']);
 
         // whatsapp
-        Permission::create(['name' => 'view_whatsapps']);
-        Permission::create(['name' => 'create_whatsapps']);
-        Permission::create(['name' => 'edit_whatsapps']);
-        Permission::create(['name' => 'delete_whatsapps']);
+        Permission::create(['name' => 'view whatsapps']);
+        Permission::create(['name' => 'create whatsapps']);
+        Permission::create(['name' => 'edit whatsapps']);
+        Permission::create(['name' => 'delete whatsapps']);
 
         // queue
-        Permission::create(['name' => 'view_queues']);
-        Permission::create(['name' => 'create_queues']);
-        Permission::create(['name' => 'edit_queues']);
-        Permission::create(['name' => 'reopen_queues']);
-        Permission::create(['name' => 'both_queues']);
+        Permission::create(['name' => 'view queues']);
+        Permission::create(['name' => 'create queues']);
+        Permission::create(['name' => 'edit queues']);
+        Permission::create(['name' => 'reopen queues']);
+        Permission::create(['name' => 'both queues']);
 
         // crew
-        Permission::create(['name' => 'view_crews']);
-        Permission::create(['name' => 'create_crews']);
-        Permission::create(['name' => 'edit_crews']);
-        Permission::create(['name' => 'delete_crews']);
+        Permission::create(['name' => 'view crews']);
+        Permission::create(['name' => 'create crews']);
+        Permission::create(['name' => 'edit crews']);
+        Permission::create(['name' => 'delete crews']);
 
         // role
-        Permission::create(['name' => 'view_roles']);
-        Permission::create(['name' => 'create_roles']);
-        Permission::create(['name' => 'edit_roles']);
-        Permission::create(['name' => 'delete_roles']);
+        Permission::create(['name' => 'view roles']);
+        Permission::create(['name' => 'create roles']);
+        Permission::create(['name' => 'edit roles']);
+        Permission::create(['name' => 'delete roles']);
     }
 }
