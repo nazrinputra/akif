@@ -29,31 +29,37 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'restore_deleted']);
 
         // car
+        Permission::create(['name' => 'view_cars']);
         Permission::create(['name' => 'create_cars']);
         Permission::create(['name' => 'edit_cars']);
         Permission::create(['name' => 'delete_cars']);
 
         // customer
+        Permission::create(['name' => 'view_customers']);
         Permission::create(['name' => 'create_customers']);
         Permission::create(['name' => 'edit_customers']);
         Permission::create(['name' => 'delete_customers']);
 
         // packages
+        Permission::create(['name' => 'view_packages']);
         Permission::create(['name' => 'create_packages']);
         Permission::create(['name' => 'edit_packages']);
         Permission::create(['name' => 'delete_packages']);
 
         // services
+        Permission::create(['name' => 'view_services']);
         Permission::create(['name' => 'create_services']);
         Permission::create(['name' => 'edit_services']);
         Permission::create(['name' => 'delete_services']);
 
         // personality
+        Permission::create(['name' => 'view_personalities']);
         Permission::create(['name' => 'create_personalities']);
         Permission::create(['name' => 'edit_personalities']);
         Permission::create(['name' => 'delete_personalities']);
 
         // whatsapp
+        Permission::create(['name' => 'view_whatsapps']);
         Permission::create(['name' => 'create_whatsapps']);
         Permission::create(['name' => 'edit_whatsapps']);
         Permission::create(['name' => 'delete_whatsapps']);
