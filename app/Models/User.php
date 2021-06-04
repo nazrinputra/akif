@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
+    public function healths()
+    {
+        return $this->belongsToMany(Health::class);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

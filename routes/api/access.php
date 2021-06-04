@@ -1,8 +1,12 @@
 <?php
 
+use App\Models\User;
+use App\Models\Health;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Permission;
 
 /*
@@ -19,8 +23,11 @@ use Spatie\Permission\Models\Permission;
 Route::get('permissions/search', [RoleController::class, 'search'])
     ->name('permissions.search');
 
-Route::get('crews/search', [UserController::class, 'search'])
-    ->name('crews.search');
+Route::get('crews/roles', [UserController::class, 'roles'])
+    ->name('crews.roles');
+
+Route::get('crews/health', [UserController::class, 'health'])
+    ->name('crews.healths');
 
 Route::get('permissions/all', function () {
     return Permission::all();
@@ -33,3 +40,17 @@ Route::post('permissions/give', [RoleController::class, 'give_permission'])->nam
 Route::post('roles/revoke', [RoleController::class, 'revoke_role'])->name('roles.revoke');
 
 Route::post('roles/give', [RoleController::class, 'give_role'])->name('roles.give');
+
+Route::post('crew/link', function (Request $request) {
+    $health = Health::find($request->health_id);
+    $crew = User::find($request->crew_id);
+    $crew->healths()->save($health);
+    return Redirect::back();
+})->name('crew.link');
+
+Route::post('crew/unlink', function (Request $request) {
+    $health = Health::find($request->health_id);
+    $crew = User::find($request->crew_id);
+    $crew->healths()->detach($health);
+    return Redirect::back();
+})->name('crew.unlink');

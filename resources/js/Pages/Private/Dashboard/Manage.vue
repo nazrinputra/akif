@@ -119,7 +119,7 @@
                 v-show="activeCompleted"
                 v-if="completed.length > 0"
                 :completed="completed"
-                :whatsapp="whatsapp"
+                :whatsapp="completedWhatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color:#c3e6cb !important;"
@@ -129,7 +129,7 @@
                 v-show="activeCollected"
                 v-if="collected.length > 0"
                 :collected="collected"
-                :whatsapp="whatsapp"
+                :whatsapp="collectedWhatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
             />
@@ -138,7 +138,7 @@
                 v-show="activeCancelled"
                 v-if="cancelled.length > 0"
                 :cancelled="cancelled"
-                :whatsapp="whatsapp"
+                :whatsapp="cancelledWhatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
             />
@@ -150,11 +150,11 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeQueueWaiting from "@/Components/QueueWaiting";
-import BreezeQueueGrooming from "@/Components/QueueGrooming";
-import BreezeQueueCompleted from "@/Components/QueueCompleted";
-import BreezeQueueCollected from "@/Components/QueueCollected";
-import BreezeQueueCancelled from "@/Components/QueueCancelled";
+import BreezeQueueWaiting from "@/Components/Queue/QueueWaiting";
+import BreezeQueueGrooming from "@/Components/Queue/QueueGrooming";
+import BreezeQueueCompleted from "@/Components/Queue/QueueCompleted";
+import BreezeQueueCollected from "@/Components/Queue/QueueCollected";
+import BreezeQueueCancelled from "@/Components/Queue/QueueCancelled";
 
 export default {
     components: {
@@ -172,7 +172,9 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
-        whatsapp: Object
+        completedWhatsapp: Object,
+        collectedWhatsapp: Object,
+        cancelledWhatsapp: Object
     },
 
     data() {

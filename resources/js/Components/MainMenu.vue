@@ -93,6 +93,21 @@
         </inertia-link>
         <inertia-link
             class="flex items-center group py-3"
+            :href="route('healths.index')"
+            v-if="hasAnyPermission(['view healths'])"
+        >
+            <div
+                :class="
+                    route().current('healths.index')
+                        ? 'text-white'
+                        : 'text-indigo-300 group-hover:text-white'
+                "
+            >
+                <i class="fas fa-medkit"></i> Healths
+            </div>
+        </inertia-link>
+        <inertia-link
+            class="flex items-center group py-3"
             :href="route('queues.index')"
             v-if="hasAnyPermission(['view queues'])"
         >

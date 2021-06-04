@@ -149,8 +149,15 @@ class UserController extends Controller
         return Redirect::back()->with('success', 'Crew restored successfully.');
     }
 
-    public function search(Request $request)
+    public function roles(Request $request)
     {
         return User::doesntHave('roles')->where('name', 'like', '%' . $request->input('query') . '%')->limit(3)->get();
+    }
+
+    public function health(Request $request)
+    {
+        return User::where('name', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
     }
 }
