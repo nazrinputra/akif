@@ -12,6 +12,7 @@
             :class="route().current('personalities.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('personalities.index')"
+            v-if="hasAnyPermission(['view_personalities'])"
             >personalities</inertia-link
         >
     </li>
@@ -20,6 +21,7 @@
             :class="route().current('whatsapps.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('whatsapps.index')"
+            v-if="hasAnyPermission(['view_whatsapps'])"
             >whatsapps</inertia-link
         >
     </li>
@@ -28,6 +30,7 @@
             :class="route().current('customers.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('customers.index')"
+            v-if="hasAnyPermission(['view_customers'])"
             >customers</inertia-link
         >
     </li>
@@ -36,6 +39,7 @@
             :class="route().current('packages.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('packages.index')"
+            v-if="hasAnyPermission(['view_packages'])"
             >packages</inertia-link
         >
     </li>
@@ -44,6 +48,7 @@
             :class="route().current('services.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('services.index')"
+            v-if="hasAnyPermission(['view_services'])"
             >services</inertia-link
         >
     </li>
@@ -79,6 +84,7 @@
             :class="route().current('cars.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('cars.index')"
+            v-if="hasAnyPermission(['view_cars'])"
             >cars</inertia-link
         >
     </li>

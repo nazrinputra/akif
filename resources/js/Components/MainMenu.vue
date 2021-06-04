@@ -17,6 +17,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('personalities.index')"
+            v-if="hasAnyPermission(['view_personalities'])"
         >
             <div
                 :class="
@@ -32,6 +33,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('whatsapps.index')"
+            v-if="hasAnyPermission(['view_whatsapps'])"
         >
             <div
                 :class="
@@ -46,6 +48,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('customers.index')"
+            v-if="hasAnyPermission(['view_customers'])"
         >
             <div
                 :class="
@@ -60,6 +63,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('packages.index')"
+            v-if="hasAnyPermission(['view_packages'])"
         >
             <div
                 :class="
@@ -74,6 +78,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('services.index')"
+            v-if="hasAnyPermission(['view_services'])"
         >
             <div
                 :class="
@@ -133,6 +138,7 @@
         <inertia-link
             class="flex items-center group py-3"
             :href="route('cars.index')"
+            v-if="hasAnyPermission(['view_cars'])"
         >
             <div
                 :class="
