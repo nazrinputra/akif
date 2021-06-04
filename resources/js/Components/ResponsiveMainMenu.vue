@@ -55,6 +55,15 @@
     </li>
     <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
         <inertia-link
+            :class="route().current('healths.index') ? 'active' : ''"
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            :href="route('healths.index')"
+            v-if="hasAnyPermission(['view healths'])"
+            >healths</inertia-link
+        >
+    </li>
+    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+        <inertia-link
             :class="route().current('queues.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('queues.index')"
