@@ -34,7 +34,7 @@ class QueueFactory extends Factory
         $this->stores = Store::all();
         $this->car  = $this->faker->randomElement(Car::all());
         $this->customer  = $this->car->owners->first();
-        $date = $this->faker->dateTimeThisMonth($max = 'now', $timezone = null);
+        $date = $this->faker->dateTimeThisMonth('+15 days');
 
         return [
             'store_id' => $this->faker->randomElement($this->stores),
