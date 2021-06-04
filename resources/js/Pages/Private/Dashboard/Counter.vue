@@ -120,9 +120,9 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
-import BreezeStepOne from "@/Components/StepOne";
-import BreezeStepTwo from "@/Components/StepTwo";
-import BreezeStepThree from "@/Components/StepThree";
+import BreezeStepOne from "@/Components/Counter/StepOne";
+import BreezeStepTwo from "@/Components/Counter/StepTwo";
+import BreezeStepThree from "@/Components/Counter/StepThree";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
