@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             PromotionSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
+            HealthSeeder::class,
             UserSeeder::class,
+            ConditionSeeder::class,
             WhatsappSeeder::class,
         ]);
     }
