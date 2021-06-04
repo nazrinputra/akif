@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Health;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HealthController extends Controller
 {
@@ -12,9 +15,12 @@ class HealthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Inertia::render('Private/Health/Index', [
+            'filters' => $request->all('search', 'trashed'),
+            'healths' => Health::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
+        ]);
     }
 
     /**
@@ -24,7 +30,7 @@ class HealthController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Health/Create');
     }
 
     /**
@@ -35,7 +41,21 @@ class HealthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        if ($health = Health::where('slug', $request->slug)->first()) {
+            return Redirect::back()->with('error', 'Health condition already exist! <a href="' . route('healths.show', $health) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        }
+
+        $createdHealth = Health::create($request->only('name', 'slug', 'description'));
+
+        return Redirect::route('healths.show', $createdHealth)->with('success', 'Health condition added successfully.');
     }
 
     /**
@@ -46,7 +66,9 @@ class HealthController extends Controller
      */
     public function show(Health $health)
     {
-        //
+        return Inertia::render('Private/Health/Show', [
+            'health' => $health->load('crews')
+        ]);
     }
 
     /**
@@ -57,7 +79,9 @@ class HealthController extends Controller
      */
     public function edit(Health $health)
     {
-        //
+        return Inertia::render('Private/Health/Edit', [
+            'health' => $health->load('crews')
+        ]);
     }
 
     /**
@@ -69,7 +93,17 @@ class HealthController extends Controller
      */
     public function update(Request $request, Health $health)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        $slug = Str::slug($request->name);
+        $request->merge(['slug' => $slug]);
+
+        $health->update($request->only('name', 'slug', 'description'));
+
+        return Redirect::route('healths.show', $health)->with('success', 'Health condition updated successfully.');
     }
 
     /**
@@ -80,6 +114,13 @@ class HealthController extends Controller
      */
     public function destroy(Health $health)
     {
-        //
+        $health->delete();
+        return Redirect::back()->with('success', 'Health condition deleted successfully.');
+    }
+
+    public function restore(Health $health)
+    {
+        $health->restore();
+        return Redirect::back()->with('success', 'Health condition restored successfully.');
     }
 }
