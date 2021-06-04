@@ -187,22 +187,97 @@
             </div>
         </div>
 
-        <div
-            v-if="!hasAnyPermission(['view customers', 'view cars'])"
-            class="hidden sm:flex px-6 py-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        <breeze-announcement
+            class="alert-danger fixed-top"
+            v-if="$page.props.auth.can.length == 0"
         >
-            <div
-                class="container bg-opacity-10 bg-no-repeat bg-right bg-contain"
-                style="background-image: url('/img/car-wash.png')"
-            >
-                <div class="row">
-                    <h2 class="text-secondary text-6xl font-sans mr-3 my-auto">
-                        Welcome,<br />
-                        <span class="text-primary text-4xl font-sans my-auto">{{
-                            $page.props.auth.user.name
+            <i class="fas fa-exclamation-triangle my-auto mx-3"></i> You have no
+            permissions currently. If you believe this was a mistake, please
+            contact the system administrator.
+            <i class="fas fa-exclamation-triangle my-auto mx-3"></i>
+        </breeze-announcement>
+
+        <div
+            v-if="$page.props.auth.can.length == 0"
+            class="hidden sm:block p-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg text-center"
+        >
+            <span class="col"
+                ><i class="fas fa-info-circle my-auto mx-3"></i> You can always
+                update your profile even without any permissions to use the
+                system. <i class="fas fa-info-circle my-auto mx-3"></i
+            ></span>
+
+            <div class="container text-left">
+                <form @submit.prevent="submit">
+                    <div class="mt-3 p-3">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.name
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.name"
+                            @keydown="form.clearErrors('name')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.name
                         }}</span>
-                    </h2>
-                </div>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="phone_no">Phone No</label>
+                        <input
+                            type="number"
+                            id="phone_no"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.phone_no
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.phone_no"
+                            @keydown="form.clearErrors('phone_no')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.phone_no
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.email
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.email"
+                            @keydown="form.clearErrors('email')"
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.email
+                        }}</span>
+                    </div>
+
+                    <div
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button
+                            class="ml-auto"
+                            :class="{
+                                'opacity-25': form.processing
+                            }"
+                            :disabled="form.processing"
+                        >
+                            Update
+                        </breeze-button>
+                    </div>
+                </form>
             </div>
         </div>
     </breeze-authenticated-layout>
@@ -212,13 +287,18 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import BreezeButton from "@/Components/Button";
+import BreezeAnnouncement from "@/Components/Announcement";
 import throttle from "lodash/throttle";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeResponsiveNavLink
+        BreezeResponsiveNavLink,
+        BreezeButton,
+        BreezeAnnouncement
     },
 
     props: {
@@ -259,6 +339,31 @@ export default {
                     this.cars = [];
                 }
             }, 150)
+        }
+    },
+
+    setup() {
+        const form = useForm({
+            name: null,
+            phone_no: null,
+            email: null
+        });
+
+        return { form };
+    },
+
+    created() {
+        this.loadData();
+    },
+
+    methods: {
+        loadData() {
+            this.form.name = this.auth.user.name;
+            this.form.phone_no = this.auth.user.phone_no;
+            this.form.email = this.auth.user.email;
+        },
+        submit() {
+            this.form.put(route("profiles.update"));
         }
     }
 };
