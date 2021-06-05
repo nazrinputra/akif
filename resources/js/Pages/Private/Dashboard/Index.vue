@@ -199,7 +199,7 @@
 
         <div
             v-if="$page.props.auth.can.length == 0"
-            class="hidden sm:block p-6 mb-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg text-center"
+            class="hidden sm:block p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg text-center"
         >
             <span class="col"
                 ><i class="fas fa-info-circle my-auto mx-3"></i> You can always
@@ -207,7 +207,7 @@
                 system. <i class="fas fa-info-circle my-auto mx-3"></i
             ></span>
 
-            <div class="container text-left">
+            <div class="container text-left mt-3">
                 <form @submit.prevent="submit">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
