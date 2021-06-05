@@ -95,6 +95,9 @@
                     <breeze-health
                         v-show="activeHealth"
                         :form="form"
+                        :currentHealths="healths"
+                        @selectHealth="selectHealth($event)"
+                        @removeHealth="removeHealth($event)"
                     ></breeze-health>
                     <breeze-emergency
                         v-show="activeEmergency"
@@ -154,7 +157,8 @@ export default {
         errors: Object,
         flash: Object,
         stores: Object,
-        roles: Object
+        roles: Object,
+        healths: Object
     },
 
     data() {
@@ -193,7 +197,8 @@ export default {
             status: null,
             shirt_size: null,
             motor_license: null,
-            car_license: null
+            car_license: null,
+            healths_id: []
         });
 
         return { form };
@@ -231,6 +236,7 @@ export default {
             this.form.shirt_size = this.auth.user.shirt_size;
             this.form.motor_license = this.auth.user.motor_license;
             this.form.car_license = this.auth.user.car_license;
+            this.form.healths_id = this.healths.map(x => x.id);
         },
         submit() {
             this.form.put(route("profiles.update"), {
@@ -297,6 +303,12 @@ export default {
             this.activeHealth = false;
             this.activeOther = false;
             this.activeEmergency = true;
+        },
+        selectHealth(data) {
+            this.form.healths_id.push(data.id);
+        },
+        removeHealth(data) {
+            this.form.healths_id.splice(data, 1);
         }
     }
 };

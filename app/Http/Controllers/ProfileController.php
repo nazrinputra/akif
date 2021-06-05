@@ -55,7 +55,8 @@ class ProfileController extends Controller
     {
         return Inertia::render('Private/Dashboard/Profile', [
             'stores' => Store::all(),
-            'roles' => Role::all()
+            'roles' => Role::all(),
+            'healths' => Auth::user()->healths,
         ]);
     }
 
@@ -139,6 +140,12 @@ class ProfileController extends Controller
         ));
         $role = Role::find($request->role_id);
         Auth::user()->syncRoles($role);
+
+        $healths = $request->healths_id;
+        Auth::user()->healths()->detach();
+        foreach ($healths as $health) {
+            Auth::user()->healths()->attach($health);
+        }
 
         return Redirect::route('profiles.show')->with('success', 'Profile updated successfully.');
     }

@@ -5,6 +5,7 @@ use App\Models\Queue;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProfileController;
@@ -57,7 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
             'customers' => $customers,
             'monthly' => $monthly,
             'fresh' => $fresh,
-            'stale' => $stale
+            'stale' => $stale,
+            'healths' => Auth::user()->healths,
         ]);
     })->name('dashboard');
 

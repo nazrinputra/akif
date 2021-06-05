@@ -124,7 +124,7 @@ import BreezeButton from "@/Components/Button";
 import throttle from "lodash/throttle";
 
 export default {
-    props: ["form"],
+    props: ["form", "currentHealths"],
 
     components: {
         BreezeButton
@@ -138,6 +138,10 @@ export default {
             healths: [],
             selectedHealths: []
         };
+    },
+
+    created() {
+        this.selectedHealths = this.currentHealths;
     },
 
     watch: {
@@ -166,9 +170,11 @@ export default {
             this.formHealth.query = "";
             this.healths = [];
             this.selectedHealths.push(health);
+            this.$emit("selectHealth", health);
         },
         removeHealth(index) {
             this.selectedHealths.splice(index, 1);
+            this.$emit("removeHealth", index);
         }
     }
 };
