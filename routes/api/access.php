@@ -37,6 +37,10 @@ Route::get('permissions/all', function () {
     return Permission::all();
 })->name('permissions.all');
 
+Route::get('healths/all', function () {
+    return Health::all();
+})->name('healths.all');
+
 Route::post('permissions/revoke', [RoleController::class, 'revoke_permission'])->name('permissions.revoke');
 
 Route::post('permissions/give', [RoleController::class, 'give_permission'])->name('permissions.give');
