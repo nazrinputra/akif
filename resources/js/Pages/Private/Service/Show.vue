@@ -49,12 +49,36 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="price">Price</label>
+                        <label for="custom_price">Custom Price</label>
+                        <select
+                            :value="service.custom_price"
+                            disabled
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            <option value="" disabled
+                                >Select Custom Price</option
+                            >
+                            <option :value="1">Yes</option>
+                            <option :value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="price">Price (RM)</label>
                         <input
                             type="number"
                             id="price"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="service.price"
+                            :value="(service.price / 100).toFixed(2)"
+                            disabled
+                        />
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="commission">Commission (RM)</label>
+                        <input
+                            type="number"
+                            id="commission"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            :value="(service.commission / 100).toFixed(2)"
                             disabled
                         />
                     </div>

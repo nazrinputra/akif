@@ -76,41 +76,36 @@
                     </ul>
 
                     <breeze-general
-                        v-if="activeGeneral"
+                        v-show="activeGeneral"
                         :form="form"
                     ></breeze-general>
 
                     <breeze-career
-                        v-if="activeCareer"
+                        v-show="activeCareer"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
                     ></breeze-career>
 
                     <breeze-private
-                        v-if="activePrivate"
+                        v-show="activePrivate"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-private>
 
                     <breeze-health
-                        v-if="activeHealth"
+                        v-show="activeHealth"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
+                        :currentHealths="healths"
+                        @selectHealth="selectHealth($event)"
+                        @removeHealth="removeHealth($event)"
                     ></breeze-health>
                     <breeze-emergency
-                        v-if="activeEmergency"
+                        v-show="activeEmergency"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-emergency>
                     <breeze-other
-                        v-if="activeOther"
+                        v-show="activeOther"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-other>
                     <div
                         class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
@@ -141,6 +136,7 @@ import BreezePrivate from "@/Components/Crew/Private";
 import BreezeHealth from "@/Components/Crew/Health";
 import BreezeEmergency from "@/Components/Crew/Emergency";
 import BreezeOther from "@/Components/Crew/Other";
+import moment from "moment-timezone";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -161,7 +157,8 @@ export default {
         errors: Object,
         flash: Object,
         stores: Object,
-        roles: Object
+        roles: Object,
+        healths: Object
     },
 
     data() {
@@ -200,7 +197,8 @@ export default {
             status: null,
             shirt_size: null,
             motor_license: null,
-            car_license: null
+            car_license: null,
+            healths_id: []
         });
 
         return { form };
@@ -217,8 +215,12 @@ export default {
             this.form.email = this.auth.user.email;
             this.form.store_id = this.auth.user.store_id;
             this.form.role_id = this.getRole();
-            this.form.enrolled_at = this.auth.user.enrolled_at;
-            this.form.resigned_at = this.auth.user.resigned_at;
+            this.form.enrolled_at = this.readableForHumans(
+                this.auth.user.enrolled_at
+            );
+            this.form.resigned_at = this.readableForHumans(
+                this.auth.user.resigned_at
+            );
             this.form.address = this.auth.user.address;
             this.form.ic_no = this.auth.user.ic_no;
             this.form.bank = this.auth.user.bank;
@@ -234,6 +236,7 @@ export default {
             this.form.shirt_size = this.auth.user.shirt_size;
             this.form.motor_license = this.auth.user.motor_license;
             this.form.car_license = this.auth.user.car_license;
+            this.form.healths_id = this.healths.map(x => x.id);
         },
         submit() {
             this.form.put(route("profiles.update"), {
@@ -247,6 +250,11 @@ export default {
             } else {
                 return "";
             }
+        },
+        readableForHumans(date) {
+            return moment(date)
+                .tz("Asia/Kuala_Lumpur")
+                .format("YYYY-MM-DD");
         },
         showGeneral() {
             this.activeGeneral = true;
@@ -295,6 +303,12 @@ export default {
             this.activeHealth = false;
             this.activeOther = false;
             this.activeEmergency = true;
+        },
+        selectHealth(data) {
+            this.form.healths_id.push(data.id);
+        },
+        removeHealth(data) {
+            this.form.healths_id.splice(data, 1);
         }
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HealthController;
 use App\Models\User;
 use App\Models\Health;
 use Illuminate\Http\Request;
@@ -23,6 +24,9 @@ use Spatie\Permission\Models\Permission;
 Route::get('permissions/search', [RoleController::class, 'search'])
     ->name('permissions.search');
 
+Route::get('healths/search', [HealthController::class, 'search'])
+    ->name('healths.search');
+
 Route::get('crews/roles', [UserController::class, 'roles'])
     ->name('crews.roles');
 
@@ -32,6 +36,10 @@ Route::get('crews/health', [UserController::class, 'health'])
 Route::get('permissions/all', function () {
     return Permission::all();
 })->name('permissions.all');
+
+Route::get('healths/all', function () {
+    return Health::all();
+})->name('healths.all');
 
 Route::post('permissions/revoke', [RoleController::class, 'revoke_permission'])->name('permissions.revoke');
 

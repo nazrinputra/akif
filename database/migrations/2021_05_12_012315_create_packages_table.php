@@ -17,12 +17,13 @@ class CreatePackagesTable extends Migration
             $table->id();
             $table->string('slug');
             $table->string('name')->unique();
-            $table->integer('price');
-            $table->integer('commission');
+            $table->boolean('custom_price');
+            $table->integer('price')->nullable();
+            $table->integer('commission')->nullable();
             $table->string('frequency');
             $table->string('duration');
             $table->text('description');
-            $table->string('promotion');
+            $table->boolean('promotion');
             $table->timestamps();
             $table->softDeletes();
         });

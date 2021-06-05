@@ -30,171 +30,171 @@
         >
             <div class="container">
                 <form @submit.prevent="submit">
-                    <div class="mt-3 p-3">
-                        <label for="name">Name</label>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            id="name"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.name
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.name
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="phone_no">Phone No</label>
-                        <input
-                            type="number"
-                            placeholder="Phone No"
-                            id="phone_no"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.phone_no
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.phone_no"
-                            @keydown="form.clearErrors('phone_no')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.phone_no
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="email">Email</label>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            id="email"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.email
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.email"
-                            @keydown="form.clearErrors('email')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.email
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="role_id">Role</label>
-                        <select
-                            v-model="form.role_id"
-                            @change="form.clearErrors('role_id')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.role_id
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                        >
-                            <option value="" disabled>Select Role</option>
-                            <option
-                                v-for="role in roles"
-                                :key="role.id"
-                                :value="role.id"
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showGeneral()"
+                                :class="activeGeneral ? 'active' : ''"
+                                >General</span
                             >
-                                {{ role.name }}
-                            </option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.role_id
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="store_id">Store</label>
-                        <select
-                            v-model="form.store_id"
-                            @change="form.clearErrors('store_id')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.store_id
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                        >
-                            <option value="" disabled>Select Store</option>
-                            <option
-                                v-for="store in stores"
-                                :key="store.id"
-                                :value="store.id"
+                        </li>
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showCareer()"
+                                :class="activeCareer ? 'active' : ''"
+                                >Career</span
                             >
-                                {{ store.name }}
-                            </option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.store_id
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="password">Password</label>
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            id="password"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.password
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.password"
-                            @keydown="form.clearErrors('password')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.password
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="password_confirmation"
-                            >Confirm Password</label
+                        </li>
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showPrivate()"
+                                :class="activePrivate ? 'active' : ''"
+                                >Private</span
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showHealth()"
+                                :class="activeHealth ? 'active' : ''"
+                                >Health</span
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showOther()"
+                                :class="activeOther ? 'active' : ''"
+                                >Other</span
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <span
+                                class="nav-link cursor-pointer"
+                                @click="showEmergency()"
+                                :class="activeEmergency ? 'active' : ''"
+                                >Emergency</span
+                            >
+                        </li>
+                    </ul>
+
+                    <breeze-general
+                        v-show="activeGeneral"
+                        :form="form"
+                    ></breeze-general>
+                    <div
+                        v-show="activeGeneral"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button
+                            type="button"
+                            class="ml-auto"
+                            @click="showCareer()"
                         >
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            id="password_confirmation"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.password
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.password_confirmation"
-                            @keydown="form.clearErrors('password')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.password
-                        }}</span>
+                            Next
+                        </breeze-button>
                     </div>
 
+                    <breeze-career
+                        v-show="activeCareer"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-career>
                     <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
+                        v-show="activeCareer"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
-                        <inertia-link
-                            :href="route('crews.index')"
-                            class="btn btn-secondary"
-                        >
+                        <breeze-button type="button" @click="showGeneral()">
                             Back
-                        </inertia-link>
+                        </breeze-button>
                         <breeze-button
+                            type="button"
+                            class="ml-auto"
+                            @click="showPrivate()"
+                        >
+                            Next
+                        </breeze-button>
+                    </div>
+
+                    <breeze-private
+                        v-show="activePrivate"
+                        :form="form"
+                    ></breeze-private>
+                    <div
+                        v-show="activePrivate"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button type="button" @click="showCareer()">
+                            Back
+                        </breeze-button>
+                        <breeze-button
+                            type="button"
+                            class="ml-auto"
+                            @click="showHealth()"
+                        >
+                            Next
+                        </breeze-button>
+                    </div>
+
+                    <breeze-health
+                        v-show="activeHealth"
+                        :form="form"
+                        @selectHealth="selectHealth($event)"
+                        @removeHealth="removeHealth($event)"
+                    ></breeze-health>
+                    <div
+                        v-show="activeHealth"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button type="button" @click="showPrivate()">
+                            Back
+                        </breeze-button>
+                        <breeze-button
+                            type="button"
+                            class="ml-auto"
+                            @click="showOther()"
+                        >
+                            Next
+                        </breeze-button>
+                    </div>
+
+                    <breeze-other
+                        v-show="activeOther"
+                        :form="form"
+                    ></breeze-other>
+                    <div
+                        v-show="activeOther"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button type="button" @click="showHealth()">
+                            Back
+                        </breeze-button>
+                        <breeze-button
+                            type="button"
+                            class="ml-auto"
+                            @click="showEmergency()"
+                        >
+                            Next
+                        </breeze-button>
+                    </div>
+
+                    <breeze-emergency
+                        v-show="activeEmergency"
+                        :form="form"
+                    ></breeze-emergency>
+                    <div
+                        v-show="activeEmergency"
+                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                    >
+                        <breeze-button type="button" @click="showOther()">
+                            Back
+                        </breeze-button>
+                        <breeze-button
+                            class="ml-auto"
                             :class="{
                                 'opacity-25': form.processing
                             }"
@@ -213,13 +213,25 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeGeneral from "@/Components/Crew/General";
+import BreezeCareer from "@/Components/Crew/Career";
+import BreezePrivate from "@/Components/Crew/Private";
+import BreezeHealth from "@/Components/Crew/Health";
+import BreezeEmergency from "@/Components/Crew/Emergency";
+import BreezeOther from "@/Components/Crew/Other";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeGeneral,
+        BreezeCareer,
+        BreezePrivate,
+        BreezeHealth,
+        BreezeEmergency,
+        BreezeOther
     },
 
     props: {
@@ -230,6 +242,17 @@ export default {
         roles: Object
     },
 
+    data() {
+        return {
+            activeGeneral: true,
+            activeCareer: false,
+            activePrivate: false,
+            activeHealth: false,
+            activeOther: false,
+            activeEmergency: false
+        };
+    },
+
     setup() {
         const form = useForm({
             name: null,
@@ -238,7 +261,25 @@ export default {
             role_id: "",
             store_id: "",
             password: null,
-            password_confirmation: null
+            password_confirmation: null,
+            enrolled_at: null,
+            resigned_at: null,
+            address: null,
+            ic_no: null,
+            bank: null,
+            acc_no: null,
+            oku_card: "",
+            emergency_name_1: null,
+            emergency_phone_no_1: null,
+            emergency_relation_1: null,
+            emergency_name_2: null,
+            emergency_phone_no_2: null,
+            emergency_relation_2: null,
+            status: "",
+            shirt_size: "",
+            motor_license: "",
+            car_license: "",
+            healths_id: []
         });
 
         return { form };
@@ -250,6 +291,60 @@ export default {
                 onSuccess: () =>
                     this.form.reset("password", "password_confirmation")
             });
+        },
+        showGeneral() {
+            this.activeGeneral = true;
+            this.activeCareer = false;
+            this.activePrivate = false;
+            this.activeHealth = false;
+            this.activeOther = false;
+            this.activeEmergency = false;
+        },
+        showCareer() {
+            this.activeGeneral = false;
+            this.activeCareer = true;
+            this.activePrivate = false;
+            this.activeHealth = false;
+            this.activeOther = false;
+            this.activeEmergency = false;
+        },
+        showPrivate() {
+            this.activeGeneral = false;
+            this.activeCareer = false;
+            this.activePrivate = true;
+            this.activeHealth = false;
+            this.activeOther = false;
+            this.activeEmergency = false;
+        },
+        showHealth() {
+            this.activeGeneral = false;
+            this.activeCareer = false;
+            this.activePrivate = false;
+            this.activeHealth = true;
+            this.activeOther = false;
+            this.activeEmergency = false;
+        },
+        showOther() {
+            this.activeGeneral = false;
+            this.activeCareer = false;
+            this.activePrivate = false;
+            this.activeHealth = false;
+            this.activeOther = true;
+            this.activeEmergency = false;
+        },
+        showEmergency() {
+            this.activeGeneral = false;
+            this.activeCareer = false;
+            this.activePrivate = false;
+            this.activeHealth = false;
+            this.activeOther = false;
+            this.activeEmergency = true;
+        },
+        selectHealth(data) {
+            this.form.healths_id.push(data.id);
+        },
+        removeHealth(data) {
+            this.form.healths_id.splice(data, 1);
         }
     }
 };

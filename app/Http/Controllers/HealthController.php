@@ -123,4 +123,12 @@ class HealthController extends Controller
         $health->restore();
         return Redirect::back()->with('success', 'Health condition restored successfully.');
     }
+
+    public function search(Request $request)
+    {
+        return Health::where('name', 'like', '%' . $request->input('query') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('query') . '%')
+            ->limit(3)
+            ->get();
+    }
 }

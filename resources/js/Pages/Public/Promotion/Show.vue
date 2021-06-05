@@ -9,7 +9,9 @@
                     <h1 class="featurette-heading ">
                         {{ promotion.name }}
                     </h1>
-                    <h4>Starting from RM{{ promotion.price }}</h4>
+                    <h4>
+                        Starting from RM{{ (promotion.price / 100).toFixed(2) }}
+                    </h4>
                     <h5>
                         <span class="text-muted">
                             Frequency: {{ promotion.frequency }} <br />

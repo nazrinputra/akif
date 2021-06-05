@@ -24,7 +24,24 @@ class User extends Authenticatable
         'email',
         'phone_no',
         'password',
-        'store_id'
+        'store_id',
+        'enrolled_at',
+        'resigned_at',
+        'oku_card',
+        'address',
+        'ic_no',
+        'bank',
+        'acc_no',
+        'status',
+        'shirt_size',
+        'motor_license',
+        'car_license',
+        'emergency_name_1',
+        'emergency_phone_no_1',
+        'emergency_relation_1',
+        'emergency_name_2',
+        'emergency_phone_no_2',
+        'emergency_relation_2',
     ];
 
     public function scopeFilter($query, array $filters)

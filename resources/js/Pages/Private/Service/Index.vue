@@ -81,7 +81,7 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
-                            {{ service.price }}
+                            RM{{ (service.price / 100).toFixed(2) }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">

@@ -16,6 +16,7 @@ class CreateQueueServiceTable extends Migration
         Schema::create('queue_service', function (Blueprint $table) {
             $table->foreignId('queue_id')->constrained();
             $table->foreignId('service_id')->constrained();
+            $table->integer('custom_price')->nullable();
         });
     }
 

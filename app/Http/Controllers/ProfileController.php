@@ -55,7 +55,8 @@ class ProfileController extends Controller
     {
         return Inertia::render('Private/Dashboard/Profile', [
             'stores' => Store::all(),
-            'roles' => Role::all()
+            'roles' => Role::all(),
+            'healths' => Auth::user()->healths,
         ]);
     }
 
@@ -83,8 +84,18 @@ class ProfileController extends Controller
             'name' => ['required', 'max:50'],
             'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
+            'enrolled_at' => ['date'],
+            'resigned_at' => ['date'],
             'role_id' => ['required'],
             'store_id' => ['required'],
+            'address' => ['max:255'],
+            'ic_no' => ['max:14', 'min:14'],
+            'bank' => ['required'],
+            'acc_no' => ['required'],
+            'emergency_name_1' => ['required', 'max:50'],
+            'emergency_phone_no_1' => ['required', 'max:12'],
+            'emergency_name_2' => ['required', 'max:50'],
+            'emergency_phone_no_2' => ['required', 'max:12'],
         ]);
 
         if ($request->has('password') && $request->password != '') {
@@ -102,9 +113,39 @@ class ProfileController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        Auth::user()->update($request->only('name', 'slug', 'phone_no', 'email', 'password', 'store_id'));
+        Auth::user()->update($request->only(
+            'name',
+            'slug',
+            'phone_no',
+            'email',
+            'password',
+            'store_id',
+            'enrolled_at',
+            'resigned_at',
+            'oku_card',
+            'address',
+            'ic_no',
+            'bank',
+            'acc_no',
+            'status',
+            'shirt_size',
+            'motor_license',
+            'car_license',
+            'emergency_name_1',
+            'emergency_phone_no_1',
+            'emergency_relation_1',
+            'emergency_name_2',
+            'emergency_phone_no_2',
+            'emergency_relation_2',
+        ));
         $role = Role::find($request->role_id);
         Auth::user()->syncRoles($role);
+
+        $healths = $request->healths_id;
+        Auth::user()->healths()->detach();
+        foreach ($healths as $health) {
+            Auth::user()->healths()->attach($health);
+        }
 
         return Redirect::route('profiles.show')->with('success', 'Profile updated successfully.');
     }
