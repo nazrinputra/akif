@@ -47,6 +47,20 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
+                        <label for="custom_price">Custom Price</label>
+                        <select
+                            :value="pkg.custom_price"
+                            disabled
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            <option value="" disabled
+                                >Select Custom Price</option
+                            >
+                            <option :value="1">Yes</option>
+                            <option :value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 p-3">
                         <label for="price">Price (RM)</label>
                         <input
                             type="number"
@@ -98,13 +112,15 @@
                     </div>
                     <div class="mt-3 p-3">
                         <label for="promotion">Promotion</label>
-                        <input
-                            type="text"
-                            id="promotion"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        <select
                             :value="pkg.promotion"
                             disabled
-                        />
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            <option value="" disabled>Select Promotion</option>
+                            <option :value="1">Yes</option>
+                            <option :value="0">No</option>
+                        </select>
                     </div>
                     <div
                         class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"

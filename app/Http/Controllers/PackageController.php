@@ -44,6 +44,7 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
+            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
             'commission' => ['required', 'max:8'],
             'frequency' => ['required', 'max:50'],
@@ -61,7 +62,7 @@ class PackageController extends Controller
             return Redirect::back()->with('error', 'Package already exist! <a href="' . route('packages.show', $package) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdPackage = Package::create($request->only('name', 'slug', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
+        $createdPackage = Package::create($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
 
         foreach ($request->services as $id) {
             $service = Service::find($id);
@@ -108,6 +109,7 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
+            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
             'commission' => ['required', 'max:8'],
             'frequency' => ['required', 'max:50'],
@@ -121,7 +123,7 @@ class PackageController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug, 'price' => $price, 'commission' => $commission]);
 
-        $package->update($request->only('name', 'slug', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
+        $package->update($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
 
         return Redirect::route('packages.show', $package)->with('success', 'Package updated successfully.');
     }

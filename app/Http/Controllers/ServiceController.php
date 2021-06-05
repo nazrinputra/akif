@@ -44,6 +44,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
+            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
             'commission' => ['required', 'max:8'],
             'description' => ['required', 'max:255'],
@@ -58,7 +59,7 @@ class ServiceController extends Controller
             return Redirect::back()->with('error', 'Service already exist! <a href="' . route('services.show', $service) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdService = Service::create($request->only('name', 'slug', 'price', 'commission', 'description'));
+        $createdService = Service::create($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'description'));
 
         if ($request->input('package_id') != null) {
             $package = Package::find($request->input('package_id'));
@@ -106,6 +107,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
+            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
             'commission' => ['required', 'max:8'],
             'description' => ['required', 'max:255'],
@@ -116,7 +118,7 @@ class ServiceController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug, 'price' => $price, 'commission' => $commission]);
 
-        $service->update($request->only('name', 'slug', 'price', 'commission', 'description'));
+        $service->update($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'description'));
 
         return Redirect::route('services.show', $service)->with('success', 'Service updated successfully.');
     }

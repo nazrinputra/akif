@@ -13,6 +13,7 @@ class Package extends Model
     protected $fillable = [
         'name',
         'slug',
+        'custom_price',
         'price',
         'commission',
         'frequency',
