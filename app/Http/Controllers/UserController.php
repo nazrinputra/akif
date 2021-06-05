@@ -136,7 +136,7 @@ class UserController extends Controller
         return Inertia::render('Private/Crew/Edit', [
             'stores' => Store::all(),
             'roles' => Role::all(),
-            'crew' => $crew->load('store', 'roles')
+            'crew' => $crew->load('store', 'roles', 'healths')
         ]);
     }
 
@@ -151,18 +151,57 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'phone_no' => ['required', 'min:9', 'max:12'],
+            'phone_no' => ['required', 'max:12'],
             'email' => ['required', 'max:50'],
+            'enrolled_at' => ['date'],
+            'resigned_at' => ['date'],
             'role_id' => ['required'],
             'store_id' => ['required'],
+            'address' => ['max:255'],
+            'ic_no' => ['max:14', 'min:14'],
+            'bank' => ['required'],
+            'acc_no' => ['required'],
+            'emergency_name_1' => ['required', 'max:50'],
+            'emergency_phone_no_1' => ['required', 'max:12'],
+            'emergency_name_2' => ['required', 'max:50'],
+            'emergency_phone_no_2' => ['required', 'max:12'],
         ]);
 
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        $crew->update($request->only('name', 'slug', 'phone_no', 'email', 'store_id'));
+        $crew->update($request->only(
+            'name',
+            'slug',
+            'phone_no',
+            'email',
+            'store_id',
+            'enrolled_at',
+            'resigned_at',
+            'oku_card',
+            'address',
+            'ic_no',
+            'bank',
+            'acc_no',
+            'status',
+            'shirt_size',
+            'motor_license',
+            'car_license',
+            'emergency_name_1',
+            'emergency_phone_no_1',
+            'emergency_relation_1',
+            'emergency_name_2',
+            'emergency_phone_no_2',
+            'emergency_relation_2',
+        ));
         $role = Role::find($request->role_id);
         $crew->syncRoles($role);
+
+        $healths = $request->healths_id;
+        $crew->healths()->detach();
+        foreach ($healths as $health) {
+            $crew->healths()->attach($health);
+        }
 
         return Redirect::route('crews.show', $crew)->with('success', 'Crew updated successfully.');
     }
