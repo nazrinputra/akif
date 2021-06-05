@@ -261,38 +261,38 @@
                     </ul>
 
                     <breeze-general
-                        v-if="activeGeneral"
+                        v-show="activeGeneral"
                         :form="form"
                     ></breeze-general>
 
                     <breeze-career
-                        v-if="activeCareer"
+                        v-show="activeCareer"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
                     ></breeze-career>
 
                     <breeze-private
-                        v-if="activePrivate"
+                        v-show="activePrivate"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
                     ></breeze-private>
 
                     <breeze-health
-                        v-if="activeHealth"
+                        v-show="activeHealth"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
                     ></breeze-health>
                     <breeze-emergency
-                        v-if="activeEmergency"
+                        v-show="activeEmergency"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
                     ></breeze-emergency>
                     <breeze-other
-                        v-if="activeOther"
+                        v-show="activeOther"
                         :form="form"
                         :stores="stores"
                         :roles="roles"
