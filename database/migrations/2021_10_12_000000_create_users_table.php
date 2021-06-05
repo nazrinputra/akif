@@ -29,8 +29,8 @@ class CreateUsersTable extends Migration
             $table->boolean('motor_license')->nullable();
             $table->boolean('car_license')->nullable();
             $table->boolean('oku_card')->nullable();
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('resign_at')->nullable();
+            $table->timestamp('enrolled_at')->nullable();
+            $table->timestamp('resigned_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('emergency_name_1')->nullable();
