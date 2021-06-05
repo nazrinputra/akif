@@ -85,7 +85,7 @@
                             type="number"
                             placeholder="Price"
                             id="price"
-                            step=".01"
+                            step=".05"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.price
@@ -106,7 +106,7 @@
                             type="number"
                             placeholder="Commission"
                             id="commission"
-                            step=".01"
+                            step=".05"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.commission
