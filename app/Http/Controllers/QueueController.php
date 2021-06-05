@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
 use App\Models\Package;
 use App\Models\Service;
 use App\Models\Customer;
-use App\Models\Personality;
-use App\Models\User;
 use App\Models\Whatsapp;
+use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -158,7 +159,11 @@ class QueueController extends Controller
 
         if ($request->package_id) {
             $package = Package::find($request->package_id);
-            $createdQueue->packages()->save($package);
+            DB::table('package_queue')->insert([
+                'queue_id' => $createdQueue->id,
+                'package_id' => $package->id,
+                'custom_price' => $request->pkg_custom_price,
+            ]);
         }
 
         foreach ($request->services_id as $id) {
