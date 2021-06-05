@@ -11,7 +11,6 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
-                required
             >
                 <option value="" disabled>Select OKU Status</option>
                 <option :value="1">Yes</option>
@@ -39,6 +38,12 @@
                 class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
                 Oops, we could not find any matching health condition.
+                <span
+                    @click="viewAllHealths"
+                    class="text-blue-500 text-decoration-none cursor-pointer"
+                >
+                    View all?
+                </span>
             </div>
 
             <transition name="fade">
@@ -141,7 +146,9 @@ export default {
     },
 
     created() {
-        this.selectedHealths = this.currentHealths;
+        if (this.currentHealths) {
+            this.selectedHealths = this.currentHealths;
+        }
     },
 
     watch: {
@@ -175,6 +182,11 @@ export default {
         removeHealth(index) {
             this.selectedHealths.splice(index, 1);
             this.$emit("removeHealth", index);
+        },
+        viewAllHealths() {
+            axios.get(route("healths.all")).then(response => {
+                this.healths = response.data;
+            });
         }
     }
 };
