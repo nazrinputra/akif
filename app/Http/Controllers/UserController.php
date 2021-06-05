@@ -104,7 +104,10 @@ class UserController extends Controller
         $role = Role::find($request->role_id);
         $createdCrew->syncRoles($role);
 
-        event(new Registered($createdCrew));
+        $healths = $request->healths_id;
+        foreach ($healths as $health) {
+            $createdCrew->healths()->attach($health);
+        }
 
         return Redirect::route('crews.show', $createdCrew)->with('success', 'Crew added successfully.');
     }
@@ -118,7 +121,7 @@ class UserController extends Controller
     public function show(User $crew)
     {
         return Inertia::render('Private/Crew/Show', [
-            'crew' => $crew->load('store', 'roles')
+            'crew' => $crew->load('store', 'roles', 'healths')
         ]);
     }
 

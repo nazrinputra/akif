@@ -143,6 +143,8 @@
                     <breeze-health
                         v-show="activeHealth"
                         :form="form"
+                        @selectHealth="selectHealth($event)"
+                        @removeHealth="removeHealth($event)"
                     ></breeze-health>
                     <div
                         v-show="activeHealth"
@@ -276,7 +278,8 @@ export default {
             status: "",
             shirt_size: "",
             motor_license: "",
-            car_license: ""
+            car_license: "",
+            healths_id: []
         });
 
         return { form };
@@ -336,6 +339,12 @@ export default {
             this.activeHealth = false;
             this.activeOther = false;
             this.activeEmergency = true;
+        },
+        selectHealth(data) {
+            this.form.healths_id.push(data.id);
+        },
+        removeHealth(data) {
+            this.form.healths_id.splice(data, 1);
         }
     }
 };
