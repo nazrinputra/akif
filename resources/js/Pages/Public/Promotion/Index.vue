@@ -45,8 +45,8 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="bd-placeholder-img" src="/img/bg-dim.png" />
-                        <!-- <svg
+                        <!-- <img class="bd-placeholder-img" src="/img/bg-dim.png" /> -->
+                        <svg
                             class="bd-placeholder-img"
                             width="100%"
                             height="100%"
@@ -59,7 +59,7 @@
                             <title></title>
                             <rect width="100%" height="100%" fill="#777" />
                             <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-                        </svg> -->
+                        </svg>
 
                         <div class="container">
                             <div class="carousel-caption">
@@ -87,8 +87,8 @@
                         v-for="promotion in otherPromotions"
                         v-bind:key="promotion.id"
                     >
-                        <img class="bd-placeholder-img" src="/img/bg-dim.png" />
-                        <!-- <svg
+                        <!-- <img class="bd-placeholder-img" src="/img/bg-dim.png" /> -->
+                        <svg
                             class="bd-placeholder-img"
                             width="100%"
                             height="100%"
@@ -101,7 +101,7 @@
                             <title></title>
                             <rect width="100%" height="100%" fill="#777" />
                             <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-                        </svg> -->
+                        </svg>
 
                         <div class="container">
                             <div class="carousel-caption">

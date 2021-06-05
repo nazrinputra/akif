@@ -14,6 +14,7 @@ class Package extends Model
         'name',
         'slug',
         'price',
+        'commission',
         'frequency',
         'duration',
         'description',

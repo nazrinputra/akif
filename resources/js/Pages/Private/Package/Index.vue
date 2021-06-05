@@ -81,7 +81,7 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', pkg)"
                         >
-                            {{ pkg.price }}
+                            RM{{ (pkg.price / 100).toFixed(2) }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">

@@ -61,11 +61,12 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="price">Price</label>
+                        <label for="price">Price (RM)</label>
                         <input
                             type="number"
-                            id="price"
                             placeholder="Price"
+                            id="price"
+                            step=".01"
                             class="w-full rounded-md shadow-sm"
                             :class="
                                 form.errors.price
@@ -78,6 +79,27 @@
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.price
+                        }}</span>
+                    </div>
+                    <div class="mt-3 p-3">
+                        <label for="commission">Commission (RM)</label>
+                        <input
+                            type="number"
+                            placeholder="Commission"
+                            id="commission"
+                            step=".01"
+                            class="w-full rounded-md shadow-sm"
+                            :class="
+                                form.errors.commission
+                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                            "
+                            v-model="form.commission"
+                            @keydown="form.clearErrors('commission')"
+                            required
+                        />
+                        <span class="text-red-700 mt-2 text-sm">{{
+                            form.errors.commission
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
@@ -234,6 +256,7 @@ export default {
         const form = useForm({
             name: null,
             price: null,
+            commission: null,
             description: null
         });
 
@@ -247,7 +270,8 @@ export default {
     methods: {
         loadData() {
             this.form.name = this.service.name;
-            this.form.price = this.service.price;
+            this.form.price = (this.service.price / 100).toFixed(2);
+            this.form.commission = (this.service.commission / 100).toFixed(2);
             this.form.description = this.service.description;
         },
         linkPackage(pkg) {

@@ -28,8 +28,8 @@ class ServiceFactory extends Factory
         return [
             'slug' => $slug,
             'name' => $name,
-            'price' => $this->faker->randomNumber(2, true),
-            'commission' => $this->faker->randomNumber(2, true),
+            'price' => $this->faker->randomNumber(4, true),
+            'commission' => $this->faker->randomNumber(3, true),
             'description' => $this->faker->sentences(5, true),
         ];
     }
