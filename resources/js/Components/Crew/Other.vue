@@ -1,34 +1,48 @@
 <template>
     <div class="mt-3 p-3">
         <label for="status">Status</label>
-        <input
-            type="text"
-            id="status"
+        <select
+            v-model="form.status"
+            @change="form.clearErrors('status')"
             class="w-full rounded-md shadow-sm"
             :class="
                 form.errors.status
                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
             "
-            v-model="form.status"
-            @keydown="form.clearErrors('status')"
-        />
+            required
+        >
+            <option value="" disabled>Select Status</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Complicated">Complicated</option>
+            <option value="Rather Not Say">Rather Not Say</option>
+        </select>
         <span class="text-red-700 mt-2 text-sm">{{ form.errors.status }}</span>
     </div>
     <div class="mt-3 p-3">
         <label for="shirt_size">Shirt Size</label>
-        <input
-            type="text"
-            id="shirt_size"
+        <select
+            v-model="form.shirt_size"
+            @change="form.clearErrors('shirt_size')"
             class="w-full rounded-md shadow-sm"
             :class="
                 form.errors.shirt_size
                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
             "
-            v-model="form.shirt_size"
-            @keydown="form.clearErrors('shirt_size')"
-        />
+            required
+        >
+            <option value="" disabled>Select Shirt Size</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+        </select>
         <span class="text-red-700 mt-2 text-sm">{{
             form.errors.shirt_size
         }}</span>
