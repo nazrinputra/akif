@@ -329,6 +329,7 @@ import BreezeHealth from "@/Components/Crew/Health";
 import BreezeEmergency from "@/Components/Crew/Emergency";
 import BreezeOther from "@/Components/Crew/Other";
 import throttle from "lodash/throttle";
+import moment from "moment-timezone";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -436,8 +437,12 @@ export default {
             this.form.email = this.auth.user.email;
             this.form.store_id = this.auth.user.store_id;
             this.form.role_id = this.getRole();
-            this.form.enrolled_at = this.auth.user.enrolled_at;
-            this.form.resigned_at = this.auth.user.resigned_at;
+            this.form.enrolled_at = this.readableForHumans(
+                this.auth.user.enrolled_at
+            );
+            this.form.resigned_at = this.readableForHumans(
+                this.auth.user.resigned_at
+            );
             this.form.address = this.auth.user.address;
             this.form.ic_no = this.auth.user.ic_no;
             this.form.bank = this.auth.user.bank;
@@ -466,6 +471,11 @@ export default {
             } else {
                 return "";
             }
+        },
+        readableForHumans(date) {
+            return moment(date)
+                .tz("Asia/Kuala_Lumpur")
+                .format("YYYY-MM-DD");
         },
         showGeneral() {
             this.activeGeneral = true;
