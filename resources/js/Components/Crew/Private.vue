@@ -6,6 +6,7 @@
                 type="text"
                 id="address"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Address"
                 :class="
                     form.errors.address
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -19,11 +20,12 @@
             }}</span>
         </div>
         <div class="mt-3 p-3">
-            <label for="ic_no">IC No.</label>
+            <label for="ic_no">IC No</label>
             <input
                 type="text"
                 id="ic_no"
                 class="w-full rounded-md shadow-sm"
+                placeholder="IC No"
                 :class="
                     form.errors.ic_no
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -37,11 +39,12 @@
             }}</span>
         </div>
         <div class="mt-3 p-3">
-            <label for="bank">Bank</label>
+            <label for="bank">Bank Name</label>
             <input
                 type="text"
                 id="bank"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Bank Name"
                 :class="
                     form.errors.bank
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -55,11 +58,12 @@
             }}</span>
         </div>
         <div class="mt-3 p-3">
-            <label for="acc_no">Account No.</label>
+            <label for="acc_no">Account No</label>
             <input
                 type="number"
                 id="acc_no"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Account No"
                 :class="
                     form.errors.acc_no
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'

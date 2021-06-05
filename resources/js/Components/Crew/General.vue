@@ -6,6 +6,7 @@
                 type="text"
                 id="name"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Name"
                 :class="
                     form.errors.name
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -24,6 +25,7 @@
                 type="number"
                 id="phone_no"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Phone No"
                 :class="
                     form.errors.phone_no
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -42,6 +44,7 @@
                 type="email"
                 id="email"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Email"
                 :class="
                     form.errors.email
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -60,6 +63,7 @@
                 type="password"
                 id="password"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Password"
                 :class="
                     form.errors.password
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -78,6 +82,7 @@
                 type="password"
                 id="password_confirmation"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Confirm Password"
                 :class="
                     form.errors.password
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'

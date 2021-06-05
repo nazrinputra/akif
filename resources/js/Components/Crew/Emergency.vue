@@ -7,6 +7,7 @@
                 type="text"
                 id="emergency_name_1"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Name"
                 :class="
                     form.errors.emergency_name_1
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -20,11 +21,12 @@
             }}</span>
         </div>
         <div class="p-3">
-            <label for="emergency_phone_no_1">Phone No.</label>
+            <label for="emergency_phone_no_1">Phone No</label>
             <input
                 type="number"
                 id="emergency_phone_no_1"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Phone No"
                 :class="
                     form.errors.emergency_phone_no_1
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -43,6 +45,7 @@
                 type="text"
                 id="emergency_relation_1"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Relation"
                 :class="
                     form.errors.emergency_relation_1
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -62,6 +65,7 @@
                 type="text"
                 id="emergency_name_2"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Name"
                 :class="
                     form.errors.emergency_name_2
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -75,11 +79,12 @@
             }}</span>
         </div>
         <div class="p-3">
-            <label for="emergency_phone_no_2">Phone No.</label>
+            <label for="emergency_phone_no_2">Phone No</label>
             <input
                 type="number"
                 id="emergency_phone_no_2"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Phone No"
                 :class="
                     form.errors.emergency_phone_no_2
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -98,6 +103,7 @@
                 type="text"
                 id="emergency_relation_2"
                 class="w-full rounded-md shadow-sm"
+                placeholder="Relation"
                 :class="
                     form.errors.emergency_relation_2
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
