@@ -78,10 +78,40 @@
                     <breeze-general
                         v-if="activeGeneral"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-general>
 
+                    <breeze-career
+                        v-if="activeCareer"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-career>
+
+                    <breeze-private
+                        v-if="activePrivate"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-private>
+
+                    <breeze-health
+                        v-if="activeHealth"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-health>
+                    <breeze-emergency
+                        v-if="activeEmergency"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-emergency>
+                    <breeze-other
+                        v-if="activeOther"
+                        :form="form"
+                        :stores="stores"
+                        :roles="roles"
+                    ></breeze-other>
                     <div
                         class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
@@ -106,6 +136,11 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import BreezeGeneral from "@/Components/Crew/General";
+import BreezeCareer from "@/Components/Crew/Career";
+import BreezePrivate from "@/Components/Crew/Private";
+import BreezeHealth from "@/Components/Crew/Health";
+import BreezeEmergency from "@/Components/Crew/Emergency";
+import BreezeOther from "@/Components/Crew/Other";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
@@ -113,7 +148,12 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezeGeneral
+        BreezeGeneral,
+        BreezeCareer,
+        BreezePrivate,
+        BreezeHealth,
+        BreezeEmergency,
+        BreezeOther
     },
 
     props: {
@@ -143,7 +183,24 @@ export default {
             role_id: null,
             store_id: null,
             password: null,
-            password_confirmation: null
+            password_confirmation: null,
+            enrolled_at: null,
+            resigned_at: null,
+            address: null,
+            ic_no: null,
+            bank: null,
+            acc_no: null,
+            oku_card: null,
+            emergency_name_1: null,
+            emergency_phone_no_1: null,
+            emergency_relation_1: null,
+            emergency_name_2: null,
+            emergency_phone_no_2: null,
+            emergency_relation_2: null,
+            status: null,
+            shirt_size: null,
+            motor_license: null,
+            car_license: null
         });
 
         return { form };
@@ -160,6 +217,23 @@ export default {
             this.form.email = this.auth.user.email;
             this.form.store_id = this.auth.user.store_id;
             this.form.role_id = this.getRole();
+            this.form.enrolled_at = this.auth.user.enrolled_at;
+            this.form.resigned_at = this.auth.user.resigned_at;
+            this.form.address = this.auth.user.address;
+            this.form.ic_no = this.auth.user.ic_no;
+            this.form.bank = this.auth.user.bank;
+            this.form.acc_no = this.auth.user.acc_no;
+            this.form.oku_card = this.auth.user.oku_card;
+            this.form.emergency_name_1 = this.auth.user.emergency_name_1;
+            this.form.emergency_phone_no_1 = this.auth.user.emergency_phone_no_1;
+            this.form.emergency_relation_1 = this.auth.user.emergency_relation_1;
+            this.form.emergency_name_2 = this.auth.user.emergency_name_2;
+            this.form.emergency_phone_no_2 = this.auth.user.emergency_phone_no_2;
+            this.form.emergency_relation_2 = this.auth.user.emergency_relation_2;
+            this.form.status = this.auth.user.status;
+            this.form.shirt_size = this.auth.user.shirt_size;
+            this.form.motor_license = this.auth.user.motor_license;
+            this.form.car_license = this.auth.user.car_license;
         },
         submit() {
             this.form.put(route("profiles.update"), {
