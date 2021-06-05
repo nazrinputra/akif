@@ -33,11 +33,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('resigned_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('emergency_name_1')->nullable();
-            $table->string('emergency_phone_no_1')->nullable();
+            $table->string('emergency_name_1');
+            $table->string('emergency_phone_no_1');
             $table->string('emergency_relation_1')->nullable();
-            $table->string('emergency_name_2')->nullable();
-            $table->string('emergency_phone_no_2')->nullable();
+            $table->string('emergency_name_2');
+            $table->string('emergency_phone_no_2');
             $table->string('emergency_relation_2')->nullable();
             $table->rememberToken();
             $table->timestamps();
