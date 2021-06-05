@@ -275,27 +275,19 @@
                     <breeze-private
                         v-show="activePrivate"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-private>
 
                     <breeze-health
                         v-show="activeHealth"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-health>
                     <breeze-emergency
                         v-show="activeEmergency"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-emergency>
                     <breeze-other
                         v-show="activeOther"
                         :form="form"
-                        :stores="stores"
-                        :roles="roles"
                     ></breeze-other>
                     <div
                         class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
