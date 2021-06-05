@@ -4,7 +4,7 @@
             :class="route().current('dashboard') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('dashboard')"
-            v-if="$page.props.auth.can.length > 0"
+            v-if="$page.props.auth.can.length != 0"
             >my dashboard</inertia-link
         >
     </li>
