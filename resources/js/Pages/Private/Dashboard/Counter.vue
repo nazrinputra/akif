@@ -148,7 +148,6 @@ export default {
             personality_id: null,
             package_id: null,
             services_id: [],
-            pkg_custom_price: null,
             plate_no: null,
             model: null,
             size: "",
@@ -277,17 +276,7 @@ export default {
         },
         checkPackage() {
             if (this.pkg) {
-                if (
-                    this.pkg.custom_price &&
-                    this.form.pkg_custom_price &&
-                    this.form.pkg_custom_price != ""
-                ) {
-                    return true;
-                } else if (!this.pkg.custom_price) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return true;
             } else {
                 return false;
             }

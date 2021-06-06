@@ -159,11 +159,7 @@ class QueueController extends Controller
 
         if ($request->package_id) {
             $package = Package::find($request->package_id);
-            DB::table('package_queue')->insert([
-                'queue_id' => $createdQueue->id,
-                'package_id' => $package->id,
-                'custom_price' => $request->pkg_custom_price,
-            ]);
+            $createdQueue->packages()->save($package);
         }
 
         foreach ($request->services_id as $id) {

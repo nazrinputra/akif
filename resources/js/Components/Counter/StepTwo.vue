@@ -98,23 +98,6 @@
                             <th class="px-3 py-3">
                                 Selected Package Name
                             </th>
-                            <th
-                                v-if="
-                                    pkg.custom_price && !form.pkg_custom_price
-                                "
-                                for="pkg_custom_price"
-                                class="text-red-500 px-3"
-                            >
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Custom price required.
-                            </th>
-                            <th
-                                v-if="pkg.custom_price && form.pkg_custom_price"
-                                for="pkg_custom_price"
-                                class="px-3"
-                            >
-                                Custom Price (RM)
-                            </th>
                         </tr>
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
@@ -122,24 +105,6 @@
                                 style="white-space:pre-wrap; word-wrap:break-word"
                             >
                                 {{ pkg.name }}
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price"
-                            >
-                                <input
-                                    type="number"
-                                    placeholder="Custom Price"
-                                    id="pkg_custom_price"
-                                    step=".05"
-                                    class="w-full rounded-md shadow-sm"
-                                    :class="
-                                        !form.pkg_custom_price
-                                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                                    "
-                                    v-model="form.pkg_custom_price"
-                                />
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -240,7 +205,9 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Selected Service Name</th>
+                        <th class="px-3 py-3">
+                            Selected Service Name
+                        </th>
                     </tr>
                     <tr
                         v-for="(service, index) in selectedServices"
