@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="!checkCustomer" class="p-3">
+        <div v-if="!checkCustomer" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div v-if="!checkCar" class="p-3">
+        <div v-if="!checkCar" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        <div v-if="!product" class="p-3">
+        <div v-if="!product" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -175,7 +175,7 @@
             >
                 <span
                     v-if="pkg.custom_price && !packageCustomPrice"
-                    class="p-3"
+                    class="p-3 text-red-500 text-sm"
                 >
                     <i class="fas fa-exclamation-triangle"></i> This package
                     requires a custom price input.
@@ -200,7 +200,11 @@
                             class="border-t px-3 focus:text-indigo-500"
                             v-if="pkg.custom_price"
                         >
-                            RM{{ form.pkg_custom_price }}
+                            RM{{
+                                form.pkg_custom_price
+                                    ? form.pkg_custom_price
+                                    : 0
+                            }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button @click="back()" type="button">

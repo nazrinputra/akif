@@ -116,9 +116,19 @@
                         </tr>
                     </table>
 
-                    <div class="p-3" v-if="pkg.custom_price">
-                        <label for="pkg_custom_price"
-                            >This package requires a custom price input.</label
+                    <div class="px-3" v-if="pkg.custom_price">
+                        <label
+                            v-if="!form.pkg_custom_price"
+                            for="pkg_custom_price"
+                            class="text-sm text-red-500"
+                            ><i class="fas fa-exclamation-triangle"></i> This
+                            package requires a custom price input.</label
+                        >
+                        <label
+                            v-if="form.pkg_custom_price"
+                            for="pkg_custom_price"
+                            class="text-sm"
+                            >Custom Price</label
                         >
                         <input
                             type="number"
