@@ -74,27 +74,6 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="price">Price (RM)</label>
-                        <input
-                            type="number"
-                            placeholder="Price"
-                            id="price"
-                            step=".05"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.price"
-                            @keydown="form.clearErrors('price')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.price
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
                         <label for="commission">Commission (RM)</label>
                         <input
                             type="number"
@@ -270,7 +249,6 @@ export default {
         const form = useForm({
             name: null,
             custom_price: null,
-            price: null,
             commission: null,
             description: null,
             package_id: null
