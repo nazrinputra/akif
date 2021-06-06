@@ -14,6 +14,7 @@ class CreatePackageQueueTable extends Migration
     public function up()
     {
         Schema::create('package_queue', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('queue_id')->constrained();
             $table->foreignId('package_id')->constrained();
             $table->integer('custom_price')->nullable();
