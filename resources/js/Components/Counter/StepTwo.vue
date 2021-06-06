@@ -98,12 +98,48 @@
                             <th class="px-3 py-3">
                                 Selected Package Name
                             </th>
+                            <th
+                                v-if="
+                                    pkg.custom_price && !form.pkg_custom_price
+                                "
+                                for="pkg_custom_price"
+                                class="text-red-500 px-3"
+                            >
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Custom price required.
+                            </th>
+                            <th
+                                v-if="pkg.custom_price && form.pkg_custom_price"
+                                for="pkg_custom_price"
+                                class="px-3"
+                            >
+                                Custom Price (RM)
+                            </th>
                         </tr>
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                                style="white-space:pre-wrap; word-wrap:break-word"
                             >
                                 {{ pkg.name }}
+                            </td>
+                            <td
+                                class="border-t px-3 focus:text-indigo-500"
+                                v-if="pkg.custom_price"
+                            >
+                                <input
+                                    type="number"
+                                    placeholder="Custom Price"
+                                    id="pkg_custom_price"
+                                    step=".05"
+                                    class="w-full rounded-md shadow-sm"
+                                    :class="
+                                        !form.pkg_custom_price
+                                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                                    "
+                                    v-model="form.pkg_custom_price"
+                                />
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -115,40 +151,6 @@
                             </td>
                         </tr>
                     </table>
-
-                    <div class="px-3" v-if="pkg.custom_price">
-                        <label
-                            v-if="!form.pkg_custom_price"
-                            for="pkg_custom_price"
-                            class="text-sm text-red-500"
-                            ><i class="fas fa-exclamation-triangle"></i> This
-                            package requires a custom price input.</label
-                        >
-                        <label
-                            v-if="form.pkg_custom_price"
-                            for="pkg_custom_price"
-                            class="text-sm"
-                            >Custom Price</label
-                        >
-                        <input
-                            type="number"
-                            placeholder="Custom Price"
-                            id="pkg_custom_price"
-                            step=".05"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.pkg_custom_price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.pkg_custom_price"
-                            @keydown="form.clearErrors('pkg_custom_price')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.pkg_custom_price
-                        }}</span>
-                    </div>
                 </div>
             </transition>
         </div>
