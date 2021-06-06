@@ -13,6 +13,7 @@
                 "
                 v-model="form.enrolled_at"
                 @change="form.clearErrors('enrolled_at')"
+                :disabled="disabled"
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.enrolled_at
@@ -31,6 +32,7 @@
                 "
                 v-model="form.resigned_at"
                 @change="form.clearErrors('resigned_at')"
+                :disabled="disabled"
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.resigned_at
@@ -39,7 +41,7 @@
         <div class="mt-3 p-3">
             <label for="role_id">Role</label>
             <select
-                :disabled="!hasAnyPermission(['edit profile'])"
+                :disabled="!hasAnyPermission(['edit profile']) || disabled"
                 v-model="form.role_id"
                 @change="form.clearErrors('role_id')"
                 class="w-full rounded-md shadow-sm"
@@ -63,7 +65,7 @@
             <label for="store_id">Store</label>
             <select
                 v-model="form.store_id"
-                :disabled="!hasAnyPermission(['edit profile'])"
+                :disabled="!hasAnyPermission(['edit profile']) || disabled"
                 @change="form.clearErrors('store_id')"
                 class="w-full rounded-md shadow-sm"
                 :class="
@@ -71,6 +73,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                required
             >
                 <option value="" disabled>Select Store</option>
                 <option
@@ -90,6 +93,6 @@
 
 <script>
 export default {
-    props: ["form", "stores", "roles"]
+    props: ["form", "stores", "roles", "disabled"]
 };
 </script>

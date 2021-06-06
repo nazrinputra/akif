@@ -2,11 +2,11 @@
     <div>
         <div class="mt-3 p-3">
             <label for="address">Address</label>
-            <input
-                type="text"
+            <textarea
+                rows="4"
                 id="address"
-                class="w-full rounded-md shadow-sm"
                 placeholder="Address"
+                class="w-full rounded-md shadow-sm"
                 :class="
                     form.errors.address
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
@@ -14,6 +14,8 @@
                 "
                 v-model="form.address"
                 @keydown="form.clearErrors('address')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.address
@@ -33,6 +35,7 @@
                 "
                 v-model="form.ic_no"
                 @keydown="form.clearErrors('ic_no')"
+                :disabled="disabled"
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.ic_no
@@ -52,6 +55,8 @@
                 "
                 v-model="form.bank"
                 @keydown="form.clearErrors('bank')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.bank
@@ -71,6 +76,8 @@
                 "
                 v-model="form.acc_no"
                 @keydown="form.clearErrors('acc_no')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.acc_no
@@ -81,6 +88,6 @@
 
 <script>
 export default {
-    props: ["form"]
+    props: ["form", "disabled"]
 };
 </script>
