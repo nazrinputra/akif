@@ -14,6 +14,8 @@
                 "
                 v-model="form.name"
                 @keydown="form.clearErrors('name')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.name
@@ -33,6 +35,8 @@
                 "
                 v-model="form.phone_no"
                 @keydown="form.clearErrors('phone_no')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.phone_no
@@ -52,12 +56,17 @@
                 "
                 v-model="form.email"
                 @keydown="form.clearErrors('email')"
+                :disabled="disabled"
+                required
             />
             <span class="text-red-700 mt-2 text-sm">{{
                 form.errors.email
             }}</span>
         </div>
-        <div class="mt-3 p-3">
+        <div
+            class="mt-3 p-3"
+            v-if="hasAnyPermission(['edit profile']) || !disabled"
+        >
             <label for="password">Password</label>
             <input
                 type="password"
@@ -76,7 +85,10 @@
                 form.errors.password
             }}</span>
         </div>
-        <div class="mt-3 p-3">
+        <div
+            class="mt-3 p-3"
+            v-if="hasAnyPermission(['edit profile']) || !disabled"
+        >
             <label for="password_confirmation">Confirm Password</label>
             <input
                 type="password"
@@ -100,6 +112,6 @@
 
 <script>
 export default {
-    props: ["form"]
+    props: ["form", "disabled"]
 };
 </script>

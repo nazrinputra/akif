@@ -11,6 +11,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
             >
                 <option value="" disabled>Select OKU Status</option>
                 <option :value="1">Yes</option>
@@ -23,7 +24,7 @@
 
         <div class="mt-3 p-3">
             <label for="search">Health Conditions</label>
-            <div class="input-group">
+            <div class="input-group" v-if="!disabled">
                 <input
                     type="text"
                     id="search"
@@ -108,7 +109,10 @@
                                 {{ health.name }}
                             </inertia-link>
                         </td>
-                        <td class="border-t w-px md:table-cell hidden pr-3">
+                        <td
+                            class="border-t w-px md:table-cell hidden pr-3"
+                            v-if="!disabled"
+                        >
                             <breeze-button
                                 type="button"
                                 @click="removeHealth(index)"
@@ -129,7 +133,7 @@ import BreezeButton from "@/Components/Button";
 import throttle from "lodash/throttle";
 
 export default {
-    props: ["form", "currentHealths"],
+    props: ["form", "currentHealths", "disabled"],
 
     components: {
         BreezeButton

@@ -121,6 +121,8 @@ class UserController extends Controller
     public function show(User $crew)
     {
         return Inertia::render('Private/Crew/Show', [
+            'stores' => Store::all(),
+            'roles' => Role::all(),
             'crew' => $crew->load('store', 'roles', 'healths')
         ]);
     }

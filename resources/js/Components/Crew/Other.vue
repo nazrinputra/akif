@@ -11,6 +11,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
             >
                 <option value="" disabled>Select Status</option>
                 <option value="Single">Single</option>
@@ -34,6 +35,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
             >
                 <option value="" disabled>Select Shirt Size</option>
                 <option value="XS">XS</option>
@@ -59,6 +61,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
             >
                 <option value="" disabled>Select Motor License</option>
                 <option :value="1">Yes</option>
@@ -79,6 +82,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
             >
                 <option value="" disabled>Select Car License Status</option>
                 <option :value="1">Yes</option>
@@ -93,6 +97,6 @@
 
 <script>
 export default {
-    props: ["form"]
+    props: ["form", "disabled"]
 };
 </script>

@@ -13,6 +13,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_name_1"
                 @keydown="form.clearErrors('emergency_name_1')"
             />
@@ -32,6 +33,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_phone_no_1"
                 @keydown="form.clearErrors('emergency_phone_no_1')"
             />
@@ -51,6 +53,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_relation_1"
                 @keydown="form.clearErrors('emergency_relation_1')"
             />
@@ -71,6 +74,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_name_2"
                 @keydown="form.clearErrors('emergency_name_2')"
             />
@@ -90,6 +94,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_phone_no_2"
                 @keydown="form.clearErrors('emergency_phone_no_2')"
             />
@@ -109,6 +114,7 @@
                         ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                         : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 "
+                :disabled="disabled"
                 v-model="form.emergency_relation_2"
                 @keydown="form.clearErrors('emergency_relation_2')"
             />
@@ -121,6 +127,6 @@
 
 <script>
 export default {
-    props: ["form"]
+    props: ["form", "disabled"]
 };
 </script>
