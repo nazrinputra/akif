@@ -55,7 +55,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Service Name</th>
-                    <th class="px-3 py-3">Service Price</th>
+                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr
                     v-for="service in services.data"
@@ -81,7 +81,7 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
-                            RM{{ (service.price / 100).toFixed(2) }}
+                            {{ service.custom_price ? "Yes" : "No" }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">

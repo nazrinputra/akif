@@ -102,6 +102,7 @@
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                                style="white-space:pre-wrap; word-wrap:break-word"
                             >
                                 {{ pkg.name }}
                             </td>
@@ -115,30 +116,6 @@
                             </td>
                         </tr>
                     </table>
-
-                    <div class="p-3" v-if="pkg.custom_price">
-                        <label for="pkg_custom_price"
-                            >This package requires a custom price input.</label
-                        >
-                        <input
-                            type="number"
-                            placeholder="Custom Price"
-                            id="pkg_custom_price"
-                            step=".05"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.pkg_custom_price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.pkg_custom_price"
-                            @keydown="form.clearErrors('pkg_custom_price')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.pkg_custom_price
-                        }}</span>
-                    </div>
                 </div>
             </transition>
         </div>
@@ -228,7 +205,9 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">Selected Service Name</th>
+                        <th class="px-3 py-3">
+                            Selected Service Name
+                        </th>
                     </tr>
                     <tr
                         v-for="(service, index) in selectedServices"

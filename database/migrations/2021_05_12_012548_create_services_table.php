@@ -18,7 +18,6 @@ class CreateServicesTable extends Migration
             $table->string('slug');
             $table->string('name')->unique();
             $table->boolean('custom_price');
-            $table->integer('price')->nullable();
             $table->integer('commission')->nullable();
             $table->text('description');
             $table->timestamps();

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="!checkCustomer" class="p-3">
+        <div v-if="!checkCustomer" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div v-if="!checkCar" class="p-3">
+        <div v-if="!checkCar" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        <div v-if="!product" class="p-3">
+        <div v-if="!product" class="p-3 text-red-500">
             <div
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -173,21 +173,10 @@
             <div
                 class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
-                <span
-                    v-if="pkg.custom_price && !packageCustomPrice"
-                    class="p-3"
-                >
-                    <i class="fas fa-exclamation-triangle"></i> This package
-                    requires a custom price input.
-                </span>
-
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">
                             Selected Package Name
-                        </th>
-                        <th class="px-3 py-3" v-if="pkg.custom_price">
-                            Custom Price
                         </th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -195,12 +184,6 @@
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ pkg.name }}
-                        </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="pkg.custom_price"
-                        >
-                            RM{{ form.pkg_custom_price }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button @click="back()" type="button">
@@ -295,10 +278,7 @@
             </div>
         </div>
 
-        <div
-            class="mb-3 p-3"
-            v-if="checkCar && checkCustomer && product && packageCustomPrice"
-        >
+        <div class="mb-3 p-3" v-if="checkCar && checkCustomer && product">
             <label for="remarks">Remarks</label>
             <textarea
                 rows="7"
@@ -318,12 +298,7 @@
             <breeze-button
                 type="button"
                 @click="submit"
-                :disabled="
-                    !checkCar ||
-                        !checkCustomer ||
-                        !product ||
-                        !packageCustomPrice
-                "
+                :disabled="!checkCar || !checkCustomer || !product"
             >
                 Submit
             </breeze-button>
@@ -344,20 +319,6 @@ export default {
     computed: {
         product() {
             if (this.pkg || this.services.length > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        packageCustomPrice() {
-            if (!this.pkg.custom_price) {
-                return true;
-            }
-            if (
-                this.pkg.custom_price &&
-                this.form.pkg_custom_price &&
-                this.form.pkg_custom_price != ""
-            ) {
                 return true;
             } else {
                 return false;
