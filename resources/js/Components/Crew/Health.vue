@@ -22,8 +22,10 @@
             }}</span>
         </div>
 
-        <div class="mt-3 p-3">
-            <label for="search">Health Conditions</label>
+        <div class="mt-3 p-3" v-if="!disabled || selectedHealths.length != 0">
+            <label for="search" v-if="!disabled || formHealth.query"
+                >Health Conditions</label
+            >
             <div class="input-group" v-if="!disabled">
                 <input
                     type="text"
