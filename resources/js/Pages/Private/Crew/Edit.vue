@@ -88,18 +88,6 @@
                         v-show="activeGeneral"
                         :form="form"
                     ></breeze-general>
-                    <div
-                        v-show="activeGeneral"
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button
-                            type="button"
-                            class="ml-auto"
-                            @click="showCareer()"
-                        >
-                            Next
-                        </breeze-button>
-                    </div>
 
                     <breeze-career
                         v-show="activeCareer"
@@ -107,41 +95,11 @@
                         :stores="stores"
                         :roles="roles"
                     ></breeze-career>
-                    <div
-                        v-show="activeCareer"
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button type="button" @click="showGeneral()">
-                            Back
-                        </breeze-button>
-                        <breeze-button
-                            type="button"
-                            class="ml-auto"
-                            @click="showPrivate()"
-                        >
-                            Next
-                        </breeze-button>
-                    </div>
 
                     <breeze-private
                         v-show="activePrivate"
                         :form="form"
                     ></breeze-private>
-                    <div
-                        v-show="activePrivate"
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button type="button" @click="showCareer()">
-                            Back
-                        </breeze-button>
-                        <breeze-button
-                            type="button"
-                            class="ml-auto"
-                            @click="showHealth()"
-                        >
-                            Next
-                        </breeze-button>
-                    </div>
 
                     <breeze-health
                         v-show="activeHealth"
@@ -150,53 +108,19 @@
                         @selectHealth="selectHealth($event)"
                         @removeHealth="removeHealth($event)"
                     ></breeze-health>
-                    <div
-                        v-show="activeHealth"
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button type="button" @click="showPrivate()">
-                            Back
-                        </breeze-button>
-                        <breeze-button
-                            type="button"
-                            class="ml-auto"
-                            @click="showOther()"
-                        >
-                            Next
-                        </breeze-button>
-                    </div>
 
                     <breeze-other
                         v-show="activeOther"
                         :form="form"
                     ></breeze-other>
-                    <div
-                        v-show="activeOther"
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
-                    >
-                        <breeze-button type="button" @click="showHealth()">
-                            Back
-                        </breeze-button>
-                        <breeze-button
-                            type="button"
-                            class="ml-auto"
-                            @click="showEmergency()"
-                        >
-                            Next
-                        </breeze-button>
-                    </div>
 
                     <breeze-emergency
                         v-show="activeEmergency"
                         :form="form"
                     ></breeze-emergency>
                     <div
-                        v-show="activeEmergency"
                         class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
                     >
-                        <breeze-button type="button" @click="showOther()">
-                            Back
-                        </breeze-button>
                         <breeze-button
                             class="ml-auto"
                             :class="{
@@ -204,7 +128,7 @@
                             }"
                             :disabled="form.processing"
                         >
-                            Submit
+                            Update
                         </breeze-button>
                     </div>
                 </form>
