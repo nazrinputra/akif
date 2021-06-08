@@ -40,7 +40,7 @@
         </template>
 
         <div
-            v-if="queue.packages.length > 0"
+            v-if="queue.package"
             class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
@@ -48,41 +48,30 @@
                     <th class="px-3 py-3">Package Name</th>
                     <th class="px-3 py-3">Custom Price</th>
                 </tr>
-                <tr
-                    v-for="pkg in queue.packages"
-                    :key="pkg.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('packages.show', pkg)"
+                            :href="route('packages.show', queue.package)"
                         >
-                            {{ pkg.name }}
+                            {{ queue.package.name }}
                         </inertia-link>
                     </td>
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('packages.show', pkg)"
+                            :href="route('packages.show', queue.package)"
                         >
-                            <span
-                                v-html="
-                                    checkCustomPrice(
-                                        pkg.custom_price,
-                                        pkg.pivot.custom_price
-                                    )
-                                "
-                            />
+                            {{ queue.package_custom_price }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('packages.show', pkg)"
+                            :href="route('packages.show', queue.package)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>
