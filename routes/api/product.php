@@ -46,20 +46,6 @@ Route::post('package/unlink', function (Request $request) {
     return Redirect::back();
 })->name('package.unlink');
 
-Route::post('package/add', function (Request $request) {
-    $package = Package::find($request->package_id);
-    $queue = Queue::find($request->queue_id);
-    $queue->packages()->save($package);
-    return Redirect::back();
-})->name('package.add');
-
-Route::post('package/remove', function (Request $request) {
-    $package = Package::find($request->package_id);
-    $queue = Queue::find($request->queue_id);
-    $queue->packages()->detach($package);
-    return Redirect::back();
-})->name('package.remove');
-
 Route::post('queues/manage', function (Request $request) {
     $queue = Queue::find($request->queue_id);
     $queue->update($request->only('status'));
