@@ -38,6 +38,11 @@ class QueueFactory extends Factory
         $this->car  = $this->faker->randomElement(Car::all());
         $this->customer  = $this->car->owners->first();
         $this->package  = $this->faker->randomElement(Package::all());
+        if ($this->package->custom_price) {
+            $package_custom_price = $this->faker->randomNumber(4, true);
+        } else {
+            $package_custom_price = null;
+        }
         $date = $this->faker->dateTimeThisMonth('+15 days');
 
         return [
@@ -45,6 +50,7 @@ class QueueFactory extends Factory
             'car_id' => $this->car,
             'customer_id' => $this->customer,
             'package_id' => $this->package,
+            'package_custom_price' => $package_custom_price,
             'status' => $this->faker->randomElement($this->status),
             'remarks' => ucwords($this->faker->words(3, true)),
             'created_at' => $date,
