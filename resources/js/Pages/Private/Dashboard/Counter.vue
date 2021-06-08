@@ -92,12 +92,14 @@
             <breeze-step-two
                 v-show="show.stepTwo"
                 :form="form"
+                :checkService="checkService()"
                 @back="stepOne()"
                 @next="stepThree()"
                 @selectPackage="selectPackage($event)"
                 @clearPackage="clearPackage()"
                 @selectService="selectService($event)"
                 @removeService="removeService($event)"
+                @changePrice="checkStepTwo"
             />
 
             <breeze-step-three
@@ -108,6 +110,11 @@
                 :pkg="pkg"
                 :services="services"
                 :form="form"
+                :checkCar="checkCar()"
+                :checkCustomer="checkCustomer()"
+                :checkService="checkService()"
+                :checkStepOne="checkStepOne"
+                :checkStepTwo="checkStepTwo"
                 @back="stepTwo()"
                 @editStepOne="stepOne()"
                 @submit="form.post(route('queues.store'))"
@@ -147,7 +154,9 @@ export default {
             customer_id: null,
             personality_id: null,
             package_id: null,
+            package_custom_price: null,
             services_id: [],
+            services_custom_price: [],
             plate_no: null,
             model: null,
             size: "",
@@ -170,8 +179,14 @@ export default {
             }
         },
         checkStepTwo() {
-            if (this.checkPackage() || this.checkService()) {
-                return true;
+            if (this.pkg && this.services.length == 0) {
+                return this.checkPackage();
+            }
+            if (this.services.length > 0 && !this.pkg) {
+                return this.checkService();
+            }
+            if (this.pkg && this.services.length > 0) {
+                return this.checkPackage() && this.checkService();
             } else {
                 return false;
             }
@@ -246,10 +261,12 @@ export default {
         },
         selectService(data) {
             this.services.push(data);
+            this.form.services_custom_price.push(null);
             this.form.services_id.push(data.id);
         },
         removeService(data) {
             this.services.splice(data, 1);
+            this.form.services_custom_price.splice(data, 1);
             this.form.services_id.splice(data, 1);
         },
         checkCar() {
@@ -276,6 +293,13 @@ export default {
         },
         checkPackage() {
             if (this.pkg) {
+                if (
+                    (this.pkg.custom_price == 1 &&
+                        this.form.package_custom_price == null) ||
+                    this.form.package_custom_price == ""
+                ) {
+                    return false;
+                }
                 return true;
             } else {
                 return false;
@@ -283,7 +307,21 @@ export default {
         },
         checkService() {
             if (this.services.length > 0) {
-                return true;
+                let self = this;
+                let status = [];
+                this.services.forEach(function(service, i) {
+                    if (
+                        (service.custom_price == 1 &&
+                            self.form.services_custom_price[i] == null) ||
+                        self.form.services_custom_price[i] == ""
+                    ) {
+                        status.push(false);
+                    } else {
+                        status.push(true);
+                    }
+                });
+                let checker = arr => arr.every(status => status === true);
+                return checker(status);
             } else {
                 return false;
             }
