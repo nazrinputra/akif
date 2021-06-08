@@ -64,7 +64,14 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', queue.package)"
                         >
-                            {{ queue.package_custom_price }}
+                            {{
+                                queue.package_custom_price
+                                    ? "RM" +
+                                      (
+                                          queue.package_custom_price / 100
+                                      ).toFixed(2)
+                                    : "Not Required"
+                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
@@ -88,6 +95,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Service Name</th>
+                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr
                     v-for="service in queue.services"
@@ -101,6 +109,22 @@
                             :href="route('services.show', service)"
                         >
                             {{ service.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('services.show', service)"
+                        >
+                            {{
+                                service.pivot.custom_price
+                                    ? "RM" +
+                                      (
+                                          service.pivot.custom_price / 100
+                                      ).toFixed(2)
+                                    : "Not Required"
+                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
@@ -329,17 +353,6 @@ export default {
             return moment(date)
                 .tz("Asia/Kuala_Lumpur")
                 .format("MMMM Do YYYY, HH:mm:ss");
-        },
-        checkCustomPrice(status, price) {
-            if (status && price) {
-                return "RM" + (price / 100).toFixed(2);
-            }
-            if (status && !price) {
-                return "<a href='#'>Link to set</a>";
-            }
-            if (!status) {
-                return "Not Required";
-            }
         }
     }
 };
