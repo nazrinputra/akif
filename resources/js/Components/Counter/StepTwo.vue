@@ -64,6 +64,9 @@
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Package Name</th>
+                            <th class="px-3 py-3">
+                                Custom Price
+                            </th>
                         </tr>
                         <tr
                             v-for="pkg in packages"
@@ -74,6 +77,18 @@
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
                                 {{ pkg.name }}
+                            </td>
+                            <td
+                                class="border-t px-3 focus:text-indigo-500"
+                                v-if="pkg.custom_price == false"
+                            >
+                                Not Required
+                            </td>
+                            <td
+                                class="border-t px-3 focus:text-indigo-500"
+                                v-if="pkg.custom_price == true"
+                            >
+                                Required
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -200,6 +215,9 @@
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Service Name</th>
+                            <th class="px-3 py-3">
+                                Custom Price
+                            </th>
                         </tr>
                         <tr
                             v-for="service in services"
@@ -210,6 +228,18 @@
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
                                 {{ service.name }}
+                            </td>
+                            <td
+                                class="border-t px-3 focus:text-indigo-500"
+                                v-if="service.custom_price == false"
+                            >
+                                Not Required
+                            </td>
+                            <td
+                                class="border-t px-3 focus:text-indigo-500"
+                                v-if="service.custom_price == true"
+                            >
+                                Required
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button

@@ -5,7 +5,7 @@
         </template>
         <template #header>
             <inertia-link
-                :href="route('queues.index')"
+                :href="route('queues.show', queue)"
                 class="btn btn-secondary"
             >
                 <i class="fas fa-chevron-left"></i>
@@ -32,10 +32,16 @@
             <breeze-nav-link :href="route('queues.index')" :active="false">
                 Queues
             </breeze-nav-link>
+            <breeze-nav-link
+                :href="route('queues.show', queue)"
+                :active="false"
+            >
+                Queue
+            </breeze-nav-link>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Queue
+                Edit
             </span>
         </template>
 
@@ -70,6 +76,9 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Package Name</th>
+                        <th class="px-3 py-3">
+                            Custom Price
+                        </th>
                     </tr>
                     <tr
                         v-for="pkg in packages"
@@ -80,6 +89,18 @@
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ pkg.name }}
+                        </td>
+                        <td
+                            class="border-t px-3 focus:text-indigo-500"
+                            v-if="pkg.custom_price == false"
+                        >
+                            Not Required
+                        </td>
+                        <td
+                            class="border-t px-3 focus:text-indigo-500"
+                            v-if="pkg.custom_price == true"
+                        >
+                            Required
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
@@ -186,6 +207,9 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Service Name</th>
+                        <th class="px-3 py-3">
+                            Custom Price
+                        </th>
                     </tr>
                     <tr
                         v-for="service in services"
@@ -196,6 +220,18 @@
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ service.name }}
+                        </td>
+                        <td
+                            class="border-t px-3 focus:text-indigo-500"
+                            v-if="service.custom_price == false"
+                        >
+                            Not Required
+                        </td>
+                        <td
+                            class="border-t px-3 focus:text-indigo-500"
+                            v-if="service.custom_price == true"
+                        >
+                            Required
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
@@ -542,6 +578,11 @@ export default {
         viewAllServices() {
             axios.get(route("services.all")).then(response => {
                 this.services = response.data;
+            });
+        },
+        viewAllPackages() {
+            axios.get(route("packages.all")).then(response => {
+                this.packages = response.data;
             });
         },
         addService(service) {
