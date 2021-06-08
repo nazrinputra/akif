@@ -93,6 +93,10 @@
                     v-if="pkg"
                     class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
+                    <span v-if="!checkPackage" class="p-3 text-red-500">
+                        <i class="fas fa-exclamation-triangle"></i> Price input
+                        required
+                    </span>
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">
@@ -123,7 +127,12 @@
                                     type="number"
                                     step=".05"
                                     placeholder="Custom Price"
-                                    class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    class="w-full rounded-md shadow-sm"
+                                    :class="
+                                        !checkPackage
+                                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                                    "
                                     v-model="form.package_custom_price"
                                     @change="changePrice()"
                                 />
@@ -262,7 +271,12 @@
                                 type="number"
                                 step=".05"
                                 placeholder="Custom Price"
-                                class="col rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                class="w-full rounded-md shadow-sm"
+                                :class="
+                                    !checkService
+                                        ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
+                                        : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                                "
                                 v-model="form.services_custom_price[index]"
                                 @change="changePrice()"
                             />
@@ -303,7 +317,7 @@ export default {
         BreezeButton
     },
 
-    props: ["form", "checkService"],
+    props: ["form", "checkService", "checkPackage"],
 
     data() {
         return {

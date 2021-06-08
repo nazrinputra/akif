@@ -93,6 +93,7 @@
                 v-show="show.stepTwo"
                 :form="form"
                 :checkService="checkService()"
+                :checkPackage="checkPackage()"
                 @back="stepOne()"
                 @next="stepThree()"
                 @selectPackage="selectPackage($event)"
