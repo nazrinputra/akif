@@ -46,20 +46,6 @@ Route::post('package/unlink', function (Request $request) {
     return Redirect::back();
 })->name('package.unlink');
 
-Route::post('service/add', function (Request $request) {
-    $service = Service::find($request->service_id);
-    $queue = Queue::find($request->queue_id);
-    $queue->services()->save($service);
-    return Redirect::back();
-})->name('service.add');
-
-Route::post('service/remove', function (Request $request) {
-    $service = Service::find($request->service_id);
-    $queue = Queue::find($request->queue_id);
-    $queue->services()->detach($service);
-    return Redirect::back();
-})->name('service.remove');
-
 Route::post('package/add', function (Request $request) {
     $package = Package::find($request->package_id);
     $queue = Queue::find($request->queue_id);
