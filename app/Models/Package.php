@@ -49,6 +49,6 @@ class Package extends Model
 
     public function queues()
     {
-        return $this->belongsToMany(Queue::class);
+        return $this->hasMany(Queue::class);
     }
 }

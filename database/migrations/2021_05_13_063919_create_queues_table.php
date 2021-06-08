@@ -18,6 +18,8 @@ class CreateQueuesTable extends Migration
             $table->foreignId('store_id')->constrained();
             $table->foreignId('car_id')->constrained();
             $table->foreignId('customer_id')->constrained();
+            $table->foreignId('package_id')->constrained()->nullable();
+            $table->string('package_custom_price')->nullable();
             $table->string('status');
             $table->string('remarks')->nullable();
             $table->integer('move')->nullable();

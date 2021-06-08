@@ -40,37 +40,102 @@
         </template>
 
         <div
-            v-if="whatsapps.length > 0"
-            class="mb-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            v-if="queue.package"
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Quick Send WhatsApp</th>
+                    <th class="px-3 py-3">Package Name</th>
+                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
-                <tr
-                    v-for="whatsapp in whatsapps"
-                    :key="whatsapp.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td
-                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
-                    >
-                        {{ whatsapp.title }}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.show', queue.package)"
+                        >
+                            {{ queue.package.name }}
+                        </inertia-link>
                     </td>
-                    <td class="border-t w-px md:table-cell hidden pr-3">
-                        <a
-                            :href="
-                                'https://api.whatsapp.com/send?phone=6' +
-                                    queue.customer.phone_no +
-                                    '&text=' +
-                                    whatsapp.message
-                            "
-                            target="_blank"
-                            class="btn btn-secondary"
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('packages.show', queue.package)"
+                        >
+                            {{
+                                queue.package_custom_price
+                                    ? "RM" +
+                                      (
+                                          queue.package_custom_price / 100
+                                      ).toFixed(2)
+                                    : "Not Required"
+                            }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('packages.show', queue.package)"
                             tabindex="-1"
                         >
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div
+            v-if="queue.services.length > 0"
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+        >
+            <table class="w-full whitespace-nowrap">
+                <tr class="text-left font-bold">
+                    <th class="px-3 py-3">Service Name</th>
+                    <th class="px-3 py-3">Custom Price</th>
+                </tr>
+                <tr
+                    v-for="service in queue.services"
+                    :key="service.id"
+                    class="hover:bg-gray-100 focus-within:bg-gray-100"
+                >
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('services.show', service)"
+                        >
+                            {{ service.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('services.show', service)"
+                        >
+                            {{
+                                service.pivot.custom_price
+                                    ? "RM" +
+                                      (
+                                          service.pivot.custom_price / 100
+                                      ).toFixed(2)
+                                    : "Not Required"
+                            }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t w-px md:table-cell hidden">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 flex items-center"
+                            :href="route('services.show', service)"
+                            tabindex="-1"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </inertia-link>
                     </td>
                 </tr>
             </table>
@@ -151,72 +216,37 @@
         </div>
 
         <div
-            v-if="queue.packages.length > 0"
+            v-if="whatsapps.length > 0"
             class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Package Name</th>
+                    <th class="px-3 py-3">Quick Send WhatsApp</th>
                 </tr>
                 <tr
-                    v-for="pkg in queue.packages"
-                    :key="pkg.id"
+                    v-for="whatsapp in whatsapps"
+                    :key="whatsapp.id"
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('packages.show', pkg)"
-                        >
-                            {{ pkg.name }}
-                        </inertia-link>
+                    <td
+                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                    >
+                        {{ whatsapp.title }}
                     </td>
-                    <td class="border-t w-px md:table-cell hidden">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('packages.show', pkg)"
+                    <td class="border-t w-px md:table-cell hidden pr-3">
+                        <a
+                            :href="
+                                'https://api.whatsapp.com/send?phone=6' +
+                                    queue.customer.phone_no +
+                                    '&text=' +
+                                    whatsapp.message
+                            "
+                            target="_blank"
+                            class="btn btn-secondary"
                             tabindex="-1"
                         >
-                            <i class="fas fa-eye"></i>
-                        </inertia-link>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div
-            v-if="queue.services.length > 0"
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Service Name</th>
-                </tr>
-                <tr
-                    v-for="service in queue.services"
-                    :key="service.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('services.show', service)"
-                        >
-                            {{ service.name }}
-                        </inertia-link>
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 flex items-center"
-                            :href="route('services.show', service)"
-                            tabindex="-1"
-                        >
-                            <i class="fas fa-eye"></i>
-                        </inertia-link>
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </td>
                 </tr>
             </table>
@@ -302,7 +332,6 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
 import moment from "moment-timezone";
-import throttle from "lodash/throttle";
 
 export default {
     components: {

@@ -63,13 +63,13 @@ class Queue extends Model
         return $this->belongsTo(Car::class);
     }
 
-    public function packages()
+    public function package()
     {
-        return $this->belongsToMany(Package::class);
+        return $this->belongsTo(Package::class);
     }
 
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class)->withPivot('custom_price');
     }
 }

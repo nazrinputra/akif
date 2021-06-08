@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Car;
 use App\Models\Queue;
 use App\Models\Store;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QueueFactory extends Factory
@@ -22,6 +23,8 @@ class QueueFactory extends Factory
 
     protected $customer;
 
+    protected $package;
+
     protected $status = ['Waiting', 'Grooming', 'Completed', 'Collected', 'Cancelled'];
 
     /**
@@ -34,12 +37,20 @@ class QueueFactory extends Factory
         $this->stores = Store::all();
         $this->car  = $this->faker->randomElement(Car::all());
         $this->customer  = $this->car->owners->first();
+        $this->package  = $this->faker->randomElement(Package::all());
+        if ($this->package->custom_price) {
+            $package_custom_price = $this->faker->randomNumber(4, true);
+        } else {
+            $package_custom_price = null;
+        }
         $date = $this->faker->dateTimeThisMonth('+15 days');
 
         return [
             'store_id' => $this->faker->randomElement($this->stores),
             'car_id' => $this->car,
             'customer_id' => $this->customer,
+            'package_id' => $this->package,
+            'package_custom_price' => $package_custom_price,
             'status' => $this->faker->randomElement($this->status),
             'remarks' => ucwords($this->faker->words(3, true)),
             'created_at' => $date,
