@@ -14,7 +14,6 @@ use App\Models\Whatsapp;
 use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -159,12 +158,27 @@ class QueueController extends Controller
 
         if ($request->package_id) {
             $package = Package::find($request->package_id);
-            $createdQueue->packages()->save($package);
+            $createdQueue->package_id = $package->id;
+
+            if ($package->custom_price) {
+                $package_custom_price = $request->package_custom_price * 100;
+                $createdQueue->package_custom_price = $package_custom_price;
+            }
+
+            $createdQueue->save();
         }
 
-        foreach ($request->services_id as $id) {
-            $service = Service::find($id);
-            $createdQueue->services()->save($service);
+        foreach ($request->services_id as $i => $id) {
+
+            if ($request->services_custom_price[$i]) {
+                $service_custom_price = $request->services_custom_price[$i] * 100;
+            } else {
+                $service_custom_price = null;
+            }
+
+            $createdQueue->services()->attach([
+                $id => ['custom_price' => $service_custom_price]
+            ]);
         }
 
         return Redirect::route('queues.show', $createdQueue)->with('success', 'Queue created successfully.');
@@ -179,7 +193,7 @@ class QueueController extends Controller
     public function show(Queue $queue)
     {
         return Inertia::render('Private/Queue/Show', [
-            'queue' => $queue->load('car', 'customer', 'store', 'packages', 'services'),
+            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services'),
             'whatsapps' => Whatsapp::all()
         ]);
     }
@@ -193,7 +207,7 @@ class QueueController extends Controller
     public function edit(Queue $queue)
     {
         return Inertia::render('Private/Queue/Edit', [
-            'queue' => $queue->load('car', 'customer', 'store', 'packages', 'services')
+            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services')
         ]);
     }
 
@@ -208,10 +222,37 @@ class QueueController extends Controller
     {
         $request->validate([
             'status' => ['required', 'max:10'],
-            'remarks' => ['required', 'max:255'],
+            'remarks' => ['max:255'],
         ]);
 
         $queue->update($request->only('status', 'remarks'));
+
+        if ($request->package_id) {
+            $package = Package::find($request->package_id);
+            $queue->package_id = $package->id;
+
+            if ($package->custom_price) {
+                $package_custom_price = $request->package_custom_price * 100;
+                $queue->package_custom_price = $package_custom_price;
+            }
+
+            $queue->save();
+        }
+
+        $queue->services()->detach();
+
+        foreach ($request->services_id as $i => $id) {
+
+            if ($request->services_custom_price[$i]) {
+                $service_custom_price = $request->services_custom_price[$i] * 100;
+            } else {
+                $service_custom_price = null;
+            }
+
+            $queue->services()->attach([
+                $id => ['custom_price' => $service_custom_price]
+            ]);
+        }
 
         return Redirect::route('queues.show', $queue)->with('success', 'Queue updated successfully.');
     }
