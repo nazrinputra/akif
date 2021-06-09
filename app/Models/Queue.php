@@ -11,14 +11,18 @@ class Queue extends Model
 
     protected $attributes = [
         'status' => 'Waiting',
-        'remarks' => 'None',
+        'remarks' => '',
         'move' => 0,
+        'package_id' => null,
+        'package_custom_price' => null,
     ];
 
     protected $fillable = [
         'store_id',
         'car_id',
         'customer_id',
+        'package_id',
+        'package_custom_price',
         'status',
         'remarks',
         'move'

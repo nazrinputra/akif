@@ -146,7 +146,8 @@
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Customer</th>
+                    <th class="px-3 py-3">Customer Name</th>
+                    <th class="px-3 py-3">Customer Phone No</th>
                 </tr>
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
@@ -155,11 +156,16 @@
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
-                            {{
-                                queue.customer.name +
-                                    " - " +
-                                    queue.customer.phone_no
-                            }}
+                            {{ queue.customer.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('customers.show', queue.customer)"
+                        >
+                            {{ queue.customer.phone_no }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
