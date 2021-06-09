@@ -322,6 +322,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Customer Name</th>
+                    <th class="px-3 py-3">Customer Phone No</th>
                 </tr>
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
@@ -331,6 +332,15 @@
                             :href="route('customers.show', queue.customer)"
                         >
                             {{ queue.customer.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('customers.show', queue.customer)"
+                        >
+                            {{ queue.customer.phone_no }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
@@ -566,13 +576,21 @@ export default {
             this.form.status = this.newQueue.status;
             this.form.remarks = this.newQueue.remarks;
             this.form.package_id = this.newQueue.package_id;
-            this.form.package_custom_price = this.newQueue.package_custom_price;
+            if (this.newQueue.package_custom_price) {
+                this.form.package_custom_price = (
+                    this.newQueue.package_custom_price / 100
+                ).toFixed(2);
+            }
             let self = this;
             this.newQueue.services.forEach(service => {
                 self.form.services_id.push(service.id);
-                self.form.services_custom_price.push(
-                    service.pivot.custom_price
-                );
+                if (service.custom_price) {
+                    self.form.services_custom_price.push(
+                        (service.pivot.custom_price / 100).toFixed(2)
+                    );
+                } else {
+                    self.form.services_custom_price.push(null);
+                }
             });
         },
         viewAllServices() {
