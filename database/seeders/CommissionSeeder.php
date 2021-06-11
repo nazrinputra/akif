@@ -23,7 +23,7 @@ class CommissionSeeder extends Seeder
          */
         $faker = \Faker\Factory::create('ms_MY');
         $queues = Queue::all();
-        $crews = User::all()->pluck('id');
+        $crews = User::all()->skip(2)->pluck('id');
 
         /**
          * Assign commission to every queues
