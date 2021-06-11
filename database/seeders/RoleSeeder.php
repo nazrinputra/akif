@@ -26,6 +26,7 @@ class RoleSeeder extends Seeder
         $owner->givePermissionTo(['view services', 'create services', 'edit services', 'delete services']);
         $owner->givePermissionTo(['view personalities', 'create personalities', 'edit personalities', 'delete personalities']);
         $owner->givePermissionTo(['view whatsapps', 'create whatsapps', 'edit whatsapps', 'delete whatsapps']);
+        $owner->givePermissionTo(['view commissions', 'create commissions', 'edit commissions']);
         $owner->givePermissionTo(['view deleted']);
         $owner->givePermissionTo(['view report']);
         $owner->givePermissionTo(['edit profile']);
@@ -36,6 +37,7 @@ class RoleSeeder extends Seeder
         $manager->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
         $manager->givePermissionTo(['view healths', 'create healths', 'edit healths', 'delete healths']);
         $manager->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
+        $manager->givePermissionTo(['view commissions', 'create commissions', 'edit commissions']);
         $manager->givePermissionTo(['view deleted']);
         $manager->givePermissionTo(['view report']);
         $manager->givePermissionTo(['edit profile']);
@@ -45,11 +47,13 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
         $admin->givePermissionTo(['view healths', 'create healths', 'edit healths', 'delete healths']);
         $admin->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
+        $admin->givePermissionTo(['view commissions', 'create commissions', 'edit commissions']);
         $admin->givePermissionTo(['view deleted']);
         $admin->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
 
         $qualityChecker = Role::create(['name' => 'Quality Checker']);
         $qualityChecker->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
+        $qualityChecker->givePermissionTo(['view commissions', 'create commissions', 'edit commissions']);
 
         Role::create(['name' => 'Detailer']);
         Role::create(['name' => 'Accountant']);

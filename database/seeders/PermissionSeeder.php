@@ -88,5 +88,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'create healths']);
         Permission::create(['name' => 'edit healths']);
         Permission::create(['name' => 'delete healths']);
+
+        // commission
+        Permission::create(['name' => 'view commissions']);
+        Permission::create(['name' => 'create commissions']);
+        Permission::create(['name' => 'edit commissions']);
     }
 }
