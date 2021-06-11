@@ -100,17 +100,6 @@
 
                                             <template #content>
                                                 <breeze-dropdown-link
-                                                    :href="route('reports')"
-                                                    as="button"
-                                                    v-if="
-                                                        hasAnyPermission([
-                                                            'view report'
-                                                        ])
-                                                    "
-                                                >
-                                                    View Reports
-                                                </breeze-dropdown-link>
-                                                <breeze-dropdown-link
                                                     :href="
                                                         route('profiles.show')
                                                     "
@@ -222,13 +211,6 @@
                                 </div>
 
                                 <div class="mt-3 space-y-1">
-                                    <breeze-responsive-nav-link
-                                        :href="route('reports')"
-                                        as="button"
-                                        v-if="hasAnyPermission(['view report'])"
-                                    >
-                                        View Reports
-                                    </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('profiles.show')"
                                         as="button"
