@@ -22,15 +22,22 @@ class QueueSeeder extends Seeder
          */
         $faker = \Faker\Factory::create('ms_MY');
         $queues = Queue::factory(80)->create()->pluck('id');
-        $services = Service::all()->pluck('id');
+        $services = Service::all();
 
         /**
          * Assign random service to every queues
          */
         foreach ($queues as $queue) {
+            $service = $faker->randomElement($services);
+            if ($service->custom_price) {
+                $custom_price = $faker->randomNumber(4, true);
+            } else {
+                $custom_price = null;
+            }
             DB::table('queue_service')->insert([
-                'service_id' => $faker->randomElement($services),
-                'queue_id' => $queue
+                'service_id' => $service->id,
+                'queue_id' => $queue,
+                'custom_price' => $custom_price,
             ]);
         }
     }
