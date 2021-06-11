@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Health;
 use App\Models\Commission;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,12 @@ class CommissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Inertia::render('Private/Commission/Index', [
+            'filters' => $request->all('search', 'trashed'),
+            'healths' => Health::filter($request->only('search', 'trashed'))->paginate(10)->withQueryString()
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class CommissionController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Commission/Create');
     }
 
     /**
@@ -46,7 +51,9 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        //
+        return Inertia::render('Private/Commission/Show', [
+            'commission' => $commission->load('crews')
+        ]);
     }
 
     /**
@@ -57,7 +64,9 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        //
+        return Inertia::render('Private/Commission/Edit', [
+            'commission' => $commission->load('crews')
+        ]);
     }
 
     /**
