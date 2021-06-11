@@ -99,4 +99,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Store::class);
     }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class);
+    }
 }

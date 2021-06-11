@@ -51,4 +51,9 @@ class Package extends Model
     {
         return $this->hasMany(Queue::class);
     }
+
+    public function commissions()
+    {
+        return $this->morphMany(Commission::class, 'claimable');
+    }
 }
