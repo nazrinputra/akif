@@ -34,6 +34,7 @@ require __DIR__ . '/web/whatsapp.php';
 require __DIR__ . '/web/queue.php';
 require __DIR__ . '/web/role.php';
 require __DIR__ . '/web/health.php';
+require __DIR__ . '/web/commission.php';
 
 URL::forceScheme('https');
 
