@@ -23,7 +23,7 @@ class CommissionSeeder extends Seeder
          */
         $faker = \Faker\Factory::create('ms_MY');
         $queues = Queue::all();
-        $crews = User::all()->skip(2)->pluck('id');
+        $detailer = User::role('Detailer')->pluck('id');
 
         /**
          * Assign commission to every queues
@@ -32,14 +32,14 @@ class CommissionSeeder extends Seeder
             $package = $queue->package;
             if ($package->commission) {
                 Commission::create([
-                    'user_id' => $faker->randomElement($crews),
+                    'user_id' => $faker->randomElement($detailer),
                     'claimable_type' => Package::class,
                     'claimable_id' => $package->id,
                     'value' => $package->commission
                 ]);
             } else {
                 Commission::create([
-                    'user_id' => $faker->randomElement($crews),
+                    'user_id' => $faker->randomElement($detailer),
                     'claimable_type' => Package::class,
                     'claimable_id' => $package->id,
                     'value' => $queue->package_custom_price / 5
@@ -49,14 +49,14 @@ class CommissionSeeder extends Seeder
             foreach ($queue->services as $service) {
                 if ($service->commission) {
                     Commission::create([
-                        'user_id' => $faker->randomElement($crews),
+                        'user_id' => $faker->randomElement($detailer),
                         'claimable_type' => Service::class,
                         'claimable_id' => $service->id,
                         'value' => $service->commission
                     ]);
                 } else {
                     Commission::create([
-                        'user_id' => $faker->randomElement($crews),
+                        'user_id' => $faker->randomElement($detailer),
                         'claimable_type' => Service::class,
                         'claimable_id' => $service->id,
                         'value' => $service->pivot->custom_price,
