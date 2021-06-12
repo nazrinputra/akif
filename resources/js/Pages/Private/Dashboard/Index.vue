@@ -5,21 +5,28 @@
         </template>
         <template #header>
             <inertia-link
-                v-if="hasAnyPermission(['edit queues'])"
-                :href="route('queues.manage')"
-                class="btn btn-secondary align-self-end"
+                href="#"
+                v-if="hasAnyPermission(['edit commissions'])"
+                class="btn btn-secondary"
             >
-                Queues
+                <i class="fas fa-dollar-sign"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
                 Akif Car Grooming Center
             </h6>
             <inertia-link
-                v-if="hasAnyPermission(['create queues'])"
-                :href="route('counter')"
-                class="btn btn-secondary align-self-end"
+                v-if="hasAnyPermission(['edit queues'])"
+                :href="route('queues.manage')"
+                class="btn btn-secondary mr-3"
             >
-                Counter
+                <i class="fas fa-clipboard-list"></i>
+            </inertia-link>
+            <inertia-link
+                :href="route('counter')"
+                v-if="hasAnyPermission(['create queues'])"
+                class="btn btn-secondary"
+            >
+                <i class="fas fa-cash-register"></i>
             </inertia-link>
         </template>
 
