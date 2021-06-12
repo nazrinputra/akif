@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Commission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,5 +48,10 @@ class Service extends Model
     public function packages()
     {
         return $this->belongsToMany(Package::class);
+    }
+
+    public function commissions()
+    {
+        return $this->morphMany(Commission::class, 'claimable');
     }
 }

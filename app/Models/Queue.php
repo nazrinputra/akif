@@ -76,4 +76,9 @@ class Queue extends Model
     {
         return $this->belongsToMany(Service::class)->withPivot('custom_price');
     }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class);
+    }
 }

@@ -19,6 +19,15 @@
     </li>
     <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
         <inertia-link
+            :class="route().current('commissions.index') ? 'active' : ''"
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            :href="route('commissions.index')"
+            v-if="hasAnyPermission(['view commissions'])"
+            >commissions</inertia-link
+        >
+    </li>
+    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+        <inertia-link
             :class="route().current('whatsapps.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
             :href="route('whatsapps.index')"

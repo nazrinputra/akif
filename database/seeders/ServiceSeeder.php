@@ -100,7 +100,7 @@ class ServiceSeeder extends Seeder
             'slug' => 'windows-treatment',
             'name' => 'Windows Treatment',
             'custom_price' => true,
-            'commission' => 0,
+            'commission' => null,
             'description' => $faker->sentence()
         ]);
 
@@ -140,7 +140,7 @@ class ServiceSeeder extends Seeder
             'slug' => 'seat-and-interiors-cleaning',
             'name' => 'Seat and Interiors Cleaning',
             'custom_price' => true,
-            'commission' => 0,
+            'commission' => null,
             'description' => $faker->sentence()
         ]);
 
@@ -172,7 +172,7 @@ class ServiceSeeder extends Seeder
             'slug' => 'interior-maintenance-leather',
             'name' => 'Interior Maintenance Leather',
             'custom_price' => true,
-            'commission' => 0,
+            'commission' => null,
             'description' => $faker->sentence()
         ]);
 
@@ -204,7 +204,7 @@ class ServiceSeeder extends Seeder
             'slug' => 'touchup-polish',
             'name' => 'Touchup Polish',
             'custom_price' => true,
-            'commission' => 0,
+            'commission' => null,
             'description' => $faker->sentence()
         ]);
     }

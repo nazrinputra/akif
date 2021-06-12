@@ -12,7 +12,7 @@
     </teleport>
     <teleport to="#menuButton">
         <button
-            v-if="$page.props.auth.can.length > 0"
+            v-if="$page.props.auth.can.length != 0"
             type="button"
             class="flex md:hidden text-uppercase font-weight-bold text-white text-xl"
         >
@@ -99,17 +99,6 @@
                                             </template>
 
                                             <template #content>
-                                                <breeze-dropdown-link
-                                                    :href="route('reports')"
-                                                    as="button"
-                                                    v-if="
-                                                        hasAnyPermission([
-                                                            'view report'
-                                                        ])
-                                                    "
-                                                >
-                                                    View Reports
-                                                </breeze-dropdown-link>
                                                 <breeze-dropdown-link
                                                     :href="
                                                         route('profiles.show')
@@ -222,13 +211,6 @@
                                 </div>
 
                                 <div class="mt-3 space-y-1">
-                                    <breeze-responsive-nav-link
-                                        :href="route('reports')"
-                                        as="button"
-                                        v-if="hasAnyPermission(['view report'])"
-                                    >
-                                        View Reports
-                                    </breeze-responsive-nav-link>
                                     <breeze-responsive-nav-link
                                         :href="route('profiles.show')"
                                         as="button"

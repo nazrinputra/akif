@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
 
@@ -123,7 +122,7 @@ class UserController extends Controller
         return Inertia::render('Private/Crew/Show', [
             'stores' => Store::all(),
             'roles' => Role::all(),
-            'crew' => $crew->load('store', 'roles', 'healths')
+            'crew' => $crew->load('store', 'roles', 'healths', 'commissions')
         ]);
     }
 
@@ -138,7 +137,7 @@ class UserController extends Controller
         return Inertia::render('Private/Crew/Edit', [
             'stores' => Store::all(),
             'roles' => Role::all(),
-            'crew' => $crew->load('store', 'roles', 'healths')
+            'crew' => $crew->load('store', 'roles', 'healths', 'commissions')
         ]);
     }
 

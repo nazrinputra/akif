@@ -2,8 +2,9 @@
 
 use Inertia\Inertia;
 use App\Models\Queue;
+use App\Models\Store;
 use App\Models\Customer;
-use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ require __DIR__ . '/web/whatsapp.php';
 require __DIR__ . '/web/queue.php';
 require __DIR__ . '/web/role.php';
 require __DIR__ . '/web/health.php';
+require __DIR__ . '/web/commission.php';
 
 URL::forceScheme('https');
 
@@ -59,6 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
             'monthly' => $monthly,
             'fresh' => $fresh,
             'stale' => $stale,
+            'stores' => Store::all(),
+            'roles' => Role::all(),
             'healths' => Auth::user()->healths,
         ]);
     })->name('dashboard');
