@@ -1,7 +1,7 @@
 <template>
     <breeze-authenticated-layout>
         <template #title>
-            - List Healths
+            - List Commissions
         </template>
 
         <template #header>
@@ -9,36 +9,19 @@
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
             <h6 class="pt-2.5 mx-auto">
-                List of health conditions
+                List of crew commissions
             </h6>
-            <inertia-link
-                v-if="hasAnyPermission(['create healths'])"
-                :href="route('healths.create')"
-                class="btn btn-secondary align-self-end"
-            >
-                <i class="fas fa-plus"></i>
-            </inertia-link>
         </template>
 
         <template #nav>
             <span
                 class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
-                Healths
+                Commissions
             </span>
         </template>
 
         <div class="input-group pb-4">
-            <select
-                v-if="hasAnyPermission(['view deleted'])"
-                :value="filters.trashed"
-                @input="this.form.trashed = $event.target.value"
-                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-                <option value="without">Without Trashed</option>
-                <option value="with">With Trashed</option>
-                <option value="only">Only Trashed</option>
-            </select>
             <input
                 type="text"
                 id="search"
@@ -54,47 +37,53 @@
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Health Name</th>
+                    <th class="px-3 py-3">Crew Name</th>
+                    <th class="px-3 py-3">Product Name</th>
                 </tr>
                 <tr
-                    v-for="health in healths.data"
-                    :key="health.id"
+                    v-for="commission in commissions.data"
+                    :key="commission.id"
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('healths.show', health)"
+                            :href="route('commissions.show', commission)"
                         >
-                            {{ health.name }}
-                            <i
-                                v-if="health.deleted_at"
-                                class="fas fa-trash opacity-50 ml-3"
-                            ></i>
+                            {{ commission.user.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit;"
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            :href="route('commissions.show', commission)"
+                        >
+                            {{ commission.claimable.name }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit;"
                             class="px-3 flex items-center"
-                            :href="route('healths.show', health)"
+                            :href="route('commissions.show', commission)"
                             tabindex="-1"
                         >
                             <i class="fas fa-eye"></i>
                         </inertia-link>
                     </td>
                 </tr>
-                <tr v-if="healths.data.length === 0">
+                <tr v-if="commissions.data.length === 0">
                     <td class="border-t px-3 py-3" colspan="2">
-                        Uh-oh! No health conditions found.
+                        Uh-oh! No commissions found.
                     </td>
                 </tr>
             </table>
         </div>
         <breeze-pagination
             class="mt-6 d-flex align-items-center"
-            :links="healths.links"
+            :links="commissions.links"
         />
     </breeze-authenticated-layout>
 </template>
@@ -120,7 +109,7 @@ export default {
         errors: Object,
         flash: Object,
         filters: Object,
-        healths: Object
+        commissions: Object
     },
 
     data() {
@@ -135,9 +124,13 @@ export default {
         form: {
             deep: true,
             handler: throttle(function() {
-                this.$inertia.get(route("healths.index"), pickBy(this.form), {
-                    preserveState: true
-                });
+                this.$inertia.get(
+                    route("commissions.index"),
+                    pickBy(this.form),
+                    {
+                        preserveState: true
+                    }
+                );
             }, 150)
         }
     }
