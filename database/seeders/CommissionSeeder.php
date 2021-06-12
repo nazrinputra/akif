@@ -32,6 +32,7 @@ class CommissionSeeder extends Seeder
             $package = $queue->package;
             if ($package->commission) {
                 Commission::create([
+                    'queue_id' => $queue->id,
                     'user_id' => $faker->randomElement($detailer),
                     'claimable_type' => Package::class,
                     'claimable_id' => $package->id,
@@ -39,6 +40,7 @@ class CommissionSeeder extends Seeder
                 ]);
             } else {
                 Commission::create([
+                    'queue_id' => $queue->id,
                     'user_id' => $faker->randomElement($detailer),
                     'claimable_type' => Package::class,
                     'claimable_id' => $package->id,
@@ -49,6 +51,7 @@ class CommissionSeeder extends Seeder
             foreach ($queue->services as $service) {
                 if ($service->commission) {
                     Commission::create([
+                        'queue_id' => $queue->id,
                         'user_id' => $faker->randomElement($detailer),
                         'claimable_type' => Service::class,
                         'claimable_id' => $service->id,
@@ -56,10 +59,11 @@ class CommissionSeeder extends Seeder
                     ]);
                 } else {
                     Commission::create([
+                        'queue_id' => $queue->id,
                         'user_id' => $faker->randomElement($detailer),
                         'claimable_type' => Service::class,
                         'claimable_id' => $service->id,
-                        'value' => $service->pivot->custom_price,
+                        'value' => $service->pivot->custom_price / 5,
                     ]);
                 }
             }
