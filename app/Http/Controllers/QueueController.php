@@ -11,6 +11,7 @@ use App\Models\Package;
 use App\Models\Service;
 use App\Models\Customer;
 use App\Models\Whatsapp;
+use App\Models\Commission;
 use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -161,8 +162,23 @@ class QueueController extends Controller
             $createdQueue->package_id = $package->id;
 
             if ($package->custom_price) {
-                $package_custom_price = $request->package_custom_price * 100;
-                $createdQueue->package_custom_price = $package_custom_price;
+                $createdQueue->package_custom_price = $request->package_custom_price * 100;
+
+                Commission::create([
+                    'queue_id' => $createdQueue->id,
+                    'claimable_type' => Package::class,
+                    'claimable_id' => $package->id,
+                    'value' => $request->package_custom_price * 100 / 5
+                ]);
+            } else {
+                $createdQueue->package_custom_price = null;
+
+                Commission::create([
+                    'queue_id' => $createdQueue->id,
+                    'claimable_type' => Package::class,
+                    'claimable_id' => $package->id,
+                    'value' => $package->commission
+                ]);
             }
 
             $createdQueue->save();
@@ -172,8 +188,23 @@ class QueueController extends Controller
 
             if ($request->services_custom_price[$i]) {
                 $service_custom_price = $request->services_custom_price[$i] * 100;
+
+                Commission::create([
+                    'queue_id' => $createdQueue->id,
+                    'claimable_type' => Service::class,
+                    'claimable_id' => $id,
+                    'value' => $service_custom_price / 5
+                ]);
             } else {
                 $service_custom_price = null;
+                $service = Service::find($id);
+
+                Commission::create([
+                    'queue_id' => $createdQueue->id,
+                    'claimable_type' => Service::class,
+                    'claimable_id' => $id,
+                    'value' => $service->commission
+                ]);
             }
 
             $createdQueue->services()->attach([
