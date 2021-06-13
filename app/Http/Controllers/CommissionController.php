@@ -17,7 +17,7 @@ class CommissionController extends Controller
     {
         return Inertia::render('Private/Commission/Index', [
             'filters' => $request->all('search'),
-            'commissions' => Commission::filter($request->only('search'))->with('claimable', 'user')->paginate(10)->withQueryString()
+            'commissions' => Commission::where('user_id', '<>', null)->filter($request->only('search'))->with('claimable', 'user')->paginate(10)->withQueryString()
         ]);
     }
 
@@ -28,7 +28,7 @@ class CommissionController extends Controller
      */
     public function create()
     {
-        // return Inertia::render('Private/Commission/Create');
+        //
     }
 
     /**
@@ -63,9 +63,7 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        // return Inertia::render('Private/Commission/Edit', [
-        //     'commission' => $commission->load('crews')
-        // ]);
+        //
     }
 
     /**
