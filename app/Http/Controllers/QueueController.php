@@ -45,7 +45,7 @@ class QueueController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Private/Dashboard/Counter');
     }
 
     /**
