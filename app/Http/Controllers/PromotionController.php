@@ -15,7 +15,7 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        $promotions = Package::where('promotion', 'Yes')->get();
+        $promotions = Package::where('promotion', true)->get();
         $promotionsCount = $promotions->count();
         $firstPromotion = $promotions->first();
         $otherPromotions = $promotions->skip(1);
