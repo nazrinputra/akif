@@ -258,8 +258,8 @@ class QueueController extends Controller
 
         $queue->update($request->only('status', 'remarks'));
 
-        $old_commissions = Commission::where('queue_id', $queue->id)->get();
-        foreach ($old_commissions as $commission) {
+        $old_package_commissions = Commission::where('queue_id', $queue->id)->where('claimable_type', Package::class)->get();
+        foreach ($old_package_commissions as $commission) {
             $commission->delete();
         }
 
