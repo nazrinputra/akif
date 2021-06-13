@@ -258,13 +258,33 @@ class QueueController extends Controller
 
         $queue->update($request->only('status', 'remarks'));
 
+        $old_commissions = Commission::where('queue_id', $queue->id)->get();
+        foreach ($old_commissions as $commission) {
+            $commission->delete();
+        }
+
         if ($request->package_id) {
             $package = Package::find($request->package_id);
             $queue->package_id = $package->id;
 
             if ($package->custom_price) {
-                $package_custom_price = $request->package_custom_price * 100;
-                $queue->package_custom_price = $package_custom_price;
+                $queue->package_custom_price = $request->package_custom_price * 100;
+
+                Commission::create([
+                    'queue_id' => $queue->id,
+                    'claimable_type' => Package::class,
+                    'claimable_id' => $package->id,
+                    'value' => $request->package_custom_price * 100 / 5
+                ]);
+            } else {
+                $queue->package_custom_price = null;
+
+                Commission::create([
+                    'queue_id' => $queue->id,
+                    'claimable_type' => Package::class,
+                    'claimable_id' => $package->id,
+                    'value' => $package->commission
+                ]);
             }
 
             $queue->save();
