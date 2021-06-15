@@ -31,7 +31,7 @@ class RoleSeeder extends Seeder
         $owner->givePermissionTo(['view report']);
         $owner->givePermissionTo(['edit profile']);
         $owner->givePermissionTo(['restore deleted']);
-        $owner->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues', 'both queues']);
+        $owner->givePermissionTo(['view queues', 'create queues', 'edit queues', 'both queues']);
 
         $manager = Role::create(['name' => 'Manager']);
         $manager->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
@@ -41,7 +41,7 @@ class RoleSeeder extends Seeder
         $manager->givePermissionTo(['view deleted']);
         $manager->givePermissionTo(['view report']);
         $manager->givePermissionTo(['edit profile']);
-        $manager->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
+        $manager->givePermissionTo(['view queues', 'create queues', 'edit queues']);
 
         $admin = Role::create(['name' => 'Admin']);
         $admin->givePermissionTo(['view cars', 'create cars', 'edit cars', 'delete cars']);
@@ -49,10 +49,10 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(['view customers', 'create customers', 'edit customers', 'delete customers']);
         $admin->givePermissionTo(['view commissions', 'edit commissions']);
         $admin->givePermissionTo(['view deleted']);
-        $admin->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
+        $admin->givePermissionTo(['view queues', 'create queues', 'edit queues']);
 
         $qualityChecker = Role::create(['name' => 'Quality Checker']);
-        $qualityChecker->givePermissionTo(['view queues', 'create queues', 'edit queues', 'reopen queues']);
+        $qualityChecker->givePermissionTo(['view queues', 'create queues', 'edit queues']);
         $qualityChecker->givePermissionTo(['view commissions', 'edit commissions']);
 
         Role::create(['name' => 'Detailer']);
