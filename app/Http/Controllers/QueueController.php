@@ -291,13 +291,32 @@ class QueueController extends Controller
         }
 
         $queue->services()->detach();
+        $old_service_commissions = Commission::where('queue_id', $queue->id)->where('claimable_type', Service::class)->get();
+        foreach ($old_service_commissions as $commission) {
+            $commission->delete();
+        }
 
         foreach ($request->services_id as $i => $id) {
 
             if ($request->services_custom_price[$i]) {
                 $service_custom_price = $request->services_custom_price[$i] * 100;
+
+                Commission::create([
+                    'queue_id' => $queue->id,
+                    'claimable_type' => Service::class,
+                    'claimable_id' => $id,
+                    'value' => $service_custom_price / 5
+                ]);
             } else {
                 $service_custom_price = null;
+                $service = Service::find($id);
+
+                Commission::create([
+                    'queue_id' => $queue->id,
+                    'claimable_type' => Service::class,
+                    'claimable_id' => $id,
+                    'value' => $service->commission
+                ]);
             }
 
             $queue->services()->attach([
