@@ -10,7 +10,7 @@
         >
             <td class="border-t">
                 <inertia-link
-                    style="color: inherit; text-decoration: inherit;"
+                    style="color: inherit; text-decoration: inherit"
                     class="px-3 py-3 flex items-center focus:text-indigo-500"
                     :href="route('queues.show', queue)"
                 >
@@ -35,7 +35,7 @@
             </td>
             <td class="border-t md:table-cell hidden">
                 <inertia-link
-                    style="color: inherit; text-decoration: inherit;"
+                    style="color: inherit; text-decoration: inherit"
                     class="px-3 py-3 flex justify-content-end focus:text-indigo-500"
                     :href="route('queues.show', queue)"
                 >
@@ -46,19 +46,14 @@
                         "
                         :value="queue.status"
                         class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        ><option value="" disabled>Select Status</option>
+                    >
+                        <option value="" disabled>Select Status</option>
                         <option value="Waiting">Waiting</option>
                         <option value="Grooming">Grooming</option>
                         <option value="Completed">Completed</option>
                         <option value="Collected">Collected</option>
                         <option value="Cancelled">Cancelled</option>
                     </select>
-                    <button
-                        class="ml-3 btn btn-light"
-                        @click.prevent="moveBottom(queue)"
-                    >
-                        <i class="fas fa-level-down-alt mx-1.5"></i>
-                    </button>
                 </inertia-link>
             </td>
         </tr>
@@ -84,13 +79,10 @@ export default {
                 return "badge-dark";
             }
         },
-        moveBottom(queue) {
-            this.$emit("moveBottom", queue);
-        },
         updateStatus(status, queue) {
             queue.status = status;
             this.$emit("updateStatus", queue);
-        }
-    }
+        },
+    },
 };
 </script>

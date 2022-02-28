@@ -1,16 +1,12 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Manage Queues
-        </template>
+        <template #title> - Manage Queues </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Manage status of queues
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Manage status of queues</h6>
             <inertia-link
                 :href="route('counter')"
                 v-if="hasAnyPermission(['create queues'])"
@@ -99,20 +95,18 @@
                 v-show="activeWaiting"
                 v-if="waiting.length > 0"
                 :waiting="waiting"
-                @moveBottom="moveBottom($event)"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
-                style="background-color:#f5c6cb !important;"
+                style="background-color: #f5c6cb !important"
             />
 
             <breeze-queue-grooming
                 v-show="activeGrooming"
                 v-if="grooming.length > 0"
                 :grooming="grooming"
-                @moveBottom="moveBottom($event)"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
-                style="background-color:#ffeeba !important;"
+                style="background-color: #ffeeba !important"
             />
 
             <breeze-queue-completed
@@ -122,7 +116,7 @@
                 :whatsapp="completedWhatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
-                style="background-color:#c3e6cb !important;"
+                style="background-color: #c3e6cb !important"
             />
 
             <breeze-queue-collected
@@ -165,7 +159,7 @@ export default {
         BreezeQueueGrooming,
         BreezeQueueCompleted,
         BreezeQueueCollected,
-        BreezeQueueCancelled
+        BreezeQueueCancelled,
     },
 
     props: {
@@ -174,7 +168,7 @@ export default {
         flash: Object,
         completedWhatsapp: Object,
         collectedWhatsapp: Object,
-        cancelledWhatsapp: Object
+        cancelledWhatsapp: Object,
     },
 
     data() {
@@ -189,7 +183,7 @@ export default {
             activeGrooming: false,
             activeCompleted: false,
             activeCollected: false,
-            activeCancelled: false
+            activeCancelled: false,
         };
     },
 
@@ -203,7 +197,7 @@ export default {
                 route("manage"),
                 {
                     queue_id: queue.id,
-                    status: queue.status
+                    status: queue.status,
                 },
                 {
                     onSuccess: () => {
@@ -215,52 +209,32 @@ export default {
                             " status changed to " +
                             queue.status +
                             " successfully.";
-                    }
-                }
-            );
-        },
-        moveBottom(queue) {
-            queue.move += 1;
-            this.$inertia.post(
-                route("bottom"),
-                {
-                    queue_id: queue.id,
-                    move: queue.move
-                },
-                {
-                    onSuccess: () => {
-                        this.getQueue();
-                        this.flash.warning =
-                            queue.car.model +
-                            " - " +
-                            queue.car.plate_no +
-                            " moved to the bottom successfully.";
-                    }
+                    },
                 }
             );
         },
         sortQueue() {
-            this.waiting = this.queues.filter(queues =>
+            this.waiting = this.queues.filter((queues) =>
                 queues.status.includes("Waiting")
             );
             this.waiting.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
 
-            this.grooming = this.queues.filter(queues =>
+            this.grooming = this.queues.filter((queues) =>
                 queues.status.includes("Grooming")
             );
             this.grooming.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
 
-            this.completed = this.queues.filter(queues =>
+            this.completed = this.queues.filter((queues) =>
                 queues.status.includes("Completed")
             );
             this.completed.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
 
-            this.collected = this.queues.filter(queues =>
+            this.collected = this.queues.filter((queues) =>
                 queues.status.includes("Collected")
             );
             this.collected.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
 
-            this.cancelled = this.queues.filter(queues =>
+            this.cancelled = this.queues.filter((queues) =>
                 queues.status.includes("Cancelled")
             );
             this.cancelled.sort((a, b) => (a.store_id < b.store_id ? -1 : 1));
@@ -269,9 +243,9 @@ export default {
             let self = this;
             axios
                 .post(route("queues.search"), {
-                    user_id: this.auth.user.id
+                    user_id: this.auth.user.id,
                 })
-                .then(response => {
+                .then((response) => {
                     self.queues = response.data;
                     this.sortQueue();
                 });
@@ -324,7 +298,7 @@ export default {
             this.activeCompleted = false;
             this.activeCollected = false;
             this.activeCancelled = true;
-        }
-    }
+        },
+    },
 };
 </script>
