@@ -1,8 +1,6 @@
 <template>
     <breeze-customer-layout>
-        <template #title>
-            Car Grooming Center
-        </template>
+        <template #title> Car Grooming Center </template>
         <div
             class="relative items-top justify-center min-h-screen sm:items-center sm:pt-0"
         >
@@ -58,21 +56,6 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-4 mx-5 my-3 shadow">
                             <inertia-link
-                                :href="route('stores.show', 'tambak-bugis')"
-                                class="text-decoration-none"
-                            >
-                                <img
-                                    class="img-fluid"
-                                    src="img/logo-store.png"
-                                    alt="Tambak Bugis"
-                                />
-                                <h1 class="text-center text-secondary">
-                                    TAMBAK<br />BUGIS
-                                </h1>
-                            </inertia-link>
-                        </div>
-                        <div class="col-lg-4 mx-5 my-3 shadow">
-                            <inertia-link
                                 :href="route('stores.show', 'bukit-katil')"
                                 class="text-decoration-none"
                             >
@@ -98,13 +81,13 @@ import BreezeCustomerLayout from "@/Layouts/Customer";
 
 export default {
     components: {
-        BreezeCustomerLayout
+        BreezeCustomerLayout,
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
-    }
+        flash: Object,
+    },
 };
 </script>
