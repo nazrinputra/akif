@@ -20,7 +20,7 @@ require __DIR__ . '/api/customer.php';
 require __DIR__ . '/api/product.php';
 require __DIR__ . '/api/access.php';
 
-URL::forceScheme('https');
+URL::forceScheme('https'); // FIXME might not need this?
 
 Route::get('store/{store:slug}/queues', [QueueController::class, 'refresh'])->name('queues.refresh');
 

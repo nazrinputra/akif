@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Show Queue
-        </template>
+        <template #title> - Show Queue </template>
         <template #header>
             <inertia-link
                 :href="route('queues.index')"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                View queue
-            </h6>
+            <h6 class="pt-2.5 mx-auto">View queue</h6>
             <inertia-link
                 v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
@@ -33,7 +29,22 @@
                 Queues
             </breeze-nav-link>
             <span
-                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+                class="
+                    inline-flex
+                    items-center
+                    px-1
+                    pt-1
+                    border-b-2 border-indigo-400
+                    text-sm
+                    font-medium
+                    leading-5
+                    text-gray-900
+                    focus:outline-none
+                    focus:border-indigo-700
+                    transition
+                    duration-150
+                    ease-in-out
+                "
             >
                 Queue
             </span>
@@ -41,7 +52,14 @@
 
         <div
             v-if="queue.package"
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -51,8 +69,14 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('packages.show', queue.package)"
                         >
                             {{ queue.package.name }}
@@ -60,8 +84,14 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('packages.show', queue.package)"
                         >
                             {{
@@ -76,7 +106,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('packages.show', queue.package)"
                             tabindex="-1"
@@ -90,7 +120,15 @@
 
         <div
             v-if="queue.services.length > 0"
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                mt-3
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -104,8 +142,14 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('services.show', service)"
                         >
                             {{ service.name }}
@@ -113,8 +157,14 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('services.show', service)"
                         >
                             {{
@@ -129,7 +179,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('services.show', service)"
                             tabindex="-1"
@@ -142,7 +192,15 @@
         </div>
 
         <div
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                mt-3
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -152,8 +210,14 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('customers.show', queue.customer)"
                         >
                             {{ queue.customer.name }}
@@ -161,8 +225,14 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('customers.show', queue.customer)"
                         >
                             {{ queue.customer.phone_no }}
@@ -181,7 +251,15 @@
         </div>
 
         <div
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                mt-3
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -191,8 +269,14 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('cars.show', queue.car)"
                         >
                             {{ queue.car.model }}
@@ -200,8 +284,14 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
+                            style="color: inherit; text-decoration: inherit"
+                            class="
+                                px-3
+                                py-3
+                                flex
+                                items-center
+                                focus:text-indigo-500
+                            "
                             :href="route('cars.show', queue.car)"
                         >
                             {{ queue.car.plate_no }}
@@ -209,7 +299,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('cars.show', queue.car)"
                             tabindex="-1"
@@ -223,7 +313,15 @@
 
         <div
             v-if="whatsapps.length > 0"
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                mt-3
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -235,7 +333,14 @@
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
                     <td
-                        class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
+                        class="
+                            border-t
+                            pl-3
+                            py-3
+                            flex
+                            items-center
+                            focus:text-indigo-500
+                        "
                     >
                         {{ whatsapp.title }}
                     </td>
@@ -243,9 +348,9 @@
                         <a
                             :href="
                                 'https://api.whatsapp.com/send?phone=6' +
-                                    queue.customer.phone_no +
-                                    '&text=' +
-                                    whatsapp.message
+                                queue.customer.phone_no +
+                                '&text=' +
+                                whatsapp.message
                             "
                             target="_blank"
                             class="btn btn-secondary"
@@ -259,7 +364,15 @@
         </div>
 
         <div
-            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                mt-3
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <div class="container">
                 <form>
@@ -268,7 +381,16 @@
                         <input
                             type="text"
                             id="store"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="
+                                w-full
+                                rounded-md
+                                shadow-sm
+                                border-gray-300
+                                focus:border-indigo-300
+                                focus:ring
+                                focus:ring-indigo-200
+                                focus:ring-opacity-50
+                            "
                             :value="queue.store.name"
                             disabled
                         />
@@ -278,7 +400,16 @@
                         <input
                             type="text"
                             id="created_at"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="
+                                w-full
+                                rounded-md
+                                shadow-sm
+                                border-gray-300
+                                focus:border-indigo-300
+                                focus:ring
+                                focus:ring-indigo-200
+                                focus:ring-opacity-50
+                            "
                             :value="readableForHumans(queue.created_at)"
                             disabled
                         />
@@ -288,7 +419,16 @@
                         <input
                             type="text"
                             id="status"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="
+                                w-full
+                                rounded-md
+                                shadow-sm
+                                border-gray-300
+                                focus:border-indigo-300
+                                focus:ring
+                                focus:ring-indigo-200
+                                focus:ring-opacity-50
+                            "
                             :value="queue.status"
                             disabled
                         />
@@ -298,28 +438,35 @@
                         <input
                             type="text"
                             id="remarks"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="
+                                w-full
+                                rounded-md
+                                shadow-sm
+                                border-gray-300
+                                focus:border-indigo-300
+                                focus:ring
+                                focus:ring-indigo-200
+                                focus:ring-opacity-50
+                            "
                             :value="queue.remarks"
                             disabled
                         />
                     </div>
                     <div
-                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-end"
+                        class="
+                            mt-3
+                            p-3
+                            bg-gray-50
+                            border-t border-gray-100
+                            row
+                            justify-end
+                        "
                     >
                         <inertia-link
                             v-if="
-                                !hasAnyPermission(['reopen queues']) &&
-                                    queue.status != 'Collected' &&
-                                    queue.status != 'Cancelled'
+                                queue.status != 'Collected' &&
+                                queue.status != 'Cancelled'
                             "
-                            class="btn btn-secondary"
-                            as="button"
-                            :href="route('queues.edit', queue)"
-                        >
-                            Edit
-                        </inertia-link>
-                        <inertia-link
-                            v-if="hasAnyPermission(['reopen queues'])"
                             class="btn btn-secondary"
                             as="button"
                             :href="route('queues.edit', queue)"
@@ -343,7 +490,7 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
@@ -351,7 +498,7 @@ export default {
         errors: Object,
         flash: Object,
         queue: Object,
-        whatsapps: Object
+        whatsapps: Object,
     },
 
     methods: {
@@ -359,7 +506,7 @@ export default {
             return moment(date)
                 .tz("Asia/Kuala_Lumpur")
                 .format("MMMM Do YYYY, HH:mm:ss");
-        }
-    }
+        },
+    },
 };
 </script>

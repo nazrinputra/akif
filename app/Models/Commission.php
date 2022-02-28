@@ -9,6 +9,18 @@ class Commission extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'user_id' => null,
+    ];
+
+    protected $fillable = [
+        'queue_id',
+        'user_id',
+        'claimable_type',
+        'claimable_id',
+        'value',
+    ];
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

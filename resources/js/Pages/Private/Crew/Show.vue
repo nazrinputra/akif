@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Show Crew
-        </template>
+        <template #title> - Show Crew </template>
         <template #header>
             <inertia-link
                 :href="route('crews.index')"
@@ -10,16 +8,29 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                View existing crew
-            </h6>
+            <h6 class="pt-2.5 mx-auto">View existing crew</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('crews.index')" :active="false">
                 Crews
             </breeze-nav-link>
             <span
-                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+                class="
+                    inline-flex
+                    items-center
+                    px-1
+                    pt-1
+                    border-b-2 border-indigo-400
+                    text-sm
+                    font-medium
+                    leading-5
+                    text-gray-900
+                    focus:outline-none
+                    focus:border-indigo-700
+                    transition
+                    duration-150
+                    ease-in-out
+                "
             >
                 Crew
             </span>
@@ -32,7 +43,14 @@
             This crew has been deleted.
         </breeze-trashed-message>
         <div
-            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
+            class="
+                p-6
+                bg-white
+                border-b border-gray-200
+                max-w-7xl
+                shadow
+                sm:rounded-lg
+            "
         >
             <div class="container">
                 <form @submit.prevent="submit">
@@ -125,13 +143,21 @@
                         :form="form"
                         :disabled="true"
                     ></breeze-emergency>
+
                     <div
-                        class="mt-3 p-6 bg-gray-50 border-t border-gray-100 row justify-between"
+                        class="
+                            mt-3
+                            p-6
+                            bg-gray-50
+                            border-t border-gray-100
+                            row
+                            justify-between
+                        "
                     >
                         <breeze-button
                             v-if="
                                 !crew.deleted_at &&
-                                    hasAnyPermission(['delete crews'])
+                                hasAnyPermission(['delete crews'])
                             "
                             @click="destroy(crew)"
                             type="button"
@@ -141,7 +167,7 @@
                         <inertia-link
                             v-if="
                                 !crew.deleted_at &&
-                                    hasAnyPermission(['edit crews'])
+                                hasAnyPermission(['edit crews'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"
@@ -181,7 +207,7 @@ export default {
         BreezePrivate,
         BreezeHealth,
         BreezeEmergency,
-        BreezeOther
+        BreezeOther,
     },
 
     props: {
@@ -190,7 +216,7 @@ export default {
         flash: Object,
         stores: Object,
         roles: Object,
-        crew: Object
+        crew: Object,
     },
 
     data() {
@@ -200,7 +226,7 @@ export default {
             activePrivate: false,
             activeHealth: false,
             activeOther: false,
-            activeEmergency: false
+            activeEmergency: false,
         };
     },
 
@@ -230,7 +256,7 @@ export default {
             shirt_size: "",
             motor_license: "",
             car_license: "",
-            healths_id: []
+            healths_id: [],
         });
 
         return { form };
@@ -268,7 +294,7 @@ export default {
             this.form.shirt_size = this.crew.shirt_size;
             this.form.motor_license = this.crew.motor_license;
             this.form.car_license = this.crew.car_license;
-            this.form.healths_id = this.crew.healths.map(x => x.id);
+            this.form.healths_id = this.crew.healths.map((x) => x.id);
         },
         destroy(crew) {
             this.$inertia.delete(route("crews.destroy", crew));
@@ -284,9 +310,7 @@ export default {
             }
         },
         readableForHumans(date) {
-            return moment(date)
-                .tz("Asia/Kuala_Lumpur")
-                .format("YYYY-MM-DD");
+            return moment(date).tz("Asia/Kuala_Lumpur").format("YYYY-MM-DD");
         },
         showGeneral() {
             this.activeGeneral = true;
@@ -335,7 +359,7 @@ export default {
             this.activeHealth = false;
             this.activeOther = false;
             this.activeEmergency = true;
-        }
-    }
+        },
+    },
 };
 </script>
