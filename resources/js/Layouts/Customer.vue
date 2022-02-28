@@ -17,19 +17,7 @@
         </button>
     </teleport>
     <teleport to="#navLinks">
-        <li class="nav-item  mx-0 mx-lg-1">
-            <inertia-link
-                :class="
-                    route().current('stores.show', 'tambak-bugis')
-                        ? 'active'
-                        : ''
-                "
-                class="nav-link py-3 px-0 px-lg-3 rounded"
-                :href="route('stores.show', 'tambak-bugis')"
-                >Tambak Bugis</inertia-link
-            >
-        </li>
-        <li class="nav-item  mx-0 mx-lg-1">
+        <li class="nav-item mx-0 mx-lg-1">
             <inertia-link
                 :class="
                     route().current('stores.show', 'bukit-katil')
@@ -41,7 +29,7 @@
                 >Bukit Katil</inertia-link
             >
         </li>
-        <li class="nav-item  mx-0 mx-lg-1">
+        <li class="nav-item mx-0 mx-lg-1">
             <inertia-link
                 :class="route().current('promotions.index') ? 'active' : ''"
                 class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -97,7 +85,7 @@ export default {
     methods: {
         currentYear() {
             return moment().year();
-        }
-    }
+        },
+    },
 };
 </script>
