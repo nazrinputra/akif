@@ -15,7 +15,6 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "mailjet/laravel-mailjet": "^3.0",
         "pelmered/fake-car": "^1.6",
         "spatie/laravel-permission": "^4.0",
         "tightenco/ziggy": "^1.1"
