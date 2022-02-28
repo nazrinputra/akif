@@ -225,8 +225,7 @@ class QueueController extends Controller
     public function show(Queue $queue)
     {
         return Inertia::render('Private/Queue/Show', [
-            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services'),
-            'whatsapps' => Whatsapp::all()
+            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services')
         ]);
     }
 
