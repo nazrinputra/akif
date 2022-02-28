@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Show Service
-        </template>
+        <template #title> - Show Service </template>
         <template #header>
             <inertia-link
                 :href="route('services.index')"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                View existing service
-            </h6>
+            <h6 class="pt-2.5 mx-auto">View existing service</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('services.index')" :active="false">
@@ -49,30 +45,6 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="custom_price">Custom Price</label>
-                        <select
-                            :value="service.custom_price"
-                            disabled
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        >
-                            <option value="" disabled
-                                >Select Custom Price</option
-                            >
-                            <option :value="1">Yes</option>
-                            <option :value="0">No</option>
-                        </select>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="commission">Commission (RM)</label>
-                        <input
-                            type="number"
-                            id="commission"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="(service.commission / 100).toFixed(2)"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"
@@ -88,7 +60,7 @@
                         <breeze-button
                             v-if="
                                 !service.deleted_at &&
-                                    hasAnyPermission(['delete services'])
+                                hasAnyPermission(['delete services'])
                             "
                             @click="destroy(service)"
                             type="button"
@@ -98,7 +70,7 @@
                         <inertia-link
                             v-if="
                                 !service.deleted_at &&
-                                    hasAnyPermission(['edit services'])
+                                hasAnyPermission(['edit services'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"
@@ -126,7 +98,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', pkg)"
                         >
@@ -135,7 +107,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('packages.show', pkg)"
                             tabindex="-1"
@@ -160,14 +132,14 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezeTrashedMessage
+        BreezeTrashedMessage,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        service: Object
+        service: Object,
     },
 
     methods: {
@@ -176,7 +148,7 @@ export default {
         },
         restore(service) {
             this.$inertia.put(route("services.restore", service));
-        }
-    }
+        },
+    },
 };
 </script>

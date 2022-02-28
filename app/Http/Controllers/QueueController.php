@@ -204,7 +204,7 @@ class QueueController extends Controller
                     'queue_id' => $createdQueue->id,
                     'claimable_type' => Service::class,
                     'claimable_id' => $id,
-                    'value' => $service->commission
+                    'value' => 0
                 ]);
             }
 

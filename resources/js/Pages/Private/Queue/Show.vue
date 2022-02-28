@@ -91,7 +91,6 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Service Name</th>
-                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr
                     v-for="service in queue.services"
@@ -105,22 +104,6 @@
                             :href="route('services.show', service)"
                         >
                             {{ service.name }}
-                        </inertia-link>
-                    </td>
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('services.show', service)"
-                        >
-                            {{
-                                service.pivot.custom_price
-                                    ? "RM" +
-                                      (
-                                          service.pivot.custom_price / 100
-                                      ).toFixed(2)
-                                    : "Not Required"
-                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">

@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration
             $table->id();
             $table->string('slug');
             $table->string('name')->unique();
-            $table->boolean('custom_price');
+            $table->boolean('custom_price')->nullable();
             $table->integer('price')->nullable();
             $table->integer('commission')->nullable();
             $table->string('frequency');

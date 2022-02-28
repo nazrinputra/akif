@@ -44,21 +44,17 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'custom_price' => ['required'],
-            'commission' => ['required', 'max:8'],
             'description' => ['required', 'max:255'],
         ]);
 
-        $price = $request->price * 100;
-        $commission = $request->commission * 100;
         $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug, 'commission' => $commission]);
+        $request->merge(['slug' => $slug]);
 
         if ($service = Service::where('slug', $request->slug)->first()) {
             return Redirect::back()->with('error', 'Service already exist! <a href="' . route('services.show', $service) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdService = Service::create($request->only('name', 'slug', 'custom_price', 'commission', 'description'));
+        $createdService = Service::create($request->only('name', 'slug', 'description'));
 
         if ($request->input('package_id') != null) {
             $package = Package::find($request->input('package_id'));
@@ -106,17 +102,13 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'custom_price' => ['required'],
-            'commission' => ['required', 'max:8'],
             'description' => ['required', 'max:255'],
         ]);
 
-        $price = $request->price * 100;
-        $commission = $request->commission * 100;
         $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug, 'commission' => $commission]);
+        $request->merge(['slug' => $slug]);
 
-        $service->update($request->only('name', 'slug', 'custom_price', 'commission', 'description'));
+        $service->update($request->only('name', 'slug', 'description'));
 
         return Redirect::route('services.show', $service)->with('success', 'Service updated successfully.');
     }

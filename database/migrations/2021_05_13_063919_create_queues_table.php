@@ -22,6 +22,7 @@ class CreateQueuesTable extends Migration
             $table->string('package_custom_price')->nullable();
             $table->string('status');
             $table->string('remarks')->nullable();
+            $table->integer('move')->nullable();
             $table->timestamps();
         });
     }

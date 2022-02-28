@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Edit Queue
-        </template>
+        <template #title> - Edit Queue </template>
         <template #header>
             <inertia-link
                 :href="route('queues.show', queue)"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Edit queue
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Edit queue</h6>
             <inertia-link
                 v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
@@ -76,9 +72,7 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Package Name</th>
-                        <th class="px-3 py-3">
-                            Custom Price
-                        </th>
+                        <th class="px-3 py-3">Custom Price</th>
                     </tr>
                     <tr
                         v-for="pkg in packages"
@@ -126,14 +120,12 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Selected Package Name</th>
-                    <th class="px-3 py-3">
-                        Custom Price
-                    </th>
+                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', newQueue.package)"
                         >
@@ -207,9 +199,6 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Service Name</th>
-                        <th class="px-3 py-3">
-                            Custom Price
-                        </th>
                     </tr>
                     <tr
                         v-for="service in services"
@@ -221,23 +210,11 @@
                         >
                             {{ service.name }}
                         </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="service.custom_price == false"
-                        >
-                            Not Required
-                        </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="service.custom_price == true"
-                        >
-                            Required
-                        </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
                                 v-if="
                                     !queue.services.some(
-                                        data => data.id === service.id
+                                        (data) => data.id === service.id
                                     )
                                 "
                                 type="button"
@@ -262,9 +239,6 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Selected Service Name</th>
-                    <th class="px-3 py-3">
-                        Custom Price
-                    </th>
                 </tr>
                 <tr
                     v-for="(service, index) in newQueue.services"
@@ -273,35 +247,12 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
                             {{ service.name }}
                         </inertia-link>
-                    </td>
-                    <td
-                        class="border-t px-3 focus:text-indigo-500"
-                        v-if="service.custom_price == false"
-                    >
-                        Not Required
-                    </td>
-                    <td
-                        class="border-t focus:text-indigo-500"
-                        v-if="service.custom_price == true"
-                    >
-                        <input
-                            type="number"
-                            step=".05"
-                            placeholder="Custom Price"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                checkService() == false
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.services_custom_price[index]"
-                        />
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
                         <breeze-button
@@ -327,7 +278,7 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
@@ -336,7 +287,7 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
@@ -345,7 +296,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('customers.show', queue.customer)"
                             tabindex="-1"
@@ -368,7 +319,7 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('cars.show', queue.car)"
                         >
@@ -377,7 +328,7 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('cars.show', queue.car)"
                         >
@@ -386,7 +337,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('cars.show', queue.car)"
                             tabindex="-1"
@@ -415,7 +366,8 @@
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
                             required
-                            ><option value="" disabled>Select Status</option>
+                        >
+                            <option value="" disabled>Select Status</option>
                             <option value="Waiting">Waiting</option>
                             <option value="Grooming">Grooming</option>
                             <option value="Completed">Completed</option>
@@ -451,7 +403,7 @@
                         <breeze-button
                             class="ml-auto"
                             :class="{
-                                'opacity-25': form.processing
+                                'opacity-25': form.processing,
                             }"
                             :disabled="form.processing || !checkProduct"
                         >
@@ -475,14 +427,14 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        queue: Object
+        queue: Object,
     },
 
     setup() {
@@ -492,7 +444,7 @@ export default {
             package_id: null,
             package_custom_price: null,
             services_id: [],
-            services_custom_price: []
+            services_custom_price: [],
         });
 
         return { form };
@@ -505,54 +457,54 @@ export default {
     data() {
         return {
             formService: {
-                query: null
+                query: null,
             },
             services: [],
             formPackage: {
-                query: null
+                query: null,
             },
             packages: [],
-            newQueue: this.queue
+            newQueue: this.queue,
         };
     },
 
     watch: {
         formService: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formService.query && this.formService.query != "") {
                     axios
                         .get(route("services.search"), {
                             params: {
-                                query: this.formService.query
-                            }
+                                query: this.formService.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.services = response.data;
                         });
                 } else {
                     this.services = [];
                 }
-            }, 150)
+            }, 150),
         },
         formPackage: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formPackage.query && this.formPackage.query != "") {
                     axios
                         .get(route("packages.search"), {
                             params: {
-                                query: this.formPackage.query
-                            }
+                                query: this.formPackage.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.packages = response.data;
                         });
                 } else {
                     this.packages = [];
                 }
-            }, 150)
-        }
+            }, 150),
+        },
     },
 
     computed: {
@@ -568,7 +520,7 @@ export default {
             } else {
                 return false;
             }
-        }
+        },
     },
 
     methods: {
@@ -582,7 +534,7 @@ export default {
                 ).toFixed(2);
             }
             let self = this;
-            this.newQueue.services.forEach(service => {
+            this.newQueue.services.forEach((service) => {
                 self.form.services_id.push(service.id);
                 if (service.custom_price) {
                     self.form.services_custom_price.push(
@@ -594,12 +546,12 @@ export default {
             });
         },
         viewAllServices() {
-            axios.get(route("services.all")).then(response => {
+            axios.get(route("services.all")).then((response) => {
                 this.services = response.data;
             });
         },
         viewAllPackages() {
-            axios.get(route("packages.all")).then(response => {
+            axios.get(route("packages.all")).then((response) => {
                 this.packages = response.data;
             });
         },
@@ -619,7 +571,7 @@ export default {
             if (this.newQueue.services.length > 0) {
                 let self = this;
                 let status = [];
-                this.newQueue.services.forEach(function(service, i) {
+                this.newQueue.services.forEach(function (service, i) {
                     if (
                         (service.custom_price == 1 &&
                             self.form.services_custom_price[i] == null) ||
@@ -630,7 +582,7 @@ export default {
                         status.push(true);
                     }
                 });
-                let checker = arr => arr.every(status => status === true);
+                let checker = (arr) => arr.every((status) => status === true);
                 return checker(status);
             } else {
                 return false;
@@ -660,7 +612,7 @@ export default {
             } else {
                 return false;
             }
-        }
-    }
+        },
+    },
 };
 </script>

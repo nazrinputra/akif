@@ -49,9 +49,7 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Customer Name
-                        </th>
+                        <th class="px-3 py-3">Selected Customer Name</th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td
@@ -90,12 +88,8 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Car Model
-                        </th>
-                        <th class="px-3 py-3">
-                            Selected Car Plate No
-                        </th>
+                        <th class="px-3 py-3">Selected Car Model</th>
+                        <th class="px-3 py-3">Selected Car Plate No</th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td
@@ -175,12 +169,8 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Package Name
-                        </th>
-                        <th class="px-3 py-3">
-                            Custom Price
-                        </th>
+                        <th class="px-3 py-3">Selected Package Name</th>
+                        <th class="px-3 py-3">Custom Price</th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td
@@ -198,7 +188,7 @@
                             class="border-t px-3 focus:text-indigo-500"
                             v-if="
                                 pkg.custom_price == true &&
-                                    form.package_custom_price
+                                form.package_custom_price
                             "
                         >
                             RM{{ form.package_custom_price }}
@@ -207,7 +197,7 @@
                             class="border-t px-3 text-red-500"
                             v-if="
                                 pkg.custom_price == true &&
-                                    !form.package_custom_price
+                                !form.package_custom_price
                             "
                         >
                             <i class="fas fa-exclamation-triangle"></i> Required
@@ -241,12 +231,9 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Selected Service Name</th>
-                        <th class="px-3 py-3">
-                            Custom Price
-                        </th>
                     </tr>
                     <tr
-                        v-for="(service, index) in services"
+                        v-for="service in services"
                         :key="service.id"
                         class="hover:bg-gray-100 focus-within:bg-gray-100"
                     >
@@ -254,30 +241,6 @@
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ service.name }}
-                        </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="service.custom_price == false"
-                        >
-                            Not Required
-                        </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="
-                                service.custom_price == true &&
-                                    form.services_custom_price[index]
-                            "
-                        >
-                            RM{{ form.services_custom_price[index] }}
-                        </td>
-                        <td
-                            class="border-t px-3 text-red-500"
-                            v-if="
-                                service.custom_price == true &&
-                                    !form.services_custom_price[index]
-                            "
-                        >
-                            <i class="fas fa-exclamation-triangle"></i> Required
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
@@ -308,9 +271,7 @@
             >
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Personality Name
-                        </th>
+                        <th class="px-3 py-3">Selected Personality Name</th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td
@@ -342,14 +303,12 @@
         <div
             class="p-3 bg-gray-50 border-t border-gray-100 row justify-between"
         >
-            <breeze-button type="button" @click="back">
-                Back
-            </breeze-button>
+            <breeze-button type="button" @click="back"> Back </breeze-button>
             <breeze-button
                 type="button"
                 @click="submit"
                 :class="{
-                    'opacity-25': form.processing
+                    'opacity-25': form.processing,
                 }"
                 :disabled="form.processing || !checkStepOne || !checkStepTwo"
             >
@@ -364,7 +323,7 @@ import BreezeButton from "@/Components/Button";
 
 export default {
     components: {
-        BreezeButton
+        BreezeButton,
     },
 
     props: [
@@ -378,7 +337,7 @@ export default {
         "checkCustomer",
         "checkService",
         "checkStepOne",
-        "checkStepTwo"
+        "checkStepTwo",
     ],
 
     computed: {
@@ -388,7 +347,7 @@ export default {
             } else {
                 return false;
             }
-        }
+        },
     },
 
     methods: {
@@ -403,7 +362,7 @@ export default {
         },
         submit() {
             this.$emit("submit");
-        }
-    }
+        },
+    },
 };
 </script>
