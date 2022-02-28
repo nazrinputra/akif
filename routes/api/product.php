@@ -51,9 +51,3 @@ Route::post('queues/manage', function (Request $request) {
     $queue->update($request->only('status'));
     return Redirect::back();
 })->name('manage');
-
-Route::post('queues/bottom', function (Request $request) {
-    $queue = Queue::find($request->queue_id);
-    $queue->update($request->only('move'));
-    return Redirect::back();
-})->name('bottom');

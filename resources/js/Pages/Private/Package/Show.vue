@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Show Package
-        </template>
+        <template #title> - Show Package </template>
         <template #header>
             <inertia-link
                 :href="route('packages.index')"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                View existing package
-            </h6>
+            <h6 class="pt-2.5 mx-auto">View existing package</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('packages.index')" :active="false">
@@ -47,36 +43,12 @@
                         />
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="custom_price">Custom Price</label>
-                        <select
-                            :value="pkg.custom_price"
-                            disabled
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        >
-                            <option value="" disabled
-                                >Select Custom Price</option
-                            >
-                            <option :value="1">Yes</option>
-                            <option :value="0">No</option>
-                        </select>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="price">Price (RM)</label>
+                        <label for="price">Display Price (RM)</label>
                         <input
                             type="number"
                             id="price"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="(pkg.price / 100).toFixed(2)"
-                            disabled
-                        />
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="commission">Commission (RM)</label>
-                        <input
-                            type="number"
-                            id="commission"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            :value="(pkg.commission / 100).toFixed(2)"
                             disabled
                         />
                     </div>
@@ -128,7 +100,7 @@
                         <breeze-button
                             v-if="
                                 !pkg.deleted_at &&
-                                    hasAnyPermission(['delete packages'])
+                                hasAnyPermission(['delete packages'])
                             "
                             @click="destroy(pkg)"
                             type="button"
@@ -138,7 +110,7 @@
                         <inertia-link
                             v-if="
                                 !pkg.deleted_at &&
-                                    hasAnyPermission(['edit packages'])
+                                hasAnyPermission(['edit packages'])
                             "
                             class="ml-auto btn btn-secondary"
                             as="button"
@@ -166,7 +138,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
@@ -175,7 +147,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('services.show', service)"
                             tabindex="-1"
@@ -200,14 +172,14 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezeTrashedMessage
+        BreezeTrashedMessage,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        pkg: Object
+        pkg: Object,
     },
 
     methods: {
@@ -216,7 +188,7 @@ export default {
         },
         restore(pkg) {
             this.$inertia.put(route("packages.restore", pkg));
-        }
-    }
+        },
+    },
 };
 </script>

@@ -1,16 +1,12 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - List Services
-        </template>
+        <template #title> - List Services </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                List of services
-            </h6>
+            <h6 class="pt-2.5 mx-auto">List of services</h6>
             <inertia-link
                 v-if="hasAnyPermission(['create services'])"
                 :href="route('services.create')"
@@ -55,7 +51,6 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Service Name</th>
-                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr
                     v-for="service in services.data"
@@ -64,7 +59,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
@@ -75,18 +70,9 @@
                             ></i>
                         </inertia-link>
                     </td>
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
-                            class="px-3 py-3 flex items-center focus:text-indigo-500"
-                            :href="route('services.show', service)"
-                        >
-                            {{ service.custom_price ? "Yes" : "No" }}
-                        </inertia-link>
-                    </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('services.show', service)"
                             tabindex="-1"
@@ -122,7 +108,7 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezePagination
+        BreezePagination,
     },
 
     props: {
@@ -130,26 +116,26 @@ export default {
         errors: Object,
         flash: Object,
         filters: Object,
-        services: Object
+        services: Object,
     },
 
     data() {
         return {
             form: {
-                search: null
-            }
+                search: null,
+            },
         };
     },
 
     watch: {
         form: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 this.$inertia.get(route("services.index"), pickBy(this.form), {
-                    preserveState: true
+                    preserveState: true,
                 });
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>

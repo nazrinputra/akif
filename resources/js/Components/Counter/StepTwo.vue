@@ -64,9 +64,6 @@
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Package Name</th>
-                            <th class="px-3 py-3">
-                                Custom Price
-                            </th>
                         </tr>
                         <tr
                             v-for="pkg in packages"
@@ -77,18 +74,6 @@
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
                                 {{ pkg.name }}
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == false"
-                            >
-                                Not Required
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == true"
-                            >
-                                Required
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -108,49 +93,19 @@
                     v-if="pkg"
                     class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
-                    <span v-if="!checkPackage" class="p-3 text-red-500">
-                        <i class="fas fa-exclamation-triangle"></i> Price input
-                        required
-                    </span>
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
-                            <th class="px-3 py-3">
-                                Selected Package Name
-                            </th>
-                            <th class="px-3 py-3">
-                                Custom Price
-                            </th>
+                            <th class="px-3 py-3">Selected Package Name</th>
                         </tr>
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
-                                style="white-space:pre-wrap; word-wrap:break-word"
+                                style="
+                                    white-space: pre-wrap;
+                                    word-wrap: break-word;
+                                "
                             >
                                 {{ pkg.name }}
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == false"
-                            >
-                                Not Required
-                            </td>
-                            <td
-                                class="border-t focus:text-indigo-500"
-                                v-if="pkg.custom_price == true"
-                            >
-                                <input
-                                    type="number"
-                                    step=".05"
-                                    placeholder="Custom Price"
-                                    class="w-full rounded-md shadow-sm"
-                                    :class="
-                                        !checkPackage
-                                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                                    "
-                                    v-model="form.package_custom_price"
-                                    @change="changePrice()"
-                                />
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -180,8 +135,8 @@
             <div
                 v-if="
                     !form.service &&
-                        services.length == 0 &&
-                        selectedServices.length == 0
+                    services.length == 0 &&
+                    selectedServices.length == 0
                 "
                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
             >
@@ -215,9 +170,6 @@
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Service Name</th>
-                            <th class="px-3 py-3">
-                                Custom Price
-                            </th>
                         </tr>
                         <tr
                             v-for="service in services"
@@ -229,23 +181,11 @@
                             >
                                 {{ service.name }}
                             </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="service.custom_price == false"
-                            >
-                                Not Required
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="service.custom_price == true"
-                            >
-                                Required
-                            </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
                                     v-if="
                                         !selectedServices.some(
-                                            data => data.id === service.id
+                                            (data) => data.id === service.id
                                         )
                                     "
                                     type="button"
@@ -270,12 +210,7 @@
                 </span>
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
-                        <th class="px-3 py-3">
-                            Selected Service Name
-                        </th>
-                        <th class="px-3 py-3">
-                            Custom Price
-                        </th>
+                        <th class="px-3 py-3">Selected Service Name</th>
                     </tr>
                     <tr
                         v-for="(service, index) in selectedServices"
@@ -286,30 +221,6 @@
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ service.name }}
-                        </td>
-                        <td
-                            class="border-t px-3 focus:text-indigo-500"
-                            v-if="service.custom_price == false"
-                        >
-                            Not Required
-                        </td>
-                        <td
-                            class="border-t focus:text-indigo-500"
-                            v-if="service.custom_price == true"
-                        >
-                            <input
-                                type="number"
-                                step=".05"
-                                placeholder="Custom Price"
-                                class="w-full rounded-md shadow-sm"
-                                :class="
-                                    !checkService
-                                        ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                        : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                                "
-                                v-model="form.services_custom_price[index]"
-                                @change="changePrice()"
-                            />
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
@@ -328,12 +239,8 @@
         <div
             class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-between"
         >
-            <breeze-button type="button" @click="back">
-                Back
-            </breeze-button>
-            <breeze-button type="button" @click="next">
-                Next
-            </breeze-button>
+            <breeze-button type="button" @click="back"> Back </breeze-button>
+            <breeze-button type="button" @click="next"> Next </breeze-button>
         </div>
     </div>
 </template>
@@ -344,7 +251,7 @@ import BreezeButton from "@/Components/Button";
 
 export default {
     components: {
-        BreezeButton
+        BreezeButton,
     },
 
     props: ["form", "checkService", "checkPackage"],
@@ -356,22 +263,22 @@ export default {
             services: [],
             selectedServices: [],
             activePackage: false,
-            activeService: true
+            activeService: true,
         };
     },
 
     watch: {
         form: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.form.package && this.form.package != "") {
                     axios
                         .get(route("packages.search"), {
                             params: {
-                                query: this.form.package
-                            }
+                                query: this.form.package,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.packages = response.data;
                         });
                 }
@@ -382,18 +289,18 @@ export default {
                     axios
                         .get(route("services.search"), {
                             params: {
-                                query: this.form.service
-                            }
+                                query: this.form.service,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.services = response.data;
                         });
                 }
                 if (!this.form.service || this.form.service == "") {
                     this.services = [];
                 }
-            }, 150)
-        }
+            }, 150),
+        },
     },
 
     methods: {
@@ -414,12 +321,12 @@ export default {
             this.$emit("next");
         },
         viewAllPackages() {
-            axios.get(route("packages.all")).then(response => {
+            axios.get(route("packages.all")).then((response) => {
                 this.packages = response.data;
             });
         },
         viewAllServices() {
-            axios.get(route("services.all")).then(response => {
+            axios.get(route("services.all")).then((response) => {
                 this.services = response.data;
             });
         },
@@ -441,9 +348,6 @@ export default {
             this.activePackage = false;
             this.activeService = true;
         },
-        changePrice() {
-            this.$emit("changePrice");
-        }
-    }
+    },
 };
 </script>

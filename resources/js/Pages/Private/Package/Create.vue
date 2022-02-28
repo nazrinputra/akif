@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Create Package
-        </template>
+        <template #title> - Create Package </template>
         <template #header>
             <inertia-link
                 :href="route('packages.index')"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Add new package
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Add new package</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('packages.index')" :active="false">
@@ -51,30 +47,7 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="custom_price">Custom Price</label>
-                        <select
-                            v-model="form.custom_price"
-                            @change="form.clearErrors('custom_price')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.custom_price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                        >
-                            <option value="" disabled
-                                >Select Custom Price</option
-                            >
-                            <option :value="1">Yes</option>
-                            <option :value="0">No</option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.custom_price
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="price">Price (RM)</label>
+                        <label for="price">Display Price (RM)</label>
                         <input
                             type="number"
                             placeholder="Price"
@@ -92,27 +65,6 @@
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
                             form.errors.price
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="commission">Commission (RM)</label>
-                        <input
-                            type="number"
-                            placeholder="Commission"
-                            id="commission"
-                            step=".05"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.commission
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.commission"
-                            @keydown="form.clearErrors('commission')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.commission
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
@@ -240,7 +192,7 @@
                                             <breeze-button
                                                 v-if="
                                                     !selectedServices.some(
-                                                        data =>
+                                                        (data) =>
                                                             data.id ===
                                                             service.id
                                                     )
@@ -274,7 +226,10 @@
                                 >
                                     <td class="border-t">
                                         <inertia-link
-                                            style="color: inherit; text-decoration: inherit;"
+                                            style="
+                                                color: inherit;
+                                                text-decoration: inherit;
+                                            "
                                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                                             :href="
                                                 route('services.show', service)
@@ -310,7 +265,7 @@
                         </inertia-link>
                         <breeze-button
                             :class="{
-                                'opacity-25': form.processing
+                                'opacity-25': form.processing,
                             }"
                             :disabled="form.processing"
                         >
@@ -334,26 +289,24 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
     },
 
     setup() {
         const form = useForm({
             name: null,
-            custom_price: "",
             price: null,
-            commission: null,
             frequency: null,
             duration: null,
             description: null,
             promotion: "",
-            services: []
+            services: [],
         });
 
         return { form };
@@ -362,32 +315,32 @@ export default {
     data() {
         return {
             formService: {
-                query: null
+                query: null,
             },
             services: [],
-            selectedServices: []
+            selectedServices: [],
         };
     },
 
     watch: {
         formService: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formService.query && this.formService.query != "") {
                     axios
                         .get(route("services.search"), {
                             params: {
-                                query: this.formService.query
-                            }
+                                query: this.formService.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.services = response.data;
                         });
                 } else {
                     this.services = [];
                 }
-            }, 150)
-        }
+            }, 150),
+        },
     },
 
     methods: {
@@ -402,11 +355,11 @@ export default {
         submit() {
             if (this.selectedServices.length > 0) {
                 this.form.services = this.selectedServices.map(
-                    service => service.id
+                    (service) => service.id
                 );
             }
             this.form.post(route("packages.store"));
-        }
-    }
+        },
+    },
 };
 </script>

@@ -106,15 +106,15 @@ class UserSeeder extends Seeder
             'emergency_relation_2' => $faker->randomElement($relation),
         ])->assignRole('Admin');
 
-        $detailers = User::factory(15)->create();
-        foreach ($detailers as $detailer) {
-            $detailer->assignRole('Detailer');
-        }
+        // $detailers = User::factory(15)->create();
+        // foreach ($detailers as $detailer) {
+        //     $detailer->assignRole('Detailer');
+        // }
 
-        $users = User::factory(32)->create();
-        $roles = Role::whereNotIn('name', ['IT', 'Owner', 'Manager', 'Admin', 'Quality Checker', 'Detailer'])->get();
-        foreach ($users as $user) {
-            $user->assignRole($faker->randomElement($roles));
-        }
+        // $users = User::factory(32)->create();
+        // $roles = Role::whereNotIn('name', ['IT', 'Owner', 'Manager', 'Admin', 'Quality Checker', 'Detailer'])->get();
+        // foreach ($users as $user) {
+        //     $user->assignRole($faker->randomElement($roles));
+        // }
     }
 }

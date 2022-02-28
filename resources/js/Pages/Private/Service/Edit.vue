@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Edit Service
-        </template>
+        <template #title> - Edit Service </template>
         <template #header>
             <inertia-link
                 :href="route('services.show', service)"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Edit existing service
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Edit existing service</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('services.index')" :active="false">
@@ -61,50 +57,6 @@
                         }}</span>
                     </div>
                     <div class="mt-3 p-3">
-                        <label for="custom_price">Custom Price</label>
-                        <select
-                            v-model="form.custom_price"
-                            @change="form.clearErrors('custom_price')"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.custom_price
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            required
-                        >
-                            <option value="" disabled
-                                >Select Custom Price</option
-                            >
-                            <option :value="1">Yes</option>
-                            <option :value="0">No</option>
-                        </select>
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.custom_price
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
-                        <label for="commission">Commission (RM)</label>
-                        <input
-                            type="number"
-                            placeholder="Commission"
-                            id="commission"
-                            step=".05"
-                            class="w-full rounded-md shadow-sm"
-                            :class="
-                                form.errors.commission
-                                    ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                    : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                            "
-                            v-model="form.commission"
-                            @keydown="form.clearErrors('commission')"
-                            required
-                        />
-                        <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.commission
-                        }}</span>
-                    </div>
-                    <div class="mt-3 p-3">
                         <label for="description">Description</label>
                         <textarea
                             rows="7"
@@ -130,7 +82,7 @@
                         <breeze-button
                             class="ml-auto"
                             :class="{
-                                'opacity-25': form.processing
+                                'opacity-25': form.processing,
                             }"
                             :disabled="form.processing"
                         >
@@ -181,7 +133,7 @@
                             <breeze-button
                                 v-if="
                                     !service.packages.some(
-                                        data => data.id === pkg.id
+                                        (data) => data.id === pkg.id
                                     )
                                 "
                                 type="button"
@@ -211,7 +163,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', pkg)"
                         >
@@ -244,22 +196,20 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        service: Object
+        service: Object,
     },
 
     setup() {
         const form = useForm({
             name: null,
-            custom_price: null,
-            commission: null,
-            description: null
+            description: null,
         });
 
         return { form };
@@ -272,8 +222,6 @@ export default {
     methods: {
         loadData() {
             this.form.name = this.service.name;
-            this.form.custom_price = this.service.custom_price;
-            this.form.commission = (this.service.commission / 100).toFixed(2);
             this.form.description = this.service.description;
         },
         linkPackage(pkg) {
@@ -281,7 +229,7 @@ export default {
                 route("package.link"),
                 {
                     service_id: this.service.id,
-                    package_id: pkg.id
+                    package_id: pkg.id,
                 },
                 {
                     onSuccess: () => {
@@ -289,7 +237,7 @@ export default {
                         this.packages = [];
                         this.flash.success =
                             "Package linked successfully to service.";
-                    }
+                    },
                 }
             );
         },
@@ -298,7 +246,7 @@ export default {
                 route("package.unlink"),
                 {
                     service_id: this.service.id,
-                    package_id: pkg.id
+                    package_id: pkg.id,
                 },
                 {
                     onSuccess: () => {
@@ -306,40 +254,40 @@ export default {
                             "Package unlinked from service. <a href='" +
                             route("packages.show", pkg) +
                             " 'style='color:#92400e;text-decoration:underline;'>View package</a>";
-                    }
+                    },
                 }
             );
-        }
+        },
     },
 
     data() {
         return {
             formPackage: {
-                query: null
+                query: null,
             },
-            packages: []
+            packages: [],
         };
     },
 
     watch: {
         formPackage: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formPackage.query && this.formPackage.query != "") {
                     axios
                         .get(route("packages.search"), {
                             params: {
-                                query: this.formPackage.query
-                            }
+                                query: this.formPackage.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.packages = response.data;
                         });
                 } else {
                     this.packages = [];
                 }
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>

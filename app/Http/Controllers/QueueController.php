@@ -161,56 +161,11 @@ class QueueController extends Controller
         if ($request->package_id) {
             $package = Package::find($request->package_id);
             $createdQueue->package_id = $package->id;
-
-            if ($package->custom_price) {
-                $createdQueue->package_custom_price = $request->package_custom_price * 100;
-
-                Commission::create([
-                    'queue_id' => $createdQueue->id,
-                    'claimable_type' => Package::class,
-                    'claimable_id' => $package->id,
-                    'value' => $request->package_custom_price * 100 / 5
-                ]);
-            } else {
-                $createdQueue->package_custom_price = null;
-
-                Commission::create([
-                    'queue_id' => $createdQueue->id,
-                    'claimable_type' => Package::class,
-                    'claimable_id' => $package->id,
-                    'value' => $package->commission
-                ]);
-            }
-
             $createdQueue->save();
         }
 
         foreach ($request->services_id as $i => $id) {
-
-            if ($request->services_custom_price[$i]) {
-                $service_custom_price = $request->services_custom_price[$i] * 100;
-
-                Commission::create([
-                    'queue_id' => $createdQueue->id,
-                    'claimable_type' => Service::class,
-                    'claimable_id' => $id,
-                    'value' => $service_custom_price / 5
-                ]);
-            } else {
-                $service_custom_price = null;
-                $service = Service::find($id);
-
-                Commission::create([
-                    'queue_id' => $createdQueue->id,
-                    'claimable_type' => Service::class,
-                    'claimable_id' => $id,
-                    'value' => $service->commission
-                ]);
-            }
-
-            $createdQueue->services()->attach([
-                $id => ['custom_price' => $service_custom_price]
-            ]);
+            $createdQueue->services()->attach($id);
         }
 
         return Redirect::route('queues.show', $createdQueue)->with('success', 'Queue created successfully.');
@@ -225,8 +180,7 @@ class QueueController extends Controller
     public function show(Queue $queue)
     {
         return Inertia::render('Private/Queue/Show', [
-            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services'),
-            'whatsapps' => Whatsapp::all()
+            'queue' => $queue->load('car', 'customer', 'store', 'package', 'services')
         ]);
     }
 
@@ -259,108 +213,19 @@ class QueueController extends Controller
 
         $queue->update($request->only('status', 'remarks'));
 
-        $old_package_commission = Commission::where('queue_id', $queue->id)->where('claimable_type', Package::class)->first();
-
         if ($request->package_id) {
             $package = Package::find($request->package_id);
-
-            if ($queue->package_id == $package->id && $package->custom_price) {
-                $queue->package_custom_price = $request->package_custom_price * 100;
-
-                if ($old_package_commission) {
-                    $old_package_commission->update([
-                        'value' => $request->package_custom_price * 100 / 5
-                    ]);
-                }
-            } else if ($queue->package_id == $package->id) {
-                $queue->package_custom_price = null;
-            } else if ($queue->package_id != $package->id && $package->custom_price) {
-                $queue->package_id = $package->id;
-                $queue->package_custom_price = $request->package_custom_price * 100;
-                if ($old_package_commission) {
-                    $old_package_commission->delete();
-                }
-                Commission::create([
-                    'queue_id' => $queue->id,
-                    'claimable_type' => Package::class,
-                    'claimable_id' => $package->id,
-                    'value' => $request->package_custom_price * 100 / 5
-                ]);
-            } else {
-                $queue->package_id = $package->id;
-                $queue->package_custom_price = null;
-                if ($old_package_commission) {
-                    $old_package_commission->delete();
-                }
-                Commission::create([
-                    'queue_id' => $queue->id,
-                    'claimable_type' => Package::class,
-                    'claimable_id' => $package->id,
-                    'value' => $package->commission
-                ]);
-            }
+            $queue->package_id = $package->id;
             $queue->save();
         } else {
             $queue->package_id = null;
-            $queue->package_custom_price = null;
-            if ($old_package_commission) {
-                $old_package_commission->delete();
-            }
             $queue->save();
         }
 
         $queue->services()->detach();
-        $old_service_commissions = Commission::where('queue_id', $queue->id)->where('claimable_type', Service::class)->get();
 
         foreach ($request->services_id as $i => $id) {
-            foreach ($old_service_commissions as $commission) {
-                if ($commission->claimable_id == $id) {
-                    if ($request->services_custom_price[$i]) {
-                        $commission->update([
-                            'value' => $request->services_custom_price[$i] * 100 / 5
-                        ]);
-                    }
-                }
-            }
-
-            if ($request->services_custom_price[$i]) {
-                $service_custom_price = $request->services_custom_price[$i] * 100;
-            } else {
-                $service_custom_price = null;
-            }
-
-            $queue->services()->attach([
-                $id => ['custom_price' => $service_custom_price]
-            ]);
-        }
-
-        $delete_service_commissions = Commission::where('queue_id', $queue->id)->where('claimable_type', Service::class)->whereNotIn('claimable_id', $request->services_id)->get();
-        foreach ($delete_service_commissions as $commission) {
-            $commission->delete();
-        }
-
-        $new_services = $queue->services->pluck('id');
-        $existing_commissions = Commission::where('queue_id', $queue->id)->where('claimable_type', Service::class)->pluck('claimable_id');
-        $new_commissions = $new_services->diff($existing_commissions)->flatten();
-        foreach ($new_commissions as $id) {
-            $service = Service::find($id);
-            $service_pivot = DB::table('queue_service')->where('queue_id', $queue->id)->where('service_id', $service->id)->first();
-
-            if ($service->custom_price) {
-                Commission::create([
-                    'queue_id' => $queue->id,
-                    'claimable_type' => Service::class,
-                    'claimable_id' => $id,
-                    'value' => $service_pivot->custom_price / 5
-                ]);
-            } else {
-                Commission::create([
-                    'queue_id' => $queue->id,
-                    'claimable_type' => Service::class,
-                    'claimable_id' => $id,
-                    'value' => $service->commission
-                ]);
-            }
+            $queue->services()->attach($id);
         }
 
         return Redirect::route('queues.show', $queue)->with('success', 'Queue updated successfully.');

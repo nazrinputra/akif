@@ -29,22 +29,7 @@
                 Queues
             </breeze-nav-link>
             <span
-                class="
-                    inline-flex
-                    items-center
-                    px-1
-                    pt-1
-                    border-b-2 border-indigo-400
-                    text-sm
-                    font-medium
-                    leading-5
-                    text-gray-900
-                    focus:outline-none
-                    focus:border-indigo-700
-                    transition
-                    duration-150
-                    ease-in-out
-                "
+                class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
             >
                 Queue
             </span>
@@ -52,56 +37,20 @@
 
         <div
             v-if="queue.package"
-            class="
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
+            class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Package Name</th>
-                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', queue.package)"
                         >
                             {{ queue.package.name }}
-                        </inertia-link>
-                    </td>
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
-                            :href="route('packages.show', queue.package)"
-                        >
-                            {{
-                                queue.package_custom_price
-                                    ? "RM" +
-                                      (
-                                          queue.package_custom_price / 100
-                                      ).toFixed(2)
-                                    : "Not Required"
-                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
@@ -120,20 +69,11 @@
 
         <div
             v-if="queue.services.length > 0"
-            class="
-                mt-3
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Service Name</th>
-                    <th class="px-3 py-3">Custom Price</th>
                 </tr>
                 <tr
                     v-for="service in queue.services"
@@ -143,38 +83,10 @@
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('services.show', service)"
                         >
                             {{ service.name }}
-                        </inertia-link>
-                    </td>
-                    <td class="border-t">
-                        <inertia-link
-                            style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
-                            :href="route('services.show', service)"
-                        >
-                            {{
-                                service.pivot.custom_price
-                                    ? "RM" +
-                                      (
-                                          service.pivot.custom_price / 100
-                                      ).toFixed(2)
-                                    : "Not Required"
-                            }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
@@ -192,15 +104,7 @@
         </div>
 
         <div
-            class="
-                mt-3
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -211,13 +115,7 @@
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
                             {{ queue.customer.name }}
@@ -226,13 +124,7 @@
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', queue.customer)"
                         >
                             {{ queue.customer.phone_no }}
@@ -251,15 +143,7 @@
         </div>
 
         <div
-            class="
-                mt-3
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
@@ -270,13 +154,7 @@
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('cars.show', queue.car)"
                         >
                             {{ queue.car.model }}
@@ -285,13 +163,7 @@
                     <td class="border-t">
                         <inertia-link
                             style="color: inherit; text-decoration: inherit"
-                            class="
-                                px-3
-                                py-3
-                                flex
-                                items-center
-                                focus:text-indigo-500
-                            "
+                            class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('cars.show', queue.car)"
                         >
                             {{ queue.car.plate_no }}
@@ -312,67 +184,7 @@
         </div>
 
         <div
-            v-if="whatsapps.length > 0"
-            class="
-                mt-3
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
-        >
-            <table class="w-full whitespace-nowrap">
-                <tr class="text-left font-bold">
-                    <th class="px-3 py-3">Quick Send WhatsApp</th>
-                </tr>
-                <tr
-                    v-for="whatsapp in whatsapps"
-                    :key="whatsapp.id"
-                    class="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                    <td
-                        class="
-                            border-t
-                            pl-3
-                            py-3
-                            flex
-                            items-center
-                            focus:text-indigo-500
-                        "
-                    >
-                        {{ whatsapp.title }}
-                    </td>
-                    <td class="border-t w-px md:table-cell hidden pr-3">
-                        <a
-                            :href="
-                                'https://api.whatsapp.com/send?phone=6' +
-                                queue.customer.phone_no +
-                                '&text=' +
-                                whatsapp.message
-                            "
-                            target="_blank"
-                            class="btn btn-secondary"
-                            tabindex="-1"
-                        >
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div
-            class="
-                mt-3
-                p-6
-                bg-white
-                border-b border-gray-200
-                max-w-7xl
-                shadow
-                sm:rounded-lg
-            "
+            class="mt-3 p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
             <div class="container">
                 <form>
@@ -381,16 +193,7 @@
                         <input
                             type="text"
                             id="store"
-                            class="
-                                w-full
-                                rounded-md
-                                shadow-sm
-                                border-gray-300
-                                focus:border-indigo-300
-                                focus:ring
-                                focus:ring-indigo-200
-                                focus:ring-opacity-50
-                            "
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="queue.store.name"
                             disabled
                         />
@@ -400,16 +203,7 @@
                         <input
                             type="text"
                             id="created_at"
-                            class="
-                                w-full
-                                rounded-md
-                                shadow-sm
-                                border-gray-300
-                                focus:border-indigo-300
-                                focus:ring
-                                focus:ring-indigo-200
-                                focus:ring-opacity-50
-                            "
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="readableForHumans(queue.created_at)"
                             disabled
                         />
@@ -419,16 +213,7 @@
                         <input
                             type="text"
                             id="status"
-                            class="
-                                w-full
-                                rounded-md
-                                shadow-sm
-                                border-gray-300
-                                focus:border-indigo-300
-                                focus:ring
-                                focus:ring-indigo-200
-                                focus:ring-opacity-50
-                            "
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="queue.status"
                             disabled
                         />
@@ -438,29 +223,13 @@
                         <input
                             type="text"
                             id="remarks"
-                            class="
-                                w-full
-                                rounded-md
-                                shadow-sm
-                                border-gray-300
-                                focus:border-indigo-300
-                                focus:ring
-                                focus:ring-indigo-200
-                                focus:ring-opacity-50
-                            "
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             :value="queue.remarks"
                             disabled
                         />
                     </div>
                     <div
-                        class="
-                            mt-3
-                            p-3
-                            bg-gray-50
-                            border-t border-gray-100
-                            row
-                            justify-end
-                        "
+                        class="mt-3 p-3 bg-gray-50 border-t border-gray-100 row justify-end"
                     >
                         <inertia-link
                             v-if="
@@ -498,7 +267,6 @@ export default {
         errors: Object,
         flash: Object,
         queue: Object,
-        whatsapps: Object,
     },
 
     methods: {

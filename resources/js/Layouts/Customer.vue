@@ -55,6 +55,12 @@
                     </a>
                     <a
                         class="btn btn-outline-light btn-social mx-1"
+                        href="https://www.instagram.com/akif.theofficial/"
+                    >
+                        <i class="fab fa-fw fa-instagram"></i>
+                    </a>
+                    <a
+                        class="btn btn-outline-light btn-social mx-1"
                         href="https://api.whatsapp.com/send?phone=60136541240"
                     >
                         <i class="fab fa-fw fa-whatsapp"></i>
