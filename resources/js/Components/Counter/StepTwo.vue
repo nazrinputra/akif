@@ -64,7 +64,6 @@
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Package Name</th>
-                            <th class="px-3 py-3">Custom Price</th>
                         </tr>
                         <tr
                             v-for="pkg in packages"
@@ -75,18 +74,6 @@
                                 class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                             >
                                 {{ pkg.name }}
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == false"
-                            >
-                                Not Required
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == true"
-                            >
-                                Required
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -106,14 +93,9 @@
                     v-if="pkg"
                     class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                 >
-                    <span v-if="!checkPackage" class="p-3 text-red-500">
-                        <i class="fas fa-exclamation-triangle"></i> Price input
-                        required
-                    </span>
                     <table class="w-full whitespace-nowrap">
                         <tr class="text-left font-bold">
                             <th class="px-3 py-3">Selected Package Name</th>
-                            <th class="px-3 py-3">Custom Price</th>
                         </tr>
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td
@@ -124,30 +106,6 @@
                                 "
                             >
                                 {{ pkg.name }}
-                            </td>
-                            <td
-                                class="border-t px-3 focus:text-indigo-500"
-                                v-if="pkg.custom_price == false"
-                            >
-                                Not Required
-                            </td>
-                            <td
-                                class="border-t focus:text-indigo-500"
-                                v-if="pkg.custom_price == true"
-                            >
-                                <input
-                                    type="number"
-                                    step=".05"
-                                    placeholder="Custom Price"
-                                    class="w-full rounded-md shadow-sm"
-                                    :class="
-                                        !checkPackage
-                                            ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
-                                            : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
-                                    "
-                                    v-model="form.package_custom_price"
-                                    @change="changePrice()"
-                                />
                             </td>
                             <td class="border-t w-px md:table-cell hidden pr-3">
                                 <breeze-button
@@ -389,9 +347,6 @@ export default {
         showService() {
             this.activePackage = false;
             this.activeService = true;
-        },
-        changePrice() {
-            this.$emit("changePrice");
         },
     },
 };

@@ -1,16 +1,12 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - List Packages
-        </template>
+        <template #title> - List Packages </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                List of packages
-            </h6>
+            <h6 class="pt-2.5 mx-auto">List of packages</h6>
             <inertia-link
                 v-if="hasAnyPermission(['create packages'])"
                 :href="route('packages.create')"
@@ -55,7 +51,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Package Name</th>
-                    <th class="px-3 py-3">Package Price</th>
+                    <th class="px-3 py-3">Display Price</th>
                 </tr>
                 <tr
                     v-for="pkg in packages.data"
@@ -64,7 +60,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', pkg)"
                         >
@@ -77,7 +73,7 @@
                     </td>
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('packages.show', pkg)"
                         >
@@ -86,7 +82,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('packages.show', pkg)"
                             tabindex="-1"
@@ -122,7 +118,7 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezePagination
+        BreezePagination,
     },
 
     props: {
@@ -130,26 +126,26 @@ export default {
         errors: Object,
         flash: Object,
         filters: Object,
-        packages: Object
+        packages: Object,
     },
 
     data() {
         return {
             form: {
-                search: null
-            }
+                search: null,
+            },
         };
     },
 
     watch: {
         form: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 this.$inertia.get(route("packages.index"), pickBy(this.form), {
-                    preserveState: true
+                    preserveState: true,
                 });
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>

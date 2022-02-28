@@ -1,15 +1,11 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Counter
-        </template>
+        <template #title> - Counter </template>
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Register new queue.
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Register new queue.</h6>
             <inertia-link
                 v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
@@ -100,7 +96,6 @@
                 @clearPackage="clearPackage()"
                 @selectService="selectService($event)"
                 @removeService="removeService($event)"
-                @changePrice="checkStepTwo"
             />
 
             <breeze-step-three
@@ -140,13 +135,13 @@ export default {
         BreezeButton,
         BreezeStepOne,
         BreezeStepTwo,
-        BreezeStepThree
+        BreezeStepThree,
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
     },
 
     setup() {
@@ -165,7 +160,7 @@ export default {
             phone_no: null,
             package: null,
             service: null,
-            remarks: null
+            remarks: null,
         });
 
         return { form };
@@ -191,7 +186,7 @@ export default {
             } else {
                 return false;
             }
-        }
+        },
     },
 
     data() {
@@ -199,13 +194,13 @@ export default {
             show: {
                 stepOne: true,
                 stepTwo: false,
-                stepThree: false
+                stepThree: false,
             },
             car: null,
             customer: null,
             personality: null,
             pkg: null,
-            services: []
+            services: [],
         };
     },
 
@@ -294,13 +289,6 @@ export default {
         },
         checkPackage() {
             if (this.pkg) {
-                if (
-                    (this.pkg.custom_price == 1 &&
-                        this.form.package_custom_price == null) ||
-                    this.form.package_custom_price == ""
-                ) {
-                    return false;
-                }
                 return true;
             } else {
                 return false;
@@ -310,7 +298,7 @@ export default {
             if (this.services.length > 0) {
                 let self = this;
                 let status = [];
-                this.services.forEach(function(service, i) {
+                this.services.forEach(function (service, i) {
                     if (
                         (service.custom_price == 1 &&
                             self.form.services_custom_price[i] == null) ||
@@ -321,12 +309,12 @@ export default {
                         status.push(true);
                     }
                 });
-                let checker = arr => arr.every(status => status === true);
+                let checker = (arr) => arr.every((status) => status === true);
                 return checker(status);
             } else {
                 return false;
             }
-        }
-    }
+        },
+    },
 };
 </script>

@@ -44,9 +44,7 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
-            'commission' => ['required', 'max:8'],
             'frequency' => ['required', 'max:50'],
             'duration' => ['required', 'max:50'],
             'description' => ['required', 'max:255'],
@@ -109,9 +107,7 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'custom_price' => ['required'],
             'price' => ['required', 'max:10'],
-            'commission' => ['required', 'max:8'],
             'frequency' => ['required', 'max:50'],
             'duration' => ['required', 'max:50'],
             'description' => ['required', 'max:255'],
@@ -119,11 +115,10 @@ class PackageController extends Controller
         ]);
 
         $price = $request->price * 100;
-        $commission = $request->commission * 100;
         $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug, 'price' => $price, 'commission' => $commission]);
+        $request->merge(['slug' => $slug, 'price' => $price]);
 
-        $package->update($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
+        $package->update($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
 
         return Redirect::route('packages.show', $package)->with('success', 'Package updated successfully.');
     }
