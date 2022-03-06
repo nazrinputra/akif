@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Akif</title>
+    <title>Akif Car Grooming Center</title>
 
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
