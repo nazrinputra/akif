@@ -15,6 +15,19 @@ class WhatsappSeeder extends Seeder
      */
     public function run()
     {
+        $waitingTitle = 'Waiting Message';
+        $waitingSlug = Str::slug($waitingTitle);
+        $waitingMessage = urlencode('Pelanggan yang dihormati, terima kasih kerana memilih AKIF CAR GROOMING CENTRE. Kini anda boleh mengikuti progres kereta anda melalui pautan ini,
+
+https://akif-official.herokuapp.com
+
+__________
+
+
+Dear valued customers, thank you for choosing AKIF CAR GROOMING CENTRE. You can now follow the progress of your car via this link,
+
+https://akif-official.herokuapp.com');
+
         $collectedTitle = 'Collected Message';
         $collectedSlug = Str::slug($collectedTitle);
         $collectedMessage = urlencode('Pelanggan yang dihormati, terima kasih kerana memilih AKIF CAR GROOMING CENTRE. Kami berharap anda berpuas hati dengan servis yang diberikan. Sekiranya terdapat sebarang kekurangan, sila maklumkan kepada kami untuk penambahbaikkan.
@@ -70,6 +83,12 @@ We would like to apologise if our service in any way has caused you to cancel yo
             'title' => $cancelledTitle,
             'slug' => $cancelledSlug,
             'message' => $cancelledMessage
+        ]);
+
+        Whatsapp::create([
+            'title' => $waitingTitle,
+            'slug' => $waitingSlug,
+            'message' => $waitingMessage
         ]);
     }
 }
