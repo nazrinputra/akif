@@ -19,14 +19,22 @@ class WhatsappSeeder extends Seeder
         $collectedSlug = Str::slug($collectedTitle);
         $collectedMessage = urlencode('Pelanggan yang dihormati, terima kasih kerana memilih AKIF CAR GROOMING CENTRE. Kami berharap anda berpuas hati dengan servis yang diberikan. Sekiranya terdapat sebarang kekurangan, sila maklumkan kepada kami untuk penambahbaikkan.
 
-Anda boleh mengikuti perkembangan dan promosi terkini dari kami melalui pautan facebook ini, www.facebook.com/akifcarwash
+Anda boleh mengikuti perkembangan dan promosi terkini dari kami melalui pautan Facebook
+www.facebook.com/akifcarwash
 
-____________________________
+atau Instagram,
+https://www.instagram.com/akif.theofficial/
+
+__________
 
 
 Dear valued customers, thank you for choosing AKIF CAR GROOMING CENTRE. We sincerely hope you are happy with the services we have provided. Should there be any dissatisfaction with any of the services, please do not hesitate to contact us about it.
 
-You can follow us here on facebook, www.facebook.com/akifcarwash , for the latest information and promotions.');
+You can follow us on Facebook,
+www.facebook.com/akifcarwash
+or Instagram,
+https://www.instagram.com/akif.theofficial/
+for the latest information and promotions.');
 
         $completedTitle = 'Completed Message';
         $completedSlug = Str::slug($completedTitle);
