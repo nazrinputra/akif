@@ -289,6 +289,7 @@ class QueueController extends Controller
     public function manage()
     {
         return Inertia::render('Private/Dashboard/Manage', [
+            'waitingWhatsapp' => Whatsapp::where('slug', 'waiting-message')->first(),
             'completedWhatsapp' => Whatsapp::where('slug', 'completed-message')->first(),
             'collectedWhatsapp' => Whatsapp::where('slug', 'collected-message')->first(),
             'cancelledWhatsapp' => Whatsapp::where('slug', 'cancelled-message')->first(),

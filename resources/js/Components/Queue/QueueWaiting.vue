@@ -54,6 +54,12 @@
                         <option value="Collected">Collected</option>
                         <option value="Cancelled">Cancelled</option>
                     </select>
+                    <button
+                        class="ml-3 btn btn-light"
+                        @click.prevent="sendWhatsapp(queue.customer.phone_no)"
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
                 </inertia-link>
             </td>
         </tr>
@@ -62,7 +68,7 @@
 
 <script>
 export default {
-    props: ["waiting"],
+    props: ["waiting", "whatsapp"],
 
     methods: {
         tagging(color) {
@@ -82,6 +88,14 @@ export default {
         updateStatus(status, queue) {
             queue.status = status;
             this.$emit("updateStatus", queue);
+        },
+        sendWhatsapp(phone_no) {
+            let link =
+                "https://api.whatsapp.com/send?phone=6" +
+                phone_no +
+                "&text=" +
+                this.whatsapp.message;
+            window.open(link, "_blank");
         },
     },
 };

@@ -95,6 +95,7 @@
                 v-show="activeWaiting"
                 v-if="waiting.length > 0"
                 :waiting="waiting"
+                :whatsapp="waitingWhatsapp"
                 @updateStatus="updateStatus($event)"
                 class="mb-3 p-6 max-w-7xl shadow sm:rounded-lg"
                 style="background-color: #f5c6cb !important"
@@ -166,6 +167,7 @@ export default {
         auth: Object,
         errors: Object,
         flash: Object,
+        waitingWhatsapp: Object,
         completedWhatsapp: Object,
         collectedWhatsapp: Object,
         cancelledWhatsapp: Object,
