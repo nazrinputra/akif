@@ -15,7 +15,6 @@ class Package extends Model
         'slug',
         'custom_price',
         'price',
-        'commission',
         'frequency',
         'duration',
         'description',
@@ -50,10 +49,5 @@ class Package extends Model
     public function queues()
     {
         return $this->hasMany(Queue::class);
-    }
-
-    public function commissions()
-    {
-        return $this->morphMany(Commission::class, 'claimable');
     }
 }

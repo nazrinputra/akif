@@ -52,15 +52,14 @@ class PackageController extends Controller
         ]);
 
         $price = $request->price * 100;
-        $commission = $request->commission * 100;
         $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug, 'price' => $price, 'commission' => $commission]);
+        $request->merge(['slug' => $slug, 'price' => $price]);
 
         if ($package = Package::where('slug', $request->slug)->first()) {
             return Redirect::back()->with('error', 'Package already exist! <a href="' . route('packages.show', $package) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
-        $createdPackage = Package::create($request->only('name', 'slug', 'custom_price', 'price', 'commission', 'frequency', 'duration', 'description', 'promotion'));
+        $createdPackage = Package::create($request->only('name', 'slug', 'price', 'frequency', 'duration', 'description', 'promotion'));
 
         foreach ($request->services as $id) {
             $service = Service::find($id);

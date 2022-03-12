@@ -33,21 +33,6 @@
         </inertia-link>
         <inertia-link
             class="flex items-center group py-3"
-            :href="route('commissions.index')"
-            v-if="hasAnyPermission(['view commissions'])"
-        >
-            <div
-                :class="
-                    route().current('commissions.index')
-                        ? 'text-white'
-                        : 'text-indigo-300 group-hover:text-white'
-                "
-            >
-                <i class="fas fa-dollar-sign"></i> Commissions
-            </div>
-        </inertia-link>
-        <inertia-link
-            class="flex items-center group py-3"
             :href="route('whatsapps.index')"
             v-if="hasAnyPermission(['view whatsapps'])"
         >
