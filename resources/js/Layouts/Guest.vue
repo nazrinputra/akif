@@ -25,7 +25,7 @@
                     class="text-primary text-decoration-none"
                     >Akif Car Grooming Center</inertia-link
                 >
-                2021</small
+                {{ currentYear() }}</small
             >
         </div>
     </teleport>
@@ -37,13 +37,13 @@ import moment from "moment";
 
 export default {
     components: {
-        BreezeApplicationLogo
+        BreezeApplicationLogo,
     },
 
     methods: {
         currentYear() {
             return moment().year();
-        }
-    }
+        },
+    },
 };
 </script>

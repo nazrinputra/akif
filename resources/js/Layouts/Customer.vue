@@ -78,7 +78,7 @@
                     class="text-primary text-decoration-none"
                     >Akif Car Grooming Center</inertia-link
                 >
-                2021</small
+                {{ currentYear() }}</small
             >
         </div>
     </teleport>
