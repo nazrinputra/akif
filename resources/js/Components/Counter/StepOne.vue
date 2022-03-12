@@ -131,9 +131,24 @@
                     </div>
 
                     <div class="mt-3 p-3">
-                        <label v-if="!car" for="plate_no">Plate No</label>
+                        <div class="flex justify-content-between">
+                            <label v-if="!car" for="plate_no">Plate No</label>
+                            <label class="flex items-center">
+                                <breeze-checkbox
+                                    name="unregistered"
+                                    v-model:checked="form.unregistered"
+                                    @click="
+                                        clearCar();
+                                        closeSearchCar();
+                                    "
+                                />
+                                <span class="ml-2 text-sm text-gray-600"
+                                    >Unregistered car?</span
+                                >
+                            </label>
+                        </div>
                         <input
-                            v-if="!car"
+                            v-if="!car && !form.unregistered"
                             type="text"
                             placeholder="Plate No"
                             id="plate_no"
@@ -203,7 +218,7 @@
 
                         <transition name="fade">
                             <div
-                                v-if="car"
+                                v-if="car && !form.unregistered"
                                 class="p-6 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
                             >
                                 <table class="w-full whitespace-nowrap">
@@ -420,11 +435,13 @@
 
 <script>
 import BreezeButton from "@/Components/Button";
+import BreezeCheckbox from "@/Components/Checkbox";
 import throttle from "lodash/throttle";
 
 export default {
     components: {
-        BreezeButton
+        BreezeButton,
+        BreezeCheckbox,
     },
 
     props: ["form"],
@@ -439,14 +456,14 @@ export default {
             personalities: [],
             disableSearchCustomer: false,
             disableSearchCar: false,
-            disableSearchPersonality: false
+            disableSearchPersonality: false,
         };
     },
 
     watch: {
         form: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (
                     this.form.plate_no &&
                     this.form.plate_no != "" &&
@@ -457,10 +474,10 @@ export default {
                     axios
                         .get(route("cars.search"), {
                             params: {
-                                query: this.form.plate_no
-                            }
+                                query: this.form.plate_no,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.cars = response.data;
                         });
                 }
@@ -474,10 +491,10 @@ export default {
                     axios
                         .get(route("customers.search"), {
                             params: {
-                                query: this.form.name
-                            }
+                                query: this.form.name,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.customers = response.data;
                         });
                 }
@@ -490,10 +507,10 @@ export default {
                     axios
                         .get(route("personalities.search"), {
                             params: {
-                                query: this.form.personality
-                            }
+                                query: this.form.personality,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.personalities = response.data;
                         });
                 }
@@ -506,8 +523,8 @@ export default {
                 if (!this.form.personality || this.form.personality == "") {
                     this.personalities = [];
                 }
-            }, 150)
-        }
+            }, 150),
+        },
     },
 
     methods: {
@@ -565,10 +582,10 @@ export default {
             this.form.personality = null;
         },
         viewAllPersonalities() {
-            axios.get(route("personalities.all")).then(response => {
+            axios.get(route("personalities.all")).then((response) => {
                 this.personalities = response.data;
             });
-        }
-    }
+        },
+    },
 };
 </script>

@@ -150,10 +150,9 @@ export default {
             customer_id: null,
             personality_id: null,
             package_id: null,
-            package_custom_price: null,
             services_id: [],
-            services_custom_price: [],
             plate_no: null,
+            unregistered: null,
             model: null,
             size: "",
             name: null,
@@ -257,12 +256,10 @@ export default {
         },
         selectService(data) {
             this.services.push(data);
-            this.form.services_custom_price.push(null);
             this.form.services_id.push(data.id);
         },
         removeService(data) {
             this.services.splice(data, 1);
-            this.form.services_custom_price.splice(data, 1);
             this.form.services_id.splice(data, 1);
         },
         checkCar() {
@@ -270,6 +267,12 @@ export default {
                 return true;
             } else if (
                 this.form.plate_no &&
+                this.form.model &&
+                this.form.size != ""
+            ) {
+                return true;
+            } else if (
+                this.form.unregistered &&
                 this.form.model &&
                 this.form.size != ""
             ) {
@@ -298,16 +301,8 @@ export default {
             if (this.services.length > 0) {
                 let self = this;
                 let status = [];
-                this.services.forEach(function (service, i) {
-                    if (
-                        (service.custom_price == 1 &&
-                            self.form.services_custom_price[i] == null) ||
-                        self.form.services_custom_price[i] == ""
-                    ) {
-                        status.push(false);
-                    } else {
-                        status.push(true);
-                    }
+                this.services.forEach(function () {
+                    status.push(true);
                 });
                 let checker = (arr) => arr.every((status) => status === true);
                 return checker(status);
