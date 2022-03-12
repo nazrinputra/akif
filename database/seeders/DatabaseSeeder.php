@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            PersonalitySeeder::class,
             WhatsappSeeder::class,
+            PackageSeeder::class,
+            ServiceSeeder::class,
         ]);
     }
 }
