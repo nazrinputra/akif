@@ -1,19 +1,8 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Dashboard
-        </template>
+        <template #title> - Dashboard </template>
         <template #header>
-            <inertia-link
-                href="#"
-                v-if="hasAnyPermission(['edit commissions'])"
-                class="btn btn-secondary"
-            >
-                <i class="fas fa-dollar-sign"></i>
-            </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Akif Car Grooming Center
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Akif Car Grooming Center</h6>
             <inertia-link
                 v-if="hasAnyPermission(['edit queues'])"
                 :href="route('queues.manage')"
@@ -255,7 +244,7 @@ export default {
         BreezeResponsiveNavLink,
         BreezeButton,
         BreezeAnnouncement,
-        BreezeProfile
+        BreezeProfile,
     },
 
     props: {
@@ -268,13 +257,13 @@ export default {
         stale: Number,
         stores: Object,
         roles: Object,
-        healths: Object
+        healths: Object,
     },
 
     data() {
         return {
             formCar: {
-                query: null
+                query: null,
             },
             cars: [],
             car: null,
@@ -284,29 +273,29 @@ export default {
             activePrivate: false,
             activeHealth: false,
             activeOther: false,
-            activeEmergency: false
+            activeEmergency: false,
         };
     },
 
     watch: {
         formCar: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formCar.query && this.formCar.query != "") {
                     axios
                         .get(route("cars.search"), {
                             params: {
-                                query: this.formCar.query
-                            }
+                                query: this.formCar.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.cars = response.data;
                         });
                 } else {
                     this.cars = [];
                 }
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>

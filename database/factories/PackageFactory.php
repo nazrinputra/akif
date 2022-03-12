@@ -24,22 +24,13 @@ class PackageFactory extends Factory
     {
         $name = ucwords($this->faker->words(3, true));
         $slug = Str::slug($name);
-        $custom_price = $this->faker->boolean();
 
-        if ($custom_price) {
-            $price = NULL;
-            $commission = NULL;
-        } else {
-            $price = $this->faker->randomNumber(4, true);
-            $commission = $this->faker->randomNumber(3, true);
-        }
+        $price = $this->faker->randomNumber(4, true);
 
         return [
             'slug' => $slug,
             'name' => $name,
-            'custom_price' => $custom_price,
             'price' => $price,
-            'commission' => $commission,
             'frequency' => $this->faker->words(3, true),
             'duration' => $this->faker->words(3, true),
             'description' => $this->faker->sentences(5, true),

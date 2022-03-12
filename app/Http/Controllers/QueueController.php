@@ -8,14 +8,11 @@ use Inertia\Inertia;
 use App\Models\Queue;
 use App\Models\Store;
 use App\Models\Package;
-use App\Models\Service;
 use App\Models\Customer;
 use App\Models\Whatsapp;
-use App\Models\Commission;
 use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -252,20 +249,20 @@ class QueueController extends Controller
         $user = User::find($request->user_id);
 
         if ($user->hasPermissionTo('both queues')) {
-            $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status', 'move')
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
                 ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities', 'store')
                 ->get();
 
-            $all = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status', 'move')
+            $all = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
                 ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
                 ->orderBy('updated_at', 'asc')
                 ->with('car', 'customer.personalities', 'store')
                 ->get();
         } else {
-            $daily = Queue::select('id', 'car_id', 'customer_id', 'status', 'move')
+            $daily = Queue::select('id', 'car_id', 'customer_id', 'status')
                 ->where('store_id', $user->store_id)
                 ->where('updated_at', '>', now()->subDays(1))
                 ->whereIn('status', ['Collected', 'Cancelled'])
@@ -273,7 +270,7 @@ class QueueController extends Controller
                 ->with('car', 'customer.personalities')
                 ->get();
 
-            $all = Queue::select('id', 'car_id', 'customer_id', 'status', 'move')
+            $all = Queue::select('id', 'car_id', 'customer_id', 'status')
                 ->where('store_id', $user->store_id)
                 ->whereIn('status', ['Waiting', 'Grooming', 'Completed'])
                 ->orderBy('updated_at', 'asc')

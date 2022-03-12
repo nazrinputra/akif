@@ -1,5 +1,5 @@
 <template>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('dashboard') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -8,7 +8,7 @@
             >my dashboard</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('personalities.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -17,16 +17,7 @@
             >personalities</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
-        <inertia-link
-            :class="route().current('commissions.index') ? 'active' : ''"
-            class="nav-link py-3 px-0 px-lg-3 rounded"
-            :href="route('commissions.index')"
-            v-if="hasAnyPermission(['view commissions'])"
-            >commissions</inertia-link
-        >
-    </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('whatsapps.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -35,7 +26,7 @@
             >whatsapps</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('customers.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -44,7 +35,7 @@
             >customers</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('packages.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -53,7 +44,7 @@
             >packages</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('services.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -62,7 +53,7 @@
             >services</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('healths.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -71,7 +62,7 @@
             >healths</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('queues.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -80,7 +71,7 @@
             >queues</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('crews.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -89,7 +80,7 @@
             >crews</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('roles.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"
@@ -98,7 +89,7 @@
             >roles</inertia-link
         >
     </li>
-    <li class="flex md:hidden nav-item  mx-0 mx-lg-1">
+    <li class="flex md:hidden nav-item mx-0 mx-lg-1">
         <inertia-link
             :class="route().current('cars.index') ? 'active' : ''"
             class="nav-link py-3 px-0 px-lg-3 rounded"

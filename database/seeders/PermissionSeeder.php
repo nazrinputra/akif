@@ -28,10 +28,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'view deleted']);
         Permission::create(['name' => 'restore deleted']);
 
-        // commission
-        Permission::create(['name' => 'view commissions']);
-        Permission::create(['name' => 'edit commissions']);
-
         // car
         Permission::create(['name' => 'view cars']);
         Permission::create(['name' => 'create cars']);

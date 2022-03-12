@@ -12,9 +12,7 @@ class Queue extends Model
     protected $attributes = [
         'status' => 'Waiting',
         'remarks' => '',
-        'move' => 0,
         'package_id' => null,
-        'package_custom_price' => null,
     ];
 
     protected $fillable = [
@@ -22,10 +20,8 @@ class Queue extends Model
         'car_id',
         'customer_id',
         'package_id',
-        'package_custom_price',
         'status',
         'remarks',
-        'move'
     ];
 
     public function scopeFilter($query, array $filters)
@@ -75,10 +71,5 @@ class Queue extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class)->withPivot('custom_price');
-    }
-
-    public function commissions()
-    {
-        return $this->hasMany(Commission::class);
     }
 }

@@ -24,19 +24,10 @@ class ServiceFactory extends Factory
     {
         $name = ucfirst($this->faker->words(3, true));
         $slug = Str::slug($name);
-        $custom_price = $this->faker->boolean();
-
-        if ($custom_price) {
-            $commission = NULL;
-        } else {
-            $commission = $this->faker->randomNumber(3, true);
-        }
 
         return [
             'slug' => $slug,
             'name' => $name,
-            'custom_price' => $custom_price,
-            'commission' => $commission,
             'description' => $this->faker->sentences(5, true),
         ];
     }

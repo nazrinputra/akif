@@ -51,34 +51,6 @@ class UserSeeder extends Seeder
         ])->assignRole('IT');
 
         User::create([
-            'name' => 'Owner',
-            'store_id' => $faker->randomElement($stores),
-            'slug' => 'owner',
-            'phone_no' => '0125436789',
-            'email' => 'owner@email.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
-            'ic_no' => $faker->myKadNumber(null, true),
-            'email_verified_at' => now(),
-            'bank' => $faker->bank(),
-            'acc_no' => $faker->bankAccountNumber(),
-            'address' => $faker->address(),
-            'status' => $faker->randomElement($status),
-            'shirt_size' => $faker->randomElement($shirt_size),
-            'motor_license' => $faker->boolean(),
-            'car_license' => $faker->boolean(),
-            'oku_card' => $faker->boolean(),
-            'enrolled_at' => now(),
-            'resigned_at' => now()->addYears(5),
-            'emergency_name_1' => $faker->name(),
-            'emergency_phone_no_1' => $faker->mobileNumber(false, false),
-            'emergency_relation_1' => $faker->randomElement($relation),
-            'emergency_name_2' => $faker->name(),
-            'emergency_phone_no_2' => $faker->mobileNumber(false, false),
-            'emergency_relation_2' => $faker->randomElement($relation),
-        ])->assignRole('Owner');
-
-        User::create([
             'name' => 'Admin',
             'store_id' => $faker->randomElement($stores),
             'slug' => 'admin',
@@ -105,16 +77,5 @@ class UserSeeder extends Seeder
             'emergency_phone_no_2' => $faker->mobileNumber(false, false),
             'emergency_relation_2' => $faker->randomElement($relation),
         ])->assignRole('Admin');
-
-        // $detailers = User::factory(15)->create();
-        // foreach ($detailers as $detailer) {
-        //     $detailer->assignRole('Detailer');
-        // }
-
-        // $users = User::factory(32)->create();
-        // $roles = Role::whereNotIn('name', ['IT', 'Owner', 'Manager', 'Admin', 'Quality Checker', 'Detailer'])->get();
-        // foreach ($users as $user) {
-        //     $user->assignRole($faker->randomElement($roles));
-        // }
     }
 }
