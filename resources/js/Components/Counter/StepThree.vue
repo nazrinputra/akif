@@ -114,7 +114,7 @@
             v-if="!car && checkCar"
             class="p-6 mx-3 bg-white border-b border-gray-200 max-w-7xl shadow sm:rounded-lg"
         >
-            <div class="p-3">
+            <div v-if="!form.unregistered" class="p-3">
                 <label for="plate_no">Plate No</label>
                 <input
                     type="text"
@@ -122,6 +122,17 @@
                     id="plate_no"
                     class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     :value="form.plate_no"
+                    disabled
+                />
+            </div>
+            <div v-if="form.unregistered" class="p-3">
+                <label for="plate_no">Plate No</label>
+                <input
+                    type="text"
+                    placeholder="Plate No"
+                    id="plate_no"
+                    class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    value="Auto Generated"
                     disabled
                 />
             </div>

@@ -13,6 +13,7 @@ use App\Models\Whatsapp;
 use App\Models\Personality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -96,8 +97,17 @@ class QueueController extends Controller
         }
 
         if (!$request->car_id) {
+            if (!$request->unregistered) {
+                $request->validate([
+                    'plate_no' => ['required', 'max:10'],
+                ]);
+            } else {
+                $unregisteredCount = DB::table('cars')->where('plate_no', 'LIKE', 'UNREG%')->count();
+                $unregisteredPlateNo = "UNREG" . $unregisteredCount + 1;
+                $request->merge(['plate_no' => $unregisteredPlateNo]);
+            }
+
             $request->validate([
-                'plate_no' => ['required', 'max:10'],
                 'model' => ['required', 'max:50'],
                 'size' => ['required', 'max:5'],
             ]);
