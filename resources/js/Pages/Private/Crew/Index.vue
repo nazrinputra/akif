@@ -1,16 +1,12 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - List Crews
-        </template>
+        <template #title> - List Crews </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                List of crews
-            </h6>
+            <h6 class="pt-2.5 mx-auto">List of crews</h6>
             <inertia-link
                 v-if="hasAnyPermission(['create crews'])"
                 :href="route('crews.create')"
@@ -55,6 +51,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Crew Name</th>
+                    <th class="px-3 py-3">Crew Role</th>
                 </tr>
                 <tr
                     v-for="crew in crews.data"
@@ -63,7 +60,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('crews.show', crew)"
                         >
@@ -74,9 +71,18 @@
                             ></i>
                         </inertia-link>
                     </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit"
+                            class="px-3 py-3 focus:text-indigo-500"
+                            :href="route('crews.show', crew)"
+                        >
+                            {{ crew.roles[0].name }}
+                        </inertia-link>
+                    </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('crews.show', crew)"
                             tabindex="-1"
@@ -86,9 +92,7 @@
                     </td>
                 </tr>
                 <tr v-if="crews.data.length === 0">
-                    <td class="border-t px-3 py-3">
-                        Uh-oh! No crews found.
-                    </td>
+                    <td class="border-t px-3 py-3">Uh-oh! No crews found.</td>
                 </tr>
             </table>
         </div>
@@ -112,7 +116,7 @@ export default {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
         BreezeButton,
-        BreezePagination
+        BreezePagination,
     },
 
     props: {
@@ -120,26 +124,26 @@ export default {
         errors: Object,
         flash: Object,
         filters: Object,
-        crews: Object
+        crews: Object,
     },
 
     data() {
         return {
             form: {
-                search: null
-            }
+                search: null,
+            },
         };
     },
 
     watch: {
         form: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 this.$inertia.get(route("crews.index"), pickBy(this.form), {
-                    preserveState: true
+                    preserveState: true,
                 });
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>

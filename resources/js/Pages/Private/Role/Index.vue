@@ -1,16 +1,12 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - List Roles
-        </template>
+        <template #title> - List Roles </template>
 
         <template #header>
             <inertia-link :href="route('dashboard')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                List of roles
-            </h6>
+            <h6 class="pt-2.5 mx-auto">List of roles</h6>
             <inertia-link
                 v-if="hasAnyPermission(['create roles'])"
                 :href="route('roles.create')"
@@ -42,7 +38,7 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('roles.show', role)"
                         >
@@ -55,7 +51,7 @@
                     </td>
                     <td class="border-t w-px md:table-cell hidden">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 flex items-center"
                             :href="route('roles.show', role)"
                             tabindex="-1"
@@ -65,9 +61,7 @@
                     </td>
                 </tr>
                 <tr v-if="roles.length === 0">
-                    <td class="border-t px-3 py-3">
-                        Uh-oh! No roles found.
-                    </td>
+                    <td class="border-t px-3 py-3">Uh-oh! No roles found.</td>
                 </tr>
             </table>
         </div>
@@ -83,14 +77,14 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        roles: Object
-    }
+        roles: Object,
+    },
 };
 </script>

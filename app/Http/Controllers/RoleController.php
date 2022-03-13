@@ -21,7 +21,6 @@ class RoleController extends Controller
     {
         $roles = Role::all();
 
-
         return Inertia::render('Private/Role/Index', [
             'roles' => $roles
         ]);
