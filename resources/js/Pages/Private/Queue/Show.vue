@@ -137,6 +137,14 @@
                         >
                             <i class="fas fa-phone"></i>
                         </a>
+                        <button
+                            class="ml-3 btn btn-secondary"
+                            @click.prevent="
+                                sendWhatsapp(queue.customer.phone_no)
+                            "
+                        >
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
                     </td>
                 </tr>
             </table>
@@ -274,6 +282,10 @@ export default {
             return moment(date)
                 .tz("Asia/Kuala_Lumpur")
                 .format("MMMM Do YYYY, HH:mm:ss");
+        },
+        sendWhatsapp(phone_no) {
+            let link = "https://api.whatsapp.com/send?phone=6" + phone_no;
+            window.open(link, "_blank");
         },
     },
 };
