@@ -1,8 +1,6 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Edit Car
-        </template>
+        <template #title> - Edit Car </template>
         <template #header>
             <inertia-link
                 :href="route('cars.show', car)"
@@ -10,9 +8,7 @@
             >
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Edit existing car
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Edit existing car</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('cars.index')" :active="false">
@@ -102,7 +98,7 @@
                         <breeze-button
                             class="ml-auto"
                             :class="{
-                                'opacity-25': form.processing
+                                'opacity-25': form.processing,
                             }"
                             :disabled="form.processing"
                         >
@@ -138,6 +134,7 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Customer Name</th>
+                        <th class="px-3 py-3">Customer Phone No</th>
                     </tr>
                     <tr
                         v-for="customer in customers"
@@ -149,11 +146,14 @@
                         >
                             {{ customer.name }}
                         </td>
+                        <td class="border-t pl-3 py-3 focus:text-indigo-500">
+                            {{ customer.phone_no }}
+                        </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button
                                 v-if="
                                     !car.owners.some(
-                                        data => data.id === customer.id
+                                        (data) => data.id === customer.id
                                     )
                                 "
                                 type="button"
@@ -175,6 +175,7 @@
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th class="px-3 py-3">Linked Owner Name</th>
+                    <th class="px-3 py-3">Linked Owner Phone No</th>
                 </tr>
                 <tr
                     v-for="owner in car.owners"
@@ -183,11 +184,20 @@
                 >
                     <td class="border-t">
                         <inertia-link
-                            style="color: inherit; text-decoration: inherit;"
+                            style="color: inherit; text-decoration: inherit"
                             class="px-3 py-3 flex items-center focus:text-indigo-500"
                             :href="route('customers.show', owner)"
                         >
                             {{ owner.name }}
+                        </inertia-link>
+                    </td>
+                    <td class="border-t">
+                        <inertia-link
+                            style="color: inherit; text-decoration: inherit"
+                            class="px-3 py-3 focus:text-indigo-500"
+                            :href="route('customers.show', owner)"
+                        >
+                            {{ owner.phone_no }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px md:table-cell hidden pr-3">
@@ -216,21 +226,21 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
     },
 
     props: {
         auth: Object,
         errors: Object,
         flash: Object,
-        car: Object
+        car: Object,
     },
 
     setup() {
         const form = useForm({
             plate_no: null,
             model: null,
-            size: null
+            size: null,
         });
 
         return { form };
@@ -251,7 +261,7 @@ export default {
                 route("owner.link"),
                 {
                     customer_id: customer.id,
-                    car_id: this.car.id
+                    car_id: this.car.id,
                 },
                 {
                     onSuccess: () => {
@@ -259,7 +269,7 @@ export default {
                         this.customers = [];
                         this.flash.success =
                             "Customer linked successfully to car.";
-                    }
+                    },
                 }
             );
         },
@@ -268,7 +278,7 @@ export default {
                 route("owner.unlink"),
                 {
                     car_id: this.car.id,
-                    customer_id: customer.id
+                    customer_id: customer.id,
                 },
                 {
                     onSuccess: () => {
@@ -276,40 +286,40 @@ export default {
                             "Customer unlinked from car. <a href='" +
                             route("customers.show", customer) +
                             " 'style='color:#92400e;text-decoration:underline;'>View customer</a>";
-                    }
+                    },
                 }
             );
-        }
+        },
     },
 
     data() {
         return {
             formCustomer: {
-                query: null
+                query: null,
             },
-            customers: []
+            customers: [],
         };
     },
 
     watch: {
         formCustomer: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formCustomer.query && this.formCustomer.query != "") {
                     axios
                         .get(route("customers.search"), {
                             params: {
-                                query: this.formCustomer.query
-                            }
+                                query: this.formCustomer.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.customers = response.data;
                         });
                 } else {
                     this.customers = [];
                 }
-            }, 150)
-        }
-    }
+            }, 150),
+        },
+    },
 };
 </script>
