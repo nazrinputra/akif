@@ -109,7 +109,7 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'phone_no' => ['required', 'max:12'],
+            'phone_no' => ['required', 'max:12', 'unique:customers,phone_no,' . $customer->id],
         ]);
 
         $slug = Str::slug($request->name);

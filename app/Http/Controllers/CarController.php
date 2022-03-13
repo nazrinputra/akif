@@ -116,7 +116,7 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $request->validate([
-            'plate_no' => ['required', 'max:10'],
+            'plate_no' => ['required', 'max:10', 'unique:cars,plate_no,' . $car->id],
             'model' => ['required', 'max:50'],
             'size' => ['required', 'max:5'],
         ]);
