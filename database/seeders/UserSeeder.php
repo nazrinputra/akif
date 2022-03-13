@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
             'phone_no' => '0129876543',
             'email' => 'akif@email.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
+            'password' => Hash::make("password"),
             'ic_no' => $faker->myKadNumber(null, true),
             'email_verified_at' => now(),
             'bank' => $faker->bank(),
@@ -51,13 +52,13 @@ class UserSeeder extends Seeder
         ])->assignRole('IT');
 
         User::create([
-            'name' => 'Admin',
+            'name' => 'Admin BK',
             'store_id' => $faker->randomElement($stores),
-            'slug' => 'admin',
+            'slug' => 'admin-bk',
             'phone_no' => '0123456789',
-            'email' => 'admin@email.com',
+            'email' => 'adminbukitkatil@email.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$R5fmLgPcuHt7OVogqqNEWurkIjZL.kIOwd.wjrfGGvG1wYi2xLxMi', // password
+            'password' => Hash::make("adminbk12345"),
             'ic_no' => $faker->myKadNumber(null, true),
             'email_verified_at' => now(),
             'bank' => $faker->bank(),
