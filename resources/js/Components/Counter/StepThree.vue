@@ -50,12 +50,16 @@
                 <table class="w-full whitespace-nowrap">
                     <tr class="text-left font-bold">
                         <th class="px-3 py-3">Selected Customer Name</th>
+                        <th class="px-3 py-3">Selected Customer Phone No</th>
                     </tr>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td
                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                         >
                             {{ customer.name }}
+                        </td>
+                        <td class="border-t pl-3 py-3 focus:text-indigo-500">
+                            {{ customer.phone_no }}
                         </td>
                         <td class="border-t w-px md:table-cell hidden pr-3">
                             <breeze-button type="button" @click="editStepOne()">

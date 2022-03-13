@@ -140,8 +140,7 @@ class CustomerController extends Controller
 
     public function search(Request $request)
     {
-        return Customer::where('name', 'like', '%' . $request->input('query') . '%')
-            ->orWhere('phone_no', 'like', '%' . $request->input('query') . '%')
+        return Customer::where('phone_no', 'like', '%' . $request->input('query') . '%')
             ->limit(3)
             ->get();
     }

@@ -4,26 +4,26 @@
             <div class="container">
                 <form>
                     <div class="mt-3 p-3">
-                        <label v-if="!customer" for="name">Name</label>
+                        <label v-if="!customer" for="phone_no">Phone No</label>
                         <input
                             v-if="!customer"
                             type="text"
-                            placeholder="Name"
-                            id="name"
+                            placeholder="Phone No"
+                            id="phone_no"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.name
+                                form.errors.phone_no
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.name"
-                            @keydown="form.clearErrors('name')"
+                            v-model="form.phone_no"
+                            @keydown="form.clearErrors('phone_no')"
                             required
                         />
                         <span
                             v-if="!customer"
                             class="text-red-700 mt-2 text-sm"
-                            >{{ form.errors.name }}</span
+                            >{{ form.errors.phone_no }}</span
                         >
 
                         <transition name="fade">
@@ -34,6 +34,7 @@
                                 <table class="w-full whitespace-nowrap">
                                     <tr class="text-left font-bold">
                                         <th class="px-3 py-3">Customer Name</th>
+                                        <th class="px-3 py-3">Phone No</th>
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
                                         >
@@ -54,6 +55,11 @@
                                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                                         >
                                             {{ customer.name }}
+                                        </td>
+                                        <td
+                                            class="border-t pl-3 py-3 focus:text-indigo-500"
+                                        >
+                                            {{ customer.phone_no }}
                                         </td>
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
@@ -82,6 +88,9 @@
                                         <th class="px-3 py-3">
                                             Selected Customer Name
                                         </th>
+                                        <th class="px-3 py-3">
+                                            Selected Customer Phone No
+                                        </th>
                                     </tr>
                                     <tr
                                         class="hover:bg-gray-100 focus-within:bg-gray-100"
@@ -90,6 +99,11 @@
                                             class="border-t pl-3 py-3 flex items-center focus:text-indigo-500"
                                         >
                                             {{ customer.name }}
+                                        </td>
+                                        <td
+                                            class="border-t pl-3 py-3 focus:text-indigo-500"
+                                        >
+                                            {{ customer.phone_no }}
                                         </td>
                                         <td
                                             class="border-t w-px md:table-cell hidden pr-3"
@@ -110,23 +124,23 @@
                         class="mt-3 p-3"
                         v-if="!customer && customers.length == 0"
                     >
-                        <label for="phone_no">Phone No</label>
+                        <label for="name">Name</label>
                         <input
                             type="number"
-                            placeholder="Phone No"
-                            id="phone_no"
+                            placeholder="Name"
+                            id="name"
                             class="w-full rounded-md shadow-sm"
                             :class="
-                                form.errors.phone_no
+                                form.errors.name
                                     ? 'border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-100'
                                     : 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                             "
-                            v-model="form.phone_no"
-                            @keydown="form.clearErrors('phone_no')"
+                            v-model="form.name"
+                            @keydown="form.clearErrors('name')"
                             required
                         />
                         <span class="text-red-700 mt-2 text-sm">{{
-                            form.errors.phone_no
+                            form.errors.name
                         }}</span>
                     </div>
 
@@ -482,16 +496,16 @@ export default {
                         });
                 }
                 if (
-                    this.form.name &&
-                    this.form.name != "" &&
+                    this.form.phone_no &&
+                    this.form.phone_no != "" &&
                     !this.disableSearchCustomer &&
                     !this.customer &&
-                    !this.form.phone_no
+                    !this.form.name
                 ) {
                     axios
                         .get(route("customers.search"), {
                             params: {
-                                query: this.form.name,
+                                query: this.form.phone_no,
                             },
                         })
                         .then((response) => {
@@ -517,7 +531,7 @@ export default {
                 if (!this.form.plate_no || this.form.plate_no == "") {
                     this.cars = [];
                 }
-                if (!this.form.name || this.form.name == "") {
+                if (!this.form.phone_no || this.form.phone_no == "") {
                     this.customers = [];
                 }
                 if (!this.form.personality || this.form.personality == "") {
