@@ -7,7 +7,7 @@
                         <label v-if="!customer" for="phone_no">Phone No</label>
                         <input
                             v-if="!customer"
-                            type="text"
+                            type="number"
                             placeholder="Phone No"
                             id="phone_no"
                             class="w-full rounded-md shadow-sm"
@@ -126,7 +126,7 @@
                     >
                         <label for="name">Name</label>
                         <input
-                            type="number"
+                            type="text"
                             placeholder="Name"
                             id="name"
                             class="w-full rounded-md shadow-sm"
