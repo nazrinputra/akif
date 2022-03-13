@@ -1,15 +1,11 @@
 <template>
     <breeze-authenticated-layout>
-        <template #title>
-            - Create Car
-        </template>
+        <template #title> - Create Car </template>
         <template #header>
             <inertia-link :href="route('cars.index')" class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i>
             </inertia-link>
-            <h6 class="pt-2.5 mx-auto">
-                Add new car
-            </h6>
+            <h6 class="pt-2.5 mx-auto">Add new car</h6>
         </template>
         <template #nav>
             <breeze-nav-link :href="route('cars.index')" :active="false">
@@ -28,8 +24,20 @@
             <div class="container">
                 <form @submit.prevent="submit">
                     <div class="mt-3 p-3">
-                        <label for="plate_no">Plate No</label>
+                        <div class="flex justify-content-between">
+                            <label for="plate_no">Plate No</label>
+                            <label class="flex items-center">
+                                <breeze-checkbox
+                                    name="unregistered"
+                                    v-model:checked="form.unregistered"
+                                />
+                                <span class="ml-2 text-sm text-gray-600"
+                                    >Unregistered car?</span
+                                >
+                            </label>
+                        </div>
                         <input
+                            v-if="!form.unregistered"
                             type="text"
                             placeholder="Plate No"
                             id="plate_no"
@@ -192,7 +200,7 @@
                         </inertia-link>
                         <breeze-button
                             :class="{
-                                'opacity-25': form.processing
+                                'opacity-25': form.processing,
                             }"
                             :disabled="form.processing"
                         >
@@ -209,6 +217,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated";
 import BreezeNavLink from "@/Components/NavLink";
 import BreezeButton from "@/Components/Button";
+import BreezeCheckbox from "@/Components/Checkbox";
 import throttle from "lodash/throttle";
 import { useForm } from "@inertiajs/inertia-vue3";
 
@@ -216,21 +225,23 @@ export default {
     components: {
         BreezeAuthenticatedLayout,
         BreezeNavLink,
-        BreezeButton
+        BreezeButton,
+        BreezeCheckbox,
     },
 
     props: {
         auth: Object,
         errors: Object,
-        flash: Object
+        flash: Object,
     },
 
     setup() {
         const form = useForm({
             plate_no: null,
+            unregistered: null,
             model: null,
             size: "",
-            customer_id: null
+            customer_id: null,
         });
 
         return { form };
@@ -239,32 +250,32 @@ export default {
     data() {
         return {
             formCustomer: {
-                query: null
+                query: null,
             },
             customers: [],
-            customer: null
+            customer: null,
         };
     },
 
     watch: {
         formCustomer: {
             deep: true,
-            handler: throttle(function() {
+            handler: throttle(function () {
                 if (this.formCustomer.query && this.formCustomer.query != "") {
                     axios
                         .get(route("customers.search"), {
                             params: {
-                                query: this.formCustomer.query
-                            }
+                                query: this.formCustomer.query,
+                            },
                         })
-                        .then(response => {
+                        .then((response) => {
                             this.customers = response.data;
                         });
                 } else {
                     this.customers = [];
                 }
-            }, 150)
-        }
+            }, 150),
+        },
     },
 
     methods: {
@@ -281,7 +292,7 @@ export default {
                 this.form.customer_id = this.customer.id;
             }
             this.form.post(route("cars.store"));
-        }
-    }
+        },
+    },
 };
 </script>

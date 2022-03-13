@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
@@ -42,8 +43,17 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->unregistered) {
+            $request->validate([
+                'plate_no' => ['required', 'max:10'],
+            ]);
+        } else {
+            $unregisteredCount = DB::table('cars')->where('plate_no', 'LIKE', 'UNREG%')->count();
+            $unregisteredPlateNo = "UNREG" . $unregisteredCount + 1;
+            $request->merge(['plate_no' => $unregisteredPlateNo]);
+        }
+
         $request->validate([
-            'plate_no' => ['required', 'max:10'],
             'model' => ['required', 'max:50'],
             'size' => ['required', 'max:5'],
         ]);
