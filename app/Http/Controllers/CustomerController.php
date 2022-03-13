@@ -51,8 +51,8 @@ class CustomerController extends Controller
         $slug = Str::slug($request->name);
         $request->merge(['slug' => $slug]);
 
-        if ($customer = Customer::where('slug', $request->slug)->orWhere('phone_no', $request->phone_no)->first()) {
-            return Redirect::back()->with('error', 'Customer already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
+        if ($customer = Customer::where('phone_no', $request->phone_no)->first()) {
+            return Redirect::back()->with('error', 'Phone no already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
         }
 
         $createdCustomer = Customer::create($request->only('name', 'slug', 'phone_no'));

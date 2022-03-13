@@ -7,10 +7,10 @@ Route::group(
     ['middleware' => ['auth', 'can:view customers']],
     function () {
         Route::resource('customers', CustomerController::class)->parameters([
-            'customers' => 'customer:slug'
+            'customers' => 'customer:id'
         ]);
 
-        Route::put('customers/{customer:slug}/restore', [CustomerController::class, 'restore'])
+        Route::put('customers/{customer:id}/restore', [CustomerController::class, 'restore'])
             ->name('customers.restore');
     }
 );
