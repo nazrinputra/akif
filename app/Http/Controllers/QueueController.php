@@ -78,8 +78,9 @@ class QueueController extends Controller
                     'phone_no' => ['required', 'max:12'],
                 ]);
 
-                $slug = Str::slug($request->name);
-                $request->merge(['slug' => $slug]);
+                $name = strtoupper($request->name);
+                $slug = Str::slug($name);
+                $request->merge(['slug' => $slug, 'name' => $name]);
 
                 if ($existingCustomer = Customer::where('phone_no', $request->phone_no)->first()) {
                     return Redirect::back()->with('error', 'Phone no already exist! <a href="' . route('customers.show', $existingCustomer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
@@ -114,8 +115,8 @@ class QueueController extends Controller
 
             $plate_no = strtoupper(preg_replace('/\s+/', '', $request->plate_no));
             $slug = Str::slug($plate_no);
-            $request->merge(['slug' => $slug]);
-            $request->merge(['plate_no' => $plate_no]);
+            $model = strtoupper($request->model);
+            $request->merge(['slug' => $slug, 'plate_no' => $plate_no, 'model' => $model]);
 
             if ($existingCar = Car::where('slug', $request->slug)->first()) {
                 return Redirect::back()->with('error', 'Car already exist! <a href="' . route('cars.show', $existingCar) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
@@ -140,8 +141,9 @@ class QueueController extends Controller
                     'phone_no' => ['required', 'max:12'],
                 ]);
 
-                $slug = Str::slug($request->name);
-                $request->merge(['slug' => $slug]);
+                $name = strtoupper($request->name);
+                $slug = Str::slug($name);
+                $request->merge(['slug' => $slug, 'name' => $name]);
 
                 if ($existingCustomer = Customer::where('phone_no', $request->phone_no)->first()) {
                     return Redirect::back()->with('error', 'Phone no already exist! <a href="' . route('customers.show', $existingCustomer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');

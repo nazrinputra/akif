@@ -48,8 +48,9 @@ class CustomerController extends Controller
             'phone_no' => ['required', 'max:12'],
         ]);
 
-        $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug]);
+        $name = strtoupper($request->name);
+        $slug = Str::slug($name);
+        $request->merge(['slug' => $slug, 'name' => $name]);
 
         if ($customer = Customer::where('phone_no', $request->phone_no)->first()) {
             return Redirect::back()->with('error', 'Phone no already exist! <a href="' . route('customers.show', $customer) . '"style="color:#fff;text-decoration:underline;">Click to view</a>');
@@ -112,8 +113,9 @@ class CustomerController extends Controller
             'phone_no' => ['required', 'max:12', 'unique:customers,phone_no,' . $customer->id],
         ]);
 
-        $slug = Str::slug($request->name);
-        $request->merge(['slug' => $slug]);
+        $name = strtoupper($request->name);
+        $slug = Str::slug($name);
+        $request->merge(['slug' => $slug, 'name' => $name]);
 
         $customer->update($request->only('name', 'slug', 'phone_no'));
 
