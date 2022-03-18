@@ -261,7 +261,7 @@ class QueueController extends Controller
         $user = User::find($request->user_id);
 
         if ($user->hasPermissionTo('both queues')) {
-            date_default_timezone_set('America/Los_Angeles');
+            date_default_timezone_set('Asia/Kuala_Lumpur');
             $daily = Queue::select('id', 'car_id', 'customer_id', 'store_id', 'status')
                 ->where('updated_at', 'LIKE', date('Y-m-d') . "%")
                 ->whereIn('status', ['Collected', 'Cancelled'])
@@ -275,7 +275,7 @@ class QueueController extends Controller
                 ->with('car', 'customer.personalities', 'store')
                 ->get();
         } else {
-            date_default_timezone_set('America/Los_Angeles');
+            date_default_timezone_set('Asia/Kuala_Lumpur');
             $daily = Queue::select('id', 'car_id', 'customer_id', 'status')
                 ->where('store_id', $user->store_id)
                 ->where('updated_at', 'LIKE', date('Y-m-d') . "%")
