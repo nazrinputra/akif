@@ -75,7 +75,7 @@ class QueueController extends Controller
             if (!$request->customer_id) {
                 $request->validate([
                     'name' => ['required', 'max:50'],
-                    'phone_no' => ['required', 'max:12'],
+                    'phone_no' => ['required', 'max:12', 'unique:customers,phone_no'],
                 ]);
 
                 $name = strtoupper($request->name);
@@ -100,7 +100,7 @@ class QueueController extends Controller
         if (!$request->car_id) {
             if (!$request->unregistered) {
                 $request->validate([
-                    'plate_no' => ['required', 'max:10'],
+                    'plate_no' => ['required', 'max:10', 'unique:cars,plate_no'],
                 ]);
             } else {
                 $unregisteredCount = DB::table('cars')->where('plate_no', 'LIKE', 'UNREG%')->count();
@@ -138,7 +138,7 @@ class QueueController extends Controller
             if (!$request->customer_id) {
                 $request->validate([
                     'name' => ['required', 'max:50'],
-                    'phone_no' => ['required', 'max:12'],
+                    'phone_no' => ['required', 'max:12', 'unique:customers,phone_no'],
                 ]);
 
                 $name = strtoupper($request->name);

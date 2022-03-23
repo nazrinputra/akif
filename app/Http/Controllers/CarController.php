@@ -45,7 +45,7 @@ class CarController extends Controller
     {
         if (!$request->unregistered) {
             $request->validate([
-                'plate_no' => ['required', 'max:10'],
+                'plate_no' => ['required', 'max:10', 'unique:cars,plate_no'],
             ]);
         } else {
             $unregisteredCount = DB::table('cars')->where('plate_no', 'LIKE', 'UNREG%')->count();

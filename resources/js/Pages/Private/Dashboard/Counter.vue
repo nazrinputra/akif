@@ -113,7 +113,7 @@
                 :checkStepTwo="checkStepTwo"
                 @back="stepTwo()"
                 @editStepOne="stepOne()"
-                @submit="form.post(route('queues.store'))"
+                @submit="submit()"
             />
         </div>
     </breeze-authenticated-layout>
@@ -284,7 +284,10 @@ export default {
         checkCustomer() {
             if (this.customer) {
                 return true;
-            } else if (this.form.name && this.form.phone_no) {
+            } else if (
+                this.form.name && 
+                this.form.phone_no
+            ) {
                 return true;
             } else {
                 return false;
@@ -299,7 +302,6 @@ export default {
         },
         checkService() {
             if (this.services.length > 0) {
-                let self = this;
                 let status = [];
                 this.services.forEach(function () {
                     status.push(true);
@@ -310,6 +312,15 @@ export default {
                 return false;
             }
         },
+        submit() {
+            this.form.post(route('queues.store'), {
+                onError: () => {
+                    this.show.stepOne = true;
+                    this.show.stepTwo = false;
+                    this.show.stepThree = false;
+                }
+            });
+        }
     },
 };
 </script>
