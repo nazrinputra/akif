@@ -37,8 +37,6 @@ require __DIR__ . '/web/queue.php';
 require __DIR__ . '/web/role.php';
 require __DIR__ . '/web/health.php';
 
-URL::forceScheme('https'); // FIXME might not need this?
-
 Route::get('/', function () {
     return Inertia::render('Public/Welcome');
 })->name('welcome');
